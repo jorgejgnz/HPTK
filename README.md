@@ -32,13 +32,16 @@ Then clone using this command "git clone https://github.com/jorgejgnz/HPTK.git"
     This will clone the master branch of HPTK. This repository does not contain submodules.
 	
 ### 1.b. Import package
-Download latest released package (.unitypackage). After that, import it from the Unity Editor by clicking on *Assets/Import package/Custom package*. Then select the downloaded .unitypackage file.
+Download latest released package (.unitypackage).
+After that, import it from the Unity Editor by clicking on *Assets/Import package/Custom package*.
+Then select the downloaded .unitypackage file.
 
 ## 2. Import Oculus Integration
 Download [Oculus Integration 20.0](https://assetstore.unity.com/packages/tools/integration/oculus-integration-82022) from Asset Store or the [Oculus Archive](https://developer.oculus.com/downloads/package/unity-integration/) and import it.
 - Drag and drop the Oculus folder into Assets folder.
 
-    Oculus Integration is a dependency for the InputDataProvider OVRSkeletonTracker, which reads hand data from OVRHand and OVRSkeleton components.
+      This will clone the master branch of HPTK. This repository does not contain submodules.
+      Oculus Integration is a dependency for the InputDataProvider OVRSkeletonTracker, which reads hand data from OVRHand and OVRSkeleton components.
 
 ## 3. Project Settings
 HPTK relies on nVidia PhysX and Unity's built-in Configurable Joints to simulate hand physics. HPTK has been tested under the following recommended settings:
@@ -58,8 +61,8 @@ HPTK includes different configuration assets which default values have already b
 - CoreConfiguration
 - HandPhysicsConfiguration
 
-    You can create new configuration assets by doing right-click on the Project window in the Unity Editor. Then go to Create/HPTK/*.
-	To use these assets, drag & drop them in any CoreModel or HandPhysicsModel component.
+      You can create new configuration assets by doing right-click on the Project window in the Unity Editor. Then go to Create/HPTK/*.
+      To use these assets, drag & drop them in any CoreModel or HandPhysicsModel component.
 
 ## 5. Community and support
 If you'd like to discuss your issues or ideas to improve this project, please join the following Discord server: [VRdevs&testers](https://discord.gg/7kRYjX7).
@@ -72,7 +75,8 @@ Checkout the Wiki for more details about:
 - How to build new modules. 
 
 # Author
-* **Jorge Juan González** - *HCI Researcher at I3A (UCLM)* - [LinkedIn](https://www.linkedin.com/in/jorgejgnz/) - [@jorgejgnz](https://twitter.com/jorgejgnz) - [ResearchGate](https://www.researchgate.net/profile/Jorge_Juan_Gonzalez) - [GitHub](https://github.com/jormaje)
+* **Jorge Juan González** - *HCI Researcher at I3A (UCLM)*
+[LinkedIn](https://www.linkedin.com/in/jorgejgnz/) - [Twitter](https://twitter.com/jorgejgnz) - [ResearchGate](https://www.researchgate.net/profile/Jorge_Juan_Gonzalez) - [GitHub](https://github.com/jorgejgnz)
 
 Acknowledgements:
 
