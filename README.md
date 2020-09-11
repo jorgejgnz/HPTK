@@ -1,8 +1,8 @@
 # HPTK
-Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions from scratch in a modular and scalable way. Hand physics and hover/touch/grab detection are modules included in this toolkit. Only Oculus Quest is supported at the moment.
+Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Hand physics and hover/touch/grab detection are modules included. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions. Only Oculus Quest is supported at the moment.
 
 ## Main features
-- Structured data model to access body and hand components and calculated variables to compose gestures and trigger actions.
+- Data model to access hand components and lerp values to compose gestures and trigger actions.
 - State-of-the-art hand physics that can be configured in detail through configuration assets.
 - Hover/Touch/Grab detection with support to interactions involving multiple objects and hands.
 - Mirrored character (dummy)
@@ -69,16 +69,17 @@ If you'd like to discuss your issues or ideas to improve this project, please jo
 There is a public channel called #HPTK.
 
 # Wiki
-Checkout the Wiki for more details about:
+Checkout the [Wiki](https://github.com/jorgejgnz/HPTK/wiki) for more details about:
 - Code architecture.
 - Available modules.
 - How to build new modules. 
 
 # Author
-* **Jorge Juan González** - *HCI Researcher at I3A (UCLM)*
+**Jorge Juan González** - *HCI Researcher at I3A (UCLM)*
+
 [LinkedIn](https://www.linkedin.com/in/jorgejgnz/) - [Twitter](https://twitter.com/jorgejgnz) - [ResearchGate](https://www.researchgate.net/profile/Jorge_Juan_Gonzalez) - [GitHub](https://github.com/jorgejgnz)
 
-Acknowledgements:
+## Acknowledgements
 
 Nasim, K, Kim, YJ. Physics-based assistive grasping for robust object manipulation in virtual reality. Comput Anim Virtual Worlds. 2018; 29:e1820. [https://doi.org/10.1002/cav.1820](https://doi.org/10.1002/cav.1820)
 
