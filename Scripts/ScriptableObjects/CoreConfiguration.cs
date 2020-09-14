@@ -33,5 +33,8 @@ namespace HPTK.Settings
         [Header("Hand theresolds")]
         public float minLerpToFist = 0.5f;
         public float minLerpToGrasp = 0.5f;
+
+        [Header("Error recovery")]
+        public float maxErrorAllowed = 0.5f;
     }
 }

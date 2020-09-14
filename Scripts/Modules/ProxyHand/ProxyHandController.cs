@@ -46,6 +46,8 @@ namespace HPTK.Controllers.Avatar
                         model.master.wrist.transformRef.position,
                         model.slave.wrist.transformRef.position
                     );
+
+                    model.errorLerp = Mathf.InverseLerp(0.0f, core.model.configuration.maxErrorAllowed, model.error);
                 }
             }
         }

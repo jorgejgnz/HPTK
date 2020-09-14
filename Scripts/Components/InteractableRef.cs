@@ -7,4 +7,13 @@ using UnityEngine;
 public class InteractableRef : MonoBehaviour
 {
     public InteractableHandler interactable;
+
+    private void Awake()
+    {
+        if (!interactable)
+            interactable = GetComponent<InteractableHandler>();
+
+        if (!interactable)
+            interactable = GetComponentInChildren<InteractableHandler>();
+    }
 }

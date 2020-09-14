@@ -33,6 +33,7 @@ namespace HPTK.Models.Avatar
 
         [Header("Updated by Controller")]
         public float error;
+        public float errorLerp;
 
         private void Awake()
         {

@@ -18,6 +18,7 @@ namespace HPTK.Views.Handlers
             public float graspLerp { get { return model.master.graspLerp; } }
             public bool isIndexPinching { get { return model.master.index.isPinching; } }
             public bool isGrasping { get { return model.master.isGrasping; } }
+            public float errorLerp { get { return model.errorLerp; } }
             public HPTKHandler[] relatedHandlers { get { return model.relatedHandlers.ToArray(); } }
             public ProxyHandViewModel(ProxyHandModel model)
             {

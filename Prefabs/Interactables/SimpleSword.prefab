@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3607588841872499425}
   m_Layer: 0
-  m_Name: Modules
+  m_Name: '[Modules]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3607588843407346739}
-  - component: {fileID: 3607588843407346748}
+  - component: {fileID: 4577483445189307957}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -457,7 +457,7 @@ Transform:
   m_Father: {fileID: 3607588842534360719}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3607588843407346748
+--- !u!114 &4577483445189307957
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -677,7 +677,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onFirstGrab.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 3607588843407346748}
+      objectReference: {fileID: 4577483445189307957}
     - target: {fileID: 3098167708040773608, guid: f128198ef11a7a940a1a0f6a21b69cb2,
         type: 3}
       propertyPath: onFirstGrab.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
@@ -717,7 +717,7 @@ PrefabInstance:
         type: 3}
       propertyPath: onLastUngrab.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 3607588843407346748}
+      objectReference: {fileID: 4577483445189307957}
     - target: {fileID: 3098167708040773608, guid: f128198ef11a7a940a1a0f6a21b69cb2,
         type: 3}
       propertyPath: onLastUngrab.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -792,6 +792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: onFirstHover.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3098167708040773608, guid: f128198ef11a7a940a1a0f6a21b69cb2,
+        type: 3}
+      propertyPath: onFirstGrab.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6201707843004197694, guid: f128198ef11a7a940a1a0f6a21b69cb2,
         type: 3}

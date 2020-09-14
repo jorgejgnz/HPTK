@@ -4099,99 +4099,6 @@ Transform:
   m_Father: {fileID: 1859604549857698649}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &828496626362039981
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5103302352900609781}
-  - component: {fileID: 7371064686928403573}
-  - component: {fileID: 3087314395244862021}
-  - component: {fileID: 8228211356788647973}
-  m_Layer: 12
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5103302352900609781
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828496626362039981}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.016}
-  m_LocalScale: {x: 0.17999999, y: 0.089999996, z: 0.089999996}
-  m_Children: []
-  m_Father: {fileID: 5857551473989498896}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7371064686928403573
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828496626362039981}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3087314395244862021
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828496626362039981}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: faa04bc6314cd984291b1ce4c445947c, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &8228211356788647973
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828496626362039981}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &925162521673442459
 GameObject:
   m_ObjectHideFlags: 0
@@ -4604,7 +4511,6 @@ MonoBehaviour:
   jointRef: {fileID: 7635910868347824385}
   colliderRef: {fileID: 7084802383846144156}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -4843,7 +4749,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973819520510}
   colliderRef: {fileID: 700224974146656554}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -4897,7 +4802,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009048489251917}
   colliderRef: {fileID: 8160009048490000271}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -4951,7 +4855,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973195635308}
   colliderRef: {fileID: 700224974041431051}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 5, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -5179,7 +5082,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047155431999}
   colliderRef: {fileID: 8160009048396105563}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -5343,7 +5245,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973580198222}
   colliderRef: {fileID: 700224972667251990}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -5637,7 +5538,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047824660675}
   colliderRef: {fileID: 8160009048436601445}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -6212,7 +6112,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009046892208192}
   colliderRef: {fileID: 99056083876041442}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -6710,7 +6609,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973724567681}
   colliderRef: {fileID: 700224972968420270}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -10, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -7524,7 +7422,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224974376696585}
   colliderRef: {fileID: 700224974118113124}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -7803,7 +7700,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047762006316}
   colliderRef: {fileID: 8160009047852602485}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -10, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -8013,7 +7909,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224972531499573}
   colliderRef: {fileID: 700224972948084955}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -8903,7 +8798,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224972487298743}
   colliderRef: {fileID: 700224974427911056}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -9049,7 +8943,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047732279044}
   colliderRef: {fileID: 8160009047033073537}
   isSpecial: 1
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: -13, y: 48, z: 28}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -9556,7 +9449,6 @@ MonoBehaviour:
   jointRef: {fileID: 0}
   colliderRef: {fileID: 0}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -9786,7 +9678,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047666923387}
   colliderRef: {fileID: 8160009047749470647}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -11433,7 +11324,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009048071077800}
   colliderRef: {fileID: 1621553603688444201}
   isSpecial: 1
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: -16, y: -44, z: -44}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -11579,7 +11469,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224974318443065}
   colliderRef: {fileID: 700224973961193602}
   isSpecial: 1
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: -13, y: 48, z: 28}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -11758,7 +11647,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973735140016}
   colliderRef: {fileID: 700224973264722219}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 14.4, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12001,7 +11889,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973301156623}
   colliderRef: {fileID: 700224973155628624}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 7, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12055,7 +11942,6 @@ MonoBehaviour:
   jointRef: {fileID: 0}
   colliderRef: {fileID: 8160009047824274413}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12169,7 +12055,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009048190376863}
   colliderRef: {fileID: 8160009047338706658}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12300,7 +12185,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047452614278}
   colliderRef: {fileID: 8160009048429601743}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 5, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12432,7 +12316,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047693403288}
   colliderRef: {fileID: 8160009046480236044}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -3, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12486,7 +12369,6 @@ MonoBehaviour:
   jointRef: {fileID: 0}
   colliderRef: {fileID: 0}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12540,7 +12422,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047725053789}
   colliderRef: {fileID: 8160009047403264585}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -20, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12640,7 +12521,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973021315817}
   colliderRef: {fileID: 700224972854875305}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -20, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12826,7 +12706,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009046587513485}
   colliderRef: {fileID: 8160009047329166223}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -12944,7 +12823,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224974241556133}
   colliderRef: {fileID: 700224973506183099}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13077,7 +12955,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047584193635}
   colliderRef: {fileID: 8160009047911623289}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 14.4, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13223,7 +13100,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009048394509202}
   colliderRef: {fileID: 8160009048520915435}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13277,7 +13153,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009046713284441}
   colliderRef: {fileID: 8160009046473401984}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13608,7 +13483,6 @@ MonoBehaviour:
   jointRef: {fileID: 0}
   colliderRef: {fileID: 700224972669681024}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13899,7 +13773,6 @@ MonoBehaviour:
   jointRef: {fileID: 8160009047893243445}
   colliderRef: {fileID: 8160009047970963826}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 7, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -13953,7 +13826,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224972812498299}
   colliderRef: {fileID: 700224973782377628}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -14157,7 +14029,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224973295250131}
   colliderRef: {fileID: 700224972902375575}
   isSpecial: 1
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: -16, y: -44, z: -44}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -14532,7 +14403,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224974097290488}
   colliderRef: {fileID: 700224972636152627}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: -3, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -14720,7 +14590,6 @@ MonoBehaviour:
   jointRef: {fileID: 700224974359952743}
   colliderRef: {fileID: 700224973447372020}
   isSpecial: 0
-  usesDynamicStrength: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
@@ -16057,7 +15926,7 @@ Transform:
   m_Children:
   - {fileID: 5201439771043969422}
   - {fileID: 7932402062075727643}
-  - {fileID: 5103302352900609781}
+  - {fileID: 9078655876784428550}
   m_Father: {fileID: 5301987387615063888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16610,6 +16479,100 @@ Transform:
   m_Father: {fileID: 1859604550333611509}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5924450229707743788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9078655876784428550}
+  - component: {fileID: 2334422105308068331}
+  - component: {fileID: 4985872723785798101}
+  - component: {fileID: 8656549659477080899}
+  m_Layer: 12
+  m_Name: Capsule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &9078655876784428550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924450229707743788}
+  m_LocalRotation: {x: 0.000000119209275, y: -0.0000000745058, z: 0.7071065, w: 0.70710725}
+  m_LocalPosition: {x: 0, y: -0, z: -0.003}
+  m_LocalScale: {x: 0.07758679, y: 0.08813084, z: 0.07758679}
+  m_Children: []
+  m_Father: {fileID: 5857551473989498896}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.00001}
+--- !u!33 &2334422105308068331
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924450229707743788}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4985872723785798101
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924450229707743788}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 22d0a317ea1306e479f374ab4cba3b4e, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!136 &8656549659477080899
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5924450229707743788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5941679310381693605
 GameObject:
   m_ObjectHideFlags: 0

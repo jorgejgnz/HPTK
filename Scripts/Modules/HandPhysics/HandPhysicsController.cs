@@ -65,7 +65,7 @@ namespace HPTK.Controllers.Avatar
         }
         private void Update()
         {
-            if (model.proxyHand.error > 0.5f && !decoupled)
+            if (model.proxyHand.error > core.model.configuration.maxErrorAllowed && !decoupled)
                 StartCoroutine(RecoverFromError());
         }
 
