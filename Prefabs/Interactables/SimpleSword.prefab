@@ -228,7 +228,6 @@ GameObject:
   - component: {fileID: 3607588842534360719}
   - component: {fileID: 3607588842534360712}
   - component: {fileID: 3607588842534360714}
-  - component: {fileID: 3607588842534360713}
   m_Layer: 0
   m_Name: SimpleSword
   m_TagString: Untagged
@@ -281,22 +280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: {fileID: 5493938656956456884}
---- !u!114 &3607588842534360713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3607588842534360718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ffc3ae9fa362a04b9bd116897d022ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  initialPosition: {x: 0, y: 0, z: 0}
-  initialRotation: {x: 0, y: 0, z: 0, w: 0}
-  attachedRbs: []
 --- !u!1 &3607588842539877184
 GameObject:
   m_ObjectHideFlags: 0
