@@ -1,5 +1,4 @@
-﻿using JorgeJGnz;
-using HPTK.Models.Avatar;
+﻿using HPTK.Models.Avatar;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
