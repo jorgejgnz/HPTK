@@ -28,13 +28,16 @@ namespace HPTK.Models.Avatar
         [Header("Module registry")]
         public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();
 
+        [Header("(HPTKCore required)")]
+        public bool updateHandValues = true;
+
         [Header("Updated by Controller")]
         public float error;
 
         private void Awake()
         {
             master.proxyHand = this;
-            slave.proxyHand = this;
+            if (slave) slave.proxyHand = this;
             if (ghost) ghost.proxyHand = this;
         }
     }

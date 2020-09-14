@@ -7,6 +7,13 @@ using UnityEngine;
 
 namespace HPTK.Helpers
 {
+    public enum GestureType
+    {
+        None = 0,
+        Grasp = 1,
+        Pinch = 2,
+    }
+
     public static class AvatarHelpers
     {
         public static BoneModel[] GetHandBones(HandModel hand)

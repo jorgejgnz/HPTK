@@ -310,7 +310,10 @@ namespace HPTK.Helpers
             while (Time.time <= startTime + duration)
             {
                 if (joint == null)
-                 yield break;
+                {
+                    Debug.LogError("Joint is NULL!");
+                    yield break;
+                }
 
                 distCovered = Time.time - startTime;
                 fraction = distCovered / duration;
@@ -351,6 +354,13 @@ namespace HPTK.Helpers
         public static IEnumerator DoAfterFixedUpdate(Action toDo)
         {
             yield return new WaitForFixedUpdate();
+
+            toDo.Invoke();
+        }
+
+        public static IEnumerator DoAfterUpdate(Action toDo)
+        {
+            yield return new WaitForEndOfFrame();
 
             toDo.Invoke();
         }

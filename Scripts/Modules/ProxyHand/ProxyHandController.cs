@@ -22,10 +22,11 @@ namespace HPTK.Controllers.Avatar
 
         private void Start()
         {
-            conf = core.model.configuration;
+            if (model.updateHandValues)
+                conf = core.model.configuration;
 
             InitHand(model.master);
-            InitHand(model.slave);
+            if (model.slave) InitHand(model.slave);
             if (model.ghost) InitHand(model.ghost);
 
             onInitialized.Invoke();
@@ -33,13 +34,20 @@ namespace HPTK.Controllers.Avatar
 
         private void Update()
         {
-            UpdateHand(model.master);
-            UpdateHand(model.slave);
+            if (model.updateHandValues)
+            {
+                UpdateHand(model.master);
 
-            model.error = Vector3.Distance(
-                model.master.wrist.transformRef.position,
-                model.slave.wrist.transformRef.position
-            );
+                if (model.slave)
+                {
+                    UpdateHand(model.slave);
+
+                    model.error = Vector3.Distance(
+                        model.master.wrist.transformRef.position,
+                        model.slave.wrist.transformRef.position
+                    );
+                }
+            }
         }
 
         void InitHand(HandModel hand)
@@ -49,7 +57,6 @@ namespace HPTK.Controllers.Avatar
 
             AvatarHelpers.UpdateFingerLengths(hand, hand.proxyHand.scale);
         }
-
 
         void UpdateHand(HandModel hand)
         {
@@ -101,8 +108,11 @@ namespace HPTK.Controllers.Avatar
             hand.isGrasping = hand.graspLerp > conf.minLerpToGrasp;
 
             // Ray
-            hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand);
-            hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
+            if (hand.ray)
+            {
+                hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand);
+                hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
+            }
 
             if (hand is MasterHandModel)
                 EmitEvents(hand as MasterHandModel, hand.proxyHand.handler, wasPinching, wasGrasping);
