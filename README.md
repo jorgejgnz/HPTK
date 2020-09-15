@@ -5,12 +5,13 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 - Data model to access hand components and lerp values to compose gestures and trigger actions.
 - State-of-the-art hand physics that can be configured in detail through configuration assets.
 - Hover/Touch/Grab detection with support to interactions involving multiple objects and hands.
-- Mirrored character (dummy)
+- Code architecture based on isolated modules. Support to custom modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Custom-modules)).
+- Input abstraction. RelativeSkeletonTracker included to mimic other hands. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Modules-overview)).
 
 ## Example project
 - You can clone a ready-to-go project at [HPTK-Sample](https://github.com/jorgejgnz/HPTK-Sample).
 
-[![Demo video](./Media/hptk.gif)](https://twitter.com/jorgejgnz/status/1285514990619942912)
+[![Demo video](./Documentation/Media/hptk.gif)](https://twitter.com/jorgejgnz/status/1285514990619942912)
 
 # Supported versions
 - Unity 2019.4.4f1 LTS, 2019.3.15f1
@@ -19,7 +20,7 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 # Supported target devices
 - Oculus Quest - Android
 
-# Getting started with HPTK
+# Getting started with HPTK (Oculus Quest)
 
 1. Obtain *HPTK*.
 1. Import *Oculus Integration*.
