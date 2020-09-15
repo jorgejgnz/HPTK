@@ -1,0 +1,25 @@
+{
+  "name": "com.jorgejgnz.hptk",
+  "version": "0.1.0",
+  "displayName": "HPTK",
+  "description": "Hand Physics Toolkit",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jorgejgnz/HPTK-Package.git"
+  },
+  "unity": "2019.4",
+  "unityRelease": "4f1",
+  "keywords": [
+    "virtualreality",
+    "vr",
+    "interaction",
+    "handtracking"
+  ],
+  "author": {
+    "name": "JorgeJGnz",
+    "email": "jorge.jgnz94@gmail.com",
+    "url": "https://jorgejgnz.carrd.co/"
+  },
+  "type": "tool"
+}
