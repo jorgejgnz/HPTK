@@ -1,32 +1,16 @@
-# This is a basic workflow to help you get started with Actions
+name: Publish UPM Package
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  release:
+    types: [published]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  publish:
+
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a set of commands using the runners shell
-      - name: Create a Release of Unity Package
-        uses: quabug/create-upm-release@v1.0.1
-      
-      # Runs a single command using the runners shell
-      - name: One-line script
-        run: echo Action completed!
-
+    - uses: actions/checkout@v2
+    - uses: monry/actions-upm-publish@v1
+      with:
+        npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN }}
