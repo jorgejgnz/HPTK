@@ -1,4 +1,5 @@
-# HPTK
+# HPTK ![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg) [![](https://img.shields.io/github/license/jorgejgnz/HPTK.svg)](https://github.com/jorgejgnz/HPTK/LICENSE.md) [![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/jorgejgnz/HPTK?include_prereleases)](https://github.com/jorgejgnz/HPTK/releases) [![openupm](https://img.shields.io/npm/v/com.jorgejgnz.upm-hptk?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.jorgejgnz.hptk/) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
+
 Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Hand physics and hover/touch/grab detection are modules included. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions. Only Oculus Quest is supported at the moment.
 
 ## Main features
