@@ -1,16 +1,22 @@
-name: Publish UPM Package
-
+name: CI
 on:
-  release:
-    types: [published]
-
+  push:
+    branches:
+    - master
 jobs:
-  publish:
-
+  release:
+    name: release
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    - uses: monry/actions-upm-publish@v1
       with:
-        npm_auth_token: ${{ secrets.NPM_AUTH_TOKEN }}
+        fetch-depth: 0
+    - name: Release
+      uses: cycjimmy/semantic-release-action@v2
+      with:
+        extra_plugins: |
+          @semantic-release/changelog
+          @semantic-release/git
+        branch: master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
