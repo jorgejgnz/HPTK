@@ -29,6 +29,7 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 1. Configure *Project Settings* (!).
 1. Setup a scene with *hand tracking support* (Oculus Quest).
 1. Setup *HPTK specific components*.
+1. Setup *platform specific HPTK components* (Oculus Quest).
 1. Modify/Create *HPTK Configuration Assets* (if needed).
 
 Checkout the [Wiki](https://github.com/jorgejgnz/HPTK/wiki/Getting-started) for a detailed **step-by-step guide**.
