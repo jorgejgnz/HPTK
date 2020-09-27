@@ -54,9 +54,6 @@ namespace HPTK.Controllers.Avatar
 
         void InitHand(HandModel hand)
         {
-            hand.allTransforms = AvatarHelpers.GetAllTransforms(hand);
-            hand.bones = AvatarHelpers.GetHandBones(hand);
-
             AvatarHelpers.UpdateFingerLengths(hand, hand.proxyHand.scale);
         }
 

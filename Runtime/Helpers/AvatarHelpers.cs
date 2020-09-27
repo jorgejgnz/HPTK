@@ -38,13 +38,12 @@ namespace HPTK.Helpers
 
         public static SlaveBoneModel[] GetSlaveHandBones(HandModel hand)
         {
-            BoneModel[] bones = GetHandBones(hand);
             List<SlaveBoneModel> slaveBones = new List<SlaveBoneModel>();
 
-            for (int i = 0; i < bones.Length; i++)
+            for (int i = 0; i < hand.bones.Length; i++)
             {
-                if (bones[i] is SlaveBoneModel)
-                    slaveBones.Add(bones[i] as SlaveBoneModel);
+                if (hand.bones[i] is SlaveBoneModel)
+                    slaveBones.Add(hand.bones[i] as SlaveBoneModel);
             }
 
             return slaveBones.ToArray();
@@ -52,14 +51,12 @@ namespace HPTK.Helpers
 
         public static Transform[] GetAllTransforms(HandModel hand)
         {
-            List<BoneModel> handBones = new List<BoneModel>(GetHandBones(hand));
-
             List<Transform> handTransforms = new List<Transform>();
 
             // Wrist, Forearm and Finger bones
-            for (int i = 0; i < handBones.Count; i++)
+            for (int i = 0; i < hand.bones.Length; i++)
             {
-                handTransforms.Add(handBones[i].transformRef);
+                handTransforms.Add(hand.bones[i].transformRef);
             }
 
             // Figner tips
