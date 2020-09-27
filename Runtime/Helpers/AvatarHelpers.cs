@@ -25,7 +25,8 @@ namespace HPTK.Helpers
             handBones.Add(hand.wrist);
 
             // Forearm
-            handBones.Add(hand.forearm);
+            if (hand.forearm)
+                handBones.Add(hand.forearm);
 
             // Finger bones
             for (int i = 0; i < hand.fingers.Length; i++)
