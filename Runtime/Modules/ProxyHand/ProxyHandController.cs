@@ -12,8 +12,6 @@ namespace HPTK.Controllers.Avatar
     {
         public ProxyHandModel model;
 
-        CoreConfiguration conf;
-
         private void Awake()
         {
             viewModel = new ProxyHandViewModel(model);
@@ -22,8 +20,19 @@ namespace HPTK.Controllers.Avatar
 
         private void Start()
         {
-            if (model.updateHandValues)
-                conf = core.model.configuration;
+            // Set default configuration if needed
+            if (model.configuration == null)
+            {
+                if (!core || !core.model.configuration)
+                {
+                    Debug.LogError("Lerp values can't be updated as any CoreConfiguration file is available");
+                    model.updateHandValues = false;
+                }
+                else
+                {
+                    model.configuration = core.model.configuration;
+                }
+            }
 
             InitHand(model.master);
             if (model.slave) InitHand(model.slave);
@@ -36,11 +45,11 @@ namespace HPTK.Controllers.Avatar
         {
             if (model.updateHandValues)
             {
-                UpdateHand(model.master);
+                UpdateHand(model.master, model.configuration);
 
                 if (model.slave)
                 {
-                    UpdateHand(model.slave);
+                    UpdateHand(model.slave, model.configuration);
 
                     model.error = Vector3.Distance(
                         model.master.wrist.transformRef.position,
@@ -57,7 +66,7 @@ namespace HPTK.Controllers.Avatar
             AvatarHelpers.UpdateFingerLengths(hand, hand.proxyHand.scale);
         }
 
-        void UpdateHand(HandModel hand)
+        void UpdateHand(HandModel hand, CoreConfiguration conf)
         {
             bool wasPinching = false;
             bool wasGrasping = false;

@@ -1,4 +1,5 @@
 ﻿using HPTK.Models.Interaction;
+using HPTK.Settings;
 using HPTK.Views.Handlers;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,8 @@ namespace HPTK.Models.Avatar
         [Header("Module registry")]
         public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();
 
-        [Header("(HPTKCore required)")]
+        [Header("Configuration (CoreModel's if empty)")]
+        public CoreConfiguration configuration;
         public bool updateHandValues = true;
 
         [Header("Updated by Controller")]
