@@ -26,17 +26,7 @@ namespace HPTK.Controllers.Avatar
         {
             model.proxyHand.relatedHandlers.Add(this);
 
-
             slaveBones = AvatarHelpers.GetSlaveHandBones(model.proxyHand.slave);
-
-            // Ignore palm-finger collisions
-            for (int i = 0; i < slaveBones.Length; i++)
-            {
-                if (!slaveBones[i].colliderRef)
-                    continue;
-
-                Physics.IgnoreCollision((model.proxyHand.slave.wrist as SlaveBoneModel).colliderRef, slaveBones[i].colliderRef, true);
-            }
 
             // Set default configuration if needed
             if (model.configuration == null)
@@ -44,23 +34,29 @@ namespace HPTK.Controllers.Avatar
 
             for (int i = 0; i < slaveBones.Length; i++)
             {
-                if (!slaveBones[i].jointRef)
-                    continue;
+                if (slaveBones[i].colliderRef)
+                {
+                    // Ignore palm-finger collisions
+                    Physics.IgnoreCollision((model.proxyHand.slave.wrist as SlaveBoneModel).colliderRef, slaveBones[i].colliderRef, true);
+                }
 
-                // Get initial connected body local rotations
-                if (slaveBones[i].jointRef.connectedBody != null) slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.connectedBody.transform.localRotation;
-                else slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.transform.rotation;
+                if (slaveBones[i].jointRef)
+                {
+                    // Get initial connected body local rotations
+                    if (slaveBones[i].jointRef.connectedBody != null) slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.connectedBody.transform.localRotation;
+                    else slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.transform.rotation;
 
-                // Set initial joint configurations
-                if (slaveBones[i] == model.proxyHand.slave.wrist)
-                    PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.wrist);
-                else if (slaveBones[i].isSpecial)
-                    PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.specials);
-                else
-                    PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.fingers);
+                    // Set initial joint configurations
+                    if (slaveBones[i] == model.proxyHand.slave.wrist)
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.wrist);
+                    else if (slaveBones[i].isSpecial)
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.specials);
+                    else
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.fingers);
 
-                slaveBones[i].rigidbodyRef.maxDepenetrationVelocity = model.configuration.fingers.maxLinearVelocity;
-                slaveBones[i].rigidbodyRef.maxAngularVelocity = model.configuration.fingers.maxAngularVelocity;
+                    slaveBones[i].rigidbodyRef.maxDepenetrationVelocity = model.configuration.fingers.maxLinearVelocity;
+                    slaveBones[i].rigidbodyRef.maxAngularVelocity = model.configuration.fingers.maxAngularVelocity;
+                }
             }
         }
         private void Update()
@@ -71,18 +67,18 @@ namespace HPTK.Controllers.Avatar
 
         private void FixedUpdate()
         {
-            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, model.proxyHand.master.wrist.transformRef, Space.World, model.configuration.wrist);
+            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.transformRef, Space.World, model.configuration.wrist);
 
-            for (int i = 0; i < model.proxyHand.slave.fingers.Length; i++)
+            for (int f = 0; f < model.proxyHand.slave.fingers.Length; f++)
             {
-                for (int j = 0; j < model.proxyHand.slave.fingers[i].bones.Length; j++)
+                for (int b = 0; b < model.proxyHand.slave.fingers[f].bones.Length; b++)
                 {
-                    slaveBone = model.proxyHand.slave.fingers[i].bones[j] as SlaveBoneModel;
+                    slaveBone = model.proxyHand.slave.fingers[f].bones[b] as SlaveBoneModel;
 
                     if (slaveBone.isSpecial)
-                        UpdateSlaveBone(slaveBone, model.proxyHand.master.fingers[i].bones[j].transformRef, Space.Self, model.configuration.specials);
+                        UpdateSlaveBone(slaveBone, slaveBone.masterBone.transformRef, Space.Self, model.configuration.specials);
                     else
-                        UpdateSlaveBone(slaveBone, model.proxyHand.master.fingers[i].bones[j].transformRef, Space.Self, model.configuration.fingers);
+                        UpdateSlaveBone(slaveBone, slaveBone.masterBone.transformRef, Space.Self, model.configuration.fingers);
                 }
             }
         }

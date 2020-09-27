@@ -13145,6 +13145,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673712513101325}
   isSpecial: 1
   targetEulerOffsetRot: {x: -13, y: 48, z: 28}
+  masterBone: {fileID: 8514069894549926427}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069893885407018
@@ -13350,6 +13351,7 @@ MonoBehaviour:
   colliderRef: {fileID: 0}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894201282666}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069893935042867
@@ -13625,6 +13627,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713999169595}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895949025680}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069893969794601
@@ -14704,6 +14707,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777323516444}
   isSpecial: 1
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895144911177}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894117662214
@@ -15034,6 +15038,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777567383272}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895238740168}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894191301991
@@ -15291,6 +15296,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713833850361}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -10, z: 0}
+  masterBone: {fileID: 8514069895961216496}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894228461420
@@ -15375,6 +15381,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776665823575}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069893879773584}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894362148611
@@ -15920,6 +15927,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776434450978}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -10, z: 0}
+  masterBone: {fileID: 8514069895524931843}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894433219373
@@ -17029,6 +17037,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7978482923635848046}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894083587551}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894632175271
@@ -17225,6 +17234,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713286866647}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895701298900}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894687846436
@@ -17692,6 +17702,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776936492186}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894544252155}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894774683830
@@ -17745,6 +17756,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713111307241}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894956048644}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894801259328
@@ -17798,6 +17810,7 @@ MonoBehaviour:
   colliderRef: {fileID: 987677218634012944}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894367518609}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894806290247
@@ -18082,6 +18095,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777505398151}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 5, z: 0}
+  masterBone: {fileID: 8514069894002942970}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894906880961
@@ -18181,6 +18195,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777610606758}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895463093981}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894923622671
@@ -18234,6 +18249,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713129086467}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894092523858}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894931710137
@@ -18482,6 +18498,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776905392831}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -3, z: 0}
+  masterBone: {fileID: 8514069895191778688}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894956048666
@@ -18645,6 +18662,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704778236755320}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895480659002}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069894996567423
@@ -19144,6 +19162,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776938920972}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895882491128}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895134352975
@@ -19197,6 +19216,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776634777883}
   isSpecial: 1
   targetEulerOffsetRot: {x: -16, y: -44, z: -44}
+  masterBone: {fileID: 8514069895681960488}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895144647253
@@ -19250,6 +19270,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777768502544}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895253464079}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895144911183
@@ -19349,6 +19370,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713719410942}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 7, z: 0}
+  masterBone: {fileID: 8514069893885405396}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895158126402
@@ -19527,6 +19549,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673712272323075}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895277459873}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895228244888
@@ -19690,6 +19713,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713162066023}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895828443779}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895245167672
@@ -19743,6 +19767,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673712993601292}
   isSpecial: 1
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895878024917}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895250022255
@@ -19796,6 +19821,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713641196533}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 14.4, z: 0}
+  masterBone: {fileID: 8514069895379782375}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895253464077
@@ -19895,6 +19921,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704778043858487}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069895636902839}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895262278950
@@ -20204,6 +20231,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713320346179}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 5, z: 0}
+  masterBone: {fileID: 8514069894715643581}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895379782373
@@ -20334,6 +20362,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673712262973294}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894535382148}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895404117067
@@ -20387,6 +20416,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713000468352}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -3, z: 0}
+  masterBone: {fileID: 8514069894842808938}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895405888776
@@ -20650,6 +20680,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776553706789}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -20, z: 0}
+  masterBone: {fileID: 8514069894160714435}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895456813840
@@ -20703,6 +20734,7 @@ MonoBehaviour:
   colliderRef: {fileID: 0}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894906880963}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895463093971
@@ -20802,6 +20834,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673712075873221}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: -20, z: 0}
+  masterBone: {fileID: 8514069894366462508}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895468283349
@@ -20980,6 +21013,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704777660008718}
   isSpecial: 1
   targetEulerOffsetRot: {x: -13, y: 48, z: 28}
+  masterBone: {fileID: 8514069895561536484}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895522327971
@@ -21033,6 +21067,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776210708647}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 14.4, z: 0}
+  masterBone: {fileID: 8514069895053439806}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895524931841
@@ -21132,6 +21167,7 @@ MonoBehaviour:
   colliderRef: {fileID: 7372704776319670236}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 7, z: 0}
+  masterBone: {fileID: 8514069895405888778}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895545054706
@@ -21404,6 +21440,7 @@ MonoBehaviour:
   colliderRef: {fileID: 2222673713790874209}
   isSpecial: 0
   targetEulerOffsetRot: {x: 0, y: 0, z: 0}
+  masterBone: {fileID: 8514069894806290241}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895618273508
@@ -21997,6 +22034,7 @@ MonoBehaviour:
   colliderRef: {fileID: 8747753410063421605}
   isSpecial: 1
   targetEulerOffsetRot: {x: -16, y: -44, z: -44}
+  masterBone: {fileID: 8514069895954459478}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &8514069895726338186

@@ -13,6 +13,8 @@ namespace HPTK.Models.Avatar
         public bool isSpecial;
         public Vector3 targetEulerOffsetRot;
 
+        public MasterBoneModel masterBone;
+
         [HideInInspector]
         public Quaternion initialConnectedBodyLocalRotation;
 
