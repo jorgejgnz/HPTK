@@ -21,7 +21,7 @@ namespace HPTK.Controllers.Avatar
         private void Start()
         {
             // Set default configuration if needed
-            if (model.configuration == null)
+            if (model.updateHandValues && model.configuration == null)
             {
                 if (!core || !core.model.configuration)
                 {
