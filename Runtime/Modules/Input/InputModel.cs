@@ -82,73 +82,123 @@ namespace HPTK.Models.Avatar
 
                 if (proxyHand.master.thumb)
                 {
-                    bone = proxyHand.master.thumb.bones[0] as MasterBoneModel;
-                    if (bone)
-                        thumb0 = bone;
-                    bone = proxyHand.master.thumb.bones[1] as MasterBoneModel;
-                    if (bone)
-                        thumb1 = bone;
-                    bone = proxyHand.master.thumb.bones[2] as MasterBoneModel;
-                    if (bone)
-                        thumb2 = bone;
-                    bone = proxyHand.master.thumb.bones[3] as MasterBoneModel;
-                    if (bone)
-                        thumb3 = bone;
+                    for (int b = 0; b < proxyHand.master.thumb.bones.Length; b++)
+                    {
+                        bone = proxyHand.master.thumb.bones[b] as MasterBoneModel;
+                        if (bone != null)
+                        {
+                            switch (b)
+                            {
+                                case 0:
+                                    thumb0 = bone;
+                                    break;
+                                case 1:
+                                    thumb1 = bone;
+                                    break;
+                                case 2:
+                                    thumb2 = bone;
+                                    break;
+                                case 3:
+                                    thumb3 = bone;
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 if (proxyHand.master.index)
                 {
-                    bone = proxyHand.master.index.bones[0] as MasterBoneModel;
-                    if (bone)
-                        index1 = bone;
-                    bone = proxyHand.master.index.bones[1] as MasterBoneModel;
-                    if (bone)
-                        index2 = bone;
-                    bone = proxyHand.master.index.bones[2] as MasterBoneModel;
-                    if (bone)
-                        index3 = bone;
+                    for (int b = 0; b < proxyHand.master.index.bones.Length; b++)
+                    {
+                        bone = proxyHand.master.index.bones[b] as MasterBoneModel;
+                        if (bone != null)
+                        {
+                            switch (b)
+                            {
+                                case 0:
+                                    index1 = bone;
+                                    break;
+                                case 1:
+                                    index2 = bone;
+                                    break;
+                                case 2:
+                                    index3 = bone;
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 if (proxyHand.master.middle)
                 {
-                    bone = proxyHand.master.middle.bones[0] as MasterBoneModel;
-                    if (bone)
-                        middle1 = bone;
-                    bone = proxyHand.master.middle.bones[1] as MasterBoneModel;
-                    if (bone)
-                        middle2 = bone;
-                    bone = proxyHand.master.middle.bones[2] as MasterBoneModel;
-                    if (bone)
-                        middle3 = bone;
+                    for (int b = 0; b < proxyHand.master.middle.bones.Length; b++)
+                    {
+                        bone = proxyHand.master.middle.bones[b] as MasterBoneModel;
+                        if (bone != null)
+                        {
+                            switch (b)
+                            {
+                                case 0:
+                                    middle1 = bone;
+                                    break;
+                                case 1:
+                                    middle2 = bone;
+                                    break;
+                                case 2:
+                                    middle3 = bone;
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 if (proxyHand.master.ring)
                 {
-                    bone = proxyHand.master.ring.bones[0] as MasterBoneModel;
-                    if (bone)
-                        ring1 = bone;
-                    bone = proxyHand.master.ring.bones[1] as MasterBoneModel;
-                    if (bone)
-                        ring2 = bone;
-                    bone = proxyHand.master.ring.bones[2] as MasterBoneModel;
-                    if (bone)
-                        ring3 = bone;
+                    for (int b = 0; b < proxyHand.master.ring.bones.Length; b++)
+                    {
+                        bone = proxyHand.master.ring.bones[b] as MasterBoneModel;
+                        if (bone != null)
+                        {
+                            switch (b)
+                            {
+                                case 0:
+                                    ring1 = bone;
+                                    break;
+                                case 1:
+                                    ring2 = bone;
+                                    break;
+                                case 2:
+                                    ring3 = bone;
+                                    break;
+                            }
+                        }
+                    }
                 }
 
                 if (proxyHand.master.pinky)
                 {
-                    bone = proxyHand.master.pinky.bones[0] as MasterBoneModel;
-                    if (bone)
-                        pinky0 = bone;
-                    bone = proxyHand.master.pinky.bones[1] as MasterBoneModel;
-                    if (bone)
-                        pinky1 = bone;
-                    bone = proxyHand.master.pinky.bones[2] as MasterBoneModel;
-                    if (bone)
-                        pinky2 = bone;
-                    bone = proxyHand.master.pinky.bones[3] as MasterBoneModel;
-                    if (bone)
-                        pinky3 = bone;
+                    for (int b = 0; b < proxyHand.master.pinky.bones.Length; b++)
+                    {
+                        bone = proxyHand.master.pinky.bones[b] as MasterBoneModel;
+                        if (bone != null)
+                        {
+                            switch (b)
+                            {
+                                case 0:
+                                    pinky0 = bone;
+                                    break;
+                                case 1:
+                                    pinky1 = bone;
+                                    break;
+                                case 2:
+                                    pinky2 = bone;
+                                    break;
+                                case 3:
+                                    pinky3 = bone;
+                                    break;
+                            }
+                        }
+                    }
                 }
             }
             else
