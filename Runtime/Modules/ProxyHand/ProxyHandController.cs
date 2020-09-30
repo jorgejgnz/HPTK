@@ -74,33 +74,39 @@ namespace HPTK.Controllers.Avatar
             float tempValue;
 
             int tempIndex;
-            for (int i = 0; i < hand.fingers.Length; i++)
+            for (int f = 0; f < hand.fingers.Length; f++)
             {
+                if (hand.fingers[f].bones.Length == 0)
+                    continue;
+
                 // Strength
-                tempIndex = hand.fingers[i].bones.Length - 2;
-                hand.fingers[i].strengthLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[i].bones[tempIndex], conf.maxLocalRotZ, conf.minLocalRotZ);
+                if (hand.fingers[f].bones.Length >= 3)
+                    tempIndex = hand.fingers[f].bones.Length - 2;
+                else
+                    tempIndex = hand.fingers[f].bones.Length - 1;
+
+                hand.fingers[f].strengthLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].bones[tempIndex].transformRef, conf.maxLocalRotZ, conf.minLocalRotZ);
 
                 // Flex
-                hand.fingers[i].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[i], conf.minFlexRelDistance, hand.proxyHand.scale);
+                hand.fingers[f].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[f], conf.minFlexRelDistance, hand.proxyHand.scale);
 
                 // Base rotation (Closed/Opened)
-                tempIndex = hand.fingers[i].bones.Length - 3;
-                hand.fingers[i].baseRotationLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[i].bones[tempIndex], conf.maxLocalRotZ, conf.minLocalRotZ);
-                hand.fingers[i].isClosed = hand.fingers[i].baseRotationLerp > conf.minLerpToClose;
+                hand.fingers[f].baseRotationLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].fingerBase, conf.maxLocalRotZ, conf.minLocalRotZ);
+                hand.fingers[f].isClosed = hand.fingers[f].baseRotationLerp > conf.minLerpToClose;
 
                 // Palm line
-                hand.fingers[i].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[i], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.proxyHand.scale);
+                hand.fingers[f].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[f], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.proxyHand.scale);
 
                 // Pinch
-                tempValue = hand.fingers[i].pinchLerp;
-                if (hand.fingers[i].flexLerp < conf.minFlexLerpToDisablePinch)
-                    hand.fingers[i].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[i], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
+                tempValue = hand.fingers[f].pinchLerp;
+                if (hand.fingers[f].flexLerp < conf.minFlexLerpToDisablePinch)
+                    hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
                 else
-                    hand.fingers[i].pinchLerp = 0.0f;
-                hand.fingers[i].pinchSpeed = (hand.fingers[i].pinchLerp - tempValue) / Time.deltaTime;
+                    hand.fingers[f].pinchLerp = 0.0f;
+                hand.fingers[f].pinchSpeed = (hand.fingers[f].pinchLerp - tempValue) / Time.deltaTime;
 
-                if (hand.fingers[i] == hand.index) wasPinching = hand.fingers[i].isPinching;
-                hand.fingers[i].isPinching = hand.fingers[i].pinchLerp > conf.minLerpToPinch;
+                if (hand.fingers[f] == hand.index) wasPinching = hand.fingers[f].isPinching;
+                hand.fingers[f].isPinching = hand.fingers[f].pinchLerp > conf.minLerpToPinch;
             }
 
             // Fist
@@ -116,9 +122,9 @@ namespace HPTK.Controllers.Avatar
             hand.isGrasping = hand.graspLerp > conf.minLerpToGrasp;
 
             // Ray
-            if (hand.ray)
+            if (hand.ray && hand.proxyHand && hand.proxyHand.shoulderTip)
             {
-                hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand);
+                hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand, hand.proxyHand.shoulderTip);
                 hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
             }
 

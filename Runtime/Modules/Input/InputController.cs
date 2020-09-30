@@ -11,6 +11,8 @@ namespace HPTK.Controllers.Input
     {
         public InputModel model;
 
+        bool initialized = false;
+
         private void Awake()
         {
             viewModel = new InputViewModel(model);
@@ -19,8 +21,6 @@ namespace HPTK.Controllers.Input
         private void Start()
         {
             model.proxyHand.relatedHandlers.Add(this);
-
-            model.inputDataProvider.InitData(model.proxyHand.master);
 
             // Input data for finger tips can be ignored as it will depend on the master hand model
             // This array MUST match model.inputDataProvider.bones[]
@@ -46,10 +46,23 @@ namespace HPTK.Controllers.Input
                 model.pinky2,
                 model.pinky3
             };
+
+            if (model.inputDataProvider)
+            {
+                model.inputDataProvider.InitData(model.proxyHand.master);
+                initialized = true;
+            }
+            else
+            {
+                Debug.LogError("InputModel.InputDataProvider is required!");
+            }
         }
 
         void Update()
         {
+            if (!initialized)
+                return;
+
             model.inputDataProvider.UpdateData();
 
             // Update pos and rot for wrist and forearm

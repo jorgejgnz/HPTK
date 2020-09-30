@@ -9,9 +9,6 @@ namespace HPTK.Models.Avatar
 {
     public class SlaveHandModel : HandModel
     {
-        [Header("Interactor")]
-        public InteractorModel interactor;
-
         [Header("Notifiers")]
         public TriggerNotifier palmTrigger;
         public TriggerNotifier handTrigger;

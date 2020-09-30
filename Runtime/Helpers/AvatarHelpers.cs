@@ -131,9 +131,9 @@ namespace HPTK.Helpers
         }
 
         // If bone1 -> Finger rotation. If bone 2 -> Finger strength
-        public static float GetBoneRotLerp(BoneModel bone, float maxLocalRotZ, float minLocalRotZ)
+        public static float GetBoneRotLerp(Transform boneTsfRef, float maxLocalRotZ, float minLocalRotZ)
         {
-            float localRotZ = bone.transformRef.localRotation.eulerAngles.z;
+            float localRotZ = boneTsfRef.localRotation.eulerAngles.z;
 
             if (localRotZ <= maxLocalRotZ && localRotZ >= minLocalRotZ)
                 return Mathf.InverseLerp(maxLocalRotZ, minLocalRotZ, localRotZ);
@@ -210,9 +210,9 @@ namespace HPTK.Helpers
             return start + line * d;
         }
 
-        public static Vector3 GetHandRayDirection(HandModel hand)
+        public static Vector3 GetHandRayDirection(HandModel hand, Transform shoulderTip)
         {
-            return (hand.ray.position - hand.proxyHand.shoulderTip.position).normalized;
+            return (hand.ray.position - shoulderTip.position).normalized;
         }
 
         public static void CopyValues(HandModel from, HandModel to)

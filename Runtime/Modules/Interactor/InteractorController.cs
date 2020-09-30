@@ -12,6 +12,8 @@ namespace HPTK.Controllers.Interaction
     {
         public InteractorModel model;
 
+        bool validStart = true;
+
         private void Awake()
         {
             model.handler = this;
@@ -22,23 +24,56 @@ namespace HPTK.Controllers.Interaction
         {
             SlaveHandModel hand = model.proxyHand.slave;
 
-            hand.palmCollisionNotifier.onRbEnter.AddListener(OnEnter_Special);
-            hand.palmCollisionNotifier.onRbExit.AddListener(OnExit_Special);
+            if (hand.palmCollisionNotifier)
+            {
+                hand.palmCollisionNotifier.onRbEnter.AddListener(OnEnter_Special);
+                hand.palmCollisionNotifier.onRbExit.AddListener(OnExit_Special);
+            }
+            else
+            {
+                Debug.LogError("InteractorModule requires a slave hand with palmCollisionNotifier");
+                validStart = false;
+            }
 
-            hand.thumb.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Special);
-            hand.thumb.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Special);
+            if (hand.thumb)
+            {
+                hand.thumb.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Special);
+                hand.thumb.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Special);
+            }
+            else
+            {
+                Debug.LogError("InteractorModule requires a slave hand with CollisionNotifier attached to a thumb finger tip (slave hand)");
+                validStart = false;
+            }
 
-            hand.index.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
-            hand.index.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            if (hand.index)
+            {
+                hand.index.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
+                hand.index.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            }
+            else
+            {
+                Debug.LogError("InteractorModule requires a slave hand with CollisionNotifier attached to a index finger tip (slave hand)");
+                validStart = false;
+            }
 
-            hand.middle.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
-            hand.middle.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            if (hand.middle)
+            {
+                hand.middle.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
+                hand.middle.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            }
 
-            hand.ring.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
-            hand.ring.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            if (hand.ring)
+            {
+                hand.ring.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
+                hand.ring.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            }
 
-            hand.pinky.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
-            hand.pinky.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            if (hand.pinky)
+            {
+                hand.pinky.fingerTipCollisionNotifier.onRbEnter.AddListener(OnEnter_Default);
+                hand.pinky.fingerTipCollisionNotifier.onRbExit.AddListener(OnExit_Default);
+            }
 
             hand.handTrigger.onEnterRigidbody.AddListener(OnEnter_Hover);
             hand.handTrigger.onExitRigidbody.AddListener(OnExit_Hover);

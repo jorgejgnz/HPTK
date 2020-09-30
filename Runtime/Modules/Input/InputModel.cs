@@ -203,7 +203,7 @@ namespace HPTK.Models.Avatar
             }
             else
             {
-                Debug.LogError("ProxyHand field or ProxyHand.master are NULL");
+                Debug.LogWarning("ProxyHand field or ProxyHand.master are NULL");
             }
         }
     }

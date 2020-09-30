@@ -14,6 +14,8 @@ namespace HPTK.Models.Interaction
 
         public ProxyHandModel proxyHand;
 
+        [Header("Updated by InteractorController")]
+
         public int totalHovering = 0;
         public int totalTouching = 0;
         public int totalGrabbing = 0;
