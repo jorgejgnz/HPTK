@@ -13,6 +13,7 @@ namespace HPTK.Models.Avatar
         public bool isSpecial;
         public Vector3 targetEulerOffsetRot;
 
+        [Header("Slave rig mapping")]
         public MasterBoneModel masterBone;
 
         [HideInInspector]

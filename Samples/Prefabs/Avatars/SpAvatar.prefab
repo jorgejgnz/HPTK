@@ -23629,9 +23629,99 @@ PrefabInstance:
       objectReference: {fileID: 218427590295452712}
     - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
         type: 3}
-      propertyPath: inputDataProvider
+      propertyPath: wrist
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8514069894083587551}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: forearm
+      value: 
+      objectReference: {fileID: 8514069894906880963}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb0
+      value: 
+      objectReference: {fileID: 8514069895954459478}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb1
+      value: 
+      objectReference: {fileID: 8514069894549926427}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb2
+      value: 
+      objectReference: {fileID: 8514069895878024917}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb3
+      value: 
+      objectReference: {fileID: 8514069895828443779}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index1
+      value: 
+      objectReference: {fileID: 8514069895277459873}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index2
+      value: 
+      objectReference: {fileID: 8514069894092523858}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index3
+      value: 
+      objectReference: {fileID: 8514069894956048644}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle1
+      value: 
+      objectReference: {fileID: 8514069895949025680}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle2
+      value: 
+      objectReference: {fileID: 8514069895701298900}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle3
+      value: 
+      objectReference: {fileID: 8514069894535382148}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring1
+      value: 
+      objectReference: {fileID: 8514069895379782375}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring2
+      value: 
+      objectReference: {fileID: 8514069894366462508}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring3
+      value: 
+      objectReference: {fileID: 8514069894842808938}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky0
+      value: 
+      objectReference: {fileID: 8514069894806290241}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky1
+      value: 
+      objectReference: {fileID: 8514069894715643581}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky2
+      value: 
+      objectReference: {fileID: 8514069893885405396}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky3
+      value: 
+      objectReference: {fileID: 8514069895961216496}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bec82ecf97c3b1a46a06a21e7080eb04, type: 3}
 --- !u!4 &5773015936140360903 stripped
@@ -24031,9 +24121,99 @@ PrefabInstance:
       objectReference: {fileID: 8514069895380845619}
     - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
         type: 3}
-      propertyPath: inputDataProvider
+      propertyPath: forearm
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8514069894201282666}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb0
+      value: 
+      objectReference: {fileID: 8514069895681960488}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb1
+      value: 
+      objectReference: {fileID: 8514069895561536484}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb2
+      value: 
+      objectReference: {fileID: 8514069895144911177}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: thumb3
+      value: 
+      objectReference: {fileID: 8514069895238740168}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index1
+      value: 
+      objectReference: {fileID: 8514069895636902839}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index2
+      value: 
+      objectReference: {fileID: 8514069895480659002}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: index3
+      value: 
+      objectReference: {fileID: 8514069893879773584}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle1
+      value: 
+      objectReference: {fileID: 8514069895253464079}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle2
+      value: 
+      objectReference: {fileID: 8514069895463093981}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: middle3
+      value: 
+      objectReference: {fileID: 8514069894544252155}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring1
+      value: 
+      objectReference: {fileID: 8514069895053439806}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring2
+      value: 
+      objectReference: {fileID: 8514069894160714435}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: ring3
+      value: 
+      objectReference: {fileID: 8514069895191778688}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky0
+      value: 
+      objectReference: {fileID: 8514069895882491128}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky1
+      value: 
+      objectReference: {fileID: 8514069894002942970}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky2
+      value: 
+      objectReference: {fileID: 8514069895405888778}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: pinky3
+      value: 
+      objectReference: {fileID: 8514069895524931843}
+    - target: {fileID: 8157165601297867708, guid: bec82ecf97c3b1a46a06a21e7080eb04,
+        type: 3}
+      propertyPath: wrist
+      value: 
+      objectReference: {fileID: 8514069894367518609}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bec82ecf97c3b1a46a06a21e7080eb04, type: 3}
 --- !u!4 &351070719972449624 stripped

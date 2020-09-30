@@ -20,6 +20,9 @@ namespace HPTK.Models.Avatar
         public SlaveHandModel slave;
         public HandModel ghost;
 
+        [HideInInspector]
+        public HandModel[] hands;
+
         [Header("Refs")]
 
         public Transform shoulderTip;
@@ -39,9 +42,25 @@ namespace HPTK.Models.Avatar
 
         private void Awake()
         {
+            List<HandModel> handList = new List<HandModel>();
+
+            // Master hand is mandatory
             master.proxyHand = this;
-            if (slave) slave.proxyHand = this;
-            if (ghost) ghost.proxyHand = this;
+            handList.Add(master);
+
+            if (slave)
+            {
+                slave.proxyHand = this;
+                handList.Add(slave);
+            }
+
+            if (ghost)
+            {
+                ghost.proxyHand = this;
+                handList.Add(ghost);
+            }
+
+            hands = handList.ToArray();
         }
     }
 }

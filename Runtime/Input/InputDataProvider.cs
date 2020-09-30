@@ -170,10 +170,10 @@ namespace HPTK.Input
             List<AbstractTsf> tmpBones = new List<AbstractTsf>(bones);
 
             UpdateFinger(thumb, tmpBones.GetRange(2, 4).ToArray(), tmpBones[tmpBones.Count - 5]);
-            UpdateFinger(thumb, tmpBones.GetRange(6, 3).ToArray(), tmpBones[tmpBones.Count - 4]);
-            UpdateFinger(thumb, tmpBones.GetRange(9, 3).ToArray(), tmpBones[tmpBones.Count - 3]);
-            UpdateFinger(thumb, tmpBones.GetRange(12, 3).ToArray(), tmpBones[tmpBones.Count - 2]);
-            UpdateFinger(thumb, tmpBones.GetRange(15, 4).ToArray(), tmpBones[tmpBones.Count - 1]);
+            UpdateFinger(index, tmpBones.GetRange(6, 3).ToArray(), tmpBones[tmpBones.Count - 4]);
+            UpdateFinger(middle, tmpBones.GetRange(9, 3).ToArray(), tmpBones[tmpBones.Count - 3]);
+            UpdateFinger(ring, tmpBones.GetRange(12, 3).ToArray(), tmpBones[tmpBones.Count - 2]);
+            UpdateFinger(pinky, tmpBones.GetRange(15, 4).ToArray(), tmpBones[tmpBones.Count - 1]);
         }
 
         void UpdateFinger(FingerPose finger, AbstractTsf[] bones, AbstractTsf tip)
