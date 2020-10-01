@@ -6,6 +6,6 @@ namespace HPTK.Models.Avatar
 {
     public class MasterBoneModel : BoneModel
     {
-
+        public Transform offset;
     }
 }

@@ -17,6 +17,8 @@ namespace HPTK.Controllers.Avatar
 
         bool decoupled = false;
 
+        Transform masterWristDestination;
+
         private void Awake()
         {
             viewModel = new HandPhysicsViewModel(model);
@@ -67,7 +69,12 @@ namespace HPTK.Controllers.Avatar
 
         private void FixedUpdate()
         {
-            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.transformRef, Space.World, model.configuration.wrist);
+            if ((model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.offset != null)
+                masterWristDestination = (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.offset;
+            else
+                masterWristDestination = (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.transformRef;
+
+            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, masterWristDestination, Space.World, model.configuration.wrist);
 
             for (int f = 0; f < model.proxyHand.slave.fingers.Length; f++)
             {
