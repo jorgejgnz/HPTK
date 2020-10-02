@@ -3,12 +3,13 @@ This package is under MIT license; however, the following components are governe
 ./Samples/Models/OculusHand_L.fbx
 ./Samples/Models/OculusHand_R.fbx
 
-[Oculus Master SDK License Agreement - 1.0]
+	[Oculus Master SDK License Agreement - 1.0]
 
-Effective date: 6/1/2020
-Copyright © Facebook Technologies, LLC and its affiliates. All rights reserved.
+	Effective date: 6/1/2020
+	Copyright © Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-The text of this may be found at: https://developer.oculus.com/licenses/oculusmastersdk-1.0/
+	The text of this may be found at: https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
-A copy of this text may be found at: 
-./Samples/Models/LICENSE.txt
+	A copy of this text may be found at: 
+	./Samples/Models/LICENSE.txt
+	
