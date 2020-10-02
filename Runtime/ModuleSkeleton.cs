@@ -1,4 +1,5 @@
 ﻿using HPTK.Models.Avatar;
+using HPTK.Views.Events;
 using HPTK.Views.Handlers;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +18,12 @@ namespace HPTK.Abstracts
     {
 		public ProxyHandModel proxyHand;
         public ChildModel child;
-        public float value = 0.0f;
+
+        [HideInInspector]
+        public Handler handler;
+
+        public float readonlyValue = 0.0f;
+        public float modifiableValue = 0.0f;
 
         private void Awake()
         {
@@ -30,8 +36,16 @@ namespace HPTK.Abstracts
         public sealed class ViewModel
         {
             Model model;
-            public float value { get { return model.value; } }
-			public ProxyHandHandler proxyHand { get { return model.proxyHand.handler; } }
+            public float readonlyValue { get { return model.readonlyValue; } }
+            public float modifiableValue {
+                get { return model.modifiableValue; }
+                set
+                {
+                    model.modifiableValue = value;
+                    model.handler.onValueChanged.Invoke(value);
+                }
+            }
+            public ProxyHandHandler proxyHand { get { return model.proxyHand.handler; } }
             public ViewModel(Model model)
             {
                 this.model = model;
@@ -39,7 +53,8 @@ namespace HPTK.Abstracts
         }
         public ViewModel viewModel;
 
-        public UnityEvent onEvent;
+        public FloatEvent onValueChanged;
+        public UnityEvent onOtherEvent;
     }
 
     public class Controller : Handler
@@ -49,6 +64,7 @@ namespace HPTK.Abstracts
         private void Awake()
         {
             viewModel = new ViewModel(model);
+            model.handler = this;
         }
 
         private void Start()
