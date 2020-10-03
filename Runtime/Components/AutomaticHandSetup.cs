@@ -508,6 +508,8 @@ public class AutomaticHandSetup : MonoBehaviour
             pinchPosConstraint.AddSource(indexTipSource);
             pinchPosConstraint.AddSource(thumbTipSource);
 
+            pinchPosConstraint.translationOffset = Vector3.zero;
+
             pinchPosConstraint.constraintActive = true;
 
             handModel.pinchCenter = pinchCenter.transform;
@@ -531,6 +533,8 @@ public class AutomaticHandSetup : MonoBehaviour
 
             throatPosConstraint.AddSource(indexBaseSource);
             throatPosConstraint.AddSource(thumbBaseSource);
+
+            throatPosConstraint.translationOffset = Vector3.zero;
 
             throatPosConstraint.constraintActive = true;
 

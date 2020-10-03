@@ -85,6 +85,7 @@ namespace HPTK.Input
 
     public class InputDataProvider : MonoBehaviour
     {
+        [HideInInspector]
         public AbstractTsf[] bones;
 
         public AbstractTsf wrist;
@@ -96,18 +97,22 @@ namespace HPTK.Input
         public FingerPose ring = new FingerPose("Ring");
         public FingerPose pinky = new FingerPose("Pinky");
 
+        // Replaceable by inherited classes
         public virtual void InitData(HandModel hand)
         {
             List<AbstractTsf> tmpBones = new List<AbstractTsf>();
 
-            for (int b = 0; b < hand.allTransforms.Length; b++)
+            // InputDataProvider.bones will always be 24 items length
+            for (int b = 0; b < 24; b++)
             {
-                tmpBones.Add(new AbstractTsf(hand.allTransforms[b], Space.World));
+                // Initialize .bones with empty AbstractTsfs
+                tmpBones.Add(new AbstractTsf(b.ToString(), Space.World));
             }
 
             bones = tmpBones.ToArray();
         }
 
+        // Replaceable by inherited classes
         public virtual void UpdateData() { }
 
         /*
