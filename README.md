@@ -1,4 +1,4 @@
-# HPTK [![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg)](https://unity3d.com/es/get-unity/download/archive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md) [![version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/jorgejgnz/HPTK/releases) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
+# HPTK [![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg)](https://unity3d.com/es/get-unity/download/archive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md) [![version](https://img.shields.io/badge/version-0.2.0-blue)](https://github.com/jorgejgnz/HPTK/releases) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
 
 Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Hand physics and hover/touch/grab detection are modules included. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions. Only Oculus Quest is supported at the moment.
 
@@ -20,6 +20,9 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 
 # Supported target devices
 - Oculus Quest - Android
+
+# Supported render pipelines
+- Universal Render Pipeline (URP)
 
 # Getting started with HPTK (Oculus Quest)
 
