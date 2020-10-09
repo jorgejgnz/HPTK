@@ -20,15 +20,15 @@ public enum Side
 public class AutomaticHandSetup : MonoBehaviour
 {
     public Side handType;
-    public Material masterMat;
-    public Material slaveMat;
-    public Material ghostMat;
     public float fingerRadius = 0.01f;
-    public Transform wristOffset;
+    
     public Transform wrist;
     public Transform thumbRootBone;
     public Transform indexRootBone;
     public GameObject proxyHandModulePrefab;
+
+    [Header("Optional")]
+    public Transform wristOffset;
 
     GameObject mainRoot;
     GameObject objects;
@@ -75,7 +75,7 @@ public class AutomaticHandSetup : MonoBehaviour
         // CustomHand
         mainRoot = new GameObject();
         mainRoot.name = "CustomHand." + handType.ToString();
-        mainRoot.transform.position = wristOffset.position + new Vector3(0.0f, 0.0f, 0.1f);
+        mainRoot.transform.position = wrist.position + new Vector3(0.0f, 0.0f, 0.1f);
 
         // CustomHand > Objects
         objects = BasicHelpers.InstantiateEmptyChild(mainRoot);
@@ -106,6 +106,11 @@ public class AutomaticHandSetup : MonoBehaviour
         FixHand(phModel.master, handType, masterWristOffset);
         FixHand(phModel.slave, handType, null);
         FixHand(phModel.ghost, handType, null);
+
+        // Add lines
+        AddLines(phModel.master, Color.blue);
+        AddLines(phModel.slave, Color.black);
+        AddLines(phModel.ghost, Color.white);
     }
 
     void SetupMasterObjects()
@@ -120,11 +125,16 @@ public class AutomaticHandSetup : MonoBehaviour
         masterWrist.transform.name = "Wrist";
 
         // Store wristOffset
-        masterWristOffset = masterWrist.transform.GetChild(0);
+        if (wristOffset)
+        {
+            masterWristOffset = masterWrist.transform.GetChild(0);
+        }
 
         // Set SkinnedMR material to master material
-        SkinnedMeshRenderer masterSMR = masterWristOffset.GetComponent<SkinnedMeshRenderer>();
+        /*
+        SkinnedMeshRenderer masterSMR = mmasterWrist.GetComponent<SkinnedMeshRenderer>();
         masterSMR.material = masterMat;
+        */
     }
 
     // 1. Wrist tiene SMR
@@ -141,13 +151,21 @@ public class AutomaticHandSetup : MonoBehaviour
         slaveRootObject.transform.position += new Vector3(0.0f, 0.2f, 0.0f);
 
         // CustomHand > Objects > Slave > (content)
-        slaveWrist = Instantiate(wristOffset.gameObject, slaveRootObject.transform.position, slaveRootObject.transform.rotation);
+        Transform handRoot;
+        if (wristOffset)
+            handRoot = wristOffset;
+        else
+            handRoot = wrist;
+
+        slaveWrist = Instantiate(handRoot.gameObject, slaveRootObject.transform.position, slaveRootObject.transform.rotation);
         slaveWrist.transform.parent = slaveRootObject.transform;
         slaveWrist.transform.name = "Wrist";
 
-        // Set SkinnedMR material to master material
+        // Set SkinnedMR material to salve material
+        /*
         SkinnedMeshRenderer slaveSMR = slaveWrist.GetComponent<SkinnedMeshRenderer>();
         slaveSMR.material = slaveMat;
+        */
     }
 
     void SetupGhostObjects()
@@ -160,13 +178,21 @@ public class AutomaticHandSetup : MonoBehaviour
         ghostRootObject.transform.position += new Vector3(0.0f, 0.4f, 0.0f);
 
         // CustomHand > Objects > Ghost > (content)
-        ghostWrist = Instantiate(wristOffset.gameObject, ghostRootObject.transform.position, ghostRootObject.transform.rotation);
+        Transform handRoot;
+        if (wristOffset)
+            handRoot = wristOffset;
+        else
+            handRoot = wrist;
+
+        ghostWrist = Instantiate(handRoot.gameObject, ghostRootObject.transform.position, ghostRootObject.transform.rotation);
         ghostWrist.transform.parent = ghostRootObject.transform;
         ghostWrist.transform.name = "Wrist";
 
         // Set SkinnedMR material to ghost material
+        /*
         SkinnedMeshRenderer ghostSMR = ghostWrist.GetComponent<SkinnedMeshRenderer>();
         ghostSMR.material = ghostMat;
+        */
     }
 
     void SetupProxyHandModule()
@@ -214,10 +240,13 @@ public class AutomaticHandSetup : MonoBehaviour
         wristBone.transformRef = masterWrist;
         handModel.wrist = wristBone;
 
-        /* SLAVE BONE MODEL SPECIFIC
+        /* MASTER BONE MODEL SPECIFIC
         */
 
-        wristBone.offset = masterWristOffset;
+        if (masterWristOffset != null)
+        {
+            wristBone.offset = masterWristOffset;
+        }
 
         /* 
         */
@@ -227,10 +256,16 @@ public class AutomaticHandSetup : MonoBehaviour
 
         List<FingerModel> fingers = new List<FingerModel>();
 
-        for (int f = 0; f < masterWristOffset.childCount; f++)
+        Transform handRoot;
+        if (masterWristOffset != null)
+            handRoot = masterWristOffset;
+        else
+            handRoot = masterWrist;
+
+        for (int f = 0; f < handRoot.childCount; f++)
         {
             // If childCount is 0, then it's not a finger
-            if (masterWristOffset.GetChild(f).childCount == 0)
+            if (handRoot.GetChild(f).childCount == 0)
             {
                 continue;
             }
@@ -243,7 +278,7 @@ public class AutomaticHandSetup : MonoBehaviour
 
             List<BoneModel> bones = new List<BoneModel>();
 
-            Transform[] fingerTransforms = GetFingerTransforms(masterWristOffset.GetChild(f));
+            Transform[] fingerTransforms = GetFingerTransforms(handRoot.GetChild(f));
             for (int b = 0; b < fingerTransforms.Length; b++)
             {
                 // If childCount is 0, then it's a fingerTip
@@ -269,7 +304,7 @@ public class AutomaticHandSetup : MonoBehaviour
 
             fingerModel.bones = bones.ToArray();
 
-            /* SLAVE BONE MODEL SPECIFIC
+            /* MASTER BONE MODEL SPECIFIC
             */
 
             /*
@@ -703,10 +738,36 @@ public class AutomaticHandSetup : MonoBehaviour
 
     bool AllSystemsNominal()
     {
-        if (wrist.childCount > 1 || !HandModelIsValid(wristOffset))
+        if (wristOffset)
         {
-            Debug.LogError("Wrist can only have 1 child (wristOffset). wristOffset can have >1 children (fingers)");
-            return false;
+            if(wrist.childCount > 1 || !HandModelIsValid(wristOffset))
+            {
+                Debug.LogError("Wrist can only have 1 child (wristOffset). wristOffset can have >1 children (fingers)");
+                return false;
+            }
+            if (!thumbRootBone.IsChildOf(wristOffset) || !indexRootBone.IsChildOf(wristOffset))
+            {
+                Debug.LogError("Thumb root bone and index root bone have to be direct children of wristOffset");
+                return false;
+            }
+            if (!wristOffset.IsChildOf(wrist))
+            {
+                Debug.LogError("wristOffset has to be son of Wrist");
+                return false;
+            }
+        }
+        else
+        {
+            if (!HandModelIsValid(wrist))
+            {
+                Debug.LogError("Wrist children should be clean branches (one child per bone)");
+                return false;
+            }
+            if (!thumbRootBone.IsChildOf(wrist) || !indexRootBone.IsChildOf(wrist))
+            {
+                Debug.LogError("Thumb root bone and index root bone have to be direct children of Wrist");
+                return false;
+            }
         }
 
         if (!thumbRootBone || !indexRootBone)
@@ -715,34 +776,14 @@ public class AutomaticHandSetup : MonoBehaviour
             return false;
         }
 
-        if (!thumbRootBone.IsChildOf(wristOffset) || !indexRootBone.IsChildOf(wristOffset))
-        {
-            Debug.LogError("Thumb root bone and index root bone have to be son of wristOffset!");
-            return false;
-        }
-
-        if (!wristOffset.IsChildOf(wrist))
-        {
-            Debug.LogError("wristOffset has to be son of Wrist!");
-            return false;
-        }
-
-        if (wristOffset.GetComponent<SkinnedMeshRenderer>() == null)
-        {
-            Debug.LogError("SkinnedMR has to be attached to wristOffset!");
-            return false;
-        }
-
         return true;
     }
 
-    bool HandModelIsValid(Transform wristOffset)
+    bool HandModelIsValid(Transform wrist)
     {
-        // Only wristOffset can have >1 children
-
-        for (int i = 0; i < wristOffset.childCount; i++)
+        for (int i = 0; i < wrist.childCount; i++)
         {
-            if (!BasicHelpers.IsCleanBranch(wristOffset.GetChild(i)))
+            if (!BasicHelpers.IsCleanBranch(wrist.GetChild(i)))
                 return false;
         }
 
@@ -890,6 +931,13 @@ public class AutomaticHandSetup : MonoBehaviour
             joint.configuredInWorldSpace = true;
             joint.enablePreprocessing = false;
         }
+    }
+
+    void AddLines(HandModel hand, Color color)
+    {
+        BoneLineDrawer bld = hand.wrist.transformRef.parent.gameObject.AddComponent<BoneLineDrawer>();
+        bld.hand = hand;
+        bld.color = color;
     }
 }
 
