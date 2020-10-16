@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438271eed043e6e418b60d5208dcadc9, type: 3}
   m_Name: DefaultStaticConfiguration
   m_EditorClassIdentifier: 
-  alias: tempStatic
+  alias: defaultStatic
   fingers:
     followsRotation: 1
     maxAngularVelocity: 2
     clampAngularVelocity: 0
     rotationDrive:
-      spring: 30
+      spring: 500
       damper: 1
       maxForce: 5
     useDynamicStrength: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
     clampLinearVelocity: 0
     positionDrive:
       spring: 10000
-      damper: 10
+      damper: 1
       maxForce: 200
     rigidbodyMass: 1
     rigidbodyDrag: 10
@@ -80,7 +80,7 @@ MonoBehaviour:
     maxAngularVelocity: 2
     clampAngularVelocity: 0
     rotationDrive:
-      spring: 150
+      spring: 500
       damper: 1
       maxForce: 25
     useDynamicStrength: 0
