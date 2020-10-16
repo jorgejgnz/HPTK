@@ -16,14 +16,25 @@ namespace HPTK.Models.Avatar
         [Header("Module registry")]
         public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();
 
+        [Header("Head")]
         public Transform headSight;
         public Transform headCenter;
         public GameObject headModel;
+        public Transform neck;
 
+        [Header("Body")]
+        public Transform torso;
+        public Transform shoulderLeft;
+        public Transform shoulderCenter;
+        public Transform shoulderRight;
+        public Transform hips;
         public Transform feet;
+        
+        [Header("Directions")]
         public Transform forwardDir;
         public Transform lookDir;
 
+        [Header("Control")]
         public bool followsCamera = true;
 
         private void Awake()
