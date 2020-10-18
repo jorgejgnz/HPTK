@@ -16,6 +16,33 @@ namespace HPTK.Helpers
 
     public static class AvatarHelpers
     {
+        public static void HandModelInit(HandModel hand)
+        {
+            List<FingerModel> fingerList = new List<FingerModel>();
+
+            if (!hand.thumb || !hand.index)
+            {
+                Debug.LogError(hand.name + " is missing Index or Thumb fingers. Initialization failed!");
+                return;
+            }
+
+            fingerList.Add(hand.thumb);
+            fingerList.Add(hand.index);
+            if (hand.middle) fingerList.Add(hand.middle);
+            else Debug.LogWarning(hand.name + " has no Middle finger");
+            if (hand.ring) fingerList.Add(hand.ring);
+            else Debug.LogWarning(hand.name + " has no Ring finger");
+            if (hand.pinky) fingerList.Add(hand.pinky);
+            else Debug.LogWarning(hand.name + " has no Pinky finger");
+
+            hand.fingers = fingerList.ToArray();
+
+            for (int i = 0; i < hand.fingers.Length; i++)
+            {
+                hand.fingers[i].hand = hand;
+            }
+        }
+
         public static BoneModel[] GetHandBones(HandModel hand)
         {
             // Same order as OVRSkeleton.Bones
