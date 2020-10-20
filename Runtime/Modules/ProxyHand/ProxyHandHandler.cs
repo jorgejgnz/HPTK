@@ -92,7 +92,7 @@ namespace HPTK.Views.Handlers
             public BoneViewModel[] bones { get { return GetBoneViewModelsArray(); } }
 
             // Extra
-            public SkinnedMeshRenderer skinnedMR;
+            public SkinnedMeshRenderer skinnedMR { get { return model.skinnedMR; } }
 
             public HandViewModel(HandModel model)
             {
