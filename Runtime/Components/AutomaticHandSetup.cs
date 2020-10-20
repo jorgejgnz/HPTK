@@ -111,12 +111,6 @@ public class AutomaticHandSetup : MonoBehaviour
         AddLines(phModel.master, Color.blue);
         AddLines(phModel.slave, Color.black);
         AddLines(phModel.ghost, Color.white);
-
-        // Remove .fingers arrays (have been using during generation for automatic rig mapping) but
-        // as handRoot children can have fingers in different orders, HandModel fingers have to be set in Inspector and then fingers array will be initialized on Awake
-        phModel.master.fingers = null;
-        phModel.slave.fingers = null;
-        phModel.ghost.fingers = null;
     }
 
     void SetupMasterObjects()
@@ -331,7 +325,6 @@ public class AutomaticHandSetup : MonoBehaviour
             }
         }
 
-        // Only available during generation (points generation and automatic rig mapping)
         handModel.fingers = fingers.ToArray();
     }
 
@@ -440,7 +433,6 @@ public class AutomaticHandSetup : MonoBehaviour
             f++;
         }
 
-        // Only available during generation (points generation and automatic rig mapping)
         handModel.fingers = fingers.ToArray();
     }
 
@@ -516,7 +508,6 @@ public class AutomaticHandSetup : MonoBehaviour
             }
         }
 
-        // Only available during generation (points generation and automatic rig mapping)
         handModel.fingers = fingers.ToArray();
     }
 

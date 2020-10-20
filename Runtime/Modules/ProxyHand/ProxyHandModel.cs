@@ -23,8 +23,7 @@ namespace HPTK.Models.Avatar
         [HideInInspector]
         public HandModel[] hands;
 
-        [Header("Refs")]
-
+        [HideInInspector]
         public Transform shoulderTip;
 
         public float scale = 1.0f;

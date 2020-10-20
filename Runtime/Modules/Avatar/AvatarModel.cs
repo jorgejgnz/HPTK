@@ -7,6 +7,9 @@ namespace HPTK.Models.Avatar
 {
     public class AvatarModel : HPTKModel
     {
+        [HideInInspector]
+        public AvatarHandler handler;
+
         public ProxyHandModel leftHand;
         public ProxyHandModel rightHand;
 
@@ -39,8 +42,14 @@ namespace HPTK.Models.Avatar
 
         private void Awake()
         {
+            // Array
             hands = new ProxyHandModel[2] { leftHand, rightHand };
 
+            // Shoulder tips
+            leftHand.shoulderTip = shoulderLeft;
+            rightHand.shoulderTip = shoulderRight;
+
+            // Referrences to parent
             for (int i = 0; i < hands.Length; i++)
             {
                 hands[i].avatar = this;

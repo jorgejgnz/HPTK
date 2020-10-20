@@ -9,9 +9,15 @@ using UnityEngine;
 
 namespace HPTK.Controllers.Avatar
 {
-    public class AvatarController : HPTKElement
+    public class AvatarController : AvatarHandler
     {
         public AvatarModel model;
+
+        private void Awake()
+        {
+            model.handler = this;
+            viewModel = new AvatarViewModel(model);
+        }
 
         private void Start()
         {

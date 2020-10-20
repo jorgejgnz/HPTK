@@ -5,11 +5,6 @@ using HPTK.Views.Notifiers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HPTK.Models.Avatar;
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace HPTK.Models.Avatar
 {
@@ -60,37 +55,34 @@ namespace HPTK.Models.Avatar
 
         protected void Awake()
         {
-            Initialize();
-        }
-
-        public void Initialize()
-        {
             // Fingers
-            AvatarHelpers.HandModelInit(this);
+
+            if (fingers == null || fingers.Length == 0)
+            {
+                List<FingerModel> fingerList = new List<FingerModel>();
+
+                if (thumb) fingerList.Add(thumb);
+                if (index) fingerList.Add(index);
+                if (middle) fingerList.Add(middle);
+                if (ring) fingerList.Add(ring);
+                if (pinky) fingerList.Add(pinky);
+
+                fingers = fingerList.ToArray();
+            }
+
+            for (int i = 0; i < fingers.Length; i++)
+            {
+                fingers[i].hand = this;
+            }
 
             // Bones
+
             bones = AvatarHelpers.GetHandBones(this);
 
             // Transforms (depends on .bones)
+
             allTransforms = AvatarHelpers.GetAllTransforms(this);
+            
         }
     }
 }
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(HandModel), true)]
-public class HandModelEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-
-        HandModel myScript = (HandModel)target;
-        if (GUILayout.Button("INITIALIZE"))
-        {
-            myScript.Initialize();
-        }
-    }
-}
-#endif
-
