@@ -59,20 +59,7 @@ namespace HPTK.Models.Avatar
 
             if (fingers == null || fingers.Length == 0)
             {
-                List<FingerModel> fingerList = new List<FingerModel>();
-
-                if (thumb) fingerList.Add(thumb);
-                if (index) fingerList.Add(index);
-                if (middle) fingerList.Add(middle);
-                if (ring) fingerList.Add(ring);
-                if (pinky) fingerList.Add(pinky);
-
-                fingers = fingerList.ToArray();
-            }
-
-            for (int i = 0; i < fingers.Length; i++)
-            {
-                fingers[i].hand = this;
+                AvatarHelpers.HandModelInit(this);
             }
 
             // Bones

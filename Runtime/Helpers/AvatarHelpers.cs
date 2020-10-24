@@ -41,6 +41,24 @@ namespace HPTK.Helpers
 
     public static class AvatarHelpers
     {
+        public static void HandModelInit(HandModel hand)
+        {
+            List<FingerModel> fingerList = new List<FingerModel>();
+
+            if (hand.thumb) fingerList.Add(hand.thumb);
+            if (hand.index) fingerList.Add(hand.index);
+            if (hand.middle) fingerList.Add(hand.middle);
+            if (hand.ring) fingerList.Add(hand.ring);
+            if (hand.pinky) fingerList.Add(hand.pinky);
+
+            hand.fingers = fingerList.ToArray();
+
+            for (int i = 0; i < hand.fingers.Length; i++)
+            {
+                hand.fingers[i].hand = hand;
+            }
+        }
+
         public static BoneModel[] GetHandBones(HandModel hand)
         {
             // Same order as OVRSkeleton.Bones
