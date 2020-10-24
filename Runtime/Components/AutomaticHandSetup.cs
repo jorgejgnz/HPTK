@@ -36,6 +36,7 @@ public class AutomaticHandSetup : MonoBehaviour
     GameObject masterRootObject;
     GameObject masterWrist;
     GameObject masterWristOffset;
+    Transform wristAnchor;
 
     GameObject slaveRootObject;
     GameObject slaveWrist;
@@ -49,6 +50,7 @@ public class AutomaticHandSetup : MonoBehaviour
     HandModel ghostHandModel;
 
     List<Transform[]> _fingers;
+    List<Transform[]> _anchors;
     List<Quaternion[]> _localRots;
     List<Quaternion[]> _worldRots;
 
@@ -64,6 +66,7 @@ public class AutomaticHandSetup : MonoBehaviour
     public PhysicMaterial skinPhysMat;
 
     [Header("Control")]
+    public bool generateArmatureAnchors = false;
     public bool generateMasterOffset = true;
     public bool generateRays = true;
     public bool generateSlave = true;
@@ -82,6 +85,7 @@ public class AutomaticHandSetup : MonoBehaviour
 
         // Initialize / Clean cache
         _fingers = new List<Transform[]>();
+        _anchors = new List<Transform[]>();
         _localRots = new List<Quaternion[]>();
         _worldRots = new List<Quaternion[]>();
 
@@ -172,10 +176,24 @@ public class AutomaticHandSetup : MonoBehaviour
             masterFingersRoot = masterWristOffset;
         }
 
+        // Armature wrist anchor
+        if (generateArmatureAnchors)
+        {
+            wristAnchor = new GameObject().transform;
+            wristAnchor.name = wrist.name + ".Anchor";
+            wristAnchor.position = wrist.position;
+
+            if (wrist.parent)
+                wristAnchor.parent = wrist.parent;
+
+            wrist.parent = wristAnchor;
+        }
+
         // Create bones
         for (int f = 0; f < _fingers.Count; f++)
         {
             List<Transform> finger = new List<Transform>();
+            List<Transform> _fingerAnchors = new List<Transform>();
 
             for (int b = 0; b < _fingers[f].Length; b++)
             {
@@ -191,10 +209,24 @@ public class AutomaticHandSetup : MonoBehaviour
 
                 // Not rotation needed
 
+                //Armature anchor
+                if (generateArmatureAnchors)
+                {
+                    Transform anchor = new GameObject().transform;
+                    anchor.name = _fingers[f][b].name + ".Anchor";
+                    anchor.position = _fingers[f][b].position;
+
+                    anchor.parent = _fingers[f][b].parent;
+                    _fingers[f][b].parent = anchor;
+
+                    _fingerAnchors.Add(anchor);
+                }
+
                 finger.Add(bone);
             }
 
             masterFingers.Add(finger.ToArray());
+            _anchors.Add(_fingerAnchors.ToArray());
         }
 
         // Move wrist to rootObject and apply offset
@@ -303,9 +335,9 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         wristBone.armatureBone = wrist;
+        if (wristAnchor) wristBone.armatureAnchor = wristAnchor;
         wristBone.relativeToOriginalArmatureLocal = Quaternion.Inverse(wristBone.transformRef.localRotation) * wrist.localRotation;
         wristBone.relativeToOriginalArmatureWorld = Quaternion.Inverse(wristBone.transformRef.rotation) * wrist.rotation;
-        wristBone.relativeToOriginalArmatureWrist = wristBone.relativeToOriginalArmatureLocal;
 
         /* 
         */
@@ -358,9 +390,12 @@ public class AutomaticHandSetup : MonoBehaviour
                 /* MASTER BONE MODEL SPECIFIC
                 */
                 masterBone.armatureBone = _fingers[f][b];
+
+                if (_anchors.Count >= f - 1 && _anchors[f].Length >= b - 1) masterBone.armatureAnchor = _anchors[f][b];
+
+                masterBone.initialArmatureBoneLocalRot = _localRots[f][b];
                 masterBone.relativeToOriginalArmatureLocal = Quaternion.Inverse(fingerTransforms[b].localRotation) * _localRots[f][b];
                 masterBone.relativeToOriginalArmatureWorld = Quaternion.Inverse(fingerTransforms[b].rotation) * _worldRots[f][b];
-                masterBone.relativeToOriginalArmatureWrist = Quaternion.Inverse(fingerTransforms[b].rotation) * wrist.rotation;
                 /*
                  */
 
