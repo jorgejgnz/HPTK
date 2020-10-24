@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,7 @@ namespace HPTK.Models.Avatar
 
         [Header("If generated from armature")]
         public Transform armatureBone;
+        public Transform armatureAnchor;
         public Quaternion relativeToOriginalArmatureWrist;
         public Quaternion relativeToOriginalArmatureLocal;
         public Quaternion relativeToOriginalArmatureWorld;
