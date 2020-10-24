@@ -6,6 +6,13 @@ namespace HPTK.Models.Avatar
 {
     public class MasterBoneModel : BoneModel
     {
+        [Header("(Only wrist)")]
         public Transform offset;
+
+        [Header("If generated from armature")]
+        public Transform armatureBone;
+        public Quaternion relativeToOriginalArmatureWrist;
+        public Quaternion relativeToOriginalArmatureLocal;
+        public Quaternion relativeToOriginalArmatureWorld;
     }
 }

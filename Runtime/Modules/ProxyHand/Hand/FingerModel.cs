@@ -17,7 +17,9 @@ namespace HPTK.Models.Avatar
         public Transform fingerTip;
 
         public BoneModel distal;
+
         public CollisionNotifier fingerTipCollisionNotifier;
+        public LineRenderer linerenderer;
 
         [HideInInspector]
         public float length;

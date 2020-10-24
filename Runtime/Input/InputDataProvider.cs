@@ -31,6 +31,9 @@ namespace HPTK.Input
         {
             this.space = space;
             this.name = name;
+            this.position = Vector3.zero;
+            this.rotation = Quaternion.identity;
+            this.localScale = Vector3.one;
         }
 
         public AbstractTsf(Transform tsf, Space space)

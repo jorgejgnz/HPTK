@@ -7,6 +7,31 @@ using UnityEngine;
 
 namespace HPTK.Helpers
 {
+    public enum Side
+    {
+        Left,
+        Right
+    }
+
+    public enum HumanFinger
+    {
+        None,
+        Thumb,
+        Index,
+        Middle,
+        Ring,
+        Pinky
+    }
+
+    public enum HumanFingerBone
+    {
+        None,
+        Metacarpal,
+        Proximal,
+        Intermediate,
+        Distal,
+    }
+
     public enum GestureType
     {
         None = 0,

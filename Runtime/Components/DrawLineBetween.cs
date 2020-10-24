@@ -15,13 +15,25 @@ public class DrawLineBetween : MonoBehaviour
     void Start()
     {
         lr = GetComponent<LineRenderer>();
-        lr.positionCount = objs.Count;
+        lr.useWorldSpace = true;
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isActive)
+        UpdateLR();
+    }
+
+    private void OnDrawGizmos()
+    {
+        UpdateLR();
+    }
+
+    void UpdateLR()
+    {
+        if (!isActive || !lr)
             return;
+
+        lr.positionCount = objs.Count;
 
         for (int i = 0; i < objs.Count; i++)
         {

@@ -11,6 +11,7 @@ namespace HPTK.Models.Avatar
         public FingerModel finger;
 
         public Transform transformRef;
+        public HumanBodyBones humanBodyBone;
         public MeshRenderer meshRef;
     }
 }

@@ -36,6 +36,17 @@ namespace HPTK.Helpers
             return newObj;
         }
 
+        public static GameObject InstantiateEmptyChild(GameObject parent, string name)
+        {
+            GameObject newObj = new GameObject();
+            newObj.transform.parent = parent.transform;
+            newObj.transform.localPosition = Vector3.zero;
+            newObj.transform.localRotation = Quaternion.identity;
+            newObj.transform.name = name;
+
+            return newObj;
+        }
+
         public static Vector3 FurthestPoint(Vector3 from, Vector3[] points)
         {
             Vector3 furthestPoint = from;
@@ -72,6 +83,33 @@ namespace HPTK.Helpers
             }
 
             return closestPoint;
+        }
+
+        public static Quaternion[] GetRotations(Transform[] transforms, Space space)
+        {
+            List<Quaternion> rotations = new List<Quaternion>();
+
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                if (space == Space.World)
+                    rotations.Add(transforms[i].rotation);
+                else
+                    rotations.Add(transforms[i].localRotation);
+            }
+
+            return rotations.ToArray();
+        }
+
+        public static Quaternion[] GetRelativeRotations(Transform[] transforms, Transform parent)
+        {
+            List<Quaternion> rotations = new List<Quaternion>();
+
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                rotations.Add(Quaternion.Inverse(transforms[i].rotation) * parent.rotation);
+            }
+
+            return rotations.ToArray();
         }
     }
 }
