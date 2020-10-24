@@ -12,7 +12,7 @@ namespace HPTK.Models.Avatar
         [Header("If generated from armature")]
         public Transform armatureBone;
         public Transform armatureAnchor;
-        public Quaternion relativeToOriginalArmatureWrist;
+        public Quaternion initialArmatureBoneLocalRot;
         public Quaternion relativeToOriginalArmatureLocal;
         public Quaternion relativeToOriginalArmatureWorld;
     }
