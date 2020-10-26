@@ -10,6 +10,13 @@ using HPTK.Helpers;
 using UnityEditor;
 #endif
 
+public enum Anchors
+{
+    None = 0,
+    AsChildren = 1,
+    AsParents = 2
+}
+
 public class AutomaticHandSetup : MonoBehaviour
 {
     public Side handType;
@@ -27,11 +34,11 @@ public class AutomaticHandSetup : MonoBehaviour
     GameObject objects;
     GameObject modules;
 
-    int thumbSiblingIndex;
-    int indexSiblingIndex;
-    int middleSiblingIndex;
-    int ringSiblingIndex;
-    int pinkySiblingIndex;
+    int thumbSiblingIndex = -1;
+    int indexSiblingIndex = -1;
+    int middleSiblingIndex = -1;
+    int ringSiblingIndex = -1;
+    int pinkySiblingIndex = -1;
 
     GameObject masterRootObject;
     GameObject masterWrist;
@@ -66,7 +73,7 @@ public class AutomaticHandSetup : MonoBehaviour
     public PhysicMaterial skinPhysMat;
 
     [Header("Control")]
-    public bool generateArmatureAnchors = false;
+    public Anchors generateArmatureAnchors = Anchors.None;
     public bool generateMasterOffset = true;
     public bool generateRays = true;
     public bool generateSlave = true;
@@ -105,9 +112,9 @@ public class AutomaticHandSetup : MonoBehaviour
         // Get sibilng index for index and thumb
         thumbSiblingIndex = thumbRootBone.GetSiblingIndex();
         indexSiblingIndex = indexRootBone.GetSiblingIndex();
-        middleSiblingIndex = middleRootBone.GetSiblingIndex();
-        ringSiblingIndex = ringRootBone.GetSiblingIndex();
-        pinkySiblingIndex = pinkyRootBone.GetSiblingIndex();
+        if (middleRootBone) middleSiblingIndex = middleRootBone.GetSiblingIndex();
+        if (ringRootBone) ringSiblingIndex = ringRootBone.GetSiblingIndex();
+        if (pinkyRootBone) pinkySiblingIndex = pinkyRootBone.GetSiblingIndex();
 
         // Initialize phModel, masterhandModel and slaveHandModel
         SetupProxyHandModule();
@@ -177,16 +184,21 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         // Armature wrist anchor
-        if (generateArmatureAnchors)
+        if (generateArmatureAnchors > Anchors.None)
         {
             wristAnchor = new GameObject().transform;
             wristAnchor.name = wrist.name + ".Anchor";
             wristAnchor.position = wrist.position;
 
-            if (wrist.parent)
+            if (generateArmatureAnchors == Anchors.AsParents)
+            {
                 wristAnchor.parent = wrist.parent;
-
-            wrist.parent = wristAnchor;
+                wrist.parent = wristAnchor;
+            }
+            else if (generateArmatureAnchors == Anchors.AsChildren)
+            {
+                wristAnchor.parent = wrist;
+            }  
         }
 
         // Create bones
@@ -198,7 +210,12 @@ public class AutomaticHandSetup : MonoBehaviour
             for (int b = 0; b < _fingers[f].Length; b++)
             {
                 Transform bone = BasicHelpers.InstantiateEmptyChild(masterFingersRoot).transform;
-                bone.name = "Finger" + f + ".Bone" + b;
+
+                if (b==0 && _fingers[f][b].childCount == 0) 
+                    bone.name = "Extra.Bone";
+                else
+                    bone.name = "Finger" + f + ".Bone" + b;
+
                 bone.position = _fingers[f][b].position;
 
                 // Parenting
@@ -210,14 +227,27 @@ public class AutomaticHandSetup : MonoBehaviour
                 // Not rotation needed
 
                 //Armature anchor
-                if (generateArmatureAnchors)
+                if (generateArmatureAnchors > Anchors.None)
                 {
                     Transform anchor = new GameObject().transform;
                     anchor.name = _fingers[f][b].name + ".Anchor";
                     anchor.position = _fingers[f][b].position;
 
-                    anchor.parent = _fingers[f][b].parent;
-                    _fingers[f][b].parent = anchor;
+                    if (_fingers[f][b].childCount > 0)
+                        _fingers[f][b].GetChild(0).parent = anchor;
+
+                    if (generateArmatureAnchors == Anchors.AsParents)
+                    {
+                        anchor.parent = _fingers[f][b].parent;
+                        _fingers[f][b].parent = anchor;
+                    }
+                    else if (generateArmatureAnchors == Anchors.AsChildren)
+                    {
+                        anchor.parent = _fingers[f][b];
+
+                        if (b == 0)
+                            _fingers[f][b].parent = wristAnchor;
+                    }
 
                     _fingerAnchors.Add(anchor);
                 }
@@ -391,7 +421,7 @@ public class AutomaticHandSetup : MonoBehaviour
                 */
                 masterBone.armatureBone = _fingers[f][b];
 
-                if (_anchors.Count >= f - 1 && _anchors[f].Length >= b - 1) masterBone.armatureAnchor = _anchors[f][b];
+                if (generateArmatureAnchors > Anchors.None && _anchors.Count >= f - 1 && _anchors[f].Length >= b - 1) masterBone.armatureAnchor = _anchors[f][b];
 
                 masterBone.initialArmatureBoneLocalRot = _localRots[f][b];
                 masterBone.relativeToOriginalArmatureLocal = Quaternion.Inverse(fingerTransforms[b].localRotation) * _localRots[f][b];
@@ -507,7 +537,11 @@ public class AutomaticHandSetup : MonoBehaviour
                  */
 
                 // Simple automatic rig mapping
-                if (handModel.proxyHand.master.fingers[f] != null && handModel.proxyHand.master.fingers[f].bones[b] != null)
+                if (f > handModel.proxyHand.master.fingers.Length - 1)
+                    Debug.LogError("Trying to access a non-existing finger!");
+                else if (b > handModel.proxyHand.master.fingers[f].bones.Length - 1)
+                    Debug.LogError("Trying to access a non-existing bone!");
+                else if (handModel.proxyHand.master.fingers[f] != null && handModel.proxyHand.master.fingers[f].bones[b] != null)
                     slaveBone.masterBone = handModel.proxyHand.master.fingers[f].bones[b] as MasterBoneModel;
 
                 /* 
