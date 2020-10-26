@@ -11,9 +11,17 @@ using UnityEditor;
 public class FromHandToArmature : MonoBehaviour
 {
     public bool onDrawGizmos = true;
+    public bool onUpdate = true;
+
     public HandModel hand;
  
     public Space space;
+
+    void Update()
+    {
+        if (onUpdate)
+            ApplyToArmature();
+    }
 
     public void ApplyToArmature()
     {
@@ -75,7 +83,7 @@ public class FromHandToArmature : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (!onDrawGizmos)
+        if (!onDrawGizmos || onUpdate)
             return;
 
         ApplyToArmature();

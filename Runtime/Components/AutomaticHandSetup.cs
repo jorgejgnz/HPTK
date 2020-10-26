@@ -533,20 +533,6 @@ public class AutomaticHandSetup : MonoBehaviour
                 SlaveBoneModel slaveBone = boneModelObj.AddComponent<SlaveBoneModel>();
                 slaveBone.transformRef = fingerTransforms[b];
 
-                /* SLAVE BONE MODEL SPECIFIC
-                 */
-
-                // Simple automatic rig mapping
-                if (f > handModel.proxyHand.master.fingers.Length - 1)
-                    Debug.LogError("Trying to access a non-existing finger!");
-                else if (b > handModel.proxyHand.master.fingers[f].bones.Length - 1)
-                    Debug.LogError("Trying to access a non-existing bone!");
-                else if (handModel.proxyHand.master.fingers[f] != null && handModel.proxyHand.master.fingers[f].bones[b] != null)
-                    slaveBone.masterBone = handModel.proxyHand.master.fingers[f].bones[b] as MasterBoneModel;
-
-                /* 
-                */
-
                 bones.Add(slaveBone);
             }
 
@@ -607,6 +593,32 @@ public class AutomaticHandSetup : MonoBehaviour
         if (handModel.pinky) fingers.Add(handModel.pinky);
 
         handModel.fingers = fingers.ToArray();
+
+        // Operations that depends on having master.fingers and slave.fingers in the correct order
+        for (f = 0; f < handModel.fingers.Length; f++)
+        {
+            for (int b = 0; b < handModel.fingers[f].bones.Length; b++)
+            {
+                /* SLAVE BONE MODEL SPECIFIC
+                */
+
+                SlaveBoneModel slaveBone = handModel.fingers[f].bones[b] as SlaveBoneModel;
+
+                // Simple automatic rig mapping
+                if (f > handModel.proxyHand.master.fingers.Length - 1)
+                    Debug.LogError("Trying to access a non-existing finger!");
+
+                else if (b > handModel.proxyHand.master.fingers[f].bones.Length - 1)
+                    Debug.LogError("Trying to access a non-existing bone!");
+
+                else if (handModel.proxyHand.master.fingers[f] != null && handModel.proxyHand.master.fingers[f].bones[b] != null)
+                    slaveBone.masterBone = handModel.proxyHand.master.fingers[f].bones[b] as MasterBoneModel;
+
+                /* 
+                */
+            }
+        }
+        
     }
 
     void SetupGhostHandModel(HandModel handModel, Transform ghostWrist)

@@ -43,11 +43,14 @@ namespace HPTK.Models.Avatar
         private void Awake()
         {
             // Array
-            hands = new ProxyHandModel[2] { leftHand, rightHand };
+            List<ProxyHandModel> handsList = new List<ProxyHandModel>();
+            if (leftHand) handsList.Add(leftHand);
+            if (rightHand) handsList.Add(rightHand);
+            hands = handsList.ToArray();
 
             // Shoulder tips
-            leftHand.shoulderTip = shoulderLeft;
-            rightHand.shoulderTip = shoulderRight;
+            if (leftHand) leftHand.shoulderTip = shoulderLeft;
+            if (rightHand) rightHand.shoulderTip = shoulderRight;
 
             // Referrences to parent
             for (int i = 0; i < hands.Length; i++)
