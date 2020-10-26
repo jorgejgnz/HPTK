@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/jorgejgnz/HPTK/compare/v0.2.0...v0.2.1) (2020-10-26)
+
+
+### Bug Fixes
+
+* **automaticHandSetup:** Automatic rig mapping once slave fingers array is reordered ([b6d9ffd](https://github.com/jorgejgnz/HPTK/commit/b6d9ffdc25ba1c49a182dc94f4a86302d379d194))
+
 # [0.2.0](https://github.com/jorgejgnz/HPTK/compare/v0.1.1...v0.2.0) (2020-10-02)
 
 
