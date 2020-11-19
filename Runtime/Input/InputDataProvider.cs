@@ -91,13 +91,19 @@ namespace HPTK.Input
         [HideInInspector]
         public AbstractTsf[] bones;
 
+        [HideInInspector]
         public AbstractTsf wrist;
+        [HideInInspector]
         public AbstractTsf forearm;
-
+        [HideInInspector]
         public FingerPose thumb = new FingerPose("Thumb");
+        [HideInInspector]
         public FingerPose index = new FingerPose("Index");
+        [HideInInspector]
         public FingerPose middle = new FingerPose("Middle");
+        [HideInInspector]
         public FingerPose ring = new FingerPose("Ring");
+        [HideInInspector]
         public FingerPose pinky = new FingerPose("Pinky");
 
         // Replaceable by inherited classes

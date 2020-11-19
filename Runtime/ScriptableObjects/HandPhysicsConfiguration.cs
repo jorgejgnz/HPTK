@@ -40,6 +40,13 @@ namespace HPTK.Settings
             maxForce = 0.0f;
         }
 
+        public CustomJointDrive(float spring, float damper, float maxForce)
+        {
+            this.spring = spring;
+            this.damper = damper;
+            this.maxForce = maxForce;
+        }
+
     }
 
     [Serializable]

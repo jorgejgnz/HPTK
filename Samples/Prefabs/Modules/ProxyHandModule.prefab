@@ -46,18 +46,6 @@ MonoBehaviour:
   onInitialized:
     m_PersistentCalls:
       m_Calls: []
-  onIndexPinch:
-    m_PersistentCalls:
-      m_Calls: []
-  onIndexUnpinch:
-    m_PersistentCalls:
-      m_Calls: []
-  onGrasp:
-    m_PersistentCalls:
-      m_Calls: []
-  onUngrasp:
-    m_PersistentCalls:
-      m_Calls: []
   model: {fileID: 185603990160810433}
 --- !u!1 &185603990160810435
 GameObject:
@@ -107,10 +95,17 @@ MonoBehaviour:
   master: {fileID: 0}
   slave: {fileID: 0}
   ghost: {fileID: 0}
+  hands: []
   shoulderTip: {fileID: 0}
+  side: 1
   scale: 1
+  minLerpToFist: 0.5
+  minLerpToGrasp: 0.5
   relatedHandlers: []
+  configuration: {fileID: 0}
+  updateHandValues: 1
   error: 0
+  errorLerp: 0
 --- !u!1 &8623075514320365233
 GameObject:
   m_ObjectHideFlags: 0

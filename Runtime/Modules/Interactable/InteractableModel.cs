@@ -1,4 +1,5 @@
-﻿using HPTK.Views.Handlers;
+﻿using HPTK.Components;
+using HPTK.Views.Handlers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace HPTK.Models.Interaction
         public InteractableHandler handler;
 
         public Rigidbody rigidbodyRef;
+        public RigidbodyGroup rigidbodyGroup;
 
         [Header("Module registry")]
         public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();

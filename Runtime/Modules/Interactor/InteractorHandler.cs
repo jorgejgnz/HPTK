@@ -14,6 +14,10 @@ namespace HPTK.Views.Handlers
             public ProxyHandHandler proxyHand { get { return model.proxyHand.handler; } }
             public InteractionModel[] interactions { get { return model.interactions.ToArray(); } }
 
+            public int totalHovering { get { return model.totalHovering; } }
+            public int totalTouching { get { return model.totalTouching; } }
+            public int totalGrabbing { get { return model.totalGrabbing; } }
+
             public InteractorViewModel(InteractorModel model)
             {
                 this.model = model;

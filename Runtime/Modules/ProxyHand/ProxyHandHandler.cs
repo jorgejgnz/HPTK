@@ -13,21 +13,43 @@ namespace HPTK.Views.Handlers
         {
             ProxyHandModel model;
 
-            // Most used properties are easily accessible
-            public float indexPinchLerp { get { return model.master.index.pinchLerp; } }
-            public float graspLerp { get { return model.master.graspLerp; } }
-            public float fistLerp { get { return model.master.fistLerp; } }
-            public float indexBaseRotationLerp { get { return model.master.index.baseRotationLerp; } }
-            public float indexFlexLerp { get { return model.master.index.flexLerp; } }
-            public float indexStrengthLerp { get { return model.master.index.strengthLerp; } }
-            public bool isIndexPinching { get { return model.master.index.isPinching; } }
-            public bool isGrasping { get { return model.master.isGrasping; } }
-
             // All properties are accessible through HandViewModel and FingerviewModel
-            public HandViewModel master { get { return model.master ? new HandViewModel(model.master) : null; } }
-            public HandViewModel slave { get { return model.slave ? new HandViewModel(model.slave) : null; } }
-            public HandViewModel ghost { get { return model.ghost ? new HandViewModel(model.ghost) : null; } }
-            public HandViewModel[] hands { get { return GetHandViewModelsArray(); } }
+            HandViewModel _master;
+            public HandViewModel master
+            {
+                get
+                {
+                    if (_master == null && model.master != null) _master = new HandViewModel(model.master);
+                    return _master;
+                }
+            }
+            HandViewModel _slave;
+            public HandViewModel slave
+            {
+                get
+                {
+                    if (_slave == null && model.slave != null) _slave = new HandViewModel(model.slave);
+                    return _slave;
+                }
+            }
+            HandViewModel _ghost;
+            public HandViewModel ghost
+            {
+                get
+                {
+                    if (_ghost == null && model.ghost != null) _ghost = new HandViewModel(model.ghost);
+                    return _ghost;
+                }
+            }
+            HandViewModel[] _hands;
+            public HandViewModel[] hands
+            {
+                get
+                {
+                    if (_hands == null && model.hands != null) _hands = GetHandViewModelsArray();
+                    return _hands;
+                }
+            }
 
             // Related modules
             public HPTKHandler[] relatedHandlers { get { return model.relatedHandlers.ToArray(); } }
@@ -70,12 +92,60 @@ namespace HPTK.Views.Handlers
             public bool isFist { get { return model.isFist; } }
 
             // Fingers
-            public FingerViewModel thumb { get { return model.thumb ? new FingerViewModel(model.thumb) : null; } }
-            public FingerViewModel index { get { return model.index ? new FingerViewModel(model.index) : null; } }
-            public FingerViewModel middle { get { return model.middle ? new FingerViewModel(model.middle) : null; } }
-            public FingerViewModel ring { get { return model.ring ? new FingerViewModel(model.ring) : null; } }
-            public FingerViewModel pinky { get { return model.pinky ? new FingerViewModel(model.pinky) : null; } }
-            public FingerViewModel[] fingers { get { return GetFingerViewModelsArray(); } }
+            FingerViewModel _thumb;
+            public FingerViewModel thumb
+            {
+                get
+                {
+                    if (_thumb == null && model.thumb != null) _thumb = new FingerViewModel(model.thumb);
+                    return _thumb;
+                }
+            }
+            FingerViewModel _index;
+            public FingerViewModel index
+            {
+                get
+                {
+                    if (_index == null && model.index != null) _index = new FingerViewModel(model.index);
+                    return _index;
+                }
+            }
+            FingerViewModel _middle;
+            public FingerViewModel middle
+            {
+                get
+                {
+                    if (_middle == null && model.middle != null) _middle = new FingerViewModel(model.middle);
+                    return _middle;
+                }
+            }
+            FingerViewModel _ring;
+            public FingerViewModel ring
+            {
+                get
+                {
+                    if (_ring == null && model.ring != null) _ring = new FingerViewModel(model.ring);
+                    return _ring;
+                }
+            }
+            FingerViewModel _pinky;
+            public FingerViewModel pinky
+            {
+                get
+                {
+                    if (_pinky == null && model.pinky != null) _pinky = new FingerViewModel(model.pinky);
+                    return _pinky;
+                }
+            }
+            FingerViewModel[] _fingers;
+            public FingerViewModel[] fingers
+            {
+                get
+                {
+                    if (_fingers == null && model.fingers != null) _fingers = GetFingerViewModelsArray();
+                    return _fingers;
+                }
+            }
 
             // Transforms
             public Transform pinchCenter { get { return model.pinchCenter; } }
@@ -93,6 +163,12 @@ namespace HPTK.Views.Handlers
 
             // Extra
             public SkinnedMeshRenderer skinnedMR { get { return model.skinnedMR; } }
+
+            // Events
+            public UnityEvent onGrasp = new UnityEvent();
+            public UnityEvent onLongGrasp = new UnityEvent();
+            public UnityEvent onUngrasp = new UnityEvent();
+            public UnityEvent onLongUngrasp = new UnityEvent();
 
             public HandViewModel(HandModel model)
             {
@@ -140,7 +216,15 @@ namespace HPTK.Views.Handlers
             public bool isClosed { get { return model.isClosed; } }
 
             // Bones
-            public BoneViewModel[] bones { get { return GetBoneViewModelsArray(); } }
+            BoneViewModel[] _bones;
+            public BoneViewModel[] bones
+            {
+                get
+                {
+                    if (_bones == null && model.bones != null) _bones = GetBoneViewModelsArray();
+                    return _bones;
+                }
+            }
 
             // Transforms
             public Transform knuckle { get { return model.fingerBase; } }
@@ -149,6 +233,12 @@ namespace HPTK.Views.Handlers
             // Extra
             public BoneViewModel distal { get { return model.distal ? new BoneViewModel(model.distal) : null; } }
             public CollisionNotifier fingerTipCollisionNotifier { get { return model.fingerTipCollisionNotifier; } }
+
+            // Events
+            public UnityEvent onPinch = new UnityEvent();
+            public UnityEvent onLongPinch = new UnityEvent();
+            public UnityEvent onUnpinch = new UnityEvent();
+            public UnityEvent onLongUnpinch = new UnityEvent();
 
             public FingerViewModel(FingerModel model)
             {
@@ -191,11 +281,5 @@ namespace HPTK.Views.Handlers
 
         // Generic events
         public UnityEvent onInitialized;
-
-        // Gesture events
-        public UnityEvent onIndexPinch;
-        public UnityEvent onIndexUnpinch;
-        public UnityEvent onGrasp;
-        public UnityEvent onUngrasp;
     }
 }

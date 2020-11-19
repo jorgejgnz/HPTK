@@ -12,36 +12,45 @@ namespace HPTK.Models.Avatar
 
         public InputDataProvider inputDataProvider;
 
-        public bool updateBonesOnValidate = true;
+        [Header("Control")]
+        public bool updateWrist = true;
+        public bool updateForearm = true;
 
         /*
-         * 0 - wrist
-         * 1 - forearm
-         * 
-         * 2 - thumb0
-         * 3 - thumb1
-         * 4 - thumb2
-         * 5 - thumb3
-         * 
-         * 6 - index1
-         * 7 - index2
-         * 8 - index3
-         * 
-         * 9 - middle1
-         * 10 - middle2
-         * 11 - middle3
-         * 
-         * 12 - ring1
-         * 13 - ring2
-         * 14 - ring3
-         * 
-         * 15 - pinky0
-         * 16 - pinky1
-         * 17 - pinky2
-         * 18 - pinky3
-         */
+        * 0 - wrist
+        * 1 - forearm
+        * 
+        * 2 - thumb0
+        * 3 - thumb1
+        * 4 - thumb2
+        * 5 - thumb3
+        * 
+        * 6 - index1
+        * 7 - index2
+        * 8 - index3
+        * 
+        * 9 - middle1
+        * 10 - middle2
+        * 11 - middle3
+        * 
+        * 12 - ring1
+        * 13 - ring2
+        * 14 - ring3
+        * 
+        * 15 - pinky0
+        * 16 - pinky1
+        * 17 - pinky2
+        * 18 - pinky3
+        * 
+        * 19 - thumbTip
+        * 20 - indexTip
+        * 21 - middleTip
+        * 22 - ringTip
+        * 23 - pinkyTip
+        */
 
         [Header("Master rig mapping")]
+        public bool updateBonesOnValidate = true;
         public MasterBoneModel wrist;
         public MasterBoneModel forearm;
         public MasterBoneModel thumb0;

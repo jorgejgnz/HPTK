@@ -1,4 +1,5 @@
-﻿using HPTK.Models.Interaction;
+﻿using HPTK.Helpers;
+using HPTK.Models.Interaction;
 using HPTK.Settings;
 using HPTK.Views.Handlers;
 using System.Collections;
@@ -26,7 +27,13 @@ namespace HPTK.Models.Avatar
         [HideInInspector]
         public Transform shoulderTip;
 
+        public Side side = Side.Left;
+
         public float scale = 1.0f;
+
+        [Header("Hand gesture theresolds")]
+        public float minLerpToFist = 0.5f;
+        public float minLerpToGrasp = 0.5f;
 
         [Header("Module registry")]
         public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();

@@ -1136,7 +1136,7 @@ public class AutomaticHandSetup : MonoBehaviour
             lr.startWidth = fingerRadius;
             lr.endWidth = fingerRadius;
 
-            hand.fingers[f].linerenderer = lr;
+            hand.fingers[f].lineRenderer = lr;
 
             DrawLineBetween dlb = hand.fingers[f].bones[0].transformRef.gameObject.AddComponent<DrawLineBetween>();
             dlb.isActive = true;

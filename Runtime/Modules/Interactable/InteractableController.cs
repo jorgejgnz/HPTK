@@ -1,4 +1,5 @@
-﻿using HPTK.Models.Interaction;
+﻿using HPTK.Components;
+using HPTK.Models.Interaction;
 using HPTK.Views.Handlers;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,12 @@ namespace HPTK.Controllers.Interaction
             onUntouch.AddListener((InteractionModel interaction) => model.totalTouching--);
             onHover.AddListener((InteractionModel interaction) => model.totalHovering++);
             onUnhover.AddListener((InteractionModel interaction) => model.totalHovering--);
+
+            // Get rigidobdyGroup if it exists
+            if (model.rigidbodyRef && !model.rigidbodyGroup && model.rigidbodyRef.GetComponent<RigidbodyGroup>())
+            {
+                model.rigidbodyGroup = model.rigidbodyRef.GetComponent<RigidbodyGroup>();
+            }
         }
 
         private void Update()

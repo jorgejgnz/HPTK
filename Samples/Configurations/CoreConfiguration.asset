@@ -18,12 +18,14 @@ MonoBehaviour:
   maxPinchRelDistance: 0.05
   minLerpToPinch: 0.95
   minFlexLerpToDisablePinch: 0.8
-  maxPalmRelDistance: 0.07
+  maxPalmRelDistance: 0.09
   minPalmRelDistance: 0.03
   minLocalRotZLimit: 270
   maxLocalRotZLimit: 359
   maxLocalRotZ: 350
   minLocalRotZ: 280
   minLerpToClose: 0.5
-  minLerpToFist: 0.5
-  minLerpToGrasp: 0.5
+  defaultMinLerpToFist: 0.5
+  defaultMinLerpToGrasp: 0.5
+  minTimeToIntention: 0.25
+  maxErrorAllowed: 0.5

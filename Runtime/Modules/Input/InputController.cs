@@ -67,13 +67,13 @@ namespace HPTK.Controllers.Input
 
             // Update pos and rot for wrist and forearm
 
-            if (model.bonesToUpdate[0] != null)
+            if (model.updateWrist && model.bonesToUpdate[0] != null)
             {
                 UpdateMasterBonePos(model.wrist, model.inputDataProvider.bones[0]);
                 UpdateMasterBoneRot(model.wrist, model.inputDataProvider.bones[0]);
             }
 
-            if (model.bonesToUpdate[1] != null)
+            if (model.updateForearm && model.bonesToUpdate[1] != null)
             {
                 UpdateMasterBonePos(model.forearm, model.inputDataProvider.bones[1]);
                 UpdateMasterBoneRot(model.forearm, model.inputDataProvider.bones[1]);

@@ -111,5 +111,24 @@ namespace HPTK.Helpers
 
             return rotations.ToArray();
         }
+
+        public static Transform GetClosestTransform(Transform[] tsfs, Vector3 point)
+        {
+            float d;
+            float minDistance = Mathf.Infinity;
+            Transform candidate = null;
+
+            for (int i = 0; i < tsfs.Length; i++)
+            {
+                d = Vector3.Distance(tsfs[i].position, point);
+                if (d < minDistance)
+                {
+                    minDistance = d;
+                    candidate = tsfs[i];
+                }
+            }
+
+            return candidate;
+        }
     }
 }

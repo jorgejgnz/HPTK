@@ -6,7 +6,7 @@ namespace HPTK.Models.Avatar
 {
     public class MasterBoneModel : BoneModel
     {
-        [Header("(Only wrist)")]
+        [Header("Only wrist")]
         public Transform offset;
 
         [Header("If generated from armature")]

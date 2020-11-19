@@ -19,6 +19,10 @@ namespace HPTK.Controllers.Avatar
 
         Transform masterWristDestination;
 
+        Rigidbody parentRb;
+        Vector3 clampedVelocity;
+        Vector3 clampedAngularVelocity;
+
         private void Awake()
         {
             viewModel = new HandPhysicsViewModel(model);
@@ -162,12 +166,20 @@ namespace HPTK.Controllers.Avatar
                     PhysHelpers.UpdateBoneStrength(slaveBone, boneConf.minDynamicRotDrive.toJointDrive(), boneConf.maxDynamicRotDrive.toJointDrive(), slaveBone.finger.strengthLerp);
 
             }
-            
-            if (boneConf.clampLinearVelocity)
-                slaveBone.rigidbodyRef.velocity = Vector3.ClampMagnitude(slaveBone.rigidbodyRef.velocity, boneConf.maxLinearVelocity);
 
+            if (boneConf.clampLinearVelocity)
+            {
+                parentRb = slaveBone.transformRef.parent.GetComponent<Rigidbody>();
+                if (parentRb)
+                    slaveBone.rigidbodyRef.velocity = Vector3.ClampMagnitude(slaveBone.rigidbodyRef.velocity, parentRb.velocity.magnitude + boneConf.maxLinearVelocity);
+                else
+                    slaveBone.rigidbodyRef.velocity = Vector3.ClampMagnitude(slaveBone.rigidbodyRef.velocity, boneConf.maxLinearVelocity);
+            }
+            
             if (boneConf.clampAngularVelocity)
-                slaveBone.rigidbodyRef.angularVelocity = Vector3.ClampMagnitude(slaveBone.rigidbodyRef.angularVelocity, boneConf.maxAngularVelocity);
+            {
+                slaveBone.rigidbodyRef.maxAngularVelocity = boneConf.maxAngularVelocity;
+            }
         }
 
         public void SetDecoupledMode(bool newDecoupled)

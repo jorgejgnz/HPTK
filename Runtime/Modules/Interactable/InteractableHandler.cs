@@ -1,4 +1,5 @@
-﻿using HPTK.Helpers;
+﻿using HPTK.Components;
+using HPTK.Helpers;
 using HPTK.Models.Interaction;
 using HPTK.Views.Events;
 using System;
@@ -13,7 +14,12 @@ namespace HPTK.Views.Handlers
         {
             InteractableModel model;
             public Rigidbody rigidbodyRef { get { return model.rigidbodyRef; } }
+            public RigidbodyGroup rigidbodyGroup { get { return model.rigidbodyGroup; } }
             public HPTKHandler[] relatedHandlers { get { return model.relatedHandlers.ToArray(); } }
+
+            public int totalHovering { get { return model.totalHovering; } }
+            public int totalTouching { get { return model.totalTouching; } }
+            public int totalGrabbing { get { return model.totalGrabbing; } }
 
             public InteractableViewModel(InteractableModel model)
             {

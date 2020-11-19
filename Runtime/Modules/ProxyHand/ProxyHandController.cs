@@ -34,6 +34,15 @@ namespace HPTK.Controllers.Avatar
                 }
             }
 
+            // Get hand side
+            if (model.avatar)
+            {
+                if (model == model.avatar.leftHand)
+                    model.side = Side.Left;
+                else if (model == model.avatar.rightHand)
+                    model.side = Side.Right;
+            }   
+
             InitHand(model.master);
             if (model.slave) InitHand(model.slave);
             if (model.ghost) InitHand(model.ghost);
@@ -45,11 +54,11 @@ namespace HPTK.Controllers.Avatar
         {
             if (model.updateHandValues)
             {
-                UpdateHand(model.master, model.configuration);
+                UpdateHand(model.master, viewModel.master, model.configuration);
 
                 if (model.slave)
                 {
-                    UpdateHand(model.slave, model.configuration);
+                    //UpdateHand(model.slave, viewModel.slave, model.configuration);
 
                     model.error = Vector3.Distance(
                         model.master.wrist.transformRef.position,
@@ -66,10 +75,9 @@ namespace HPTK.Controllers.Avatar
             AvatarHelpers.UpdateFingerLengths(hand, hand.proxyHand.scale);
         }
 
-        void UpdateHand(HandModel hand, CoreConfiguration conf)
+        void UpdateHand(HandModel hand, HandViewModel viewModel, CoreConfiguration conf)
         {
-            bool wasPinching = false;
-            bool wasGrasping = false;
+            bool wasGrasping = hand.isGrasping;
 
             float tempValue;
 
@@ -78,6 +86,8 @@ namespace HPTK.Controllers.Avatar
             {
                 if (hand.fingers[f].bones.Length == 0)
                     continue;
+
+                bool wasPinching = hand.fingers[f].isPinching;
 
                 // Strength
                 if (hand.fingers[f].bones.Length >= 3)
@@ -99,27 +109,68 @@ namespace HPTK.Controllers.Avatar
 
                 // Pinch
                 tempValue = hand.fingers[f].pinchLerp;
+
                 if (hand.fingers[f].flexLerp < conf.minFlexLerpToDisablePinch)
                     hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
                 else
                     hand.fingers[f].pinchLerp = 0.0f;
+
+                // Pinch speed
                 hand.fingers[f].pinchSpeed = (hand.fingers[f].pinchLerp - tempValue) / Time.deltaTime;
 
-                if (hand.fingers[f] == hand.index) wasPinching = hand.fingers[f].isPinching;
+                // Is Pinching
                 hand.fingers[f].isPinching = hand.fingers[f].pinchLerp > conf.minLerpToPinch;
+
+                // Time counter
+                if (hand.fingers[f].isPinching)
+                    hand.fingers[f].timePinching += Time.deltaTime;
+                else
+                    hand.fingers[f].timePinching = 0.0f;
+
+                // Gesture intention     
+                if (hand.fingers[f].isPinching)
+                {
+                    hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].timePinching, 0.0f, model.configuration.minTimeToIntention);
+                }
+                else
+                {
+                    hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].pinchIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+                }
+
+                hand.fingers[f].pinchIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.fingers[f].pinchIntentionTime);
+
+                // Events
+                EmitFingerEvents(hand.fingers[f], viewModel.fingers[f], wasPinching);
             }
 
             // Fist
             hand.fistLerp = AvatarHelpers.GetHandFist(hand);
-            hand.isFist = hand.fistLerp > conf.minLerpToFist;
+            hand.isFist = hand.fistLerp > model.minLerpToFist;
 
             // Grasp
             tempValue = hand.graspLerp;
             hand.graspLerp = AvatarHelpers.GetHandGrasp(hand);
             hand.graspSpeed = (hand.graspLerp - tempValue) / Time.deltaTime;
 
-            wasGrasping = hand.isGrasping;
-            hand.isGrasping = hand.graspLerp > conf.minLerpToGrasp;
+            hand.isGrasping = hand.graspLerp > model.minLerpToGrasp;
+
+            // Time grasping
+            if (hand.isGrasping)
+                hand.timeGrasping += Time.deltaTime;
+            else
+                hand.timeGrasping = 0.0f;
+
+            // Gesture intention     
+            if (hand.isGrasping)
+            {
+                hand.graspIntentionTime = Mathf.Clamp(hand.timeGrasping, 0.0f, model.configuration.minTimeToIntention);
+            }
+            else
+            {
+                hand.graspIntentionTime = Mathf.Clamp(hand.graspIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+            }
+
+            hand.graspIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.graspIntentionTime);
 
             // Ray
             if (hand.ray && hand.proxyHand && hand.proxyHand.shoulderTip)
@@ -128,27 +179,55 @@ namespace HPTK.Controllers.Avatar
                 hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
             }
 
-            if (hand is MasterHandModel)
-                EmitEvents(hand as MasterHandModel, hand.proxyHand.handler, wasPinching, wasGrasping);
-
+            // Events
+            EmitHandEvents(hand, viewModel, wasGrasping);
         }
 
-        void EmitEvents(MasterHandModel master, ProxyHandHandler handler, bool wasPinching, bool wasGrasping)
+        void EmitHandEvents(HandModel hand, HandViewModel viewModel, bool wasGrasping)
         {
-            if (master.index.isPinching != wasPinching)
+            // Grasp events
+            if (hand.isGrasping != wasGrasping)
             {
-                if (master.index.isPinching)
-                    handler.onIndexPinch.Invoke();
+                if (hand.isGrasping)
+                    viewModel.onGrasp.Invoke();
                 else
-                    handler.onIndexUnpinch.Invoke();
+                    viewModel.onUngrasp.Invoke();
             }
 
-            if (master.isGrasping != wasGrasping)
+            // Grasp intention events
+            if (hand.graspIntentionLerp == 1.0f && !hand.isIntentionallyGrasping)
             {
-                if (master.isGrasping)
-                    handler.onGrasp.Invoke();
+                hand.isIntentionallyGrasping = true;
+                viewModel.onLongGrasp.Invoke();
+            }
+            else if (hand.graspIntentionLerp == 0.0f && hand.isIntentionallyGrasping)
+            {
+                hand.isIntentionallyGrasping = false;
+                viewModel.onLongUngrasp.Invoke();
+            }        
+        }
+
+        void EmitFingerEvents(FingerModel finger, FingerViewModel viewModel, bool wasPinching)
+        {
+            // Pinch events
+            if (finger.isPinching != wasPinching)
+            {
+                if (finger.isPinching)
+                    viewModel.onPinch.Invoke();
                 else
-                    handler.onUngrasp.Invoke();
+                    viewModel.onUnpinch.Invoke();
+            }
+
+            // Pinch intention events
+            if (finger.pinchIntentionLerp == 1.0f && !finger.isIntentionallyPinching)
+            {
+                finger.isIntentionallyPinching = true;
+                viewModel.onLongPinch.Invoke();
+            }
+            else if (finger.pinchIntentionLerp == 0.0f && finger.isIntentionallyPinching)
+            {
+                finger.isIntentionallyPinching = false;
+                viewModel.onLongUnpinch.Invoke();
             }
         }
     }

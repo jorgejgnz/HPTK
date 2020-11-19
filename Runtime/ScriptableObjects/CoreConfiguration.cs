@@ -31,8 +31,11 @@ namespace HPTK.Settings
         public float minLerpToClose = 0.5f;
 
         [Header("Hand theresolds")]
-        public float minLerpToFist = 0.5f;
-        public float minLerpToGrasp = 0.5f;
+        public float defaultMinLerpToFist = 0.5f;
+        public float defaultMinLerpToGrasp = 0.5f;
+
+        [Header("Gesture intention")]
+        public float minTimeToIntention = 0.5f;
 
         [Header("Error recovery")]
         public float maxErrorAllowed = 0.5f;

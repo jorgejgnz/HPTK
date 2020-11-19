@@ -5,6 +5,7 @@ using HPTK.Views.Notifiers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HPTK.Views.Handlers.ProxyHandHandler;
 
 namespace HPTK.Models.Avatar
 {
@@ -12,6 +13,9 @@ namespace HPTK.Models.Avatar
     {
         [HideInInspector]
         public ProxyHandModel proxyHand;
+
+        [HideInInspector]
+        public HandViewModel viewModel;
 
         [Header("Models")]
         public FingerModel thumb;
@@ -39,13 +43,18 @@ namespace HPTK.Models.Avatar
         [Header("Components")]
         public SkinnedMeshRenderer skinnedMR;
 
-        [Header("(Updated by controller)")]
+        [Header("Updated by Controller")]
         public float fistLerp;
         public bool isFist;
 
         public float graspLerp;
         public float graspSpeed;
         public bool isGrasping;
+        public float timeGrasping;
+        public float graspIntentionTime;
+        [Range(0.0f,1.0f)]
+        public float graspIntentionLerp;
+        public bool isIntentionallyGrasping;
 
         [HideInInspector]
         public Transform[] allTransforms;

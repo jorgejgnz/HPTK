@@ -1,4 +1,5 @@
-﻿using HPTK.Models.Avatar;
+﻿using HPTK.Components;
+using HPTK.Models.Avatar;
 using HPTK.Settings;
 using System;
 using System.Collections;
@@ -128,7 +129,7 @@ namespace HPTK.Helpers
             return toggleValue;
         }
 
-        public static ConfigurableJoint CreateSnapJoint(Rigidbody body, Rigidbody connectedBody, Vector3 pointPosition, Quaternion pointRotation, Vector3 destinationPosition, Quaternion destinationRotation, bool matchRotation)
+        public static ConfigurableJoint CreateSnapJoint(Rigidbody body, Rigidbody connectedBody, Vector3 pointPosition, Quaternion pointRotation, Vector3 destinationPosition, Quaternion destinationRotation, bool matchRotation, bool enableCollisions)
         {
             // Initial configuration
             ConfigurableJoint joint = body.gameObject.AddComponent<ConfigurableJoint>();
@@ -141,23 +142,14 @@ namespace HPTK.Helpers
 
             joint.massScale = 1.6f;
 
+            joint.enableCollision = enableCollisions;
+
             // Linear limits
-            joint.xMotion = ConfigurableJointMotion.Limited;
-            joint.yMotion = ConfigurableJointMotion.Limited;
-            joint.zMotion = ConfigurableJointMotion.Limited;
+            joint.xMotion = ConfigurableJointMotion.Free;
+            joint.yMotion = ConfigurableJointMotion.Free;
+            joint.zMotion = ConfigurableJointMotion.Free;
 
             joint.targetPosition = Vector3.zero;
-        
-            SoftJointLimit limit = new SoftJointLimit();
-            limit.limit = 0.0f;
-            limit.bounciness = 0.0f;
-            limit.contactDistance = 0.0f;
-
-            SoftJointLimitSpring limitSpring = new SoftJointLimitSpring();
-            limitSpring.spring = 0.0f;
-            limitSpring.damper = 0.0f;
-
-            joint.linearLimit = limit;
 
             // Target rotation
             if (matchRotation)
@@ -204,6 +196,20 @@ namespace HPTK.Helpers
             joint.slerpDrive = new JointDrive();
         }
 
+        public static void UpdateJointMotionDrive(ConfigurableJoint joint, JointDrive motionDrive)
+        {
+            joint.xDrive = motionDrive;
+            joint.yDrive = motionDrive;
+            joint.zDrive = motionDrive;
+        }
+
+        public static void UpdateJointAngularDrive(ConfigurableJoint joint, JointDrive angularDrive)
+        {
+            joint.angularXDrive = angularDrive;
+            joint.angularYZDrive = angularDrive;
+            joint.slerpDrive = angularDrive;
+        }
+
         public static void IgnoreChildrenCollisions(Rigidbody rbA, Rigidbody rbB, bool ignore)
         {
             Collider[] rbAcolliders = rbA.GetComponentsInChildren<Collider>();
@@ -233,16 +239,28 @@ namespace HPTK.Helpers
             }
         }
 
-        public static void IgnoreBoneCollisions(Rigidbody rb, SlaveHandModel hand, bool ignore)
+        public static void IgnoreEveryBoneCollisions(Rigidbody rb, SlaveHandModel hand, bool ignore, bool includeRbGroup)
         {
             SlaveBoneModel bone;
-            Collider[] rbColliders = rb.GetComponentsInChildren<Collider>();
-            for (int i = 0; i < rbColliders.Length; i++)
+            List<Collider> rbColliders = new List<Collider>(rb.GetComponentsInChildren<Collider>());
+
+            RigidbodyGroup rbGroup = rb.GetComponent<RigidbodyGroup>();
+            if (rbGroup && includeRbGroup)
+            {
+                for (int i = 0; i < rbGroup.rigidbodies.Length; i++)
+                {
+                    rbColliders.AddRange(GetColliders(rbGroup.rigidbodies[i]));
+                }
+            }
+
+            for (int i = 0; i < rbColliders.Count; i++)
             {
                 for (int j = 0; j < hand.bones.Length; j++)
                 {
                     if (hand.bones[j] is SlaveBoneModel) {
+
                         bone = hand.bones[j] as SlaveBoneModel;
+
                         if (bone.colliderRef != null)
                         {
                             Physics.IgnoreCollision(rbColliders[i], bone.colliderRef, ignore);
@@ -250,6 +268,37 @@ namespace HPTK.Helpers
                     }
                 }
             }
+        }
+
+        public static void IgnoreBoneCollisions(Rigidbody rb, SlaveBoneModel bone, bool ignore, bool includeRbGroup)
+        {
+            if (!bone.colliderRef)
+                return;
+
+            List<Collider> rbColliders = new List<Collider>(rb.GetComponentsInChildren<Collider>());
+
+            RigidbodyGroup rbGroup = rb.GetComponent<RigidbodyGroup>();
+            if (rbGroup && includeRbGroup)
+            {
+                for (int i = 0; i < rbGroup.rigidbodies.Length; i++)
+                {
+                    rbColliders.AddRange(GetColliders(rbGroup.rigidbodies[i]));
+                }
+            }
+
+            for (int i = 0; i < rbColliders.Count; i++)
+            {
+                Physics.IgnoreCollision(rbColliders[i], bone.colliderRef, ignore);
+            }
+        }
+
+        public static Collider[] GetColliders(Rigidbody rb)
+        {
+            List<Collider> colliders = new List<Collider>(rb.GetComponents<Collider>());
+
+            colliders.AddRange(rb.GetComponentsInChildren<Collider>());
+
+            return colliders.ToArray();
         }
 
         public static void IgnoreFingerTipsCollisions(Rigidbody rb, SlaveHandModel hand, bool ignore)
@@ -299,10 +348,8 @@ namespace HPTK.Helpers
             }
         }
 
-        public static IEnumerator SmoothLerpJointSpring(ConfigurableJoint joint, SoftJointLimitSpring startLimitSpring, SoftJointLimitSpring endLimitSpring, JointDrive startSlerpDrive, JointDrive endSlerpDrive, float duration)
+        public static IEnumerator SmoothJoint(ConfigurableJoint joint, JointDrive startMotionDrive, JointDrive endMotionDrive, JointDrive startSlerpDrive, JointDrive endSlerpDrive, float duration)
         {
-            SoftJointLimitSpring limitSpring;
-            JointDrive slerpDrive;
             float startTime = Time.time;
 
             float distCovered, fraction;
@@ -311,27 +358,30 @@ namespace HPTK.Helpers
             {
                 if (joint == null)
                 {
-                    Debug.LogError("Joint is NULL!");
                     yield break;
                 }
 
                 distCovered = Time.time - startTime;
-                fraction = distCovered / duration;
+                fraction = Mathf.SmoothStep(0.0f, 1.0f, distCovered / duration);
 
-                limitSpring = new SoftJointLimitSpring();
-                limitSpring.spring = Mathf.SmoothStep(startLimitSpring.spring, endLimitSpring.spring, fraction);
-                limitSpring.damper = Mathf.SmoothStep(startLimitSpring.damper, endLimitSpring.damper, fraction);
+                joint.xDrive = JointDriveLerp(startMotionDrive, endMotionDrive, fraction);
+                joint.yDrive = JointDriveLerp(startMotionDrive, endMotionDrive, fraction);
+                joint.zDrive = JointDriveLerp(startMotionDrive, endMotionDrive, fraction);
 
-                slerpDrive = new JointDrive();
-                slerpDrive.positionSpring = Mathf.SmoothStep(startSlerpDrive.positionSpring, endSlerpDrive.positionSpring, fraction);
-                slerpDrive.positionDamper = Mathf.SmoothStep(startSlerpDrive.positionDamper, endSlerpDrive.positionDamper, fraction);
-                slerpDrive.maximumForce = Mathf.SmoothStep(startSlerpDrive.maximumForce, endSlerpDrive.maximumForce, fraction);
-
-                joint.linearLimitSpring = limitSpring;
-                joint.slerpDrive = slerpDrive;
+                joint.slerpDrive = JointDriveLerp(startSlerpDrive, endSlerpDrive, fraction);
 
                 yield return new WaitForEndOfFrame();
             }
+        }
+
+        public static JointDrive JointDriveLerp (JointDrive min, JointDrive max, float lerp)
+        {
+            JointDrive jd = new JointDrive();
+            jd.positionSpring = Mathf.SmoothStep(min.positionSpring, max.positionSpring, lerp);
+            jd.positionDamper = Mathf.SmoothStep(min.positionDamper, max.positionDamper, lerp);
+            jd.maximumForce = Mathf.SmoothStep(min.maximumForce, max.maximumForce, lerp);
+
+            return jd;
         }
 
         public static IEnumerator SmoothLerpPosition(Transform item, Vector3 origin, Vector3 destination, float duration)

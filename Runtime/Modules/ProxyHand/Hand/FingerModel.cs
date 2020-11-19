@@ -11,21 +11,25 @@ namespace HPTK.Models.Avatar
         [HideInInspector]
         public HandModel hand;
 
+        [Header("Models")]
         public BoneModel[] bones;
 
+        [Header("Refs")]
         public Transform fingerBase;
         public Transform fingerTip;
 
         public BoneModel distal;
 
         public CollisionNotifier fingerTipCollisionNotifier;
-        public LineRenderer linerenderer;
+        public LineRenderer lineRenderer;
 
-        [HideInInspector]
-        public float length;
+        [Header("Updated by Controller")]
 
         public float flexLerp;
         public float strengthLerp;
+
+        [HideInInspector]
+        public float length;
 
         public float baseRotationLerp;
         public bool isClosed;
@@ -33,6 +37,11 @@ namespace HPTK.Models.Avatar
         public float pinchLerp;
         public float pinchSpeed;
         public bool isPinching;
+        public float timePinching;
+        public float pinchIntentionTime;
+        [Range(0.0f,1.0f)]
+        public float pinchIntentionLerp;
+        public bool isIntentionallyPinching;
 
         public float palmLineLerp;
 
