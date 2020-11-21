@@ -1,0 +1,7 @@
+
+Standard/RegularOutline.shader:
+
+	http://wiki.unity3d.com/index.php/Outlined_Diffuse_3
+
+URP/ToonBasicOutline.shader:
+	https://github.com/Microsoft/Imagine_block-knock/blob/master/Block%20Knock/Assets/Standard%20Assets/Effects/ToonShading/Shaders/ToonBasicOutline.shader
