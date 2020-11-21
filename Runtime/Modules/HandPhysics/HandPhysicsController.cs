@@ -17,7 +17,7 @@ namespace HPTK.Controllers.Avatar
 
         bool decoupled = false;
 
-        Transform masterWristDestination;
+        Transform masterDestination;
 
         Rigidbody parentRb;
         Vector3 clampedVelocity;
@@ -73,12 +73,7 @@ namespace HPTK.Controllers.Avatar
 
         private void FixedUpdate()
         {
-            if ((model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.offset != null)
-                masterWristDestination = (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.offset;
-            else
-                masterWristDestination = (model.proxyHand.slave.wrist as SlaveBoneModel).masterBone.transformRef;
-
-            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, masterWristDestination, Space.World, model.configuration.wrist);
+            UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, Space.World, model.configuration.wrist);
 
             for (int f = 0; f < model.proxyHand.slave.fingers.Length; f++)
             {
@@ -87,17 +82,22 @@ namespace HPTK.Controllers.Avatar
                     slaveBone = model.proxyHand.slave.fingers[f].bones[b] as SlaveBoneModel;
 
                     if (slaveBone.isSpecial)
-                        UpdateSlaveBone(slaveBone, slaveBone.masterBone.transformRef, Space.Self, model.configuration.specials);
+                        UpdateSlaveBone(slaveBone, Space.Self, model.configuration.specials);
                     else
-                        UpdateSlaveBone(slaveBone, slaveBone.masterBone.transformRef, Space.Self, model.configuration.fingers);
+                        UpdateSlaveBone(slaveBone, Space.Self, model.configuration.fingers);
                 }
             }
         }
 
-        private void UpdateSlaveBone(SlaveBoneModel slaveBone, Transform master, Space space, SlaveBoneConfiguration boneConf)
+        private void UpdateSlaveBone(SlaveBoneModel slaveBone, Space space, SlaveBoneConfiguration boneConf)
         {
             if (!slaveBone.jointRef)
                 return;
+
+            if (slaveBone.masterBone.offset != null)
+                masterDestination = slaveBone.masterBone.offset;
+            else
+                masterDestination = slaveBone.masterBone.transformRef;
 
             if (boneConf.followsPosition)
             {
@@ -106,7 +106,7 @@ namespace HPTK.Controllers.Avatar
                     if (space == Space.Self && slaveBone.jointRef.configuredInWorldSpace) Debug.LogError(slaveBone.name + " is configured in world space. You can't use local position as target position here");
                     if (space == Space.World && !slaveBone.jointRef.configuredInWorldSpace) Debug.LogError(slaveBone.name + " is configured in local space. You can't use world position as target position here");
 
-                    Vector3 desiredWorldPosition = PhysHelpers.GetDesiredWorldPos(slaveBone.transformRef, master, space);
+                    Vector3 desiredWorldPosition = PhysHelpers.GetDesiredWorldPos(slaveBone.transformRef, masterDestination, space);
 
                     if (slaveBone.jointRef.configuredInWorldSpace)
                     {
@@ -120,7 +120,7 @@ namespace HPTK.Controllers.Avatar
                 else
                 {
                     // Position
-                    Vector3 desiredPosition = PhysHelpers.GetDesiredWorldPos(slaveBone.transformRef, master, space);
+                    Vector3 desiredPosition = PhysHelpers.GetDesiredWorldPos(slaveBone.transformRef, masterDestination, space);
 
                     // Velocity
                     Vector3 newVelocity = (desiredPosition - slaveBone.transformRef.position) / Time.fixedDeltaTime;
@@ -137,7 +137,7 @@ namespace HPTK.Controllers.Avatar
 
                 if (space == Space.Self)
                 {
-                    Quaternion clampedLocalRot = master.localRotation;
+                    Quaternion clampedLocalRot = masterDestination.localRotation;
 
                     if (slaveBone.minLocalRot.eulerAngles.z > 180.0f/* &&
                         master.localRotation.eulerAngles.z < slaveBone.minLocalRot.eulerAngles.z*/)
@@ -150,7 +150,7 @@ namespace HPTK.Controllers.Avatar
                 {
                     Quaternion worldToJointSpace = ConfigurableJointExtensions.GetWorldToJointSpace(slaveBone.jointRef);
                     Quaternion jointSpaceToWorld = Quaternion.Inverse(worldToJointSpace);
-                    Quaternion resultRotation = ConfigurableJointExtensions.GetWorldResultRotation(slaveBone.jointRef, master.rotation, slaveBone.initialConnectedBodyLocalRotation, space, jointSpaceToWorld);
+                    Quaternion resultRotation = ConfigurableJointExtensions.GetWorldResultRotation(slaveBone.jointRef, masterDestination.rotation, slaveBone.initialConnectedBodyLocalRotation, space, jointSpaceToWorld);
 
                     // Transform back into joint space
                     resultRotation *= worldToJointSpace;
@@ -163,7 +163,7 @@ namespace HPTK.Controllers.Avatar
                 slaveBone.jointRef.targetRotation *= Quaternion.Euler(slaveBone.targetEulerOffsetRot);
 
                 if (boneConf.useDynamicStrength)
-                    PhysHelpers.UpdateBoneStrength(slaveBone, boneConf.minDynamicRotDrive.toJointDrive(), boneConf.maxDynamicRotDrive.toJointDrive(), slaveBone.finger.strengthLerp);
+                    PhysHelpers.UpdateBoneStrength(slaveBone, boneConf.minDynamicRotDrive.toJointDrive(), boneConf.maxDynamicRotDrive.toJointDrive(), slaveBone.masterBone.finger.strengthLerp);
 
             }
 

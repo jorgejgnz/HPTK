@@ -65,6 +65,7 @@ namespace HPTK.Views.Notifiers
             }
         }
 
+        /*
         protected virtual void OnTriggerStay(Collider other)
         {
             if (!ready || (ignoreChildren && other.transform.IsChildOf(ignoreChildren)))
@@ -72,6 +73,7 @@ namespace HPTK.Views.Notifiers
 
             onStayCollider.Invoke(other);
         }
+        */
 
         protected virtual void OnTriggerExit(Collider other)
         {

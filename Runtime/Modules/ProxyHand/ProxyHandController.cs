@@ -21,17 +21,12 @@ namespace HPTK.Controllers.Avatar
         private void Start()
         {
             // Set default configuration if needed
-            if (model.updateHandValues && model.configuration == null)
+            if (model.configuration == null)
             {
                 if (!core || !core.model.configuration)
-                {
-                    Debug.LogError("Lerp values can't be updated as any CoreConfiguration file is available");
-                    model.updateHandValues = false;
-                }
+                    Debug.LogError("Any CoreConfiguration asset is available!");
                 else
-                {
                     model.configuration = core.model.configuration;
-                }
             }
 
             // Get hand side
@@ -52,14 +47,24 @@ namespace HPTK.Controllers.Avatar
 
         private void Update()
         {
-            if (model.updateHandValues)
+            if (model.configuration != null)
             {
-                UpdateHand(model.master, viewModel.master, model.configuration);
+                for (int h = 0; h < model.hands.Length; h++)
+                {
+                    if (model.hands[h] == model.master && !model.updateValuesForMaster)
+                        continue;
+
+                    if (model.hands[h] == model.slave && !model.updateValuesForSlave)
+                        continue;
+
+                    if (model.hands[h] != model.master && model.hands[h] != model.slave && !model.updateValuesForOther)
+                        continue;
+
+                    UpdateHand(model.hands[h], viewModel.hands[h], model.configuration);
+                }
 
                 if (model.slave)
                 {
-                    //UpdateHand(model.slave, viewModel.slave, model.configuration);
-
                     model.error = Vector3.Distance(
                         model.master.wrist.transformRef.position,
                         model.slave.wrist.transformRef.position
@@ -89,94 +94,118 @@ namespace HPTK.Controllers.Avatar
 
                 bool wasPinching = hand.fingers[f].isPinching;
 
-                // Strength
-                if (hand.fingers[f].bones.Length >= 3)
-                    tempIndex = hand.fingers[f].bones.Length - 2;
-                else
-                    tempIndex = hand.fingers[f].bones.Length - 1;
-
-                hand.fingers[f].strengthLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].bones[tempIndex].transformRef, conf.maxLocalRotZ, conf.minLocalRotZ);
-
-                // Flex
-                hand.fingers[f].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[f], conf.minFlexRelDistance, hand.proxyHand.scale);
-
-                // Base rotation (Closed/Opened)
-                hand.fingers[f].baseRotationLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].fingerBase, conf.maxLocalRotZ, conf.minLocalRotZ);
-                hand.fingers[f].isClosed = hand.fingers[f].baseRotationLerp > conf.minLerpToClose;
-
-                // Palm line
-                hand.fingers[f].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[f], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.proxyHand.scale);
-
-                // Pinch
-                tempValue = hand.fingers[f].pinchLerp;
-
-                if (hand.fingers[f].flexLerp < conf.minFlexLerpToDisablePinch)
-                    hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
-                else
-                    hand.fingers[f].pinchLerp = 0.0f;
-
-                // Pinch speed
-                hand.fingers[f].pinchSpeed = (hand.fingers[f].pinchLerp - tempValue) / Time.deltaTime;
-
-                // Is Pinching
-                hand.fingers[f].isPinching = hand.fingers[f].pinchLerp > conf.minLerpToPinch;
-
-                // Time counter
-                if (hand.fingers[f].isPinching)
-                    hand.fingers[f].timePinching += Time.deltaTime;
-                else
-                    hand.fingers[f].timePinching = 0.0f;
-
-                // Gesture intention     
-                if (hand.fingers[f].isPinching)
+                if (model.strength)
                 {
-                    hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].timePinching, 0.0f, model.configuration.minTimeToIntention);
-                }
-                else
-                {
-                    hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].pinchIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+                    // Strength
+                    if (hand.fingers[f].bones.Length >= 3)
+                        tempIndex = hand.fingers[f].bones.Length - 2;
+                    else
+                        tempIndex = hand.fingers[f].bones.Length - 1;
+
+                    hand.fingers[f].strengthLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].bones[tempIndex].transformRef, conf.maxLocalRotZ, conf.minLocalRotZ);
                 }
 
-                hand.fingers[f].pinchIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.fingers[f].pinchIntentionTime);
+                if (model.flex)
+                {
+                    // Flex
+                    hand.fingers[f].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[f], conf.minFlexRelDistance, hand.proxyHand.scale);
+                }
+
+                if (model.grasp)
+                {
+                    // Base rotation (Closed/Opened)
+                    hand.fingers[f].baseRotationLerp = AvatarHelpers.GetBoneRotLerp(hand.fingers[f].fingerBase, conf.maxLocalRotZ, conf.minLocalRotZ);
+                    hand.fingers[f].isClosed = hand.fingers[f].baseRotationLerp > conf.minLerpToClose;
+                }
+
+                if (model.fist)
+                {
+                    // Palm line
+                    hand.fingers[f].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[f], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.proxyHand.scale);
+                }
+
+                if (model.pinch)
+                {
+                    // Pinch
+                    tempValue = hand.fingers[f].pinchLerp;
+
+                    if (hand.fingers[f].flexLerp < conf.minFlexLerpToDisablePinch)
+                        hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
+                    else
+                        hand.fingers[f].pinchLerp = 0.0f;
+
+                    // Pinch speed
+                    hand.fingers[f].pinchSpeed = (hand.fingers[f].pinchLerp - tempValue) / Time.deltaTime;
+
+                    // Is Pinching
+                    hand.fingers[f].isPinching = hand.fingers[f].pinchLerp > conf.minLerpToPinch;
+
+                    // Time counter
+                    if (hand.fingers[f].isPinching)
+                        hand.fingers[f].timePinching += Time.deltaTime;
+                    else
+                        hand.fingers[f].timePinching = 0.0f;
+
+                    // Gesture intention     
+                    if (hand.fingers[f].isPinching)
+                    {
+                        hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].timePinching, 0.0f, model.configuration.minTimeToIntention);
+                    }
+                    else
+                    {
+                        hand.fingers[f].pinchIntentionTime = Mathf.Clamp(hand.fingers[f].pinchIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+                    }
+
+                    hand.fingers[f].pinchIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.fingers[f].pinchIntentionTime);
+                }
 
                 // Events
-                EmitFingerEvents(hand.fingers[f], viewModel.fingers[f], wasPinching);
+                EmitFingerEvents(hand.fingers[f], viewModel.fingers[f], wasPinching);               
             }
 
-            // Fist
-            hand.fistLerp = AvatarHelpers.GetHandFist(hand);
-            hand.isFist = hand.fistLerp > model.minLerpToFist;
-
-            // Grasp
-            tempValue = hand.graspLerp;
-            hand.graspLerp = AvatarHelpers.GetHandGrasp(hand);
-            hand.graspSpeed = (hand.graspLerp - tempValue) / Time.deltaTime;
-
-            hand.isGrasping = hand.graspLerp > model.minLerpToGrasp;
-
-            // Time grasping
-            if (hand.isGrasping)
-                hand.timeGrasping += Time.deltaTime;
-            else
-                hand.timeGrasping = 0.0f;
-
-            // Gesture intention     
-            if (hand.isGrasping)
+            if (model.fist)
             {
-                hand.graspIntentionTime = Mathf.Clamp(hand.timeGrasping, 0.0f, model.configuration.minTimeToIntention);
-            }
-            else
-            {
-                hand.graspIntentionTime = Mathf.Clamp(hand.graspIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+                // Fist
+                hand.fistLerp = AvatarHelpers.GetHandFist(hand);
+                hand.isFist = hand.fistLerp > model.minLerpToFist;
             }
 
-            hand.graspIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.graspIntentionTime);
-
-            // Ray
-            if (hand.ray && hand.proxyHand && hand.proxyHand.shoulderTip)
+            if (model.grasp)
             {
-                hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand, hand.proxyHand.shoulderTip);
-                hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
+                // Grasp
+                tempValue = hand.graspLerp;
+                hand.graspLerp = AvatarHelpers.GetHandGrasp(hand);
+                hand.graspSpeed = (hand.graspLerp - tempValue) / Time.deltaTime;
+
+                hand.isGrasping = hand.graspLerp > model.minLerpToGrasp;
+
+                // Time grasping
+                if (hand.isGrasping)
+                    hand.timeGrasping += Time.deltaTime;
+                else
+                    hand.timeGrasping = 0.0f;
+
+                // Gesture intention     
+                if (hand.isGrasping)
+                {
+                    hand.graspIntentionTime = Mathf.Clamp(hand.timeGrasping, 0.0f, model.configuration.minTimeToIntention);
+                }
+                else
+                {
+                    hand.graspIntentionTime = Mathf.Clamp(hand.graspIntentionTime - Time.deltaTime, 0.0f, model.configuration.minTimeToIntention);
+                }
+
+                hand.graspIntentionLerp = Mathf.InverseLerp(0.0f, model.configuration.minTimeToIntention, hand.graspIntentionTime);
+            }
+
+            if (model.rays)
+            {
+                // Ray
+                if (hand.ray && hand.proxyHand && hand.proxyHand.shoulderTip)
+                {
+                    hand.ray.forward = AvatarHelpers.GetHandRayDirection(hand, hand.proxyHand.shoulderTip);
+                    hand.ray.gameObject.SetActive(Vector3.Dot(hand.palmNormal.forward, hand.ray.forward) > 0.0f);
+                }
             }
 
             // Events
