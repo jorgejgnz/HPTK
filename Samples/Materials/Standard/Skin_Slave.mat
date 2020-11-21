@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Slave
-  m_Shader: {fileID: 4800000, guid: 7c9a86e6698c20941bf0b28e2e070ce6, type: 3}
+  m_Name: Skin_Slave
+  m_Shader: {fileID: 4800000, guid: 06c6d8b7e9ea3a74f8bce96a3ebcfbdd, type: 3}
   m_ShaderKeywords: _COLOR_MAP_ENABLE_ _OUTLINEENABLED_ON _PULSE_ENABLED__ON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULAREDGE_ON _SPECULAR_EDGE
   m_LightmapFlags: 4
@@ -98,7 +98,7 @@ Material:
     - _Mode: 0
     - _Noise_Frequency_: 40.5
     - _OcclusionStrength: 1
-    - _Outline: 0.005
+    - _Outline: 0.18
     - _OutlineColorMix: 1
     - _OutlineEnabled: 1
     - _OutlineFade: 1

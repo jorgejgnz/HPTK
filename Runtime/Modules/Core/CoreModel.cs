@@ -14,7 +14,9 @@ namespace HPTK.Models
         public CoreHandler handler;
 
         public CoreConfiguration configuration;
-        public HandPhysicsConfiguration defaultHandPhysicsConfiguration;
+
+        [Header("Default configuration assets")]
+        public ScriptableObject[] defaultConfAssets;
 
         public List<AvatarModel> avatars;
 

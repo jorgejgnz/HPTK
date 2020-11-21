@@ -60,8 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handler: {fileID: 0}
   configuration: {fileID: 11400000, guid: ece9d36d612781446894cf3c05726e83, type: 2}
-  defaultHandPhysicsConfiguration: {fileID: 11400000, guid: dd958106acc24664689c29ac710dfa62,
-    type: 2}
+  defaultConfAssets:
+  - {fileID: 11400000, guid: ccce0c23b0444d84e9391a9c21a40c0c, type: 2}
   avatars: []
   trackedCamera: {fileID: 0}
 --- !u!114 &1372122285928843541
