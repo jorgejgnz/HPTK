@@ -77,7 +77,19 @@ namespace HPTK.Views.Handlers
                 for (int h = 0; h < model.hands.Length; h++)
                 {
                     if (model.hands[h] != null)
-                        handViewModelsList.Add(new HandViewModel(model.hands[h]));
+                    {
+                        if (model.hands[h] == model.master)
+                            handViewModelsList.Add(master);
+
+                        else if (model.hands[h] == model.slave)
+                            handViewModelsList.Add(slave);
+
+                        else if (model.hands[h] == model.ghost)
+                            handViewModelsList.Add(ghost);
+
+                        else
+                            handViewModelsList.Add(new HandViewModel(model.hands[h]));
+                    }
                 }
 
                 return handViewModelsList.ToArray();
@@ -227,7 +239,25 @@ namespace HPTK.Views.Handlers
                 for (int f = 0; f < model.fingers.Length; f++)
                 {
                     if (model.fingers[f] != null)
-                        fingerViewModelsList.Add(new FingerViewModel(model.fingers[f]));
+                    {
+                        if (model.fingers[f] == model.thumb)
+                            fingerViewModelsList.Add(thumb);
+
+                        else if (model.fingers[f] == model.index)
+                            fingerViewModelsList.Add(index);
+
+                        else if (model.fingers[f] == model.middle)
+                            fingerViewModelsList.Add(middle);
+
+                        else if (model.fingers[f] == model.ring)
+                            fingerViewModelsList.Add(ring);
+
+                        else if (model.fingers[f] == model.pinky)
+                            fingerViewModelsList.Add(pinky);
+
+                        else
+                            fingerViewModelsList.Add(new FingerViewModel(model.fingers[f]));
+                    }
                 }
 
                 return fingerViewModelsList.ToArray();
