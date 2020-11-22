@@ -9,5 +9,6 @@ namespace HPTK.Models.Avatar
     {
         public ProxyHandModel proxyHand;
         public HandPhysicsConfiguration configuration;
+        public bool isActive = true;
     }
 }

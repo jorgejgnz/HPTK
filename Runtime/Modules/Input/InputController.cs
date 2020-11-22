@@ -63,6 +63,9 @@ namespace HPTK.Controllers.Input
             if (!initialized)
                 return;
 
+            if (!model.isActive)
+                return;
+
             model.inputDataProvider.UpdateData();
 
             // Update pos and rot for wrist and forearm

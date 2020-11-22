@@ -12,6 +12,8 @@ namespace HPTK.Models.Avatar
 
         public InputDataProvider inputDataProvider;
 
+        public bool isActive = true;
+
         [Header("Control")]
         public bool updateWrist = true;
         public bool updateForearm = true;

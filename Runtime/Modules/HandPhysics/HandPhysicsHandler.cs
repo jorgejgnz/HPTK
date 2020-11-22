@@ -12,6 +12,7 @@ namespace HPTK.Views.Handlers
         {
             HandPhysicsModel model;
             public ProxyHandHandler proxyHand { get { return model.proxyHand.handler; } }
+            public bool isActive { get { return model.isActive; } set { model.isActive = value; } }
             public HandPhysicsViewModel(HandPhysicsModel model)
             {
                 this.model = model;

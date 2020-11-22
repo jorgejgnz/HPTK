@@ -130,5 +130,16 @@ namespace HPTK.Helpers
 
             return candidate;
         }
+
+        public static T FindHandler<T>(HPTKHandler[] handlers) where T : HPTKHandler
+        {
+            for (int i = 0; i < handlers.Length; i++)
+            {
+                if (handlers[i] is T)
+                    return handlers[i] as T;
+            }
+
+            return null;
+        }
     }
 }

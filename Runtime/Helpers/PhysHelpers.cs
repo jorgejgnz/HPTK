@@ -401,6 +401,30 @@ namespace HPTK.Helpers
             }
         }
 
+        public static void SetHandPhysics(ProxyHandModel phModel, bool enabled)
+        {
+            SlaveBoneModel wristBone = phModel.slave.wrist as SlaveBoneModel;
+            SetBonePhysics(wristBone, enabled);
+
+            for (int f = 0; f < phModel.slave.fingers.Length; f++)
+            {
+                for (int b = 0; b < phModel.slave.fingers[f].bones.Length; b++)
+                {
+                    SlaveBoneModel slaveBone = phModel.slave.fingers[f].bones[b] as SlaveBoneModel;
+                    SetBonePhysics(slaveBone, enabled);
+                }
+            }
+        }
+
+        public static void SetBonePhysics(SlaveBoneModel bone, bool enabled)
+        {
+            if (bone.rigidbodyRef)
+                bone.rigidbodyRef.isKinematic = !enabled;
+
+            if (bone.colliderRef)
+                bone.colliderRef.enabled = enabled;
+        }
+
         public static IEnumerator DoAfterFixedUpdate(Action toDo)
         {
             yield return new WaitForFixedUpdate();

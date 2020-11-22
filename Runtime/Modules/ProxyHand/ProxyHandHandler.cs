@@ -1,5 +1,8 @@
-﻿using HPTK.Models.Avatar;
+﻿using HPTK.Helpers;
+using HPTK.Models.Avatar;
+using HPTK.Views.Handlers.Input;
 using HPTK.Views.Notifiers;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
@@ -9,6 +12,7 @@ namespace HPTK.Views.Handlers
 {
     public class ProxyHandHandler : HPTKHandler
     {
+        [Serializable]
         public sealed class ProxyHandViewModel
         {
             ProxyHandModel model;
@@ -19,7 +23,7 @@ namespace HPTK.Views.Handlers
             {
                 get
                 {
-                    if (_master == null && model.master != null) _master = new HandViewModel(model.master);
+                    if (_master == null && model.master != null)  _master = new HandViewModel(model.master);
                     return _master;
                 }
             }
@@ -78,8 +82,48 @@ namespace HPTK.Views.Handlers
 
                 return handViewModelsList.ToArray();
             }
+
+            public void SetMasterActive(bool active)
+            {
+                // Module
+                InputHandler input = BasicHelpers.FindHandler<InputHandler>(model.relatedHandlers.ToArray());
+                input.viewModel.isActive = active;
+
+                // Visuals
+                model.master.skinnedMR.enabled = active;
+            }
+
+            public void SetSlaveActive(bool active)
+            {
+                if (active)
+                {
+                    // Teleport
+                    model.slave.wrist.transformRef.position = model.master.wrist.transformRef.position;
+                    model.slave.wrist.transformRef.rotation = model.master.wrist.transformRef.rotation;
+
+                    // Physics
+                    PhysHelpers.SetHandPhysics(model, active);
+
+                    // Module
+                    HandPhysicsHandler handPhysics = BasicHelpers.FindHandler<HandPhysicsHandler>(model.relatedHandlers.ToArray());
+                    handPhysics.viewModel.isActive = active;
+                }                    
+                else
+                {
+                    // Module
+                    HandPhysicsHandler handPhysics = BasicHelpers.FindHandler<HandPhysicsHandler>(model.relatedHandlers.ToArray());
+                    handPhysics.viewModel.isActive = active;
+
+                    // Physics
+                    PhysHelpers.SetHandPhysics(model, active);
+                }
+
+                // Visuals
+                model.slave.skinnedMR.enabled = active;
+            }
         }
 
+        [Serializable]
         public sealed class HandViewModel
         {
             HandModel model;
@@ -88,6 +132,7 @@ namespace HPTK.Views.Handlers
             public float graspLerp { get { return model.graspLerp; } }
             public float graspSpeed { get { return model.graspSpeed; } }
             public bool isGrasping { get { return model.isGrasping; } }
+            public bool isIntentionallyGrasping { get { return model.isIntentionallyGrasping; } }
             public float fistLerp { get { return model.fistLerp; } }
             public bool isFist { get { return model.isFist; } }
 
@@ -201,6 +246,7 @@ namespace HPTK.Views.Handlers
             }
         }
 
+        [Serializable]
         public sealed class FingerViewModel
         {
             FingerModel model;
@@ -258,6 +304,7 @@ namespace HPTK.Views.Handlers
             }
         }
 
+        [Serializable]
         public sealed class BoneViewModel
         {
             BoneModel model;

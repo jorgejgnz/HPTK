@@ -67,12 +67,18 @@ namespace HPTK.Controllers.Avatar
         }
         private void Update()
         {
+            if (!model.isActive)
+                return;
+
             if (model.proxyHand.error > core.model.configuration.maxErrorAllowed && !decoupled)
                 StartCoroutine(RecoverFromError());
         }
 
         private void FixedUpdate()
         {
+            if (!model.isActive)
+                return;
+
             UpdateSlaveBone(model.proxyHand.slave.wrist as SlaveBoneModel, Space.World, model.configuration.wrist);
 
             for (int f = 0; f < model.proxyHand.slave.fingers.Length; f++)
