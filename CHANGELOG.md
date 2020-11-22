@@ -1,3 +1,10 @@
+## [0.2.2](https://github.com/jorgejgnz/HPTK/compare/v0.2.1...v0.2.2) (2020-11-22)
+
+
+### Bug Fixes
+
+* **proxyHandModule:** Fix for redundant hand/finger view models ([6cefe80](https://github.com/jorgejgnz/HPTK/commit/6cefe80918df78171767957fcce0db5cb6139ab5))
+
 ## [0.2.1](https://github.com/jorgejgnz/HPTK/compare/v0.2.0...v0.2.1) (2020-10-26)
 
 
