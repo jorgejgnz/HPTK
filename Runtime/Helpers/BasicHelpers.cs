@@ -141,5 +141,25 @@ namespace HPTK.Helpers
 
             return null;
         }
+
+        public static T FindScriptableObject<T>(ScriptableObject[] scriptableObjects) where T : ScriptableObject
+        {
+            for (int i = 0; i < scriptableObjects.Length; i++)
+            {
+                if (scriptableObjects[i] is T)
+                    return scriptableObjects[i] as T;
+            }
+
+            return null;
+        }
+
+        public static Quaternion ClampQuaternion(Quaternion origin, Quaternion destination, float maxAngle)
+        {
+            float angle = Quaternion.Angle(origin, destination);
+
+            float lerp = Mathf.Clamp(angle, 0.0f, maxAngle);
+
+            return Quaternion.Lerp(origin, destination, lerp);
+        }
     }
 }

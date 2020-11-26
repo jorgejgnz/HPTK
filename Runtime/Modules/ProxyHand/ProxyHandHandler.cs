@@ -97,10 +97,6 @@ namespace HPTK.Views.Handlers
 
             public void SetMasterActive(bool active)
             {
-                // Module
-                InputHandler input = BasicHelpers.FindHandler<InputHandler>(model.relatedHandlers.ToArray());
-                input.viewModel.isActive = active;
-
                 // Visuals
                 model.master.skinnedMR.enabled = active;
             }

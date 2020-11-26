@@ -36,7 +36,7 @@ namespace HPTK.Controllers.Avatar
 
             // Set default configuration if needed
             if (model.configuration == null)
-                model.configuration = FindConfAsset();
+                model.configuration = BasicHelpers.FindScriptableObject<HandPhysicsConfiguration>(core.model.defaultConfAssets);
 
             for (int i = 0; i < slaveBones.Length; i++)
             {
@@ -224,17 +224,6 @@ namespace HPTK.Controllers.Avatar
             yield return new WaitForSeconds(1.0f);
 
             PhysHelpers.SetCollisionDetectionForBones(model.proxyHand.slave, true);
-        }
-
-        HandPhysicsConfiguration FindConfAsset()
-        {
-            for (int i = 0; i < this.core.model.defaultConfAssets.Length; i++)
-            {
-                if (this.core.model.defaultConfAssets[i] is HandPhysicsConfiguration)
-                    return this.core.model.defaultConfAssets[i] as HandPhysicsConfiguration;
-            }
-
-            return null;
         }
     }
 }

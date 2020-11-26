@@ -1,4 +1,5 @@
 ﻿using HPTK.Input;
+using HPTK.Settings;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,13 +11,19 @@ namespace HPTK.Models.Avatar
     {
         public ProxyHandModel proxyHand;
 
+        public InputConfiguration configuration;
+
         public InputDataProvider inputDataProvider;
 
         public bool isActive = true;
 
-        [Header("Control")]
-        public bool updateWrist = true;
-        public bool updateForearm = true;
+        [HideInInspector]
+        public MasterBoneModel[] bonesToUpdate;
+
+        [HideInInspector]
+        public float highestLinearSpeed = 1000.0f;
+        [HideInInspector]
+        public float highestAngularSpeed = 1000.0f;
 
         /*
         * 0 - wrist
@@ -73,8 +80,10 @@ namespace HPTK.Models.Avatar
         public MasterBoneModel pinky2;
         public MasterBoneModel pinky3;
 
-        [HideInInspector]
-        public MasterBoneModel[] bonesToUpdate;
+        [Header("Updated by Controller")]
+        public bool handIsTracked = false;
+        public bool fingersAreTracked = false;
+        public bool isPredicting = false;
 
         public void OnValidate()
         {

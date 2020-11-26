@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HPTK.Views.Handlers.ProxyHandHandler;
 
 namespace HPTK.Input
 {
@@ -55,6 +56,14 @@ namespace HPTK.Input
             this.localScale = tsf.localScale;
         }
 
+        public AbstractTsf(AbstractTsf abstractTsf)
+        {
+            this.name = abstractTsf.name;
+            this.space = abstractTsf.space;
+            this.position = abstractTsf.position;
+            this.rotation = abstractTsf.rotation;
+        }
+
         public static void ApplyTransform(AbstractTsf bonePose, Transform receiverTsf)
         {
             if (bonePose.space == Space.World)
@@ -88,7 +97,9 @@ namespace HPTK.Input
 
     public class InputDataProvider : MonoBehaviour
     {
-        [HideInInspector]
+        // InputDataProvider.bones will always be 24 items length
+        protected int numOfBones = 24;
+
         public AbstractTsf[] bones;
 
         [HideInInspector]
@@ -106,13 +117,15 @@ namespace HPTK.Input
         [HideInInspector]
         public FingerPose pinky = new FingerPose("Pinky");
 
+        [Range(0.0f, 1.0f)]
+        public float confidence = 0.0f;
+
         // Replaceable by inherited classes
-        public virtual void InitData(HandModel hand)
+        public virtual void InitData()
         {
             List<AbstractTsf> tmpBones = new List<AbstractTsf>();
 
-            // InputDataProvider.bones will always be 24 items length
-            for (int b = 0; b < 24; b++)
+            for (int b = 0; b < numOfBones; b++)
             {
                 // Initialize .bones with empty AbstractTsfs
                 tmpBones.Add(new AbstractTsf(b.ToString(), Space.World));

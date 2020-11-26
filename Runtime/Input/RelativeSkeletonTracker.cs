@@ -29,6 +29,8 @@ namespace HPTK.Input
                 bones[i].position = replicatedHead.TransformPoint(relPos);
             }
 
+            confidence = 1.0f;
+
             UpdateFingers();
         }
     }

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 438271eed043e6e418b60d5208dcadc9, type: 3}
-  m_Name: DefaultStaticConfiguration
+  m_Name: DynamicStrongWrist
   m_EditorClassIdentifier: 
-  alias: defaultStatic
+  alias: defaultDynamic
   fingers:
     followsRotation: 1
     maxAngularVelocity: 2
@@ -21,15 +21,15 @@ MonoBehaviour:
       spring: 500
       damper: 1
       maxForce: 5
-    useDynamicStrength: 0
+    useDynamicStrength: 1
     minDynamicRotDrive:
-      spring: 0
-      damper: 0
-      maxForce: 0
+      spring: 500
+      damper: 1
+      maxForce: 2.5
     maxDynamicRotDrive:
-      spring: 0
-      damper: 0
-      maxForce: 0
+      spring: 500
+      damper: 1
+      maxForce: 5
     followsPosition: 0
     useTargetPos: 0
     maxLinearVelocity: 5
@@ -83,15 +83,15 @@ MonoBehaviour:
       spring: 500
       damper: 1
       maxForce: 25
-    useDynamicStrength: 0
+    useDynamicStrength: 1
     minDynamicRotDrive:
-      spring: 0
-      damper: 0
-      maxForce: 0
+      spring: 500
+      damper: 1
+      maxForce: 12.5
     maxDynamicRotDrive:
-      spring: 0
-      damper: 0
-      maxForce: 0
+      spring: 500
+      damper: 1
+      maxForce: 25
     followsPosition: 0
     useTargetPos: 0
     maxLinearVelocity: 5
