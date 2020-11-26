@@ -1,3 +1,10 @@
+# [0.3.0](https://github.com/jorgejgnz/HPTK/compare/v0.2.2...v0.3.0) (2020-11-26)
+
+
+### Features
+
+* **inputModule:** Configuration assets with which to define tactics for dealing with tracking confidence ([eb128ef](https://github.com/jorgejgnz/HPTK/commit/eb128ef37b0cc66a2351cd4b92b6f978bfe93971))
+
 ## [0.2.2](https://github.com/jorgejgnz/HPTK/compare/v0.2.1...v0.2.2) (2020-11-22)
 
 
