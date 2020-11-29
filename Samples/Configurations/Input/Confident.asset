@@ -23,11 +23,18 @@ MonoBehaviour:
   usePredictiveTrackingWhenLost: 0
   maxPredictionTime: 2
   maxPredictionDisplacement: 0.4
+  recordTracking: 1
+  movingAverage: 2
+  windowSize: 10
+  applyToWristPosition: 0
+  applyToWristRotation: 1
+  applyToFingersPosition: 0
+  applyToFingersRotation: 1
   useHandClamping: 1
   gradualHandClamping: 0
-  startDecreasingHandClampUnderConfidence: 0.5
-  lowestHandLinearSpeed: 1
-  lowestHandAngularSpeed: 10
+  startDecreasingHandClampUnderConfidence: 1
+  lowestHandLinearSpeed: 2
+  lowestHandAngularSpeed: 90
   useFingerClamping: 0
   gradualFingerClamping: 1
   startDecreasingFingerClampUnderConfidence: 0.75

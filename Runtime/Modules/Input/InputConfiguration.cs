@@ -1,9 +1,19 @@
-﻿using System.Collections;
+﻿using HPTK.Input;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace HPTK.Settings
 {
+    public enum MovingAverage
+    {
+        None,
+        Simple,
+        Weighted,
+        Exponential
+    }
+
     [CreateAssetMenu(menuName = "HPTK/InputConfiguration Asset", order = 2)]
     public class InputConfiguration : ScriptableObject
     {
@@ -31,6 +41,17 @@ namespace HPTK.Settings
         public float maxPredictionTime = 2.0f;
         [Range(0.05f, 0.5f)]
         public float maxPredictionDisplacement = 0.4f;
+
+        [Header("Noise reduction")]
+        public bool recordTracking = true;
+        public MovingAverage movingAverage = MovingAverage.Weighted;
+        [Tooltip("Can't be changed during gameplay")]
+        [Range(5, 60)]
+        public int windowSize = 3;
+        public bool applyToWristPosition = true;
+        public bool applyToWristRotation = true;
+        public bool applyToFingersPosition = false;
+        public bool applyToFingersRotation = true;
 
         [Header("Hand clamping")]
         public bool useHandClamping = true;

@@ -3,6 +3,7 @@ using HPTK.Input;
 using HPTK.Models.Avatar;
 using HPTK.Settings;
 using HPTK.Views.Handlers.Input;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -90,6 +91,22 @@ namespace HPTK.Controllers.Input
             {
                 Debug.LogError("InputModel.InputDataProvider is required!");
             }
+
+            // Initialize recording arrays
+            model.boneRecords = new AbstractTsf[model.bonesToUpdate.Length][];
+            for (int i = 0; i < model.boneRecords.Length; i++)
+            {
+                model.boneRecords[i] = new AbstractTsf[model.configuration.windowSize];
+
+                for (int j = 0; j < model.boneRecords[i].Length; j++)
+                {
+                    // Initial state of records is the same as in IDP
+                    model.boneRecords[i][j] = new AbstractTsf(model.inputDataProvider.bones[i]);
+                }
+            }
+
+            // Get weights for noise reduction (WMA)
+            model.wmaWeights = GetLinearWeights(model.configuration.windowSize);
         }
 
         void Update()
@@ -148,17 +165,37 @@ namespace HPTK.Controllers.Input
                     maxHandAngularSpeed = -1.0f;
                 }
 
+                // Update record
+                if (model.configuration.recordTracking)
+                {
+                    RecordBone(model.inputDataProvider.bones[0], 0);
+                    // RecordBone(model.inputDataProvider.bones[1], 1);
+                }
+
+                // Noise reduction
+                if (model.configuration.movingAverage != MovingAverage.None)
+                {
+                    model.inputDataProvider.bones[0] = ReduceNoise(model.boneRecords[0], 0);
+                    // model.inputDataProvider.bones[1] = ReduceNoise(model.boneRecords[1], 1);
+                }
+
                 // Update pos and rot for wrist and forearm
                 if (conf.updateWrist && model.bonesToUpdate[0] != null)
                 {
+                    // Update wrist position and rotation
                     UpdateMasterBonePos(model.wrist, model.inputDataProvider.bones[0], maxHandLinearSpeed);
                     UpdateMasterBoneRot(model.wrist, model.inputDataProvider.bones[0], maxHandAngularSpeed);
                 }
 
                 if (conf.updateForearm && model.bonesToUpdate[1] != null)
                 {
+                    // Optional
+                    if (model.configuration.recordTracking)
+                        RecordBone(model.inputDataProvider.bones[1], 1);
+
+                    // Update wrist position and rotation
                     UpdateMasterBonePos(model.forearm, model.inputDataProvider.bones[1], maxHandLinearSpeed);
-                    UpdateMasterBoneRot(model.forearm, model.inputDataProvider.bones[1], maxHandAngularSpeed);
+                    UpdateMasterBoneRot(model.forearm, model.inputDataProvider.bones[1], maxHandAngularSpeed); // Optional
                 }
             }
             // On hand tracking loss
@@ -247,9 +284,22 @@ namespace HPTK.Controllers.Input
                     maxFingerAngularSpeed = -1.0f;
                 }
 
-                // Update only rot for bones as input data may assume master bone lengths that don't match master on custom rigged hands
+                // Finger bones start at i=2 (i=0 -> wrist, i=1 -> forearm)
                 for (int i = 2; i < model.bonesToUpdate.Length; i++)
                 {
+                    // Update record
+                    if (model.configuration.recordTracking)
+                    {
+                        RecordBone(model.inputDataProvider.bones[i], i);
+                    }
+
+                    // Noise reduction
+                    if (model.configuration.movingAverage != MovingAverage.None)
+                    {
+                        model.inputDataProvider.bones[i] = ReduceNoise(model.boneRecords[i], i);
+                    }
+
+                    // Update only fingers rotation (assuming hierachy)
                     if (model.bonesToUpdate[i] != null)
                         UpdateMasterBoneRot(model.bonesToUpdate[i], model.inputDataProvider.bones[i], maxFingerAngularSpeed);
                 }
@@ -322,5 +372,137 @@ namespace HPTK.Controllers.Input
             }
         }
 
+        // "Helperizable" functions
+
+        void RecordBone(AbstractTsf raw, int bone)
+        {
+            AbstractTsf[] updatedRecords = new AbstractTsf[model.boneRecords[bone].Length];
+            Array.Copy(model.boneRecords[bone], 1, updatedRecords, 0, updatedRecords.Length - 1);
+            updatedRecords[updatedRecords.Length - 1] = new AbstractTsf(raw);
+
+            model.boneRecords[bone] = updatedRecords;
+        }
+
+        AbstractTsf ReduceNoise(AbstractTsf[] updatedTrackingRecord, int boneIndex)
+        {
+            bool applyPosition, applyRotation;
+
+            if (boneIndex == 0 || boneIndex == 1)
+            {
+                applyPosition = model.configuration.applyToWristPosition;
+                applyRotation = model.configuration.applyToWristRotation;
+            }
+            else
+            {
+                applyPosition = model.configuration.applyToFingersPosition;
+                applyRotation = model.configuration.applyToFingersRotation;
+            }
+
+            switch (model.configuration.movingAverage)
+            {
+                case MovingAverage.Simple:
+                    return SimpleMovingAverage(updatedTrackingRecord, applyPosition, applyRotation);
+
+                case MovingAverage.Weighted:
+                    return WeightedMovingAverage(updatedTrackingRecord, model.wmaWeights, applyPosition, applyRotation);
+
+                case MovingAverage.Exponential:
+                    Debug.LogError("Exponential Moving Average is not supperted for input noise reduction");
+                    return updatedTrackingRecord[updatedTrackingRecord.Length - 1];
+
+                default:
+                    return updatedTrackingRecord[updatedTrackingRecord.Length - 1];
+            }
+        }
+
+        AbstractTsf SimpleMovingAverage(AbstractTsf[] window, bool averagePosition, bool averageRotation)
+        {
+            // Result is a copy of the last element to preserve its name and space
+            AbstractTsf result = new AbstractTsf(window[window.Length - 1]);
+
+            float weight = 1.0f / window.Length;
+
+            if (averagePosition)
+            {
+                result.position = Vector3.zero;
+                for (int i = 0; i < window.Length; i++)
+                {
+                    result.position += window[i].position * weight;
+                }
+            }
+
+            if (averageRotation)
+            {
+                Vector3 averageForward = Vector3.zero;
+                Vector3 averageUpwards = Vector3.zero;
+
+                for (int i = 0; i < window.Length; i++)
+                {
+                    averageForward += (window[i].rotation * Vector3.forward) * weight;
+                    averageUpwards += (window[i].rotation * Vector3.up) * weight;
+                }
+
+                result.rotation = Quaternion.LookRotation(averageForward, averageUpwards);
+            }
+
+            return result;
+        }
+
+        AbstractTsf WeightedMovingAverage(AbstractTsf[] window, float[] weights, bool averagePosition, bool averageRotation)
+        {
+            if (window.Length != weights.Length)
+            {
+                Debug.LogError("Window and weight arrays are required to have the same length!");
+                return window[window.Length - 1];
+            }
+
+            // Result is a copy of the last element to preserve its name and space
+            AbstractTsf result = new AbstractTsf(window[window.Length - 1]);
+
+            if (averagePosition)
+            {
+                result.position = Vector3.zero;
+                for (int i = 0; i < window.Length; i++)
+                {
+                    result.position += window[i].position * weights[i];
+                }
+            }
+
+            if (averageRotation)
+            {
+                Vector3 averageForward = Vector3.zero;
+                Vector3 averageUpwards = Vector3.zero;
+
+                for (int i = 0; i < window.Length; i++)
+                {
+                    averageForward += (window[i].rotation * Vector3.forward) * weights[i];
+                    averageUpwards += (window[i].rotation * Vector3.up) * weights[i];
+                }
+
+                result.rotation = Quaternion.LookRotation(averageForward, averageUpwards);
+            }
+
+            return result;
+        }
+
+        float[] GetLinearWeights(int windowLength)
+        {
+            float[] result = new float[windowLength];
+
+            result[0] = 1.0f;
+            float sum = 1.0f;
+            for (int i = 1; i < windowLength; i++)
+            {
+                result[i] = 1 + result[i - 1];  // ... -> result = {1, 2, 3, 4, 5}
+                sum += result[i];               // 1 -> 1+2=3 -> 3+3=6 -> 6+4=10 -> 10+5=15
+            }
+
+            for (int i = 0; i < windowLength; i++)
+            {
+                result[i] = result[i] / sum;
+            }
+
+            return result;
+        }
     }
 }

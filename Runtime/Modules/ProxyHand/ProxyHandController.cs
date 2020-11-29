@@ -49,6 +49,7 @@ namespace HPTK.Controllers.Avatar
         {
             if (model.configuration != null)
             {
+                /*
                 for (int h = 0; h < model.hands.Length; h++)
                 {
                     if (model.hands[h] == model.master && !model.updateValuesForMaster)
@@ -62,6 +63,10 @@ namespace HPTK.Controllers.Avatar
 
                     UpdateHand(model.hands[h], viewModel.hands[h], model.configuration);
                 }
+                */
+
+                UpdateHand(model.master, viewModel.master, model.configuration);
+                UpdateHand(model.slave, viewModel.slave, model.configuration);
 
                 if (model.slave)
                 {

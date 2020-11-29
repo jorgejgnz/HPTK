@@ -85,6 +85,10 @@ namespace HPTK.Models.Avatar
         public bool fingersAreTracked = false;
         public bool isPredicting = false;
 
+        // Noise reduction
+        public float[] wmaWeights; // Assuming that window size won't change
+        public AbstractTsf[][] boneRecords; // Assuming that bonesToUpdate and window size won't change. [boneToUpdate][record]
+
         public void OnValidate()
         {
             if (updateBonesOnValidate)
