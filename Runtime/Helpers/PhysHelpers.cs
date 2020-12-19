@@ -480,7 +480,18 @@ namespace HPTK.Helpers
         public static void SetBonePhysics(SlaveBoneModel bone, bool enabled)
         {
             if (bone.rigidbodyRef)
-                bone.rigidbodyRef.isKinematic = !enabled;
+            {
+                if (bone.rigidbodyRef.isKinematic)
+                {
+                    bone.rigidbodyRef.isKinematic = false;
+                    bone.rigidbodyRef.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+                }
+                else
+                {
+                    bone.rigidbodyRef.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+                    bone.rigidbodyRef.isKinematic = true;
+                }
+            }         
 
             if (bone.colliderRef)
                 bone.colliderRef.enabled = enabled;
