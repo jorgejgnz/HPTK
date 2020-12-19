@@ -40,6 +40,10 @@ namespace HPTK.Models.Avatar
 
         public Transform ray;
 
+        [Header("Scaling")]
+        public float extraScale = 1.0f;
+        public float totalScale;
+
         [Header("Components")]
         public SkinnedMeshRenderer skinnedMR;
 

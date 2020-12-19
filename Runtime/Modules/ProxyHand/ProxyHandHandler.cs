@@ -61,9 +61,11 @@ namespace HPTK.Views.Handlers
             // Transforms
             public Transform shoulderTip { get { return model.shoulderTip; } }
 
+            // Scaling
+            public float realScale { get { return model.realScale; } }
+
             // Extra
             public float errorLerp { get { return model.errorLerp; } }
-            public float scale { get { return model.scale; } }
 
             public ProxyHandViewModel(ProxyHandModel model)
             {
@@ -214,6 +216,17 @@ namespace HPTK.Views.Handlers
             public BoneViewModel forearm { get { return model.forearm ? new BoneViewModel(model.forearm) : null; } }
             public BoneViewModel[] bones { get { return GetBoneViewModelsArray(); } }
 
+            // Scaling
+            public float extraScale { get { return model.extraScale; }
+                set
+                {
+                    model.extraScale = value;
+
+                    if (model.proxyHand.realScale * model.extraScale != model.totalScale)
+                        UpdateScale();
+                }
+            }
+
             // Extra
             public SkinnedMeshRenderer skinnedMR { get { return model.skinnedMR; } }
 
@@ -226,6 +239,12 @@ namespace HPTK.Views.Handlers
             public HandViewModel(HandModel model)
             {
                 this.model = model;
+            }
+
+            public void UpdateScale()
+            {
+                model.totalScale = model.proxyHand.realScale * model.extraScale;
+                model.wrist.transformRef.localScale = new Vector3(model.totalScale, model.totalScale, model.totalScale);
             }
 
             FingerViewModel[] GetFingerViewModelsArray()

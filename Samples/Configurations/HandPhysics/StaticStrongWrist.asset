@@ -12,6 +12,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438271eed043e6e418b60d5208dcadc9, type: 3}
   m_Name: StaticStrongWrist
   m_EditorClassIdentifier: 
+  configuration:
+    alias: defaultStatic
+    fingers:
+      followsRotation: 1
+      maxAngularVelocity: 2
+      clampAngularVelocity: 1
+      rotationDrive:
+        spring: 500
+        damper: 1
+        maxForce: 5
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 0
+      useTargetPos: 0
+      maxLinearVelocity: 5
+      clampLinearVelocity: 1
+      positionDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      rigidbodyMass: 0.1
+      rigidbodyDrag: 0
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 1
+      jointConnectedMassScale: 1
+    wrist:
+      followsRotation: 1
+      maxAngularVelocity: 2
+      clampAngularVelocity: 1
+      rotationDrive:
+        spring: 10000
+        damper: 1
+        maxForce: 20
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 1
+      useTargetPos: 1
+      maxLinearVelocity: 5
+      clampLinearVelocity: 1
+      positionDrive:
+        spring: 10000
+        damper: 1
+        maxForce: 200
+      rigidbodyMass: 1
+      rigidbodyDrag: 10
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 1
+      jointConnectedMassScale: 1
+    specials:
+      followsRotation: 1
+      maxAngularVelocity: 2
+      clampAngularVelocity: 1
+      rotationDrive:
+        spring: 500
+        damper: 1
+        maxForce: 25
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 0
+      useTargetPos: 0
+      maxLinearVelocity: 5
+      clampLinearVelocity: 1
+      positionDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      rigidbodyMass: 0.1
+      rigidbodyDrag: 0
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 1
+      jointConnectedMassScale: 1
   alias: defaultStatic
   fingers:
     followsRotation: 1

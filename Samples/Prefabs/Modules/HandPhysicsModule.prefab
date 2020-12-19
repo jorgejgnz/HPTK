@@ -120,4 +120,102 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proxyHand: {fileID: 0}
-  configuration: {fileID: 0}
+  asset: {fileID: 0}
+  configuration:
+    alias: 
+    fingers:
+      followsRotation: 0
+      maxAngularVelocity: 0
+      clampAngularVelocity: 0
+      rotationDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 0
+      useTargetPos: 0
+      maxLinearVelocity: 0
+      clampLinearVelocity: 0
+      positionDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      rigidbodyMass: 0
+      rigidbodyDrag: 0
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 0
+      jointConnectedMassScale: 0
+    wrist:
+      followsRotation: 0
+      maxAngularVelocity: 0
+      clampAngularVelocity: 0
+      rotationDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 0
+      useTargetPos: 0
+      maxLinearVelocity: 0
+      clampLinearVelocity: 0
+      positionDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      rigidbodyMass: 0
+      rigidbodyDrag: 0
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 0
+      jointConnectedMassScale: 0
+    specials:
+      followsRotation: 0
+      maxAngularVelocity: 0
+      clampAngularVelocity: 0
+      rotationDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      useDynamicStrength: 0
+      minDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      maxDynamicRotDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      followsPosition: 0
+      useTargetPos: 0
+      maxLinearVelocity: 0
+      clampLinearVelocity: 0
+      positionDrive:
+        spring: 0
+        damper: 0
+        maxForce: 0
+      rigidbodyMass: 0
+      rigidbodyDrag: 0
+      rigidbodyAngularDrag: 0
+      useGravity: 0
+      jointMassScale: 0
+      jointConnectedMassScale: 0
+  isActive: 1
+  applyConfOnUpdate: 1
+  updateConfFromScale: 1

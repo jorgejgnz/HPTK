@@ -36,11 +36,20 @@ namespace HPTK.Controllers.Avatar
                     model.side = Side.Left;
                 else if (model == model.avatar.rightHand)
                     model.side = Side.Right;
-            }   
+            }
 
-            InitHand(model.master);
-            if (model.slave) InitHand(model.slave);
-            if (model.ghost) InitHand(model.ghost);
+            if (model.master)
+            {
+                InitHand(model.master);
+            }
+            if (model.slave)
+            {
+                InitHand(model.slave);
+            }
+            if (model.ghost)
+            {
+                InitHand(model.ghost);
+            }
 
             onInitialized.Invoke();
         }
@@ -49,7 +58,6 @@ namespace HPTK.Controllers.Avatar
         {
             if (model.configuration != null)
             {
-                /*
                 for (int h = 0; h < model.hands.Length; h++)
                 {
                     if (model.hands[h] == model.master && !model.updateValuesForMaster)
@@ -63,12 +71,8 @@ namespace HPTK.Controllers.Avatar
 
                     UpdateHand(model.hands[h], viewModel.hands[h], model.configuration);
                 }
-                */
 
-                UpdateHand(model.master, viewModel.master, model.configuration);
-                UpdateHand(model.slave, viewModel.slave, model.configuration);
-
-                if (model.slave)
+                if (model.slave && model.master)
                 {
                     model.error = Vector3.Distance(
                         model.master.wrist.transformRef.position,
@@ -82,7 +86,7 @@ namespace HPTK.Controllers.Avatar
 
         void InitHand(HandModel hand)
         {
-            AvatarHelpers.UpdateFingerLengths(hand, hand.proxyHand.scale);
+            AvatarHelpers.UpdateFingerLengths(hand, hand.extraScale);
         }
 
         void UpdateHand(HandModel hand, HandViewModel viewModel, CoreConfiguration conf)
@@ -113,7 +117,7 @@ namespace HPTK.Controllers.Avatar
                 if (model.flex)
                 {
                     // Flex
-                    hand.fingers[f].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[f], conf.minFlexRelDistance, hand.proxyHand.scale);
+                    hand.fingers[f].flexLerp = AvatarHelpers.GetFingerFlexion(hand.fingers[f], conf.minFlexRelDistance, hand.extraScale);
                 }
 
                 if (model.grasp)
@@ -126,7 +130,7 @@ namespace HPTK.Controllers.Avatar
                 if (model.fist)
                 {
                     // Palm line
-                    hand.fingers[f].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[f], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.proxyHand.scale);
+                    hand.fingers[f].palmLineLerp = AvatarHelpers.GetPalmLineLerp(hand.fingers[f], conf.maxPalmRelDistance, conf.minPalmRelDistance, hand.extraScale);
                 }
 
                 if (model.pinch)
@@ -135,7 +139,7 @@ namespace HPTK.Controllers.Avatar
                     tempValue = hand.fingers[f].pinchLerp;
 
                     if (hand.fingers[f].flexLerp < conf.minFlexLerpToDisablePinch)
-                        hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.proxyHand.scale);
+                        hand.fingers[f].pinchLerp = AvatarHelpers.GetFingerPinch(hand.fingers[f], conf.maxPinchRelDistance, conf.minPinchRelDistance, hand.extraScale);
                     else
                         hand.fingers[f].pinchLerp = 0.0f;
 
@@ -215,6 +219,9 @@ namespace HPTK.Controllers.Avatar
 
             // Events
             EmitHandEvents(hand, viewModel, wasGrasping);
+
+            // Scaling
+            viewModel.UpdateScale(); // ProxyHandModel.realScale can change
         }
 
         void EmitHandEvents(HandModel hand, HandViewModel viewModel, bool wasGrasping)

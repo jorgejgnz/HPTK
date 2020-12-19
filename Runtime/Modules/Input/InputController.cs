@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HPTK.Views.Handlers.ProxyHandHandler;
 
 namespace HPTK.Controllers.Input
 {
@@ -314,6 +315,7 @@ namespace HPTK.Controllers.Input
                 }
             }
 
+            // If we need to record and confidence is good enough to record
             if (conf.usePredictiveTrackingWhenLost && model.inputDataProvider.confidence > conf.saveHandHistoricOverConfidence)
             {
                 // Before updating wristVelocityDirection and wristPosition
@@ -332,7 +334,12 @@ namespace HPTK.Controllers.Input
                 // Update timeOfLastRecord
                 timeOfLastRecord = Time.timeSinceLevelLoad;
             }
-            
+
+            // Hand scaling
+            if (model.updateRealScale)
+            {
+                model.proxyHand.realScale = model.inputDataProvider.scale;
+            }
         }
 
         void UpdateMasterBonePos(MasterBoneModel masterBone, AbstractTsf inputData, float maxSpeed)

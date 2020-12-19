@@ -80,6 +80,9 @@ namespace HPTK.Models.Avatar
         public MasterBoneModel pinky2;
         public MasterBoneModel pinky3;
 
+        [Header("Scaling")]
+        public bool updateRealScale = true;
+
         [Header("Updated by Controller")]
         public bool handIsTracked = false;
         public bool fingersAreTracked = false;

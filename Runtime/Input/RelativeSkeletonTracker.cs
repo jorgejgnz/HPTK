@@ -31,6 +31,8 @@ namespace HPTK.Input
 
             confidence = 1.0f;
 
+            scale = referenceHand.extraScale;
+
             UpdateFingers();
         }
     }

@@ -1,54 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using HPTK.Helpers;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 namespace HPTK.Settings
 {
-    [Serializable]
-    public class CustomJointDrive
-    {
-        public static CustomJointDrive zero = new CustomJointDrive();
-
-        public float spring;
-        public float damper;
-        public float maxForce;
-
-        public JointDrive toJointDrive()
-        {
-            JointDrive jDrive = new JointDrive();
-            jDrive.positionSpring = spring;
-            jDrive.positionDamper = damper;
-            jDrive.maximumForce = maxForce;
-
-            return jDrive;
-        }
-
-        public SoftJointLimitSpring toSoftJointLimitSpring()
-        {
-            SoftJointLimitSpring lSpring = new SoftJointLimitSpring();
-            lSpring.spring = spring;
-            lSpring.damper = damper;
-
-            return lSpring;
-        }
-
-        public CustomJointDrive()
-        {
-            spring = 0.0f;
-            damper = 0.0f;
-            maxForce = 0.0f;
-        }
-
-        public CustomJointDrive(float spring, float damper, float maxForce)
-        {
-            this.spring = spring;
-            this.damper = damper;
-            this.maxForce = maxForce;
-        }
-
-    }
-
     [Serializable]
     public class SlaveBoneConfiguration
     {
@@ -107,14 +65,29 @@ namespace HPTK.Settings
         }
     }
 
-    [CreateAssetMenu(menuName = "HPTK/HandPhysicsConfiguration Asset", order = 2)]
-    public class HandPhysicsConfiguration : ScriptableObject
+    [Serializable]
+    public class HandPhysicsConfiguration
     {
         public string alias;
 
         public SlaveBoneConfiguration fingers;
         public SlaveBoneConfiguration wrist;
         public SlaveBoneConfiguration specials;
+
+        public HandPhysicsConfiguration(HandPhysicsConfiguration conf)
+        {
+            this.alias = conf.alias;
+            this.fingers = new SlaveBoneConfiguration(conf.fingers);
+            this.wrist = new SlaveBoneConfiguration(conf.wrist);
+            this.specials = new SlaveBoneConfiguration(conf.specials);
+        }
+    }
+
+    [CreateAssetMenu(menuName = "HPTK/HandPhysicsConfiguration Asset", order = 2)]
+    public class HandPhysicsConfigurationAsset : ScriptableObject
+    {
+        [Header("For normalized scale")]
+        public HandPhysicsConfiguration configuration;
     }
 
 }

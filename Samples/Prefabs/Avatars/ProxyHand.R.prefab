@@ -544,7 +544,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1256055276830928035}
-  - component: {fileID: 1256055276830928047}
   m_Layer: 0
   m_Name: Salve.R
   m_TagString: Untagged
@@ -561,7 +560,7 @@ Transform:
   m_GameObject: {fileID: 1256055276830928045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0399998, y: 1.04, z: 1.0399998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1256055276984282842}
   - {fileID: 4217385562136366821}
@@ -570,44 +569,6 @@ Transform:
   m_Father: {fileID: 8763704830130221906}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1256055276830928047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256055276830928045}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b24ea930cb919f34eb285a4401d3a05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 427415651222813604}
-  bones:
-  - {fileID: 1256055276984282842}
-  - {fileID: 1256055278196175116}
-  - {fileID: 1256055277859543461}
-  - {fileID: 1256055276806437360}
-  - {fileID: 1256055278489298219}
-  - {fileID: 1256055277620822815}
-  - {fileID: 1256055276680664108}
-  - {fileID: 1256055278582897388}
-  - {fileID: 1256055277918303842}
-  - {fileID: 1256055277628248144}
-  - {fileID: 1256055277794744798}
-  - {fileID: 1256055277249139962}
-  - {fileID: 1256055278281987366}
-  - {fileID: 1256055277731529575}
-  - {fileID: 1256055277676294854}
-  - {fileID: 1256055277820369404}
-  - {fileID: 1256055277785049661}
-  - {fileID: 1256055276788196070}
-  - {fileID: 1256055278521518595}
-  - {fileID: 1256055277547827235}
-  - {fileID: 1256055277988001940}
-  - {fileID: 1256055277855129481}
-  - {fileID: 1256055277000165975}
-  - {fileID: 1256055278017946641}
 --- !u!1 &1256055276984282853
 GameObject:
   m_ObjectHideFlags: 0
@@ -5052,7 +5013,7 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 927bc3a6dd716f04293f3aa38e84b7da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
+  serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1431001292053516804, guid: 4c0b23bf8e849b242b5172d78ac8c743, type: 3}
@@ -5486,6 +5447,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829365659257}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704828584578730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5541,6 +5503,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829900214783}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704828646078872
 GameObject:
   m_ObjectHideFlags: 0
@@ -5619,7 +5582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8763704828650623970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.077607445, y: -0.02081205, z: 0.034253202}
+  m_LocalPosition: {x: 0.07760745, y: -0.020812035, z: 0.034253202}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8763704829995633368}
@@ -5773,6 +5736,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proxyHand: {fileID: 0}
+  viewModel:
+    onGrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onLongGrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onUngrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onLongUngrasp:
+      m_PersistentCalls:
+        m_Calls: []
   thumb: {fileID: 8763704829767116869}
   index: {fileID: 8763704828924052958}
   middle: {fileID: 8763704829817130957}
@@ -5800,6 +5776,7 @@ MonoBehaviour:
   isIntentionallyGrasping: 0
   allTransforms: []
   bones: []
+  scale: 1
   palmTrigger: {fileID: 8763704830465549203}
   handTrigger: {fileID: 8763704828733221876}
   palmCollisionNotifier: {fileID: 3570026865603570588}
@@ -5892,6 +5869,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704830481878575}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704828719115185
 GameObject:
   m_ObjectHideFlags: 0
@@ -6384,6 +6362,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829341041396}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704828859111112
 GameObject:
   m_ObjectHideFlags: 0
@@ -7202,6 +7181,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   proxyHand: {fileID: 0}
+  viewModel:
+    onGrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onLongGrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onUngrasp:
+      m_PersistentCalls:
+        m_Calls: []
+    onLongUngrasp:
+      m_PersistentCalls:
+        m_Calls: []
   thumb: {fileID: 8763704828949057229}
   index: {fileID: 8763704830516615655}
   middle: {fileID: 8763704829385405288}
@@ -7229,6 +7221,7 @@ MonoBehaviour:
   isIntentionallyGrasping: 0
   allTransforms: []
   bones: []
+  scale: 1
 --- !u!1 &8763704829163969749
 GameObject:
   m_ObjectHideFlags: 0
@@ -7472,6 +7465,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829606439643}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704829254879612
 GameObject:
   m_ObjectHideFlags: 0
@@ -7735,7 +7729,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8763704829289259384}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13781717, y: -0.032359935, z: 0.050919373}
+  m_LocalPosition: {x: 0.13781717, y: -0.032359898, z: 0.050919376}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8763704828859111111}
@@ -8182,6 +8176,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828748782896}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704829411295233
 GameObject:
   m_ObjectHideFlags: 0
@@ -8549,6 +8544,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829595823803}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704829523833344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9746,6 +9742,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829617554557}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704829900214785
 GameObject:
   m_ObjectHideFlags: 0
@@ -10081,6 +10078,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828452540522}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830099793358
 GameObject:
   m_ObjectHideFlags: 0
@@ -10189,6 +10187,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828646078870}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830111032661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10244,6 +10243,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828719115183}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830117103500
 GameObject:
   m_ObjectHideFlags: 0
@@ -10363,6 +10363,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828489585985}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830175763515
 GameObject:
   m_ObjectHideFlags: 0
@@ -10418,6 +10419,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704828553137384}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830183848967
 GameObject:
   m_ObjectHideFlags: 0
@@ -10473,6 +10475,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829085428999}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830212983520
 GameObject:
   m_ObjectHideFlags: 0
@@ -10528,6 +10531,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704830264907402}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830231269034
 GameObject:
   m_ObjectHideFlags: 0
@@ -10583,6 +10587,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829743676840}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830232613651
 GameObject:
   m_ObjectHideFlags: 0
@@ -10638,6 +10643,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829523833342}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830254719044
 GameObject:
   m_ObjectHideFlags: 0
@@ -10693,6 +10699,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704830099793356}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830264907404
 GameObject:
   m_ObjectHideFlags: 0
@@ -10959,6 +10966,7 @@ MonoBehaviour:
   masterBone: {fileID: 8763704829411297279}
   initialConnectedBodyLocalRotation: {x: 0, y: 0, z: 0, w: 0}
   minLocalRot: {x: 0, y: 0, z: 0, w: 1}
+  initialConnectedAnchor: {x: 0, y: 0, z: 0}
 --- !u!1 &8763704830465549205
 GameObject:
   m_ObjectHideFlags: 0

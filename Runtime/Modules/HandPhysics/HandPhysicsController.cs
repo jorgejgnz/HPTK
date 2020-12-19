@@ -35,8 +35,11 @@ namespace HPTK.Controllers.Avatar
             slaveBones = AvatarHelpers.GetSlaveHandBones(model.proxyHand.slave);
 
             // Set default configuration if needed
-            if (model.configuration == null)
-                model.configuration = BasicHelpers.FindScriptableObject<HandPhysicsConfiguration>(core.model.defaultConfAssets);
+            if (model.asset == null)
+                model.asset = BasicHelpers.FindScriptableObject<HandPhysicsConfigurationAsset>(core.model.defaultConfAssets);
+
+            // Make configuration editable
+            model.configuration = new HandPhysicsConfiguration(model.asset.configuration);
 
             for (int i = 0; i < slaveBones.Length; i++)
             {
@@ -48,8 +51,13 @@ namespace HPTK.Controllers.Avatar
 
                 if (slaveBones[i].jointRef)
                 {
-                    // Get initial connected body local rotations
-                    if (slaveBones[i].jointRef.connectedBody != null) slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.connectedBody.transform.localRotation;
+                    // Get initial connected body local rotations and conn anchors
+                    if (slaveBones[i].jointRef.connectedBody != null)
+                    {
+                        slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.connectedBody.transform.localRotation;
+                        slaveBones[i].initialConnectedAnchor = slaveBones[i].jointRef.connectedAnchor;
+                        slaveBones[i].jointRef.autoConfigureConnectedAnchor = false;
+                    }
                     else slaveBones[i].initialConnectedBodyLocalRotation = slaveBones[i].jointRef.transform.rotation;
 
                     // Set initial joint configurations
@@ -60,6 +68,7 @@ namespace HPTK.Controllers.Avatar
                     else
                         PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.fingers);
 
+                    // Initial built-in velocity clamps
                     slaveBones[i].rigidbodyRef.maxDepenetrationVelocity = model.configuration.fingers.maxLinearVelocity;
                     slaveBones[i].rigidbodyRef.maxAngularVelocity = model.configuration.fingers.maxAngularVelocity;
                 }
@@ -72,6 +81,45 @@ namespace HPTK.Controllers.Avatar
 
             if (model.proxyHand.error > core.model.configuration.maxErrorAllowed && !decoupled)
                 StartCoroutine(RecoverFromError());
+
+            for (int i = 0; i < slaveBones.Length; i++)
+            {
+                if (model.updateConfFromScale)
+                {
+                    model.configuration.fingers.positionDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.fingers.positionDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.fingers.rotationDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.fingers.rotationDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.fingers.rigidbodyMass = model.asset.configuration.fingers.rigidbodyMass * model.proxyHand.slave.extraScale;
+
+                    model.configuration.wrist.positionDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.wrist.positionDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.wrist.rotationDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.wrist.rotationDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.wrist.rigidbodyMass = model.asset.configuration.wrist.rigidbodyMass * model.proxyHand.slave.extraScale;
+
+                    model.configuration.specials.positionDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.specials.positionDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.specials.rotationDrive = CustomJointDrive.ScaledCopy(model.asset.configuration.specials.rotationDrive, model.proxyHand.slave.extraScale);
+                    model.configuration.specials.rigidbodyMass = model.asset.configuration.specials.rigidbodyMass * model.proxyHand.slave.extraScale;
+                }
+
+                if (model.applyConfOnUpdate && slaveBones[i].jointRef)
+                {
+                    // Update joint configurations
+                    if (slaveBones[i] == model.proxyHand.slave.wrist)
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.wrist);
+                    else if (slaveBones[i].isSpecial)
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.specials);
+                    else
+                        PhysHelpers.SetSlaveBoneConfiguration(slaveBones[i].jointRef, model.configuration.fingers);
+
+                    // Update built-in velocity clamps
+                    slaveBones[i].rigidbodyRef.maxDepenetrationVelocity = model.configuration.fingers.maxLinearVelocity;
+                    slaveBones[i].rigidbodyRef.maxAngularVelocity = model.configuration.fingers.maxAngularVelocity;
+
+                    // NO-PROD
+                    if (slaveBones[i].jointRef.connectedBody)
+                    {
+                        slaveBones[i].jointRef.connectedAnchor = slaveBones[i].initialConnectedAnchor;
+                    }
+                }
+            }
         }
 
         private void FixedUpdate()

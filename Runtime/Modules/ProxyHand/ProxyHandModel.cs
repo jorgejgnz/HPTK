@@ -35,8 +35,6 @@ namespace HPTK.Models.Avatar
 
         public Side side = Side.Left;
 
-        public float scale = 1.0f;
-
         [Header("Hand gesture theresolds")]
         public float minLerpToFist = 0.5f;
         public float minLerpToGrasp = 0.5f;
@@ -60,6 +58,9 @@ namespace HPTK.Models.Avatar
         [Tooltip("Update ray direction for the hand representation.")]
         public bool rays = true;
 
+        [Header("Scaling")]
+        public float realScale = 1.0f;
+
         [Header("Updated by Controller")]
         public float error;
         public float errorLerp;
@@ -68,9 +69,11 @@ namespace HPTK.Models.Avatar
         {
             List<HandModel> handList = new List<HandModel>();
 
-            // Master hand is mandatory
-            master.proxyHand = this;
-            handList.Add(master);
+            if (master)
+            {
+                master.proxyHand = this;
+                handList.Add(master);
+            }
 
             if (slave)
             {

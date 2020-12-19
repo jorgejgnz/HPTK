@@ -21,5 +21,8 @@ namespace HPTK.Models.Avatar
 
         [HideInInspector]
         public Quaternion minLocalRot = Quaternion.identity;
+
+        [HideInInspector]
+        public Vector3 initialConnectedAnchor;
     }
 }

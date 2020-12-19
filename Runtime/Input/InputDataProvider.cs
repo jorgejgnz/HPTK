@@ -120,6 +120,9 @@ namespace HPTK.Input
         [Range(0.0f, 1.0f)]
         public float confidence = 0.0f;
 
+        [Range(0.5f, 2.0f)]
+        public float scale = 1.0f;
+
         // Replaceable by inherited classes
         public virtual void InitData()
         {
