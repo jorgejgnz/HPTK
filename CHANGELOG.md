@@ -1,3 +1,10 @@
+# [0.5.0](https://github.com/jorgejgnz/HPTK/compare/v0.4.0...v0.5.0) (2021-01-22)
+
+
+### Features
+
+* **inputModule:** Support to Unity XR Input ([3b2ce46](https://github.com/jorgejgnz/HPTK/commit/3b2ce46b12392ae6eab993da280cbec272805b9a))
+
 ## [0.2.2](https://github.com/jorgejgnz/HPTK/compare/v0.2.1...v0.2.2) (2020-11-22)
 
 
