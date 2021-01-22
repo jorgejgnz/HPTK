@@ -28,7 +28,6 @@ namespace HPTK.Models.Avatar
         [Header("Body")]
         public Transform torso;
         public Transform shoulderLeft;
-        public Transform shoulderCenter;
         public Transform shoulderRight;
         public Transform hips;
         public Transform feet;

@@ -24,7 +24,7 @@ namespace HPTK.Models.Avatar
         public FingerModel ring;
         public FingerModel pinky;
 
-        [HideInInspector]
+        //[HideInInspector]
         public FingerModel[] fingers;
 
         public BoneModel wrist;

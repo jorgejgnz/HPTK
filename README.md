@@ -1,13 +1,17 @@
 # HPTK [![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg)](https://unity3d.com/es/get-unity/download/archive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md) [![version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/jorgejgnz/HPTK/releases) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
 
-Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Hand physics and hover/touch/grab detection are modules included. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions. Only Oculus Quest is supported at the moment.
+Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Platform-independent. Input-independent. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions.
 
 ## Main features
-- Data model to access hand components and lerp values to compose gestures and trigger actions.
-- State-of-the-art hand physics that can be configured in detail through configuration assets.
-- Hover/Touch/Grab detection with support to interactions involving multiple objects and hands.
-- Code architecture based on isolated modules. Support to custom modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Custom-modules)).
-- Input abstraction. RelativeSkeletonTracker included to mimic other hands. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Modules-overview)).
+- Data model to access hand parts, components or calculated values with very little code.
+- Code architecture based on MVC-like modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Modules-overview)). Support to custom modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Custom-modules)).
+- State-of-the-art hand physics. Configurable in detail through configuration assets.
+- Platform-independent. Tested on VR/AR/non-XR applications
+- Input-independent. Use handtracking or controllers.
+- Scale-independent. Valid for any hand size.
+- Define strategies to deal with loss of tracking.
+- Physics-based touch/grab detection.
+- Tracking noise smoothing.
 
 ## Example project
 - You can clone a ready-to-go project at [HPTK-Sample](https://github.com/jorgejgnz/HPTK-Sample).

@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &618893763536126842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8592292488377932686}
+  m_Layer: 0
+  m_Name: OculusTouchOffset
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8592292488377932686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618893763536126842}
+  m_LocalRotation: {x: -0.5129172, y: -0.42060316, z: -0.48674014, w: 0.5684127}
+  m_LocalPosition: {x: 0.05, y: -0.018, z: -0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1068063810550762410}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -97, y: -170, z: 90}
+--- !u!1 &5728394509092338231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1068063810550762410}
+  - component: {fileID: 5502624742457062706}
+  m_Layer: 0
+  m_Name: UnityXRControllerTracker.R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1068063810550762410
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728394509092338231}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8592292488377932686}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5502624742457062706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5728394509092338231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28951864902866a409e9ac3ac2e73fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bones: []
+  wrist:
+    name: 
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    space: 0
+    localScale: {x: 0, y: 0, z: 0}
+  forearm:
+    name: 
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    space: 0
+    localScale: {x: 0, y: 0, z: 0}
+  thumb:
+    name: Thumb
+    bones: []
+    tip:
+      name: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 0
+      localScale: {x: 0, y: 0, z: 0}
+  index:
+    name: Index
+    bones: []
+    tip:
+      name: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 0
+      localScale: {x: 0, y: 0, z: 0}
+  middle:
+    name: Middle
+    bones: []
+    tip:
+      name: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 0
+      localScale: {x: 0, y: 0, z: 0}
+  ring:
+    name: Ring
+    bones: []
+    tip:
+      name: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 0
+      localScale: {x: 0, y: 0, z: 0}
+  pinky:
+    name: Pinky
+    bones: []
+    tip:
+      name: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 0
+      localScale: {x: 0, y: 0, z: 0}
+  confidence: 0
+  scale: 1
+  log: 
+  side: 2
+  openHand: {fileID: 11400000, guid: 15d7a8ff6098ce54780aa84bbb591f23, type: 2}
+  pinch: {fileID: 11400000, guid: 327fc1da4d4fc25409800ff0d32bc138, type: 2}
+  fist: {fileID: 11400000, guid: 05a57b06e8cd72a4b8bcae667b11a8f4, type: 2}
+  useButtonTouch: 1
+  minLerpToTouch: 0.05
+  minLerpToPress: 0.75
+  compatibleDevices:
+  - deviceName: Oculus Touch Controller
+    deviceManufacturer: Oculus
+    wristOffset: {fileID: 8592292488377932686}
+    onDeviceUsed:
+      m_PersistentCalls:
+        m_Calls: []

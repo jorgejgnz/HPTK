@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54c587aa31b907a4f881344ca589a240, type: 3}
+  m_Name: IndexPinchOpened.R
+  m_EditorClassIdentifier: 
+  alias: IndexPinchOpened.R
+  fingers:
+  - name: Thumb
+    bones:
+    - name: b_r_thumb0
+      position: {x: 0.020069301, y: -0.011554099, z: 0.0104965195}
+      rotation: {x: 0.6714314, y: -0.43205386, z: -0.15247025, w: 0.58246213}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_thumb1
+      position: {x: 0.024852559, y: 8.881784e-18, z: -1.0547119e-17}
+      rotation: {x: 0.12953936, y: 0.14797965, z: -0.047841348, w: 0.9793023}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_thumb2
+      position: {x: 0.03251291, y: -0, z: -0}
+      rotation: {x: 0.07128443, y: -0.026931595, z: -0.07745252, w: 0.99407965}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_thumb3
+      position: {x: 0.03379309, y: 1.3322676e-17, z: -3.4416914e-17}
+      rotation: {x: 0.03153521, y: -0.10142719, z: -0.20264788, w: 0.97347414}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    tip:
+      name: ThumbTip
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 1
+      localScale: {x: 0, y: 0, z: 0}
+  - name: Index
+    bones:
+    - name: b_r_index1
+      position: {x: 0.09599624, y: -0.0073164543, z: 0.02355068}
+      rotation: {x: 0.10965632, y: -0.080088936, z: -0.40726542, w: 0.90315896}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_index2
+      position: {x: 0.0379273, y: 2.220446e-18, z: 8.881784e-18}
+      rotation: {x: 0.02509233, y: -0.10476275, z: -0.35374165, w: 0.929119}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_index3
+      position: {x: 0.024303643, y: -3.0531133e-18, z: -4.440892e-18}
+      rotation: {x: 0.053343534, y: -0.09607778, z: -0.18282408, w: 0.9769846}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    tip:
+      name: IndexTip
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 1
+      localScale: {x: 0, y: 0, z: 0}
+  - name: Middle
+    bones:
+    - name: b_r_middle1
+      position: {x: 0.095646605, y: -0.0025431546, z: 0.0017259055}
+      rotation: {x: 0.091050684, y: -0.012224701, z: -0.26942298, w: 0.9586301}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_middle2
+      position: {x: 0.04292699, y: -0, z: -0}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_middle3
+      position: {x: 0.027549583, y: -0, z: 4.440892e-18}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    tip:
+      name: MiddleTip
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 1
+      localScale: {x: 0, y: 0, z: 0}
+  - name: Ring
+    bones:
+    - name: b_r_ring1
+      position: {x: 0.08869379, y: -0.006529307, z: -0.017465241}
+      rotation: {x: 0.0977938, y: 0.04102458, z: -0.13913848, w: 0.984578}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_ring2
+      position: {x: 0.0389961, y: -7.771561e-18, z: 8.881784e-18}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_ring3
+      position: {x: 0.026573397, y: 4.440892e-18, z: -0}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    tip:
+      name: RingTip
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 1
+      localScale: {x: 0, y: 0, z: 0}
+  - name: Pinky
+    bones:
+    - name: b_r_pinky0
+      position: {x: 0.034073558, y: -0.009419835, z: -0.022998573}
+      rotation: {x: -0.20703599, y: 0.14034285, z: -0.0183118, w: 0.96804166}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_pinky1
+      position: {x: 0.04565054, y: -0.0000009982332, z: 0.0000021940255}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_pinky2
+      position: {x: 0.030720409, y: 3.330669e-18, z: 8.881784e-18}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    - name: b_r_pinky3
+      position: {x: 0.020311384, y: -6.661338e-18, z: 8.881784e-18}
+      rotation: {x: 0.09096075, y: -0.006700263, z: 0.00061201194, w: 0.9958318}
+      space: 1
+      localScale: {x: 1, y: 1, z: 1}
+    tip:
+      name: PinkyTip
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      space: 1
+      localScale: {x: 0, y: 0, z: 0}
+  wrist:
+    name: b_r_wrist
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: -0, y: -0, z: -0, w: 1}
+    space: 1
+    localScale: {x: 1.04, y: 1.04, z: 1.04}
+  forearm:
+    name: b_r_forearm_stub
+    position: {x: 0, y: -0, z: -0}
+    rotation: {x: 0, y: -0, z: -0, w: 1}
+    space: 1
+    localScale: {x: 1, y: 1, z: 1}

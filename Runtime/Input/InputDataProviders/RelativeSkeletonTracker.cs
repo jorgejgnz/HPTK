@@ -33,7 +33,7 @@ namespace HPTK.Input
 
             scale = referenceHand.extraScale;
 
-            UpdateFingers();
+            UpdateFingerPosesFromBones();
         }
     }
 }

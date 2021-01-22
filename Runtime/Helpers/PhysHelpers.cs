@@ -481,7 +481,7 @@ namespace HPTK.Helpers
         {
             if (bone.rigidbodyRef)
             {
-                if (bone.rigidbodyRef.isKinematic)
+                if (enabled)
                 {
                     bone.rigidbodyRef.isKinematic = false;
                     bone.rigidbodyRef.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;

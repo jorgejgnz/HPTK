@@ -34,8 +34,8 @@ MonoBehaviour:
   gradualHandClamping: 0
   startDecreasingHandClampUnderConfidence: 1
   lowestHandLinearSpeed: 2
-  lowestHandAngularSpeed: 90
+  lowestHandAngularSpeed: 12.56
   useFingerClamping: 0
   gradualFingerClamping: 1
   startDecreasingFingerClampUnderConfidence: 0.75
-  lowestFingerAngularSpeed: 10
+  lowestFingerAngularSpeed: 6.28

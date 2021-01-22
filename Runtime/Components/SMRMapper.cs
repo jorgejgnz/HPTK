@@ -13,17 +13,19 @@ public class SMRMapper : MonoBehaviour
 
     public void Read()
     {
+        if (!skinnedMeshRenderer) skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         bones = skinnedMeshRenderer.bones;
     }
     public void Write()
     {
+        if (!skinnedMeshRenderer) skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
         skinnedMeshRenderer.bones = bones;
     }
 
 }
 
 #if UNITY_EDITOR
-[CustomEditor(typeof(SMRMapper))]
+[CustomEditor(typeof(SMRMapper)), CanEditMultipleObjects]
 public class SMRMapperEditor : Editor
 {
     public override void OnInspectorGUI()

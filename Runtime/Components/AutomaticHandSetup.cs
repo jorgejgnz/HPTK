@@ -76,6 +76,7 @@ public class AutomaticHandSetup : MonoBehaviour
     public Anchors generateArmatureAnchors = Anchors.None;
     public bool generateMasterOffset = true;
     public bool generateRays = true;
+    public bool cloneMaster = true;
     public bool generateSlave = true;
     public bool generateGhost = true;
 
@@ -84,6 +85,7 @@ public class AutomaticHandSetup : MonoBehaviour
     float gizmoDirSize = 0.2f;
     float gizmoSphereSize = 0.005f;
 
+#if UNITY_EDITOR
     public void Setup()
     {
         // Check errors
@@ -149,6 +151,7 @@ public class AutomaticHandSetup : MonoBehaviour
     {
         // CustomHand > Objects > Master
         masterRootObject = BasicHelpers.InstantiateEmptyChild(objects);
+
         masterRootObject.name = "Master." + handType.ToString();
 
         // CustomHand > Objects > Master > (content)
@@ -171,16 +174,44 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         // Spawn wrist
-        masterWrist = BasicHelpers.InstantiateEmptyChild(masterRootObject, "Wrist");
-        masterWrist.transform.position = wrist.position;
+        if (cloneMaster)
+        {
+            masterWrist = BasicHelpers.InstantiateEmptyChild(masterRootObject);
+            masterWrist.transform.position = wrist.position;
+        }
+        else
+        {
+            masterWrist = wrist.gameObject;
+        }
+
+        masterWrist.name = "Wrist." + handType.ToString();
+
         masterFingersRoot = masterWrist.gameObject;
 
         // Create offset (if needed)
         if (generateMasterOffset)
         {
+            List<Transform> children = new List<Transform>();
+
+            if (!cloneMaster)
+            {    
+                foreach (Transform child in masterWrist.transform)
+                {
+                    children.Add(child);
+                }
+            }
+
             masterWristOffset = BasicHelpers.InstantiateEmptyChild(masterWrist, "Offset");
             masterWristOffset.transform.position = masterWrist.transform.position;
             masterFingersRoot = masterWristOffset;
+
+            if (!cloneMaster)
+            {
+                foreach(Transform child in children)
+                {
+                    child.parent = masterFingersRoot.transform;
+                }
+            }
         }
 
         // Armature wrist anchor
@@ -209,10 +240,17 @@ public class AutomaticHandSetup : MonoBehaviour
 
             for (int b = 0; b < _fingers[f].Length; b++)
             {
-                Transform bone = BasicHelpers.InstantiateEmptyChild(masterFingersRoot).transform;
+                Transform bone;
+
+                if (cloneMaster)
+                    bone = BasicHelpers.InstantiateEmptyChild(masterFingersRoot).transform;
+                else
+                    bone = _fingers[f][b];
 
                 if (b==0 && _fingers[f][b].childCount == 0) 
                     bone.name = "Extra.Bone";
+                else if (b == _fingers[f].Length - 1)
+                    bone.name = "Finger" + f + ".Tip";
                 else
                     bone.name = "Finger" + f + ".Bone" + b;
 
@@ -308,7 +346,14 @@ public class AutomaticHandSetup : MonoBehaviour
     void SetupProxyHandModule()
     {
         // CustomHand > [Modules] > ProxyHandModule
-        GameObject proxyHandModule = Instantiate(proxyHandModulePrefab, modules.transform.position, modules.transform.rotation);
+        string prefabPath = AssetDatabase.GetAssetPath(proxyHandModulePrefab);
+        Object prefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
+
+        GameObject proxyHandModule = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+
+        proxyHandModule.transform.position = modules.transform.position;
+        proxyHandModule.transform.rotation = modules.transform.rotation;
+
         proxyHandModule.transform.parent = modules.transform;
         proxyHandModule.transform.name = "ProxyHandModule." + handType.ToString();
 
@@ -464,6 +509,17 @@ public class AutomaticHandSetup : MonoBehaviour
                 fingerModel.name = "Pinky";
                 handModel.pinky = fingerModel;
             }
+            else
+            {
+                fingerModel.name = "Unidentified";
+            }
+
+            for (int b = 0; b < fingerModel.bones.Length; b++)
+            {
+                fingerModel.bones[b].transformRef.name = fingerModel.name + b;
+            }
+
+            fingerModel.fingerTip.name = fingerModel.name + ".Tip";
         }
 
         // Homogeneus order for .fingers
@@ -580,6 +636,17 @@ public class AutomaticHandSetup : MonoBehaviour
                 fingerModel.name = "Pinky";
                 handModel.pinky = fingerModel;
             }
+            else
+            {
+                fingerModel.name = "Unidentified";
+            }
+
+            for (int b = 0; b < fingerModel.bones.Length; b++)
+            {
+                fingerModel.bones[b].transformRef.name = fingerModel.name + b;
+            }
+
+            fingerModel.fingerTip.name = fingerModel.name + ".Tip";
 
             // Increase finger counter
             f++;
@@ -609,7 +676,7 @@ public class AutomaticHandSetup : MonoBehaviour
                     Debug.LogError("Trying to access a non-existing finger!");
 
                 else if (b > handModel.proxyHand.master.fingers[f].bones.Length - 1)
-                    Debug.LogError("Trying to access a non-existing bone!");
+                    Debug.LogError("Trying to access a non-existing bone! Bone " + b + " is unreachable as fingers[" + f + "].bones.Length = " + handModel.proxyHand.master.fingers[f].bones.Length);
 
                 else if (handModel.proxyHand.master.fingers[f] != null && handModel.proxyHand.master.fingers[f].bones[b] != null)
                     slaveBone.masterBone = handModel.proxyHand.master.fingers[f].bones[b] as MasterBoneModel;
@@ -705,6 +772,17 @@ public class AutomaticHandSetup : MonoBehaviour
                 fingerModel.name = "Pinky";
                 handModel.pinky = fingerModel;
             }
+            else
+            {
+                fingerModel.name = "Unidentified";
+            }
+
+            for (int b = 0; b < fingerModel.bones.Length; b++)
+            {
+                fingerModel.bones[b].transformRef.name = fingerModel.name + b;
+            }
+
+            fingerModel.fingerTip.name = fingerModel.name + ".Tip";
         }
 
         // Homogeneus order for .fingers
@@ -963,6 +1041,12 @@ public class AutomaticHandSetup : MonoBehaviour
         if (!thumbRootBone || !indexRootBone)
         {
             Debug.LogError("Thumb root bone and index root bone are required!");
+            return false;
+        }
+
+        if (!proxyHandModulePrefab)
+        {
+            Debug.LogError("Proxy hand module prefab is required!");
             return false;
         }
 
@@ -1386,7 +1470,6 @@ public class AutomaticHandSetup : MonoBehaviour
                 thumbDir = new Vector3(0.0f, 0.0f, gizmoDirSize);
             }
 
-# if UNITY_EDITOR
             // Draw finger direction
             Handles.color = Color.blue;
             Handles.Label(wrist.position + fingerDir, "Fingers");
@@ -1419,9 +1502,10 @@ public class AutomaticHandSetup : MonoBehaviour
                 gizmoDirSize,
                 EventType.Repaint
             );
-#endif
+
         }
     }
+#endif
 }
 
 
