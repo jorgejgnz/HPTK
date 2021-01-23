@@ -21,11 +21,20 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 # Supported versions
 - Unity 2019.4.4f1 LTS, 2019.3.15f1
 
-# Supported target devices
-- Oculus Quest - Android
+# Supported input
+## Hand tracking
+* [Oculus Quest 1/2 - Android](https://github.com/jorgejgnz/HPTK-Sample/tree/master/Assets/HPTK-Sample/Scripts/Input)
+* Hololens 2 - UWP
+
+## Controllers
+* [UnityXR-compatible controllers](https://docs.unity3d.com/Manual/xr_input.html) with:
+     * Index trigger
+	 * Grip trigger
+	 * Primary 2D axis
 
 # Supported render pipelines
 - Universal Render Pipeline (URP)
+- Standard RP
 
 # Getting started with HPTK (Oculus Quest)
 
