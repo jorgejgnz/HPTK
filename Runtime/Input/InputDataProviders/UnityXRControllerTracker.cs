@@ -23,6 +23,7 @@ namespace HPTK.Input
     {
         [Header("Unity XR")]
         public Side side = Side.Left;
+        public Transform playspace;
 
         [Header("Gesture poses")]
         public HandPose openHand;
@@ -169,9 +170,18 @@ namespace HPTK.Input
             if (updatedFeatureValues)
             {
                 //Wrist
-                bones[0].space = Space.World;
-                bones[0].position = position;
-                bones[0].rotation = rotation;
+                if (playspace)
+                {
+                    bones[0].space = Space.World;
+                    bones[0].position = playspace.TransformPoint(position);
+                    bones[0].rotation = playspace.rotation * rotation;
+                }
+                else
+                {
+                    bones[0].space = Space.World;
+                    bones[0].position = position;
+                    bones[0].rotation = rotation;
+                }
 
                 // Forearm
                 // ...

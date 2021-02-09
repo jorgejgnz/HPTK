@@ -10,7 +10,7 @@ using HPTK.Helpers;
 using UnityEditor;
 #endif
 
-public enum AnchorGeneration
+public enum Anchors
 {
     None = 0,
     AsChildren = 1,
@@ -19,8 +19,8 @@ public enum AnchorGeneration
 
 public class AutomaticHandSetup : MonoBehaviour
 {
-    public string name = "ProxyHand";
     public Side handType;
+    public float fingerRadius = 0.01f;
     
     public Transform wrist;
     public Transform thumbRootBone;
@@ -29,7 +29,6 @@ public class AutomaticHandSetup : MonoBehaviour
     public Transform ringRootBone;
     public Transform pinkyRootBone;
     public GameObject proxyHandModulePrefab;
-    public float fingerRadius = 0.01f;
 
     GameObject mainRoot;
     GameObject objects;
@@ -62,31 +61,24 @@ public class AutomaticHandSetup : MonoBehaviour
     List<Quaternion[]> _localRots;
     List<Quaternion[]> _worldRots;
 
-    [Header("Rays")]
+    [Header("Special points, triggers and ray")]
     public float rayWidth = 0.005f;
     public Material rayMat;
 
     Vector3 meanPoint;
     float palmRadius;
 
-    [Header("Slave")]
-    public Mesh palmMesh;
+    [Header("Collider Generation")]
+    public Mesh defaultPalmMesh;
     public PhysicMaterial skinPhysMat;
 
     [Header("Control")]
-    public AnchorGeneration generateArmatureAnchors = AnchorGeneration.None;
-    public HandRepresentation useOriginalArmatureAs;
-
-    [Header("Generate")]
-    public bool masterOffset = true;
-    public bool slaveHand = true;
-    public bool ghostHand = true;
-    public bool rays = true;
-
-    [Header("Skeleton")]
-    public bool skeletonGizmo = true;
-    public bool fingerLines = true;
-    public Material lineMat;
+    public Anchors generateArmatureAnchors = Anchors.None;
+    public bool generateMasterOffset = true;
+    public bool generateRays = true;
+    public bool cloneMaster = true;
+    public bool generateSlave = true;
+    public bool generateGhost = true;
 
     [Header("Debug")]
     public bool showGizmos = true;
@@ -108,7 +100,7 @@ public class AutomaticHandSetup : MonoBehaviour
 
         // CustomHand
         mainRoot = new GameObject();
-        mainRoot.name = name + "." + handType.ToString();
+        mainRoot.name = "CustomHand." + handType.ToString();
         mainRoot.transform.position = wrist.position + new Vector3(0.0f, 0.0f, 0.1f);
 
         // CustomHand > Objects
@@ -131,8 +123,8 @@ public class AutomaticHandSetup : MonoBehaviour
 
         // Initialize masterWrist and slaveWrist
         SetupMasterObjects();
-        if (slaveHand) SetupSlaveObjects();
-        if (ghostHand) SetupGhostObjects();
+        if (generateSlave) SetupSlaveObjects();
+        if (generateGhost) SetupGhostObjects();
 
         // Setup HPTK models
         SetupMasterHandModel(masterHandModel, masterWrist.transform, masterWristOffset);
@@ -149,33 +141,18 @@ public class AutomaticHandSetup : MonoBehaviour
         if (phModel.slave) FixHumanBodyBones(phModel.slave, handType);
         if (phModel.ghost) FixHumanBodyBones(phModel.ghost, handType);
 
-        // Add skeleton
-        if (fingerLines)
-        {
-            AddLines(phModel.master, lineMat);
-            if (phModel.slave) AddLines(phModel.slave, lineMat);
-            if (phModel.ghost) AddLines(phModel.ghost, lineMat);
-        }
-
-        if (skeletonGizmo)
-        {
-            AddBoneGizmos(phModel.master, Color.blue);
-            if (phModel.slave) AddBoneGizmos(phModel.slave, Color.black);
-            if (phModel.ghost) AddBoneGizmos(phModel.ghost, Color.white);
-        }
-
-        // Select result
-        Selection.activeGameObject = mainRoot;
+        // Add lines
+        AddLines(phModel.master, Color.blue);
+        if (phModel.slave) AddLines(phModel.slave, Color.black);
+        if (phModel.ghost) AddLines(phModel.ghost, Color.white);
     }
 
     void SetupMasterObjects()
     {
         // CustomHand > Objects > Master
-        if (useOriginalArmatureAs != HandRepresentation.Master)
-        {
-            masterRootObject = BasicHelpers.InstantiateEmptyChild(objects);
-            masterRootObject.name = "Master." + handType.ToString();
-        }
+        masterRootObject = BasicHelpers.InstantiateEmptyChild(objects);
+
+        masterRootObject.name = "Master." + handType.ToString();
 
         // CustomHand > Objects > Master > (content)
 
@@ -197,7 +174,7 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         // Spawn wrist
-        if (useOriginalArmatureAs != HandRepresentation.Master)
+        if (cloneMaster)
         {
             masterWrist = BasicHelpers.InstantiateEmptyChild(masterRootObject);
             masterWrist.transform.position = wrist.position;
@@ -207,16 +184,16 @@ public class AutomaticHandSetup : MonoBehaviour
             masterWrist = wrist.gameObject;
         }
 
-        masterWrist.name = "Wrist.Master." + handType.ToString();
+        masterWrist.name = "Wrist." + handType.ToString();
 
         masterFingersRoot = masterWrist.gameObject;
 
         // Create offset (if needed)
-        if (masterOffset)
+        if (generateMasterOffset)
         {
             List<Transform> children = new List<Transform>();
 
-            if (useOriginalArmatureAs == HandRepresentation.Master)
+            if (!cloneMaster)
             {    
                 foreach (Transform child in masterWrist.transform)
                 {
@@ -228,9 +205,9 @@ public class AutomaticHandSetup : MonoBehaviour
             masterWristOffset.transform.position = masterWrist.transform.position;
             masterFingersRoot = masterWristOffset;
 
-            if (useOriginalArmatureAs == HandRepresentation.Master)
+            if (!cloneMaster)
             {
-                foreach (Transform child in children)
+                foreach(Transform child in children)
                 {
                     child.parent = masterFingersRoot.transform;
                 }
@@ -238,18 +215,18 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         // Armature wrist anchor
-        if (generateArmatureAnchors > AnchorGeneration.None)
+        if (generateArmatureAnchors > Anchors.None)
         {
             wristAnchor = new GameObject().transform;
             wristAnchor.name = wrist.name + ".Anchor";
             wristAnchor.position = wrist.position;
 
-            if (generateArmatureAnchors == AnchorGeneration.AsParents)
+            if (generateArmatureAnchors == Anchors.AsParents)
             {
                 wristAnchor.parent = wrist.parent;
                 wrist.parent = wristAnchor;
             }
-            else if (generateArmatureAnchors == AnchorGeneration.AsChildren)
+            else if (generateArmatureAnchors == Anchors.AsChildren)
             {
                 wristAnchor.parent = wrist;
             }  
@@ -265,10 +242,10 @@ public class AutomaticHandSetup : MonoBehaviour
             {
                 Transform bone;
 
-                if (useOriginalArmatureAs == HandRepresentation.Master)
-                    bone = _fingers[f][b];
-                else
+                if (cloneMaster)
                     bone = BasicHelpers.InstantiateEmptyChild(masterFingersRoot).transform;
+                else
+                    bone = _fingers[f][b];
 
                 if (b==0 && _fingers[f][b].childCount == 0) 
                     bone.name = "Extra.Bone";
@@ -288,7 +265,7 @@ public class AutomaticHandSetup : MonoBehaviour
                 // Not rotation needed
 
                 //Armature anchor
-                if (generateArmatureAnchors > AnchorGeneration.None)
+                if (generateArmatureAnchors > Anchors.None)
                 {
                     Transform anchor = new GameObject().transform;
                     anchor.name = _fingers[f][b].name + ".Anchor";
@@ -297,12 +274,12 @@ public class AutomaticHandSetup : MonoBehaviour
                     if (_fingers[f][b].childCount > 0)
                         _fingers[f][b].GetChild(0).parent = anchor;
 
-                    if (generateArmatureAnchors == AnchorGeneration.AsParents)
+                    if (generateArmatureAnchors == Anchors.AsParents)
                     {
                         anchor.parent = _fingers[f][b].parent;
                         _fingers[f][b].parent = anchor;
                     }
-                    else if (generateArmatureAnchors == AnchorGeneration.AsChildren)
+                    else if (generateArmatureAnchors == Anchors.AsChildren)
                     {
                         anchor.parent = _fingers[f][b];
 
@@ -327,30 +304,22 @@ public class AutomaticHandSetup : MonoBehaviour
     void SetupSlaveObjects()
     {
         // CustomHand > Objects > Slave
-        if (useOriginalArmatureAs != HandRepresentation.Slave)
-        {
-            slaveRootObject = BasicHelpers.InstantiateEmptyChild(objects);
-            slaveRootObject.name = "Slave." + handType.ToString();
+        slaveRootObject = BasicHelpers.InstantiateEmptyChild(objects);
+        slaveRootObject.name = "Slave." + handType.ToString();
 
-            // Move it to avoid overlay
-            slaveRootObject.transform.position += new Vector3(0.0f, 0.2f, 0.0f);
+        // Move it to avoid overlay
+        slaveRootObject.transform.position += new Vector3(0.0f, 0.2f, 0.0f);
 
-            // CustomHand > Objects > Slave > (content)
-            GameObject handRoot;
-            if (masterOffset)
-                handRoot = masterWristOffset;
-            else
-                handRoot = masterWrist;
-
-            slaveWrist = Instantiate(handRoot, slaveRootObject.transform.position, Quaternion.identity);
-            slaveWrist.transform.parent = slaveRootObject.transform;
-        }
+        // CustomHand > Objects > Slave > (content)
+        GameObject handRoot;
+        if (generateMasterOffset)
+            handRoot = masterWristOffset;
         else
-        {
-            slaveWrist = wrist.gameObject;
-        }
+            handRoot = masterWrist;
 
-        slaveWrist.transform.name = "Wrist.Slave." + handType.ToString();
+        slaveWrist = Instantiate(handRoot, slaveRootObject.transform.position, Quaternion.identity);
+        slaveWrist.transform.parent = slaveRootObject.transform;
+        slaveWrist.transform.name = "Wrist";
     }
 
     void SetupGhostObjects()
@@ -364,7 +333,7 @@ public class AutomaticHandSetup : MonoBehaviour
 
         // CustomHand > Objects > Ghost > (content)
         GameObject handRoot;
-        if (masterOffset)
+        if (generateMasterOffset)
             handRoot = masterWristOffset;
         else
             handRoot = masterWrist;
@@ -395,7 +364,7 @@ public class AutomaticHandSetup : MonoBehaviour
         masterHandModelObj.name = "Master." + handType.ToString();
         masterHandModel = masterHandModelObj.AddComponent<MasterHandModel>();
 
-        if (slaveHand)
+        if (generateSlave)
         {
             // CustomHand > [Modules] > ProxyHandModule > ProxyHandModel > Slave
             GameObject slaveHandModelObj = BasicHelpers.InstantiateEmptyChild(phModel.gameObject);
@@ -403,7 +372,7 @@ public class AutomaticHandSetup : MonoBehaviour
             slaveHandModel = slaveHandModelObj.AddComponent<SlaveHandModel>();
         }
 
-        if (ghostHand)
+        if (generateGhost)
         {
             // CustomHand > [Modules] > ProxyHandModule > ProxyHandModel > Ghost
             GameObject ghostHandModelObj = BasicHelpers.InstantiateEmptyChild(phModel.gameObject);
@@ -413,13 +382,13 @@ public class AutomaticHandSetup : MonoBehaviour
 
         // Make HandModels accessible from ProxyHandModel
         phModel.master = masterHandModel;
-        if (slaveHand) phModel.slave = slaveHandModel;
-        if (ghostHand) phModel.ghost = ghostHandModel;
+        if (generateSlave) phModel.slave = slaveHandModel;
+        if (generateGhost) phModel.ghost = ghostHandModel;
 
         // Make ProxyHandModel accessible from HandModel
         masterHandModel.proxyHand = phModel;
-        if (slaveHand) slaveHandModel.proxyHand = phModel;
-        if (ghostHand) ghostHandModel.proxyHand = phModel;
+        if (generateSlave) slaveHandModel.proxyHand = phModel;
+        if (generateGhost) ghostHandModel.proxyHand = phModel;
     }
 
     void SetupMasterHandModel(MasterHandModel handModel, Transform masterWrist, GameObject masterWristOffset)
@@ -497,7 +466,7 @@ public class AutomaticHandSetup : MonoBehaviour
                 */
                 masterBone.armatureBone = _fingers[f][b];
 
-                if (generateArmatureAnchors > AnchorGeneration.None && _anchors.Count >= f - 1 && _anchors[f].Length >= b - 1) masterBone.armatureAnchor = _anchors[f][b];
+                if (generateArmatureAnchors > Anchors.None && _anchors.Count >= f - 1 && _anchors[f].Length >= b - 1) masterBone.armatureAnchor = _anchors[f][b];
 
                 masterBone.initialArmatureBoneLocalRot = _localRots[f][b];
                 masterBone.relativeToOriginalArmatureLocal = Quaternion.Inverse(fingerTransforms[b].localRotation) * _localRots[f][b];
@@ -973,7 +942,7 @@ public class AutomaticHandSetup : MonoBehaviour
         }
 
         // Ray line (depend on PalmCenter)
-        if (!handModel.ray && rays)
+        if (!handModel.ray && generateRays)
         {
             GameObject ray = BasicHelpers.InstantiateEmptyChild(wristOffset.gameObject);
             ray.name = "Ray";
@@ -1081,30 +1050,6 @@ public class AutomaticHandSetup : MonoBehaviour
             return false;
         }
 
-        if (useOriginalArmatureAs == HandRepresentation.Ghost)
-        {
-            Debug.LogError("Use original armature as ghost is not supported!");
-            return false;
-        }
-
-        if (rays && (rayWidth == 0 || rayMat == null))
-        {
-            Debug.LogError("If ray generation is enabled, ray width has to be greater than 0 and rayMat cannot be null");
-            return false;
-        }
-
-        if (slaveHand && (palmMesh == null || skinPhysMat == null))
-        {
-            Debug.LogError("If slave hand generation is enabled, palm mesh and skin physic material cannot be null");
-            return false;
-        }
-
-        if (fingerLines && lineMat == null)
-        {
-            Debug.LogError("If finger line generation is enabled, line material cannot be null");
-            return false;
-        }
-
         return true;
     }
 
@@ -1148,7 +1093,7 @@ public class AutomaticHandSetup : MonoBehaviour
         palmObj.transform.position = meanPoint;
 
         MeshCollider palm = palmObj.AddComponent<MeshCollider>();
-        palm.sharedMesh = palmMesh;
+        palm.sharedMesh = defaultPalmMesh;
         palm.convex = true;
         palm.material = skinPhysMat;
 
@@ -1262,19 +1207,16 @@ public class AutomaticHandSetup : MonoBehaviour
         }
     }
 
-    void AddBoneGizmos(HandModel hand, Color color)
+    void AddLines(HandModel hand, Color color)
     {
         BoneLineDrawer bld = hand.wrist.transformRef.parent.gameObject.AddComponent<BoneLineDrawer>();
         bld.hand = hand;
         bld.color = color;
-    }
 
-    void AddLines(HandModel hand, Material mat)
-    {
         for (int f = 0; f < hand.fingers.Length; f++)
         {
             LineRenderer lr = hand.fingers[f].bones[0].transformRef.gameObject.AddComponent<LineRenderer>();
-            lr.material = mat;
+            lr.material = rayMat;
             lr.startWidth = fingerRadius;
             lr.endWidth = fingerRadius;
 
