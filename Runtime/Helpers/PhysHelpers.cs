@@ -497,26 +497,5 @@ namespace HPTK.Helpers
                 bone.colliderRef.enabled = enabled;
         }
 
-        public static IEnumerator DoAfterFixedUpdate(Action toDo)
-        {
-            yield return new WaitForFixedUpdate();
-
-            toDo.Invoke();
-        }
-
-        public static IEnumerator DoAfterUpdate(Action toDo)
-        {
-            yield return new WaitForEndOfFrame();
-
-            toDo.Invoke();
-        }
-
-        public static IEnumerator DoAfter(float seconds, Action toDo)
-        {
-            yield return new WaitForSeconds(seconds);
-
-            toDo.Invoke();
-        }
-
     }
 }

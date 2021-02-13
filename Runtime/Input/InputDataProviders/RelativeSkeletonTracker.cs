@@ -7,17 +7,34 @@ namespace HPTK.Input
 {
     public class RelativeSkeletonTracker : InputDataProvider
     {
+        [Header("References")]
         public Transform referenceHead;
         public Transform replicatedHead;
 
         public HandModel referenceHand;
 
+        [Header("Copy scale")]
+        public bool copyScale = true;
+        [Range(-1.5f, 1.5f)]
+        public float scaleOffset = 0.0f;
+
         Vector3 relPos;
         Quaternion relRot;
+
+        public override void InitData()
+        {
+            base.InitData();
+        }
 
         public override void UpdateData()
         {
             base.UpdateData();
+
+            if (bones.Length != referenceHand.allTransforms.Length)
+            {
+                Debug.LogError("Replicated hand has " + bones.Length + " bones and reference hand has " + referenceHand.allTransforms.Length + " transforms");
+                return;
+            }
 
             for (int i = 0; i < bones.Length; i++)
             {
@@ -31,7 +48,11 @@ namespace HPTK.Input
 
             confidence = 1.0f;
 
-            scale = referenceHand.extraScale;
+            if (copyScale)
+            {
+                scale = referenceHand.extraScale;
+                scale += scaleOffset;
+            }
 
             UpdateFingerPosesFromBones();
         }

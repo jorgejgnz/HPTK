@@ -186,7 +186,7 @@ namespace HPTK.Input
                 // Forearm
                 // ...
 
-                // Assuming that HandPose.fingers follows the order thumb, index, middle, ring, pinky (missing FingerModel.finger as HumanFinger)
+                // Assuming that HandPose.fingers follows the order thumb, index, middle, ring, pinky
 
                 if (!touchingGrip && pressingTrigger)
                 {

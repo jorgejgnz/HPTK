@@ -15,8 +15,6 @@ namespace HPTK.Controllers.Input
     {
         public InputModel model;
 
-        bool initialized = false;
-
         Vector3 wristPosition;
         Vector3 wristVelocityDirection;
         Quaternion wristDirectionChange;
@@ -45,6 +43,7 @@ namespace HPTK.Controllers.Input
 
         private void Awake()
         {
+            model.handler = this;
             viewModel = new InputViewModel(model);
         }
 
@@ -84,27 +83,10 @@ namespace HPTK.Controllers.Input
             };
 
             if (model.inputDataProvider)
-            {
-                model.inputDataProvider.InitData();
-                initialized = true;
-            }
+                // Force/Trigger set function from property
+                viewModel.inputDataProvider = model.inputDataProvider;
             else
-            {
-                Debug.LogError("InputModel.InputDataProvider is required!");
-            }
-
-            // Initialize recording arrays
-            model.boneRecords = new AbstractTsf[model.bonesToUpdate.Length][];
-            for (int i = 0; i < model.boneRecords.Length; i++)
-            {
-                model.boneRecords[i] = new AbstractTsf[model.configuration.windowSize];
-
-                for (int j = 0; j < model.boneRecords[i].Length; j++)
-                {
-                    // Initial state of records is the same as in IDP
-                    model.boneRecords[i][j] = new AbstractTsf(model.inputDataProvider.bones[i]);
-                }
-            }
+                Debug.LogWarning("InputModel.InputDataProvider is not assigned on Start");
 
             // Get weights for noise reduction (WMA)
             model.wmaWeights = GetLinearWeights(model.configuration.windowSize);
@@ -112,7 +94,7 @@ namespace HPTK.Controllers.Input
 
         void Update()
         {
-            if (!initialized)
+            if (!model.inputDataProvider)
                 return;
 
             if (!model.isActive)

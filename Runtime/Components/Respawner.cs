@@ -64,7 +64,7 @@ namespace HPTK.Components
             rb.transform.position = rbGorup.initialPosition;
             rb.transform.rotation = rbGorup.initialRotation;
 
-            StartCoroutine(PhysHelpers.DoAfterFixedUpdate(() =>
+            StartCoroutine(AsyncHelpers.DoAfterFixedUpdate(() =>
             {
                 for (int i = 0; i < rbGorup.rigidbodies.Length; i++)
                 {

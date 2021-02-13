@@ -1,5 +1,6 @@
 ﻿using HPTK.Input;
 using HPTK.Settings;
+using HPTK.Views.Handlers.Input;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ namespace HPTK.Models.Avatar
 {
     public class InputModel : HPTKModel
     {
+        [HideInInspector]
+        public InputHandler handler;
+
         public ProxyHandModel proxyHand;
 
         public InputConfiguration configuration;
@@ -87,6 +91,7 @@ namespace HPTK.Models.Avatar
         public bool handIsTracked = false;
         public bool fingersAreTracked = false;
         public bool isPredicting = false;
+        public bool initialized = false;
 
         // Noise reduction
         public float[] wmaWeights; // Assuming that window size won't change

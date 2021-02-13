@@ -21,11 +21,20 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 # Supported versions
 - Unity 2019.4.4f1 LTS, 2019.3.15f1
 
-# Supported target devices
-- Oculus Quest - Android
+# Supported input
+## Hand tracking
+* [Oculus Quest 1/2 - Android](https://github.com/jorgejgnz/HPTK-Sample/tree/master/Assets/HPTK-Sample/Scripts/Input)
+* Hololens 2 - UWP
+
+## Controllers
+* [UnityXR-compatible controllers](https://docs.unity3d.com/Manual/xr_input.html) with:
+     * Index trigger
+	 * Grip trigger
+	 * Primary 2D axis
 
 # Supported render pipelines
 - Universal Render Pipeline (URP)
+- Standard RP
 
 # Getting started with HPTK (Oculus Quest)
 
@@ -57,7 +66,7 @@ The [Wiki](https://github.com/jorgejgnz/HPTK/wiki) also includes more details ab
 
 **Michael Stevenson** - [GitHub](https://github.com/mstevenson)
 
-Kiran Nasim and Young J. Kim. 2016. [Physics-based Interactive Virtual Grasping](https://dl.acm.org/doi/10.17210/hcik.2016.01.114). In Proceedings of HCI Korea (HCIK '16). Hanbit Media, Inc., Seoul, KOR, 114–120. DOI:https://doi.org/10.17210/hcik.2016.01.114
+Nasim, K, Kim, YJ. Physics-based assistive grasping for robust object manipulation in virtual reality. Comput Anim Virtual Worlds. 2018; 29:e1820. [https://doi.org/10.1002/cav.1820](https://doi.org/10.1002/cav.1820)
 
 Linn, Allison. Talking with your hands: How Microsoft researchers are moving beyond keyboard and mouse. The AI Blog. Microsoft. 2016
 [https://blogs.microsoft.com/](https://blogs.microsoft.com/ai/talking-hands-microsoft-researchers-moving-beyond-keyboard-mouse/)
