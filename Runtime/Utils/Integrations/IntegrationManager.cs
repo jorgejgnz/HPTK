@@ -12,7 +12,7 @@ namespace HandPhysicsToolkit.Utils
 #if UNITY_EDITOR
     public class IntegrationManager : EditorWindow
     {
-        static string integrationConfPath = "Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/integrations.asset";
+        static string integrationConfPath = "Packages/com.jorgejgnz.hptk/Samples/Integrations/Integrations.asset";
 
         static List<Integration> integrations = new List<Integration>();
 
@@ -21,6 +21,7 @@ namespace HandPhysicsToolkit.Utils
         {
             if (integrations.Count == 0)
             {
+                Debug.Log(integrationConfPath);
                 IntegrationConfiguration intConf = (IntegrationConfiguration)AssetDatabase.LoadAssetAtPath(integrationConfPath, typeof(IntegrationConfiguration));
                 integrations = intConf.integrations;
             }
