@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7041632016717877445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7041632016717877444}
+  - component: {fileID: 7041632016717877447}
+  m_Layer: 0
+  m_Name: PoseSkeletonTracker.R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7041632016717877444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041632016717877445}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.1, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+--- !u!114 &7041632016717877447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041632016717877445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19aed20fdef7e14784a0e9223f7c6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  side: 2
+  bones: []
+  wrist:
+    name: 
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    space: 0
+    localScale: {x: 0, y: 0, z: 0}
+  forearm:
+    name: 
+    position: {x: 0, y: 0, z: 0}
+    rotation: {x: 0, y: 0, z: 0, w: 0}
+    space: 0
+    localScale: {x: 0, y: 0, z: 0}
+  thumb:
+    finger: 1
+    bones: []
+  index:
+    finger: 2
+    bones: []
+  middle:
+    finger: 3
+    bones: []
+  ring:
+    finger: 4
+    bones: []
+  pinky:
+    finger: 5
+    bones: []
+  confidence: 0
+  scale: 1
+  log: 
+  startPose: {fileID: 11400000, guid: 157cdc73a1754ab4d8e996e021c95bd6, type: 2}
+  endPose: {fileID: 11400000, guid: a90e0232c0f05f146acb3c66638b8c36, type: 2}
+  animationSpeed: 0.5
+  poseLerp: 0

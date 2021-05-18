@@ -1,72 +1,60 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using HPTK.Models.Avatar;
-using HPTK.Input;
-using HPTK.Helpers;
+using HandPhysicsToolkit.Modules.Avatar;
+using HandPhysicsToolkit.Input;
+using HandPhysicsToolkit.Helpers;
 
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
-namespace HPTK.Utils
+namespace HandPhysicsToolkit.Utils
 {
+    [ExecuteInEditMode]
     public class PoseRecorder : MonoBehaviour
     {
         public HandModel hand;
-        public HPTK.Input.HandPose pose;
-        public string alias;
+        public string representation = "master";
 
-        [Header("On apply")]
+        [Header("Apply")]
         public bool applyInverted = false;
         public bool applyPos = false;
         public bool applyRot = true;
         public bool applyScale = false;
 
+        [Header("Apply on fingers")]
+        public bool thumb = true;
+        public bool index = true;
+        public bool middle = true;
+        public bool ring = true;
+        public bool pinky = true;
+
+        [Header("Pose to Apply or Overwrite")]
+        public HandPoseAsset pose;
+
+        [Header("Overwrite")]
+        public string alias;
+
+        bool dirty = false;
+
+        private void Update()
+        {
+#if UNITY_EDITOR
+            if (!Application.isPlaying && dirty)
+            {
+                AssetDatabase.SaveAssets();
+                dirty = false;
+            }
+#endif
+        }
+
         public void Save()
         {
 #if UNITY_EDITOR
             EditorUtility.SetDirty(pose);
+            dirty = true;
 #endif
-
-            // Check valid hand model initialization
-            if (hand.fingers == null || hand.fingers.Length == 0)
-            {
-                Debug.LogWarning("HandModel was not initialized. Initializing...");
-                AvatarHelpers.HandModelInit(hand);
-            }
-
-            // Save abstractTsfs
-            List<FingerPose> fingers = new List<FingerPose>();
-
-            // Poses always have 5 fingers in the same order for convention between hand models: thumb, index, middle, ring, pinky
-
-            if (hand.thumb)
-                fingers.Add(SaveFinger(hand.thumb));
-            else
-                fingers.Add(SaveFinger());
-
-            if (hand.index)
-                fingers.Add(SaveFinger(hand.index));
-            else
-                fingers.Add(SaveFinger());
-
-            if (hand.middle)
-                fingers.Add(SaveFinger(hand.middle));
-            else
-                fingers.Add(SaveFinger());
-
-            if (hand.ring)
-                fingers.Add(SaveFinger(hand.ring));
-            else
-                fingers.Add(SaveFinger());
-
-            if (hand.pinky)
-                fingers.Add(SaveFinger(hand.pinky));
-            else
-                fingers.Add(SaveFinger());
-
             pose.alias = alias;
-            pose.fingers = fingers.ToArray();
 
             pose.wrist = new AbstractTsf(
                         hand.wrist.transformRef.localPosition,
@@ -75,54 +63,66 @@ namespace HPTK.Utils
                         hand.wrist.transformRef.localScale,
                         hand.wrist.transformRef.name);
 
-            if (hand.forearm)
-            {
-                pose.forearm = new AbstractTsf(
-                            hand.forearm.transformRef.localPosition,
-                            hand.forearm.transformRef.localRotation,
-                            Space.Self,
-                            hand.forearm.transformRef.localScale,
-                            hand.forearm.transformRef.name);
-            }
-#if UNITY_EDITOR
-            AssetDatabase.SaveAssets();
-#endif
+            List<FingerPose> fingers = new List<FingerPose>();
+
+            pose.thumb = SaveFinger(hand.thumb);
+            fingers.Add(pose.thumb);
+
+            pose.index = SaveFinger(hand.index);
+            fingers.Add(pose.index);
+
+            pose.middle = SaveFinger(hand.middle);
+            fingers.Add(pose.middle);
+
+            pose.ring = SaveFinger(hand.ring);
+            fingers.Add(pose.ring);
+
+            pose.pinky = SaveFinger(hand.pinky);
+            fingers.Add(pose.pinky);
+
+            pose.fingers = fingers;
         }
 
         public void Apply()
         {
-            if (hand.fingers == null || hand.fingers.Length == 0)
-            {
-                AvatarHelpers.HandModelInit(hand);
-            }
+            if (thumb) ApplyFinger(pose.thumb, hand.thumb);
+            if (index) ApplyFinger(pose.index, hand.index);
+            if (middle) ApplyFinger(pose.middle, hand.middle);
+            if (ring) ApplyFinger(pose.ring, hand.ring);
+            if (pinky) ApplyFinger(pose.pinky, hand.pinky);
+        }
 
-            pose.ApplyPose(hand, applyPos, applyRot, applyScale, applyInverted);
+        void ApplyFinger(FingerPose pose, FingerModel finger)
+        {
+            if (finger) PoseHelpers.ApplyFingerPose(pose, finger, representation, applyPos, applyRot, applyScale, applyInverted);
         }
 
         FingerPose SaveFinger(FingerModel fingerModel)
         {
+            if (!fingerModel) return SaveFinger();
+
             List<AbstractTsf> bones = new List<AbstractTsf>();
 
-            for (int b = 0; b < fingerModel.bones.Length; b++)
+            for (int b = 0; b < fingerModel.bonesFromRootToTip.Count; b++)
             {
                 bones.Add(new AbstractTsf(
-                    fingerModel.bones[b].transformRef.localPosition,
-                    fingerModel.bones[b].transformRef.localRotation,
+                    fingerModel.bonesFromRootToTip[b].master.localPosition,
+                    fingerModel.bonesFromRootToTip[b].master.localRotation,
                     Space.Self,
-                    fingerModel.bones[b].transformRef.localScale,
-                    fingerModel.bones[b].transformRef.name));
+                    fingerModel.bonesFromRootToTip[b].master.transformRef.localScale,
+                    fingerModel.bonesFromRootToTip[b].master.transformRef.name));
             }
 
-            FingerPose fingerPose = new FingerPose(fingerModel.name);
-            fingerPose.bones = bones.ToArray();
+            FingerPose fingerPose = new FingerPose(fingerModel.finger);
+            fingerPose.bones = bones;
 
             return fingerPose;
         }
 
         FingerPose SaveFinger()
         {
-            FingerPose fingerPose = new FingerPose("NULL");
-            fingerPose.bones = new AbstractTsf[0];
+            FingerPose fingerPose = new FingerPose();
+            fingerPose.bones = new List<AbstractTsf>();
 
             return fingerPose;
         }
@@ -138,13 +138,14 @@ namespace HPTK.Utils
 
             PoseRecorder myScript = (PoseRecorder)target;
 
-            if (GUILayout.Button("OVERWRITE"))
-            {
-                myScript.Save();
-            }
             if (GUILayout.Button("APPLY"))
             {
                 myScript.Apply();
+            }
+
+            if (GUILayout.Button("OVERWRITE (!)"))
+            {
+                myScript.Save();
             }
         }
     }

@@ -1,3 +1,17 @@
-﻿{
-	"name": "jorgejgnz.hptk.runtime"
+{
+    "name": "jorgejgnz.hptk.runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:334265d0b9fbea542b9a1e350be02314",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

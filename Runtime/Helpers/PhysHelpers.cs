@@ -1,74 +1,12 @@
-﻿using HPTK.Components;
-using HPTK.Models.Avatar;
-using HPTK.Settings;
+﻿using HandPhysicsToolkit.Modules.Part.Puppet;
+using HandPhysicsToolkit.Physics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HPTK.Helpers
+namespace HandPhysicsToolkit.Helpers
 {
-    [Serializable]
-    public class CustomJointDrive
-    {
-        public static CustomJointDrive zero = new CustomJointDrive();
-
-        public float spring;
-        public float damper;
-        public float maxForce;
-
-        public static CustomJointDrive ScaledCopy(CustomJointDrive normalizedDrive, float scale)
-        {
-            CustomJointDrive drive = new CustomJointDrive();
-            drive.spring = normalizedDrive.spring; // * scale;
-            drive.damper = normalizedDrive.damper; // * scale;
-            drive.maxForce = normalizedDrive.maxForce * scale;
-
-            return drive;
-        }
-
-        public JointDrive toJointDrive()
-        {
-            JointDrive jDrive = new JointDrive();
-            jDrive.positionSpring = spring;
-            jDrive.positionDamper = damper;
-            jDrive.maximumForce = maxForce;
-
-            return jDrive;
-        }
-
-        public SoftJointLimitSpring toSoftJointLimitSpring()
-        {
-            SoftJointLimitSpring lSpring = new SoftJointLimitSpring();
-            lSpring.spring = spring;
-            lSpring.damper = damper;
-
-            return lSpring;
-        }
-
-        public CustomJointDrive()
-        {
-            spring = 0.0f;
-            damper = 0.0f;
-            maxForce = 0.0f;
-        }
-
-        public CustomJointDrive(float spring, float damper, float maxForce)
-        {
-            this.spring = spring;
-            this.damper = damper;
-            this.maxForce = maxForce;
-        }
-
-        public CustomJointDrive(CustomJointDrive drive)
-        {
-            this.spring = drive.spring;
-            this.damper = drive.damper;
-            this.maxForce = drive.maxForce;
-        }
-
-    }
-
     public static class PhysHelpers
     {
         public static Vector3 GetDesiredWorldPos(Transform slave, Transform master, Space space)
@@ -113,134 +51,6 @@ namespace HPTK.Helpers
             return true;
         }
 
-        public static void SetSlaveBoneConfiguration(ConfigurableJoint joint, SlaveBoneConfiguration conf)
-        {
-            Rigidbody rb = joint.GetComponent<Rigidbody>();
-            rb.mass = conf.rigidbodyMass;
-            rb.drag = conf.rigidbodyDrag;
-            rb.angularDrag = conf.rigidbodyAngularDrag;
-            rb.useGravity = conf.useGravity;
-
-            if (conf.followsRotation)
-            {
-                joint.angularXDrive = conf.rotationDrive.toJointDrive();
-                joint.angularYZDrive = conf.rotationDrive.toJointDrive();
-                joint.slerpDrive = conf.rotationDrive.toJointDrive();
-            }
-            else
-            {
-                joint.angularXDrive = CustomJointDrive.zero.toJointDrive();
-                joint.angularYZDrive = CustomJointDrive.zero.toJointDrive();
-                joint.slerpDrive = CustomJointDrive.zero.toJointDrive();
-            }
-
-            if (conf.useTargetPos)
-            {
-                joint.xDrive = conf.positionDrive.toJointDrive();
-                joint.yDrive = conf.positionDrive.toJointDrive();
-                joint.zDrive = conf.positionDrive.toJointDrive();
-            }
-            else
-            {
-                joint.xDrive = CustomJointDrive.zero.toJointDrive();
-                joint.yDrive = CustomJointDrive.zero.toJointDrive();
-                joint.zDrive = CustomJointDrive.zero.toJointDrive();
-            }
-
-            joint.massScale = conf.jointMassScale;
-            joint.connectedMassScale = conf.jointConnectedMassScale;
-        }
-
-        public static void UpdateBoneStrength(SlaveBoneModel bone, JointDrive minJointDrive, JointDrive maxJointDrive, float strength)
-        {
-            JointDrive updatedJointDrive = new JointDrive();
-            updatedJointDrive.positionSpring = Mathf.Lerp(minJointDrive.positionSpring, maxJointDrive.positionSpring, strength);
-            updatedJointDrive.positionDamper = Mathf.Lerp(minJointDrive.positionDamper, maxJointDrive.positionDamper, strength);
-            updatedJointDrive.maximumForce = Mathf.Lerp(minJointDrive.maximumForce, maxJointDrive.maximumForce, strength);
-
-            bone.jointRef.angularXDrive = updatedJointDrive;
-            bone.jointRef.angularYZDrive = updatedJointDrive;
-            bone.jointRef.slerpDrive = updatedJointDrive;
-        }
-
-        public static bool ToggleLockJoints(SlaveBoneModel[] bones, bool toggleValue)
-        {
-            toggleValue = !toggleValue;
-
-            for (int i = 1; i < bones.Length; i++)
-            {
-                // Wrist, forearm and pinky0 are ignored
-                if (!bones[i].jointRef || bones[i].jointRef.configuredInWorldSpace)
-                    continue;
-
-                if (toggleValue)
-                {
-                    bones[i].jointRef.xMotion = ConfigurableJointMotion.Locked;
-                    bones[i].jointRef.yMotion = ConfigurableJointMotion.Locked;
-                    bones[i].jointRef.zMotion = ConfigurableJointMotion.Locked;
-                }
-                else
-                {
-                    bones[i].jointRef.xMotion = ConfigurableJointMotion.Free;
-                    bones[i].jointRef.yMotion = ConfigurableJointMotion.Free;
-                    bones[i].jointRef.zMotion = ConfigurableJointMotion.Free;
-                }
-            }
-
-            return toggleValue;
-        }
-
-        public static ConfigurableJoint CreateSnapJoint(Rigidbody body, Rigidbody connectedBody, Vector3 pointPosition, Quaternion pointRotation, Vector3 destinationPosition, Quaternion destinationRotation, bool matchRotation, bool enableCollisions, float massScale)
-        {
-            // Initial configuration
-            ConfigurableJoint joint = body.gameObject.AddComponent<ConfigurableJoint>();
-            joint.connectedBody = connectedBody;
-            joint.autoConfigureConnectedAnchor = false;
-            joint.configuredInWorldSpace = false;
-
-            joint.anchor = joint.transform.InverseTransformPoint(pointPosition);
-            joint.connectedAnchor = joint.connectedBody.transform.InverseTransformPoint(destinationPosition);
-
-            joint.massScale = massScale;
-
-            joint.enableCollision = enableCollisions;
-
-            // Linear limits
-            joint.xMotion = ConfigurableJointMotion.Free;
-            joint.yMotion = ConfigurableJointMotion.Free;
-            joint.zMotion = ConfigurableJointMotion.Free;
-
-            joint.targetPosition = Vector3.zero;
-
-            // Target rotation
-            if (matchRotation)
-            {
-                Quaternion initialRotation = joint.transform.rotation;
-
-                Quaternion worldToJointSpace = ConfigurableJointExtensions.GetWorldToJointSpace(joint);
-                Quaternion jointSpaceToWorld = Quaternion.Inverse(worldToJointSpace);
-
-                Quaternion desiredWorldRot = (destinationRotation * Quaternion.Inverse(pointRotation)) * joint.transform.rotation;
-                Quaternion resultRotation = jointSpaceToWorld * Quaternion.Inverse(desiredWorldRot) * initialRotation;
-
-                // Transform back into joint space
-                resultRotation *= worldToJointSpace;
-
-                // Set target rotation to our newly calculated rotation
-                joint.targetRotation = resultRotation;
-
-                JointDrive rotDrive = new JointDrive();
-                rotDrive.positionDamper = 0.0f;
-                rotDrive.maximumForce = 0.0f;
-                rotDrive.positionSpring = 0.0f;
-
-                joint.rotationDriveMode = RotationDriveMode.Slerp;
-                joint.slerpDrive = rotDrive;
-            }
-
-            return joint;
-        }
-
         public static void FreeJoint(ConfigurableJoint joint)
         {
             joint.xMotion = ConfigurableJointMotion.Free;
@@ -279,135 +89,18 @@ namespace HPTK.Helpers
             {
                 for (int j = 0; j < rbBcolliders.Length; j++)
                 {
-                    Physics.IgnoreCollision(rbAcolliders[i], rbBcolliders[j], ignore);
+                    UnityEngine.Physics.IgnoreCollision(rbAcolliders[i], rbBcolliders[j], ignore);
                 }
             }
         }
 
-        public static void SetCollisionDetectionForBones(SlaveHandModel hand, bool detectCollisions)
+        public static void GetColliders(Rigidbody rb, List<Collider> _result)
         {
-            SlaveBoneModel slaveBone;
-            for (int i = 0; i < hand.bones.Length; i++)
-            {
-                if (hand.bones[i] is SlaveBoneModel)
-                {
-                    slaveBone = hand.bones[i] as SlaveBoneModel;
-                    if (slaveBone.rigidbodyRef != null)
-                    {
-                        slaveBone.rigidbodyRef.detectCollisions = detectCollisions;
-                    }
-                }
-            }
+            rb.GetComponents<Collider>().ToList(_result);
+
+            _result.AddRange(rb.GetComponentsInChildren<Collider>());
         }
 
-        public static void IgnoreEveryBoneCollisions(Rigidbody rb, SlaveHandModel hand, bool ignore, bool includeRbGroup)
-        {
-            SlaveBoneModel bone;
-            List<Collider> rbColliders = new List<Collider>(rb.GetComponentsInChildren<Collider>());
-
-            RigidbodyGroup rbGroup = rb.GetComponent<RigidbodyGroup>();
-            if (rbGroup && includeRbGroup)
-            {
-                for (int i = 0; i < rbGroup.rigidbodies.Length; i++)
-                {
-                    rbColliders.AddRange(GetColliders(rbGroup.rigidbodies[i]));
-                }
-            }
-
-            for (int i = 0; i < rbColliders.Count; i++)
-            {
-                for (int j = 0; j < hand.bones.Length; j++)
-                {
-                    if (hand.bones[j] is SlaveBoneModel) {
-
-                        bone = hand.bones[j] as SlaveBoneModel;
-
-                        if (bone.colliderRef != null)
-                        {
-                            Physics.IgnoreCollision(rbColliders[i], bone.colliderRef, ignore);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void IgnoreBoneCollisions(Rigidbody rb, SlaveBoneModel bone, bool ignore, bool includeRbGroup)
-        {
-            if (!bone.colliderRef)
-                return;
-
-            List<Collider> rbColliders = new List<Collider>(rb.GetComponentsInChildren<Collider>());
-
-            RigidbodyGroup rbGroup = rb.GetComponent<RigidbodyGroup>();
-            if (rbGroup && includeRbGroup)
-            {
-                for (int i = 0; i < rbGroup.rigidbodies.Length; i++)
-                {
-                    rbColliders.AddRange(GetColliders(rbGroup.rigidbodies[i]));
-                }
-            }
-
-            for (int i = 0; i < rbColliders.Count; i++)
-            {
-                Physics.IgnoreCollision(rbColliders[i], bone.colliderRef, ignore);
-            }
-        }
-
-        public static Collider[] GetColliders(Rigidbody rb)
-        {
-            List<Collider> colliders = new List<Collider>(rb.GetComponents<Collider>());
-
-            colliders.AddRange(rb.GetComponentsInChildren<Collider>());
-
-            return colliders.ToArray();
-        }
-
-        public static void IgnoreFingerTipsCollisions(Rigidbody rb, SlaveHandModel hand, bool ignore)
-        {
-            SlaveBoneModel bone;
-            Collider[] rbColliders = rb.GetComponentsInChildren<Collider>();
-            for (int i = 0; i < rbColliders.Length; i++)
-            {
-                for (int f = 0; f < hand.fingers.Length; f++)
-                {
-                    if (hand.fingers[f].distal is SlaveBoneModel)
-                    {
-                        bone = hand.fingers[f].distal as SlaveBoneModel;
-                        if (bone.colliderRef != null)
-                        {
-                            Physics.IgnoreCollision(rbColliders[i], bone.colliderRef, ignore);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void JointLookAt(ConfigurableJoint joint, Transform pivot, Vector3 destinationWorldPos, Quaternion initialConnectedBodyLocalRotation)
-        {
-            Rigidbody rb = joint.GetComponent<Rigidbody>();
-
-            Quaternion desiredWorldRot = Quaternion.LookRotation(destinationWorldPos - pivot.position);
-            Quaternion deltaPivotRot = Quaternion.Inverse(pivot.rotation) * desiredWorldRot;
-            Quaternion rbWorldRot = rb.rotation * deltaPivotRot;
-
-            if (joint.configuredInWorldSpace)
-            {
-                Quaternion worldToJointSpace = ConfigurableJointExtensions.GetWorldToJointSpace(joint);
-                Quaternion jointSpaceToWorld = Quaternion.Inverse(worldToJointSpace);
-                Quaternion resultRotation = ConfigurableJointExtensions.GetWorldResultRotation(joint, rbWorldRot, initialConnectedBodyLocalRotation, Space.World, jointSpaceToWorld);
-
-                // Transform back into joint space
-                resultRotation *= worldToJointSpace;
-
-                // Set target rotation to our newly calculated rotation
-                joint.targetRotation = resultRotation;   
-            }
-            else
-            {
-                Quaternion connectedBodyDesiredLocalRot = Quaternion.Inverse(joint.connectedBody.rotation) * rbWorldRot;
-                ConfigurableJointExtensions.SetTargetRotationLocal(joint, connectedBodyDesiredLocalRot, initialConnectedBodyLocalRotation);
-            }
-        }
 
         public static IEnumerator SmoothJoint(ConfigurableJoint joint, JointDrive startMotionDrive, JointDrive endMotionDrive, JointDrive startSlerpDrive, JointDrive endSlerpDrive, float duration)
         {
@@ -462,39 +155,53 @@ namespace HPTK.Helpers
             }
         }
 
-        public static void SetHandPhysics(ProxyHandModel phModel, bool enabled)
+        public static void ClosestHitFromPoint(ref RaycastHit closestHit, RaycastHit[] hits, Ray ray, float rayLength, Rigidbody rb, bool collideWithOtherRbs, bool collideWithTriggers, int layerMask)
         {
-            SlaveBoneModel wristBone = phModel.slave.wrist as SlaveBoneModel;
-            SetBonePhysics(wristBone, enabled);
+            hits = UnityEngine.Physics.RaycastAll(ray, rayLength, layerMask);
 
-            for (int f = 0; f < phModel.slave.fingers.Length; f++)
+            float minDistance = Mathf.Infinity;
+            float distance;
+
+            for (int h = 0; h < hits.Length; h++)
             {
-                for (int b = 0; b < phModel.slave.fingers[f].bones.Length; b++)
+                if (rb == null) continue;
+
+                if (!collideWithOtherRbs && hits[h].rigidbody != rb) continue;
+
+                if (!collideWithTriggers && hits[h].collider.isTrigger) continue;
+
+                distance = Vector3.Distance(ray.origin, hits[h].point);
+                if (distance < minDistance)
                 {
-                    SlaveBoneModel slaveBone = phModel.slave.fingers[f].bones[b] as SlaveBoneModel;
-                    SetBonePhysics(slaveBone, enabled);
+                    minDistance = distance;
+                    closestHit = hits[h];
                 }
             }
         }
 
-        public static void SetBonePhysics(SlaveBoneModel bone, bool enabled)
+        public static void ClosestHitFromLine(ref RaycastHit closestHit, ref RaycastHit tempHit, RaycastHit[] hits, Vector3 rayDir, float rayLength, Vector3 lineStartWorldPos, Vector3 lineEndWorldPos, int resolution, Rigidbody rb, bool ignoreOtherRbs, bool ignoreTriggers, int layerMask)
         {
-            if (bone.rigidbodyRef)
-            {
-                if (enabled)
-                {
-                    bone.rigidbodyRef.isKinematic = false;
-                    bone.rigidbodyRef.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-                }
-                else
-                {
-                    bone.rigidbodyRef.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                    bone.rigidbodyRef.isKinematic = true;
-                }
-            }         
+            Vector3 slice = (lineEndWorldPos - lineStartWorldPos) / resolution;
 
-            if (bone.colliderRef)
-                bone.colliderRef.enabled = enabled;
+            float minDistance = Mathf.Infinity;
+            float tempDistance;
+
+            Vector3 rayOrigin;
+            Ray ray;
+            for (int i = 1; i < resolution; i++)
+            {
+                rayOrigin = lineStartWorldPos + slice * i;
+                ray = new Ray(rayOrigin, rayDir);
+                ClosestHitFromPoint(ref tempHit, hits, ray, rayLength, rb, ignoreOtherRbs, ignoreTriggers, layerMask);
+
+                tempDistance = Vector3.Distance(rayOrigin, tempHit.point);
+
+                if (tempDistance < minDistance)
+                {
+                    minDistance = tempDistance;
+                    closestHit = tempHit;
+                }
+            }
         }
 
     }

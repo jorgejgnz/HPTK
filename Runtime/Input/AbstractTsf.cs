@@ -1,10 +1,112 @@
-﻿using System;
+﻿using HandPhysicsToolkit.Modules.Avatar;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HPTK.Input
+namespace HandPhysicsToolkit.Input
 {
+    [Serializable]
+    public struct AbstractTsfStruct
+    {
+        public string name;
+
+        public Vector3 position;
+        public Quaternion rotation;
+        public Space space;
+
+        public Vector3 localScale;
+
+        public AbstractTsfStruct(Space space, string name)
+        {
+            this.name = name;
+            this.space = space;
+            position = Vector3.zero;
+            rotation = Quaternion.identity;
+            localScale = Vector3.one;
+        }
+
+        public AbstractTsfStruct(Transform tsf, Space space, string name)
+        {
+            this.name = name;
+
+            this.space = space;
+
+            if (space == Space.Self)
+            {
+                this.position = tsf.localPosition;
+                this.rotation = tsf.localRotation;
+            }
+            else
+            {
+                this.position = tsf.position;
+                this.rotation = tsf.rotation;
+
+            }
+
+            this.localScale = tsf.localScale;
+            
+        }
+
+        public AbstractTsfStruct(AbstractTsf abstractTsf)
+        {
+            this.name = abstractTsf.name;
+            this.position = abstractTsf.position;
+            this.rotation = abstractTsf.rotation;
+            this.space = abstractTsf.space;
+            this.localScale = abstractTsf.localScale;
+        }
+
+        public void ApplyToTransformRelativeToOther(Transform moveThis, Transform referenceTsf, bool applyPos)
+        {
+            if (space == Space.Self)
+            {
+                if (applyPos) moveThis.position = referenceTsf.TransformPoint(position);
+                moveThis.rotation = referenceTsf.rotation * rotation;
+            }
+            else
+            {
+                if (applyPos) moveThis.position = referenceTsf.position + position;
+                moveThis.rotation = referenceTsf.rotation * rotation;
+            }
+            
+            moveThis.localScale = localScale;
+        }
+
+        public void ApplyToTransform(Transform receiverTsf, bool applyPos)
+        {
+            if (space == Space.World)
+            {
+                if (applyPos) receiverTsf.position = position;
+                receiverTsf.rotation = rotation;
+            }
+            else
+            {
+                if (applyPos) receiverTsf.localPosition = position;
+                receiverTsf.localRotation = rotation;
+            }
+
+            receiverTsf.localScale = localScale;
+        }
+
+        public void ApplyToBone(BoneView bone, string reprKey, bool applyPos)
+        {
+            if (!bone) return;
+
+            ApplyToPoint(bone.point, reprKey, applyPos);
+        }
+
+        public void ApplyToPoint(PointView point, string reprKey, bool applyPos)
+        {
+            if (!point) return;
+
+            if (point.reprs.ContainsKey(reprKey) && point.reprs[reprKey].transformRef)
+            {
+                ApplyToTransform(point.reprs[reprKey].transformRef, applyPos);
+            }
+        }
+    }
+
     [Serializable]
     public class AbstractTsf
     {
@@ -71,20 +173,20 @@ namespace HPTK.Input
             to.localScale = from.localScale;
         }
 
-        public static void ApplyTransform(AbstractTsf bonePose, Transform receiverTsf)
+        public void ApplyToTransform(Transform receiverTsf)
         {
-            if (bonePose.space == Space.World)
+            if (space == Space.World)
             {
-                receiverTsf.position = bonePose.position;
-                receiverTsf.rotation = bonePose.rotation;
+                receiverTsf.position = position;
+                receiverTsf.rotation = rotation;
             }
             else
             {
-                receiverTsf.localPosition = bonePose.position;
-                receiverTsf.localRotation = bonePose.rotation;
+                receiverTsf.localPosition = position;
+                receiverTsf.localRotation = rotation;
             }
 
-            receiverTsf.localScale = bonePose.localScale;
+            receiverTsf.localScale = localScale;
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using HPTK.Helpers;
-using HPTK.Settings;
+﻿using HandPhysicsToolkit.Helpers;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;
 
-namespace HPTK.Input
+namespace HandPhysicsToolkit.Input
 {
     [Serializable]
     public class DeviceConfiguration
@@ -21,14 +20,10 @@ namespace HPTK.Input
 
     public class UnityXRControllerTracker : InputDataProvider
     {
-        [Header("Unity XR")]
-        public Side side = Side.Left;
-        public Transform playspace;
-
         [Header("Gesture poses")]
-        public HandPose openHand;
-        public HandPose pinch;
-        public HandPose fist;
+        public HandPoseAsset openHand;
+        public HandPoseAsset pinch;
+        public HandPoseAsset fist;
 
         [Header("Control")]
         public bool useButtonTouch = true;
@@ -97,7 +92,7 @@ namespace HPTK.Input
                 return;
             }
 
-            if (openHand.fingers.Length != 5 || pinch.fingers.Length != 5 || fist.fingers.Length != 5)
+            if (openHand.fingers.Count != 5 || pinch.fingers.Count != 5 || fist.fingers.Count != 5)
             {
                 log = Time.time.ToString("F2") + " Some poses don't have 5 fingers! Interrupting update";
                 Debug.LogError(log);
@@ -169,12 +164,14 @@ namespace HPTK.Input
 
             if (updatedFeatureValues)
             {
+                Transform trackingSpace = HPTK.core.trackingSpace;
+
                 //Wrist
-                if (playspace)
+                if (trackingSpace)
                 {
                     bones[0].space = Space.World;
-                    bones[0].position = playspace.TransformPoint(position);
-                    bones[0].rotation = playspace.rotation * rotation;
+                    bones[0].position = trackingSpace.TransformPoint(position);
+                    bones[0].rotation = trackingSpace.rotation * rotation;
                 }
                 else
                 {
@@ -190,30 +187,30 @@ namespace HPTK.Input
 
                 if (!touchingGrip && pressingTrigger)
                 {
-                    thumb.bones = LerpFingerPose(openHand.fingers[0], pinch.fingers[0], 1.0f);
+                    thumb = PoseHelpers.LerpFingerPose(openHand.thumb, pinch.thumb, 1.0f);
 
-                    index.bones = LerpFingerPose(openHand.fingers[1], pinch.fingers[1], triggerLerp);
+                    index = PoseHelpers.LerpFingerPose(openHand.index, pinch.index, triggerLerp);
 
-                    middle.bones = LerpFingerPose(openHand.fingers[2], pinch.fingers[2], 1.0f);
-                    ring.bones = LerpFingerPose(openHand.fingers[3], pinch.fingers[3], 1.0f);
-                    pinky.bones = LerpFingerPose(openHand.fingers[4], pinch.fingers[4], 1.0f);
+                    middle = PoseHelpers.LerpFingerPose(openHand.middle, pinch.middle, 1.0f);
+                    ring = PoseHelpers.LerpFingerPose(openHand.ring, pinch.ring, 1.0f);
+                    pinky = PoseHelpers.LerpFingerPose(openHand.pinky, pinch.pinky, 1.0f);
                 }
                 else
                 {
                     if (touchingThumb)
                     {
-                        thumb.bones = LerpFingerPose(openHand.fingers[0], fist.fingers[0], gripLerp);
+                        thumb = PoseHelpers.LerpFingerPose(openHand.thumb, fist.thumb, gripLerp);
                     }
                     else
                     {
-                        thumb.bones = LerpFingerPose(openHand.fingers[0], fist.fingers[0], 0.0f);
+                        thumb = PoseHelpers.LerpFingerPose(openHand.thumb, fist.thumb, 0.0f);
                     }
 
-                    index.bones = LerpFingerPose(openHand.fingers[1], fist.fingers[1], triggerLerp);
+                    index = PoseHelpers.LerpFingerPose(openHand.index, fist.index, triggerLerp);
 
-                    middle.bones = LerpFingerPose(openHand.fingers[2], fist.fingers[2], gripLerp);
-                    ring.bones = LerpFingerPose(openHand.fingers[3], fist.fingers[3], gripLerp);
-                    pinky.bones = LerpFingerPose(openHand.fingers[4], fist.fingers[4], gripLerp);
+                    middle = PoseHelpers.LerpFingerPose(openHand.middle, fist.middle, gripLerp);
+                    ring = PoseHelpers.LerpFingerPose(openHand.ring, fist.ring, gripLerp);
+                    pinky = PoseHelpers.LerpFingerPose(openHand.pinky, fist.pinky, gripLerp);
                 }
             }
 
@@ -231,37 +228,6 @@ namespace HPTK.Input
             touchingGrip = touchingTrigger = touchingJoystick = false;
             touchingPrimary = touchingSecondary = touchingThumb = false;
             pressingGrip = pressingTrigger = false;
-        }
-
-        AbstractTsf[] LerpFingerPose(FingerPose start, FingerPose end, float lerp)
-        {
-            if (start.bones.Length != end.bones.Length)
-            {
-                log = Time.time.ToString("F2") + " Numer of bones is not the same for the given finger poses!";
-                Debug.LogError(log);
-            }
-
-            AbstractTsf[] fingerBones = new AbstractTsf[start.bones.Length];
-
-            for (int b = 0; b < fingerBones.Length; b++)
-            {
-                fingerBones[b] = new AbstractTsf(start.bones[b].name, Space.Self);
-
-                if (start.bones[b].space == Space.Self && end.bones[b].space == Space.Self)
-                {
-                    fingerBones[b].position = Vector3.Lerp(start.bones[b].position, end.bones[b].position, lerp); // Not required
-                    fingerBones[b].rotation = Quaternion.Lerp(start.bones[b].rotation, end.bones[b].rotation, lerp);
-                }
-                else
-                {
-                    log = Time.time.ToString("F2") + " Finger pose bone " + b + " is not in local space! Using Quaternion.identity for this bone";
-                    Debug.LogError(log);
-
-                    fingerBones[b].rotation = Quaternion.identity;
-                }              
-            }
-
-            return fingerBones;
         }
     }
 }

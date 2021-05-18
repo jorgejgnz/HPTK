@@ -88,57 +88,28 @@ MonoBehaviour:
     space: 0
     localScale: {x: 0, y: 0, z: 0}
   thumb:
-    name: Thumb
+    finger: 1
     bones: []
-    tip:
-      name: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-      space: 0
-      localScale: {x: 0, y: 0, z: 0}
   index:
-    name: Index
+    finger: 2
     bones: []
-    tip:
-      name: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-      space: 0
-      localScale: {x: 0, y: 0, z: 0}
   middle:
-    name: Middle
+    finger: 3
     bones: []
-    tip:
-      name: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-      space: 0
-      localScale: {x: 0, y: 0, z: 0}
   ring:
-    name: Ring
+    finger: 4
     bones: []
-    tip:
-      name: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-      space: 0
-      localScale: {x: 0, y: 0, z: 0}
   pinky:
-    name: Pinky
+    finger: 5
     bones: []
-    tip:
-      name: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 0}
-      space: 0
-      localScale: {x: 0, y: 0, z: 0}
+  handSide: 2
   confidence: 0
   scale: 1
   log: 
   side: 2
-  openHand: {fileID: 11400000, guid: 15d7a8ff6098ce54780aa84bbb591f23, type: 2}
-  pinch: {fileID: 11400000, guid: 327fc1da4d4fc25409800ff0d32bc138, type: 2}
-  fist: {fileID: 11400000, guid: 05a57b06e8cd72a4b8bcae667b11a8f4, type: 2}
+  openHand: {fileID: 11400000, guid: 157cdc73a1754ab4d8e996e021c95bd6, type: 2}
+  pinch: {fileID: 11400000, guid: 107a04e45deaf994a8ef0432ad0b1b11, type: 2}
+  fist: {fileID: 11400000, guid: a90e0232c0f05f146acb3c66638b8c36, type: 2}
   useButtonTouch: 1
   minLerpToTouch: 0.05
   minLerpToPress: 0.75

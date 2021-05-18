@@ -1,12 +1,11 @@
-﻿using HPTK.Models.Avatar;
-using HPTK.Views.Handlers;
+﻿using HandPhysicsToolkit.Modules.Avatar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace HPTK.Helpers
+namespace HandPhysicsToolkit.Helpers
 {
     public enum Side
     {
@@ -23,7 +22,8 @@ namespace HPTK.Helpers
         Index,
         Middle,
         Ring,
-        Pinky
+        Pinky,
+        All
     }
 
     public enum HumanFingerBone
@@ -54,259 +54,172 @@ namespace HPTK.Helpers
         Other = 4
     }
 
+    public enum HumanBodyPart
+    {
+        None,
+        Head,
+        Eye,
+        Jaw,
+        Neck,
+        Spine,
+        Chest,
+        Shoulder,
+        Arm,
+        Hand,
+        Finger,
+        Hips,
+        Leg,
+        Foot,
+        Toe,
+        All
+    }
+
     public static class AvatarHelpers
     {
-        public static void HandModelInit(HandModel hand)
+        public static void GetBonesFromRootToTip(FingerModel finger, List<BoneModel> _orderedBones)
         {
-            List<FingerModel> fingerList = new List<FingerModel>();
+            _orderedBones.Clear();
 
-            if (hand.thumb) fingerList.Add(hand.thumb);
-            if (hand.index) fingerList.Add(hand.index);
-            if (hand.middle) fingerList.Add(hand.middle);
-            if (hand.ring) fingerList.Add(hand.ring);
-            if (hand.pinky) fingerList.Add(hand.pinky);
+            BoneModel bone = finger.tip.bone;
 
-            hand.fingers = fingerList.ToArray();
-
-            for (int i = 0; i < hand.fingers.Length; i++)
+            for (int i = 0; i < 50; i++)
             {
-                hand.fingers[i].hand = hand;
-            }
-        }
+                _orderedBones.Add(bone);
 
-        public static BoneModel[] GetHandBones(HandModel hand)
-        {
-            // Same order as OVRSkeleton.Bones
-            List<BoneModel> handBones = new List<BoneModel>();
-
-            // Wrist
-            handBones.Add(hand.wrist);
-
-            // Forearm
-            if (hand.forearm)
-                handBones.Add(hand.forearm);
-            else
-                handBones.Add(hand.wrist);
-
-            // Finger bones
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                handBones.AddRange(hand.fingers[i].bones);
+                if (!bone.parent || bone == finger.root) break;
+                else bone = bone.parent;
             }
 
-            return handBones.ToArray();
+            _orderedBones.Reverse();
         }
 
-        public static SlaveBoneModel[] GetSlaveHandBones(HandModel hand)
+        public static HumanBodyBones GetHumanFingerBone(Side s, HumanFinger finger, int distanceFromDitalBone)
         {
-            List<SlaveBoneModel> slaveBones = new List<SlaveBoneModel>();
-
-            for (int i = 0; i < hand.bones.Length; i++)
+            switch (s)
             {
-                if (hand.bones[i] is SlaveBoneModel)
-                    slaveBones.Add(hand.bones[i] as SlaveBoneModel);
+                case Side.Left:
+                    switch (finger)
+                    {
+                        case HumanFinger.Thumb:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.LeftThumbDistal;
+                                case 1:
+                                    return HumanBodyBones.LeftThumbIntermediate;
+                                case 2:
+                                    return HumanBodyBones.LeftThumbProximal;
+                            }
+                            break;
+                        case HumanFinger.Index:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.LeftIndexDistal;
+                                case 1:
+                                    return HumanBodyBones.LeftIndexIntermediate;
+                                case 2:
+                                    return HumanBodyBones.LeftIndexProximal;
+                            }
+                            break;
+                        case HumanFinger.Middle:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.LeftMiddleDistal;
+                                case 1:
+                                    return HumanBodyBones.LeftMiddleIntermediate;
+                                case 2:
+                                    return HumanBodyBones.LeftMiddleProximal;
+                            }
+                            break;
+                        case HumanFinger.Ring:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.LeftRingDistal;
+                                case 1:
+                                    return HumanBodyBones.LeftRingIntermediate;
+                                case 2:
+                                    return HumanBodyBones.LeftRingProximal;
+                            }
+                            break;
+                        case HumanFinger.Pinky:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.LeftLittleDistal;
+                                case 1:
+                                    return HumanBodyBones.LeftLittleIntermediate;
+                                case 2:
+                                    return HumanBodyBones.LeftLittleProximal;
+                            }
+                            break;
+                    }
+                    break;
+                case Side.Right:
+                    switch (finger)
+                    {
+                        case HumanFinger.Thumb:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.RightThumbDistal;
+                                case 1:
+                                    return HumanBodyBones.RightThumbIntermediate;
+                                case 2:
+                                    return HumanBodyBones.RightThumbProximal;
+                            }
+                            break;
+                        case HumanFinger.Index:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.RightIndexDistal;
+                                case 1:
+                                    return HumanBodyBones.RightIndexIntermediate;
+                                case 2:
+                                    return HumanBodyBones.RightIndexProximal;
+                            }
+                            break;
+                        case HumanFinger.Middle:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.RightMiddleDistal;
+                                case 1:
+                                    return HumanBodyBones.RightMiddleIntermediate;
+                                case 2:
+                                    return HumanBodyBones.RightMiddleProximal;
+                            }
+                            break;
+                        case HumanFinger.Ring:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.RightRingDistal;
+                                case 1:
+                                    return HumanBodyBones.RightRingIntermediate;
+                                case 2:
+                                    return HumanBodyBones.RightRingProximal;
+                            }
+                            break;
+                        case HumanFinger.Pinky:
+                            switch (distanceFromDitalBone)
+                            {
+                                case 0:
+                                    return HumanBodyBones.RightLittleDistal;
+                                case 1:
+                                    return HumanBodyBones.RightLittleIntermediate;
+                                case 2:
+                                    return HumanBodyBones.RightLittleProximal;
+                            }
+                            break;
+                    }
+                    break;
             }
 
-            return slaveBones.ToArray();
-        }
-
-        public static Transform[] GetAllTransforms(HandModel hand)
-        {
-            List<Transform> handTransforms = new List<Transform>();
-
-            // Wrist, Forearm and Finger bones
-            for (int i = 0; i < hand.bones.Length; i++)
-            {
-                handTransforms.Add(hand.bones[i].transformRef);
-            }
-
-            // Figner tips
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                handTransforms.Add(hand.fingers[i].fingerTip);
-            }
-
-            return handTransforms.ToArray();
-        }
-
-        public static Transform[] GetFingerTransforms(FingerModel finger)
-        {
-            Transform[] boneTransforms = new Transform[finger.bones.Length];
-
-            for (int i = 0; i < boneTransforms.Length; i++)
-            {
-                boneTransforms[i] = finger.bones[i].transformRef;
-            }
-
-            return boneTransforms;
-        }
-
-        public static int GetBonesCount(HandModel hand)
-        {
-            int n = 2; // wrist + forearm
-
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                n += hand.fingers[i].bones.Length;
-            }
-
-            return n;
-        }
-
-        public static void UpdateFingerLengths(HandModel hand, float scale)
-        {
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                hand.fingers[i].length = GetFingerLength(hand.fingers[i], scale);
-            }
-        }
-
-        public static float GetFingerLength(FingerModel finger, float scale)
-        {
-            float length = 0.0f;
-
-            bool ignore = true;
-            for (int i = 0; i < finger.bones.Length; i++)
-            {
-                if (finger.bones[i].transformRef == finger.fingerBase)
-                    ignore = false;
-
-                if (!ignore)
-                {
-                    if (i != finger.bones.Length - 1)
-                        length += Vector3.Distance(finger.bones[i].transformRef.position,finger.bones[i + 1].transformRef.position);
-                    else
-                        length += Vector3.Distance(finger.bones[i].transformRef.position, finger.fingerTip.position);
-                }
-            }
-
-            return length / scale;
-        }
-
-        public static float GetFingerFlexion(FingerModel finger, float minFlexRelDistance, float scale)
-        {
-            float distance = Vector3.Distance(finger.fingerBase.position,finger.fingerTip.position);
-
-            return 1.0f - Mathf.InverseLerp(minFlexRelDistance * scale, finger.length * scale, distance);
-        }
-
-        // If bone1 -> Finger rotation. If bone 2 -> Finger strength
-        public static float GetBoneRotLerp(Transform boneTsfRef, float maxLocalRotZ, float minLocalRotZ)
-        {
-            float localRotZ = boneTsfRef.localRotation.eulerAngles.z;
-
-            if (localRotZ <= maxLocalRotZ && localRotZ >= minLocalRotZ)
-                return Mathf.InverseLerp(maxLocalRotZ, minLocalRotZ, localRotZ);
-            else if (localRotZ < 0.0f || localRotZ > maxLocalRotZ || (localRotZ >= 0.0f && localRotZ < 180.0f))
-                return 0.0f;
-            else
-                return 1.0f;
-        }
-
-        public static float GetHandFist(HandModel hand)
-        {
-            float sum = 0.0f;
-
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                if (hand.fingers[i] != hand.thumb)
-                    sum += hand.fingers[i].palmLineLerp; 
-            }
-
-            return sum / (hand.fingers.Length - 1);
-        }
-
-        public static float GetHandGrasp(HandModel hand)
-        {
-            float sum = 0.0f;
-
-            for (int i = 0; i < hand.fingers.Length; i++)
-            {
-                if (hand.fingers[i] != hand.thumb)
-                    sum += hand.fingers[i].baseRotationLerp;
-            }
-
-            return sum / (hand.fingers.Length - 1);
-        }
-
-        public static float GetFingerPinch(FingerModel finger, float maxRelDistance, float minRelDistance, float scale)
-        {
-            if (finger == finger.hand.thumb)
-            {
-                return new List<FingerModel>(finger.hand.fingers).FindAll(x => x != finger.hand.thumb).Max(x => x.pinchLerp);
-            }
-            else
-            {
-                float minAbsDistance = minRelDistance * scale;
-                float maxAbsDistance = maxRelDistance * scale;
-
-                float distance = Vector3.Distance(finger.fingerTip.position, finger.hand.thumb.fingerTip.position);
-
-                return 1.0f - Mathf.InverseLerp(minAbsDistance, maxAbsDistance, distance);
-            }
-          
-        }
-
-        public static float GetPalmLineLerp(FingerModel finger, float maxRelDistance, float minRelDistance, float scale)
-        {
-            float maxAbsDistance = maxRelDistance * scale;
-            float minAbsDistance = minRelDistance * scale;
-
-            Vector3 nearestPointToLine = NearestPointOnFiniteLine(finger.hand.palmExterior.position, finger.hand.palmInterior.position, finger.fingerTip.position);
-            float distance = Vector3.Distance(nearestPointToLine, finger.fingerTip.position);
-
-            return 1.0f - Mathf.InverseLerp(minAbsDistance, maxAbsDistance, distance);
-        }
-
-        public static Vector3 NearestPointOnFiniteLine(Vector3 start, Vector3 end, Vector3 pnt)
-        {
-            Vector3 line = (end - start);
-            float len = line.magnitude;
-            line.Normalize();
-
-            Vector3 v = pnt - start;
-            float d = Vector3.Dot(v, line);
-            d = Mathf.Clamp(d, 0f, len);
-            return start + line * d;
-        }
-
-        public static Vector3 GetHandRayDirection(HandModel hand, Transform shoulderTip)
-        {
-            return (hand.ray.position - shoulderTip.position).normalized;
-        }
-
-        public static void CopyValues(HandModel from, HandModel to)
-        {
-            to.thumb = from.thumb;
-            to.index = from.index;
-            to.middle = from.middle;
-            to.ring = from.ring;
-            to.pinky = from.pinky;
-            to.wrist = from.wrist;
-            to.forearm = from.forearm;
-
-            to.pinchCenter = from.pinchCenter;
-            to.throatCenter = from.throatCenter;
-            to.palmCenter = from.palmCenter;
-            to.palmExterior = from.palmExterior;
-            to.palmInterior = from.palmInterior;
-            to.ray = from.ray;
-
-            to.skinnedMR = from.skinnedMR;
-        }
-
-        public static InteractorHandler GetFirstInteractor(ProxyHandModel proxyHand)
-        {
-            for (int i = 0; i < proxyHand.relatedHandlers.Count; i++)
-            {
-                if (proxyHand.relatedHandlers[i] is InteractorHandler)
-                {
-                    // Return the first Interactor found
-                    return proxyHand.relatedHandlers[i] as InteractorHandler;
-                }
-            }
-
-            return null;
+            return HumanBodyBones.LastBone;
         }
     }
 }

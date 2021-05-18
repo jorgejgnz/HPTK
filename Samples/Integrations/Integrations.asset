@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd058f3ee020cf141b0570f2f85007f8, type: 3}
+  m_Name: Integrations
+  m_EditorClassIdentifier: 
+  integrations:
+  - name: Oculus
+    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/oculus.unitypackage
+  - name: MRTK
+    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/mrtk.unitypackage
+  - name: Final IK
+    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/finalik.unitypackage
+  - name: Hololens2
+    package: 
+  - name: Leap Motion
+    package: 
+  - name: MRTK Quest
+    package: Assets\com.jorgejgnz.hptk@16081fe0b3\Samples\Integrations\Packages\mrtk-quest.unitypackage
+  - name: P&S FinalIK
+    package: Assets\HPTK Posing & Snapping\Integrations\Packages\pns-finalik.unitypackage

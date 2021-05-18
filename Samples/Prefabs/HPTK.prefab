@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3818813662187910146
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3818813662187910145}
+  - component: {fileID: 3818813662187910144}
+  m_Layer: 0
+  m_Name: HPTK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3818813662187910145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818813662187910146}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3818813662187910144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3818813662187910146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a155bb7515c45a4daef72413fe3f703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedCamera: {fileID: 0}
+  trackingSpace: {fileID: 0}
+  defaultConfAssets:
+  - {fileID: 11400000, guid: 7810dab8672f9af418e4dd0f31e12d32, type: 2}
+  - {fileID: 11400000, guid: 930a90c6771d2d241845c329e4a1b627, type: 2}
+  - {fileID: 11400000, guid: 14e1b7d4d5881f74abb24e53429a7f4e, type: 2}
+  leftEditorIdp: {fileID: 0}
+  leftBuildIdp: {fileID: 0}
+  rightEditorIdp: {fileID: 0}
+  rightBuildIdp: {fileID: 0}
+  controlsUpdateCalls: 0
+  applyThisLayerToAvatars: HPTK
+  onAvatarEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  onAvatarLeft:
+    m_PersistentCalls:
+      m_Calls: []

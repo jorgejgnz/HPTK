@@ -1,14 +1,18 @@
-﻿using System;
+﻿using HandPhysicsToolkit.Helpers;
+using HandPhysicsToolkit.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HPTK.Input
+namespace HandPhysicsToolkit.Input
 {
     public class InputDataProvider : MonoBehaviour
     {
+        public Side side = Side.Left;
+
         // InputDataProvider.bones will always be 24 items length
-        protected int numOfBones = 24;
+        protected int numOfBones = 19;
 
         [HideInInspector]
         public AbstractTsf[] bones;
@@ -18,30 +22,34 @@ namespace HPTK.Input
         [HideInInspector]
         public AbstractTsf forearm;
         [HideInInspector]
-        public FingerPose thumb = new FingerPose("Thumb");
+        public FingerPose thumb = new FingerPose(HumanFinger.Thumb);
         [HideInInspector]
-        public FingerPose index = new FingerPose("Index");
+        public FingerPose index = new FingerPose(HumanFinger.Index);
         [HideInInspector]
-        public FingerPose middle = new FingerPose("Middle");
+        public FingerPose middle = new FingerPose(HumanFinger.Middle);
         [HideInInspector]
-        public FingerPose ring = new FingerPose("Ring");
+        public FingerPose ring = new FingerPose(HumanFinger.Ring);
         [HideInInspector]
-        public FingerPose pinky = new FingerPose("Pinky");
+        public FingerPose pinky = new FingerPose(HumanFinger.Pinky);
+
+        [Header("Input Data Provider")]
 
         [Range(0.0f, 1.0f)]
         public float confidence = 0.0f;
 
         [Range(0.5f, 1.5f)]
         public float scale = 1.0f;
-
+  
         [Header("Debug")]
-        [TextArea]
         public string log;
+
+        List<AbstractTsf> tmpBones = new List<AbstractTsf>();
+        List<AbstractTsf> bonesList = new List<AbstractTsf>();
 
         // Replaceable by inherited classes
         public virtual void InitData()
         {
-            List<AbstractTsf> tmpBones = new List<AbstractTsf>();
+            tmpBones.Clear();
 
             for (int b = 0; b < numOfBones; b++)
             {
@@ -82,17 +90,11 @@ namespace HPTK.Input
          * 16 - pinky1
          * 17 - pinky2
          * 18 - pinky3
-         * 
-         * 19 - thumbTip
-         * 20 - indexTip
-         * 21 - middleTip
-         * 22 - ringTip
-         * 23 - pinkyTip
          */
 
         public void UpdateBones()
         {
-            List<AbstractTsf> tmpBones = new List<AbstractTsf>();
+            tmpBones.Clear();
 
             tmpBones.Add(wrist);
             tmpBones.Add(forearm);
@@ -103,54 +105,45 @@ namespace HPTK.Input
             tmpBones.AddRange(ring.bones);
             tmpBones.AddRange(pinky.bones);
 
-            tmpBones.Add(thumb.tip);
-            tmpBones.Add(index.tip);
-            tmpBones.Add(middle.tip);
-            tmpBones.Add(ring.tip);
-            tmpBones.Add(pinky.tip);
-
             bones = tmpBones.ToArray();
         }
 
         public void UpdateFingerPosesFromBones()
         {     
-            List<AbstractTsf> bonesList = new List<AbstractTsf>(bones); // Enable .GetRange by turning the array into a list
+            bones.ToList(bonesList); // Enable .GetRange by turning the array into a list
 
-            FromBonesToFingerPose(thumb, bonesList.GetRange(2, 4).ToArray(), bonesList[bonesList.Count - 5]);
-            FromBonesToFingerPose(index, bonesList.GetRange(6, 3).ToArray(), bonesList[bonesList.Count - 4]);
-            FromBonesToFingerPose(middle, bonesList.GetRange(9, 3).ToArray(), bonesList[bonesList.Count - 3]);
-            FromBonesToFingerPose(ring, bonesList.GetRange(12, 3).ToArray(), bonesList[bonesList.Count - 2]);
-            FromBonesToFingerPose(pinky, bonesList.GetRange(15, 4).ToArray(), bonesList[bonesList.Count - 1]);
+            FromBonesToFingerPose(thumb, bonesList.GetRange(2, 4));
+            FromBonesToFingerPose(index, bonesList.GetRange(6, 3));
+            FromBonesToFingerPose(middle, bonesList.GetRange(9, 3));
+            FromBonesToFingerPose(ring, bonesList.GetRange(12, 3));
+            FromBonesToFingerPose(pinky, bonesList.GetRange(15, 4));
         }
 
-        void FromBonesToFingerPose(FingerPose finger, AbstractTsf[] bonesSubArray, AbstractTsf tip)
+        void FromBonesToFingerPose(FingerPose finger, List<AbstractTsf> bonesList)
         {
             // We can overwrite the item's references. The splitted array will remain splitted in fingers
-            finger.bones = bonesSubArray;
-            finger.tip = tip;
+            finger.bones = bonesList;
         }
 
         public void UpdateBonesFromFingerPoses()
         {
-            List<AbstractTsf> bonesList = new List<AbstractTsf>(bones); // Enable .GetRange by turning the array into a list
+            bones.ToList(bonesList); // Enable .GetRange by turning the array into a list
 
-            FromFingerPoseToBones(thumb, bonesList.GetRange(2, 4).ToArray(), bonesList[bonesList.Count - 5]);
-            FromFingerPoseToBones(index, bonesList.GetRange(6, 3).ToArray(), bonesList[bonesList.Count - 4]);
-            FromFingerPoseToBones(middle, bonesList.GetRange(9, 3).ToArray(), bonesList[bonesList.Count - 3]);
-            FromFingerPoseToBones(ring, bonesList.GetRange(12, 3).ToArray(), bonesList[bonesList.Count - 2]);
-            FromFingerPoseToBones(pinky, bonesList.GetRange(15, 4).ToArray(), bonesList[bonesList.Count - 1]);
+            FromFingerPoseToBones(thumb, bonesList.GetRange(2, 4));
+            FromFingerPoseToBones(index, bonesList.GetRange(6, 3));
+            FromFingerPoseToBones(middle, bonesList.GetRange(9, 3));
+            FromFingerPoseToBones(ring, bonesList.GetRange(12, 3));
+            FromFingerPoseToBones(pinky, bonesList.GetRange(15, 4));
         }
 
-        public void FromFingerPoseToBones(FingerPose finger, AbstractTsf[] bonesSubArray, AbstractTsf tip)
+        public void FromFingerPoseToBones(FingerPose finger, List<AbstractTsf> bonesList)
         {
             // We have to copy the content as we can't overwrite the item's references. It will be merged again from the splitted bones array to InputDataProvider.bones
-            for (int b = 0; b < bonesSubArray.Length; b++)
+            for (int b = 0; b < bonesList.Count; b++)
             {
-                AbstractTsf.Copy(finger.bones[b], bonesSubArray[b]);
+                if (b < finger.bones.Count) AbstractTsf.Copy(finger.bones[b], bonesList[b]);
+                else bonesList[b] = new AbstractTsf("Missing bone pose", Space.Self);
             }
-
-            // We can't overwite this reference as finger tips are also included in InputDataProviders.bones
-            AbstractTsf.Copy(finger.tip, tip);
         }
     }
 }

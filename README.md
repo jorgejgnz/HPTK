@@ -1,6 +1,10 @@
-# HPTK [![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg)](https://unity3d.com/es/get-unity/download/archive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md) [![version](https://img.shields.io/badge/version-0.4.0-blue)](https://github.com/jorgejgnz/HPTK/releases) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
+# HPTK [![](https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg)](https://unity3d.com/es/get-unity/download/archive) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md) [![version](https://img.shields.io/badge/version-0.6.0-blue)](https://github.com/jorgejgnz/HPTK/releases) [![](https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=jorgejgnz)
 
-Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interactions in a modular and scalable way. Platform-independent. Input-independent. This toolkit can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions.
+**Hand Physics Toolkit (HPTK)** is a toolkit to implement hand-driven interactions in a modular and scalable way. Platform-independent. Input-independent. Scale-independent. Can be combined with [MRTK-Quest](https://github.com/provencher/MRTK-Quest) for UI interactions.
+
+- You can clone a ready-to-go project at [HPTK-Sample](https://github.com/jorgejgnz/HPTK-Sample).
+
+[![Demo video](./Documentation/Media/hptk.gif)](https://twitter.com/jorgejgnz/status/1285514990619942912)
 
 ## Main features
 - Data model to access hand parts, components or calculated values with very little code.
@@ -13,24 +17,31 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 - Physics-based touch/grab detection.
 - Tracking noise smoothing.
 
-## Example project
-- You can clone a ready-to-go project at [HPTK-Sample](https://github.com/jorgejgnz/HPTK-Sample).
-
-[![Demo video](./Documentation/Media/hptk.gif)](https://twitter.com/jorgejgnz/status/1285514990619942912)
+- **Data model** to access parts, components or calculated values with very little code
+- **Code architecture** based on MVC-like modules. Support to custom modules
+- **Platform-independent.** Tested on VR/AR/non-XR applications
+- **Input-independent.** Use hand tracking or controllers
+- **Pupettering** for any avatar or body structure
+- **Scale-independent.** Valid for any hand size
+- **State-of-the-art** configurable hand physics
+- Define strategies to deal with tracking loss
+- Physics-based touch/grab detection
+- Tracking noise smoothing
 
 # Supported versions
-- Unity 2019.4.4f1 LTS, 2019.3.15f1
+- Unity 2020.x
+- Unity 2019.x
 
 # Supported input
 ## Hand tracking
-* [Oculus Quest 1/2 - Android](https://github.com/jorgejgnz/HPTK-Sample/tree/master/Assets/HPTK-Sample/Scripts/Input)
-* Hololens 2 - UWP
+- Oculus Quest 1/2 - Android
+- Hololens 2 - UWP
 
 ## Controllers
-* [UnityXR-compatible controllers](https://docs.unity3d.com/Manual/xr_input.html) with:
-     * Index trigger
-	 * Grip trigger
-	 * Primary 2D axis
+- Oculus Touch
+- WMR
+- Vive
+- OpenVR
 
 # Supported render pipelines
 - Universal Render Pipeline (URP)
@@ -38,22 +49,13 @@ Hand Physics Toolkit (HPTK) is a toolkit to build physical hand-driven interacti
 
 # Getting started with HPTK (Oculus Quest)
 
-1. Obtain *HPTK*.
-1. Import *Oculus Integration*.
-1. Configure *Build Settings* (Oculus Quest).
-1. Configure *Project Settings* (!).
-1. Setup a scene with *hand tracking support* (Oculus Quest).
-1. Setup *HPTK specific components*.
-1. Setup *platform specific HPTK components* (Oculus Quest).
-1. Modify/Create *HPTK Configuration Assets* (if needed).
+1. Obtain **HPTK**
+1. Change **ProjectSettings & BuildSettings**
+1. Import the built-in **integration packge** (if needed)
+1. Drag & drop the **default setup** to your scene
+1. **Build and test**
 
-Checkout the [Wiki](https://github.com/jorgejgnz/HPTK/wiki/Getting-started) for a detailed **step-by-step guide**.
-
-# Wiki
-The [Wiki](https://github.com/jorgejgnz/HPTK/wiki) also includes more details about:
-- Modules overview.
-- Getting started with HPTK.
-- How to build new HPTK modules.
+Check Wiki for a detailed **step-by-step guide**.
 
 # Author
 **Jorge Juan González** - *HCI Researcher at I3A (University of Castilla-La Mancha)*

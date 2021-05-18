@@ -1,61 +1,68 @@
-﻿using HPTK.Views.Handlers;
+﻿using HandPhysicsToolkit.Modules.Avatar;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using HandPhysicsToolkit;
+using UnityEngine.Events;
+using System.Collections.ObjectModel;
+using HandPhysicsToolkit.Utils;
 
-namespace HPTK.Models.Avatar
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+namespace HandPhysicsToolkit.Modules.Avatar
 {
     public class AvatarModel : HPTKModel
     {
-        [HideInInspector]
-        public AvatarHandler handler;
+        public static readonly string key = "master";
 
-        public ProxyHandModel leftHand;
-        public ProxyHandModel rightHand;
+        [Header("Read Only")]
+        [SerializeField]
+        [ReadOnly]
+        List<HPTKController> _registry;
+        public HPTKRegistry registry = new HPTKRegistry();
+        [ReadOnly]
+        public List<BodyModel> bodies = new List<BodyModel>();
+        [ReadOnly]
+        public BodyModel body;
+        [ReadOnly]
+        public bool ready = false;
 
-        [HideInInspector]
-        public ProxyHandModel[] hands;
-
-        [Header("Module registry")]
-        public List<HPTKHandler> relatedHandlers = new List<HPTKHandler>();
-
-        [Header("Head")]
-        public Transform headSight;
-        public Transform headCenter;
-        public GameObject headModel;
-        public Transform neck;
-
-        [Header("Body")]
-        public Transform torso;
-        public Transform shoulderLeft;
-        public Transform shoulderRight;
-        public Transform hips;
-        public Transform feet;
-        
-        [Header("Directions")]
-        public Transform forwardDir;
-        public Transform lookDir;
-
-        [Header("Control")]
-        public bool followsCamera = true;
-
-        private void Awake()
+        AvatarController _controller;
+        public AvatarController controller
         {
-            // Array
-            List<ProxyHandModel> handsList = new List<ProxyHandModel>();
-            if (leftHand) handsList.Add(leftHand);
-            if (rightHand) handsList.Add(rightHand);
-            hands = handsList.ToArray();
-
-            // Shoulder tips
-            if (leftHand) leftHand.shoulderTip = shoulderLeft;
-            if (rightHand) rightHand.shoulderTip = shoulderRight;
-
-            // Referrences to parent
-            for (int i = 0; i < hands.Length; i++)
+            get
             {
-                hands[i].avatar = this;
+                if (!_controller)
+                {
+                    _controller = GetComponent<AvatarController>();
+                    if (!_controller) _controller = gameObject.AddComponent<AvatarController>();
+                }
+
+                return _controller;
             }
+        }
+
+        AvatarView _view;
+        public AvatarView view
+        {
+            get
+            {
+                if (!_view)
+                {
+                    _view = GetComponent<AvatarView>();
+                    if (!_view) _view = gameObject.AddComponent<AvatarView>();
+                }
+
+                return _view;
+            }
+        }
+
+        public override void Awake()
+        {
+            base.Awake();
         }
     }
 }

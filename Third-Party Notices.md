@@ -1,7 +1,7 @@
 This package is under MIT license; however, the following components are governed by the licenses indicated below:
 
-./Samples/Models/OculusHand_L.fbx
-./Samples/Models/OculusHand_R.fbx
+./Samples/Models/Hands/OculusHand_L.fbx
+./Samples/Models/Hands/OculusHand_R.fbx
 
 	[Oculus Master SDK License Agreement - 1.0]
 
@@ -11,5 +11,5 @@ This package is under MIT license; however, the following components are governe
 	The text of this may be found at: https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
 	A copy of this text may be found at: 
-	./Samples/Models/LICENSE.txt
+	./Samples/Models/Hands/LICENSE.txt
 	
