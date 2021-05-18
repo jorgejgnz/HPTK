@@ -14,16 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   integrations:
   - name: Oculus
-    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/oculus.unitypackage
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/oculus.unitypackage
   - name: MRTK
-    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/mrtk.unitypackage
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk.unitypackage
   - name: Final IK
-    package: Assets/com.jorgejgnz.hptk@16081fe0b3/Samples/Integrations/Packages/finalik.unitypackage
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/finalik.unitypackage
   - name: Hololens2
     package: 
   - name: Leap Motion
     package: 
   - name: MRTK Quest
-    package: Assets\com.jorgejgnz.hptk@16081fe0b3\Samples\Integrations\Packages\mrtk-quest.unitypackage
-  - name: P&S FinalIK
-    package: Assets\HPTK Posing & Snapping\Integrations\Packages\pns-finalik.unitypackage
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk-quest.unitypackage
