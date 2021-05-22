@@ -48,7 +48,7 @@ MonoBehaviour:
   defaultConfAssets:
   - {fileID: 11400000, guid: 7810dab8672f9af418e4dd0f31e12d32, type: 2}
   - {fileID: 11400000, guid: 930a90c6771d2d241845c329e4a1b627, type: 2}
-  - {fileID: 11400000, guid: 14e1b7d4d5881f74abb24e53429a7f4e, type: 2}
+  - {fileID: 11400000, guid: 6ad4471458d8b4d49841efce05a2a66f, type: 2}
   leftEditorIdp: {fileID: 0}
   leftBuildIdp: {fileID: 0}
   rightEditorIdp: {fileID: 0}

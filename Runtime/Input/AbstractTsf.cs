@@ -57,18 +57,10 @@ namespace HandPhysicsToolkit.Input
             this.localScale = abstractTsf.localScale;
         }
 
-        public void ApplyToTransformRelativeToOther(Transform moveThis, Transform referenceTsf, bool applyPos)
+        public void ApplyToTransformRelativeToOther(Transform moveThis, Transform origin, bool applyPos)
         {
-            if (space == Space.Self)
-            {
-                if (applyPos) moveThis.position = referenceTsf.TransformPoint(position);
-                moveThis.rotation = referenceTsf.rotation * rotation;
-            }
-            else
-            {
-                if (applyPos) moveThis.position = referenceTsf.position + position;
-                moveThis.rotation = referenceTsf.rotation * rotation;
-            }
+            if (applyPos) moveThis.position = origin.TransformPoint(position);
+            moveThis.rotation = origin.rotation * rotation;
             
             moveThis.localScale = localScale;
         }
@@ -102,7 +94,8 @@ namespace HandPhysicsToolkit.Input
 
             if (point.reprs.ContainsKey(reprKey) && point.reprs[reprKey].transformRef)
             {
-                ApplyToTransform(point.reprs[reprKey].transformRef, applyPos);
+                if (point.bone.part.body.replicatedTsf) ApplyToTransformRelativeToOther(point.reprs[reprKey].transformRef, point.bone.part.body.replicatedTsf, applyPos);
+                else ApplyToTransform(point.reprs[reprKey].transformRef, applyPos);
             }
         }
     }

@@ -36,6 +36,7 @@ namespace HandPhysicsToolkit.Physics
 
         [Header("Stability")]
         public bool safeMode = true;
+        public bool gradualMode = true;
         public float maxVelocity = 20.0f;
         public float maxAngularVelocity = 12.5f;
         public float maxDepenetrationVelocity = 1.0f;
@@ -49,13 +50,11 @@ namespace HandPhysicsToolkit.Physics
         public UnityEvent onInit = new UnityEvent();
 
         [Header("Debug")]
-        [Tooltip("-1 for always enabled. 0 for always disabled")]
-        public int disableEditModeAfterFrames = -1;
         public GameObject axis;
         public float axisScale = 0.02f;
 
         [Tooltip("Set false for better performance")]
-        bool editMode = true;
+        public bool editMode = true;
 
         public List<Collider> ignoring = new List<Collider>();
 
@@ -98,21 +97,7 @@ namespace HandPhysicsToolkit.Physics
             {
                 List<Pheasy> processed = new List<Pheasy>();
                 relations.ForEach(r => IgnoreCollisions(r, true, true));
-            }
-
-            if (disableEditModeAfterFrames == 0)
-            {
-                editMode = false;
-            }
-            else if (disableEditModeAfterFrames < 0)
-            {
-                editMode = true;
-            }
-            else
-            {
-                editMode = true;
-                AsyncHelpers.DoAfterFrames(this, disableEditModeAfterFrames, () => editMode = false);
-            }  
+            } 
         }
 
         private void Update()
@@ -177,8 +162,16 @@ namespace HandPhysicsToolkit.Physics
                 SetRotationLock(t.joint, t.settings.angularMotion);
 
                 // Drives
-                PhysHelpers.UpdateJointMotionDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.motionDrive.toJointDrive(), t.lerp));
-                PhysHelpers.UpdateJointAngularDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.angularDrive.toJointDrive(), t.lerp));
+                if (gradualMode)
+                {
+                    PhysHelpers.UpdateJointMotionDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.motionDrive.toJointDrive(), t.lerp));
+                    PhysHelpers.UpdateJointAngularDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.angularDrive.toJointDrive(), t.lerp));
+                }
+                else
+                {
+                    PhysHelpers.UpdateJointMotionDrive(t.joint, t.settings.motionDrive.toJointDrive());
+                    PhysHelpers.UpdateJointAngularDrive(t.joint, t.settings.angularDrive.toJointDrive());
+                }
 
                 // Control
                 t.joint.enableCollision = t.settings.collideWithConnectedRb;

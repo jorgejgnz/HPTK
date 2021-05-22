@@ -23,11 +23,6 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
         public bool forceUnconnected = false;
 
-        [Tooltip("Set false for better performance")]
-        public bool editMode = false;
-
-        public int disableEditModeAfterFrames = 4;
-
         [Header("Read Only")]
         [ReadOnly]
         public List<PartModel> parts = new List<PartModel>();

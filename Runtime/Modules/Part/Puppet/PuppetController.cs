@@ -171,9 +171,10 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
             if (slave.constraint != null)
             {
-                // Safety
+                // Stability
                 slave.constraint.settings.collideWithConnectedRb = false;
                 slave.pheasy.safeMode = true;
+                slave.pheasy.gradualMode = false;
 
                 // Forced values
                 slave.constraint.enabled = true;
@@ -183,13 +184,8 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
                 slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
                 // Performance
-                if (model.editMode) slave.pheasy.disableEditModeAfterFrames = -1;
-                else slave.pheasy.disableEditModeAfterFrames = model.disableEditModeAfterFrames;
-
-                /*
                 slave.pheasy.editMode = true;
-                if (!model.editMode) AsyncHelpers.DoAfterFrames(this, 4, () => slave.pheasy.editMode = false);
-                */
+                AsyncHelpers.DoAfterFrames(this, 1, () => slave.pheasy.editMode = false);
             }
 
             // Find colliders and triggers. Children colliders are updated before their parents

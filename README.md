@@ -4,28 +4,18 @@
 
 - You can clone a ready-to-go project at [HPTK-Sample](https://github.com/jorgejgnz/HPTK-Sample).
 
-[![Demo video](./Documentation/Media/hptk.gif)](https://twitter.com/jorgejgnz/status/1285514990619942912)
+![Screenshot](https://imgur.com/iH35YoZ.jpg)
 
 ## Main features
-- Data model to access hand parts, components or calculated values with very little code.
-- Code architecture based on MVC-like modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Modules-overview)). Support to custom modules. ([Wiki](https://github.com/jorgejgnz/HPTK/wiki/Custom-modules)).
-- State-of-the-art hand physics. Configurable in detail through configuration assets.
-- Platform-independent. Tested on VR/AR/non-XR applications
-- Input-independent. Use handtracking or controllers.
-- Scale-independent. Valid for any hand size.
-- Define strategies to deal with loss of tracking.
-- Physics-based touch/grab detection.
-- Tracking noise smoothing.
-
 - **Data model** to access parts, components or calculated values with very little code
 - **Code architecture** based on MVC-like modules. Support to custom modules
 - **Platform-independent.** Tested on VR/AR/non-XR applications
 - **Input-independent.** Use hand tracking or controllers
 - **Pupettering** for any avatar or body structure
 - **Scale-independent.** Valid for any hand size
-- **State-of-the-art** configurable hand physics
+- **Realistic** configurable **hand physics**
 - Define strategies to deal with tracking loss
-- Physics-based touch/grab detection
+- Physics-based hover/touch/grab detection
 - Tracking noise smoothing
 
 # Supported versions

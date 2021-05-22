@@ -2870,13 +2870,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awaked: 0
   part: {fileID: 313652084674155370}
-  configuration: {fileID: 11400000, guid: 24bcb69cd2e04ba4dae1f10bfac54669, type: 2}
+  configuration: {fileID: 11400000, guid: 58452ebd535830f49b6b3a6d14c8744a, type: 2}
   axisPrefab: {fileID: 6429936386063654322, guid: 83de49a3ee76488449958f8be901a72a,
     type: 3}
   mimicRepr: master
   forceUnconnected: 0
-  editMode: 0
-  disableEditModeAfterFrames: 4
   parts: []
   bones: []
   ready: 0
@@ -7884,13 +7882,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awaked: 0
   part: {fileID: 2919580927250841799}
-  configuration: {fileID: 11400000, guid: 7a5b2b880cf89794aa178a32787f1cb4, type: 2}
+  configuration: {fileID: 11400000, guid: 031576f53501fee429c8b14cde237d7a, type: 2}
   axisPrefab: {fileID: 6429936386063654322, guid: 83de49a3ee76488449958f8be901a72a,
     type: 3}
   mimicRepr: master
   forceUnconnected: 0
-  editMode: 0
-  disableEditModeAfterFrames: 4
   parts: []
   bones: []
   ready: 0
@@ -9354,13 +9350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awaked: 0
   part: {fileID: 3705422962607720162}
-  configuration: {fileID: 11400000, guid: 24bcb69cd2e04ba4dae1f10bfac54669, type: 2}
+  configuration: {fileID: 11400000, guid: 58452ebd535830f49b6b3a6d14c8744a, type: 2}
   axisPrefab: {fileID: 6429936386063654322, guid: 83de49a3ee76488449958f8be901a72a,
     type: 3}
   mimicRepr: master
   forceUnconnected: 0
-  editMode: 0
-  disableEditModeAfterFrames: 4
   parts: []
   bones: []
   ready: 0
