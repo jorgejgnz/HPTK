@@ -21,9 +21,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
                 strengthDirector = _model.finger.tip.bone;
         }
 
-        public override sealed void UpdateFingerGesture()
+        public override sealed void FingerLerpUpdate()
         {
-            base.UpdateFingerGesture();
+            base.FingerLerpUpdate();
 
             // Lerp
             localRotZ = strengthDirector.master.localRotation.eulerAngles.z;

@@ -16,9 +16,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitHandGesture();
         }
 
-        public override sealed void UpdateHandGesture()
+        public override sealed void HandLerpUpdate()
         {
-            base.UpdateHandGesture();
+            base.HandLerpUpdate();
 
             // Lerp
             sum = 0.0f;
@@ -54,9 +54,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             }
         }
 
-        public override sealed void LateUpdateData()
+        public override sealed void LateGestureUpdate()
         {
-            base.LateUpdateData();
+            base.LateGestureUpdate();
 
             // Intention events
             if (isIntentionallyActive && !wasIntentionallyActive)

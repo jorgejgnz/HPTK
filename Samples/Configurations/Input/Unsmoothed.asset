@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74aaad9061ad4de4fb8d55be12481c17, type: 3}
+  m_Name: Unsmoothed
+  m_EditorClassIdentifier: 
+  updateWrist: 1
+  updateForearm: 1
+  ignoreTrackingLoss: 0
+  handTrackingLostUnderConfidence: 0
+  saveHandHistoricOverConfidence: 0.5
+  hideMasterWhenLost: 0
+  hideSlaveWhenLost: 0
+  fingersTrackingLostUnderConfidence: 0.75
+  usePredictiveTrackingWhenLost: 0
+  maxPredictionTime: 2
+  maxPredictionDisplacement: 0.4
+  recordTracking: 0
+  movingAverage: 0
+  windowSize: 5
+  applyToWristPosition: 0
+  applyToWristRotation: 0
+  applyToFingersPosition: 0
+  applyToFingersRotation: 0
+  useHandClamping: 1
+  gradualHandClamping: 0
+  startDecreasingHandClampUnderConfidence: 1
+  lowestHandLinearSpeed: 10
+  lowestHandAngularSpeed: 12.56
+  useFingerClamping: 0
+  gradualFingerClamping: 1
+  startDecreasingFingerClampUnderConfidence: 0.75
+  lowestFingerAngularSpeed: 6.28

@@ -12,7 +12,6 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
 
         public HandView hand { get { return model.hand.specificView; } }
 
-        public bool isActive { get { return model.isActive; } set { model.isActive = value; } }
         public InputDataProvider inputDataProvider
         {
             get { return model.inputDataProvider; }

@@ -20,9 +20,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitFingerGesture();
         }
 
-        public override sealed void UpdateFingerGesture()
+        public override sealed void FingerLerpUpdate()
         {
-            base.UpdateFingerGesture();
+            base.FingerLerpUpdate();
 
             if (pose == null || maxAngle <= 0)
                 return;

@@ -55,6 +55,9 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
         {
             base.ControllerUpdate();
 
+            if (!gameObject.activeSelf)
+                return;
+
             if (!model.ready)
                 return;
 

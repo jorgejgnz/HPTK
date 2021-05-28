@@ -38,21 +38,19 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             InitHandGesture();
         }
 
-        public override sealed void UpdateGesture()
+        public override sealed void LerpUpdate()
         {
-            base.UpdateGesture();
+            base.LerpUpdate();
 
             if (!_model)
                 return;
 
-            UpdateHandGesture();
-
-            LateUpdateData();
+            HandLerpUpdate();
         }
 
         public virtual void InitHandGesture() { }
 
-        public virtual void UpdateHandGesture() { }
+        public virtual void HandLerpUpdate() { }
 
         bool DirectlyReferenced(GestureDetectionModel parentModel)
         {

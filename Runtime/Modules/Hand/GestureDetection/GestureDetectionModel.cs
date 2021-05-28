@@ -13,8 +13,6 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
 
         public GestureDetectionConfiguration configuration;
 
-        public bool isActive = true;
-
         [Header("Gestures")]
         public Grasp grasp;
         public Fist fist;

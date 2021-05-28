@@ -204,5 +204,14 @@ namespace HandPhysicsToolkit.Helpers
             }
         }
 
+        public static void SetSolverIterations(int solverIterations, int solverVelocityIterations)
+        {
+            UnityEngine.Physics.defaultSolverIterations = solverIterations;
+            Pheasy.registry.ForEach(p =>
+            {
+                p.rb.solverIterations = solverIterations;
+                p.rb.solverVelocityIterations = solverVelocityIterations;
+            });
+        }
     }
 }

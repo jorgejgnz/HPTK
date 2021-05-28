@@ -27,7 +27,7 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
 
         public override void ControllerStart()
         {
-            base.ControllerStart();           
+            base.ControllerStart();
 
             // Set default configuration if needed
             if (model.configuration == null)
@@ -36,7 +36,7 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             if (model.configuration == null)
             {
                 Debug.LogError("Any GestureDetectionConfiguration found in GestureDetectionModel or HPTK.core.defaultConfAssets. The module cannot continue");
-                model.isActive = false;
+                gameObject.SetActive(false);
                 return;
             }
 
@@ -56,7 +56,7 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
         {
             base.ControllerUpdate();
 
-            if (!model.isActive)
+            if (!gameObject.activeSelf)
                 return;
 
             // Update hand gestures

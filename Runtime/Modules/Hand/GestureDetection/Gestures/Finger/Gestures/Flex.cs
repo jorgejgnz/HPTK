@@ -16,9 +16,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitFingerGesture();
         }
 
-        public override sealed void UpdateFingerGesture()
+        public override sealed void FingerLerpUpdate()
         {
-            base.UpdateFingerGesture();
+            base.FingerLerpUpdate();
 
             // Lerp
             dist = Vector3.Distance(finger.knuckle.transformRef.position, finger.tip.transformRef.position);

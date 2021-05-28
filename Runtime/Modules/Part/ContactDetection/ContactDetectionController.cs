@@ -114,6 +114,9 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
         {
             base.ControllerUpdate();
 
+            if (!gameObject.activeSelf)
+                return;
+
             if (model.hoverDetectionSystem == HoverDetectionSystem.OverlapSphereFromRoot)
             {
                 OverlapSphere(model.part.root, model.sphereCastRadius, foundRbs);

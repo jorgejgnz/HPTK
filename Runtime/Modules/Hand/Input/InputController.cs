@@ -71,7 +71,7 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
             if (model.configuration == null)
             {
                 Debug.LogError("Any InputConfiguration found in InputModel or HPTK.core.defaultConfAssets. The module cannot continue");
-                model.isActive = false;
+                gameObject.SetActive(false);
                 return;
             }
 
@@ -121,7 +121,7 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
             if (!model.inputDataProvider)
                 return;
 
-            if (!model.isActive)
+            if (!gameObject.activeSelf)
                 return;
 
             masterReprKey = AvatarModel.key;
@@ -203,8 +203,8 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
                 if (conf.updateWrist && model.bonesToUpdate[0] != null)
                 {
                     // Update wrist position and rotation
-                    UpdateBoneTsfPos(model.rigMap.wrist.master, model.moveThisAsWrist, model.inputDataProvider.bones[0], maxHandLinearSpeed, true, model.referenceTsf, model.replicatedTsf);
-                    UpdateBoneTsfRot(model.rigMap.wrist.master, model.moveThisAsWrist, model.inputDataProvider.bones[0], maxHandAngularSpeed, true, model.referenceTsf, model.replicatedTsf);
+                    UpdateBoneTsfPos(model.rigMap.wrist.master, model.moveThisAsWrist, model.inputDataProvider.bones[0], maxHandLinearSpeed, model.referenceTsf, model.replicatedTsf);
+                    UpdateBoneTsfRot(model.rigMap.wrist.master, model.moveThisAsWrist, model.inputDataProvider.bones[0], maxHandAngularSpeed, model.referenceTsf, model.replicatedTsf);
                 }
 
                 if (conf.updateForearm && model.bonesToUpdate[1] != null)
@@ -214,8 +214,8 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
                         InputHelpers.RecordBone(model.boneRecords, model.inputDataProvider.bones[1], 1);
 
                     // Update wrist position and rotation
-                    UpdateBoneTsfPos(model.rigMap.forearm.master, model.rigMap.forearm.master.transformRef, model.inputDataProvider.bones[1], maxHandLinearSpeed, true, model.referenceTsf, model.replicatedTsf);
-                    UpdateBoneTsfRot(model.rigMap.forearm.master, model.rigMap.forearm.master.transformRef, model.inputDataProvider.bones[1], maxHandAngularSpeed, true, model.referenceTsf, model.replicatedTsf); // Optional
+                    UpdateBoneTsfPos(model.rigMap.forearm.master, model.rigMap.forearm.master.transformRef, model.inputDataProvider.bones[1], maxHandLinearSpeed, model.referenceTsf, model.replicatedTsf);
+                    UpdateBoneTsfRot(model.rigMap.forearm.master, model.rigMap.forearm.master.transformRef, model.inputDataProvider.bones[1], maxHandAngularSpeed, model.referenceTsf, model.replicatedTsf); // Optional
                 }
             }
             // On hand tracking loss
@@ -341,7 +341,7 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
                             inputData.rotation = EstimateLocalRotation(model.inputDataProvider.bones[i - 1], model.inputDataProvider.bones[i]);
                         }
 
-                        UpdateBoneTsfRot(bone.master, bone.master.transformRef, inputData, maxFingerAngularSpeed, true, null, null);
+                        UpdateBoneTsfRot(bone.master, bone.master.transformRef, inputData, maxFingerAngularSpeed, null, null);
                     }
                 }
             }
@@ -518,14 +518,14 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
             }
         }
 
-        void UpdateBoneTsfPos(ReprModel repr, Transform applyToThis, AbstractTsf inputData, float maxSpeed, bool relativeToParent, Transform referenceTsf, Transform replicatedTsf)
+        void UpdateBoneTsfPos(ReprModel repr, Transform applyToThis, AbstractTsf inputData, float maxSpeed, Transform referenceTsf, Transform replicatedTsf)
         {
             AvatarController avatarCtrl = repr.point.bone.part.body.avatar.controller;
 
             Vector3 desiredWorldPos;
 
             if (inputData.space == Space.World) desiredWorldPos = inputData.position;
-            else desiredWorldPos = avatarCtrl.GetWorldFromLocalPoition(inputData.position, repr.point.bone, repr.key, relativeToParent);
+            else desiredWorldPos = avatarCtrl.GetWorldFromLocalPoition(inputData.position, repr);
 
             if (referenceTsf && replicatedTsf)
             {
@@ -543,14 +543,14 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
             }
         }
 
-        void UpdateBoneTsfRot(ReprModel repr, Transform applyToThis, AbstractTsf inputData, float maxSpeed, bool relativeToParent, Transform referenceTsf, Transform replicatedTsf)
+        void UpdateBoneTsfRot(ReprModel repr, Transform applyToThis, AbstractTsf inputData, float maxSpeed, Transform referenceTsf, Transform replicatedTsf)
         {
             AvatarController avatarCtrl = repr.point.bone.part.body.avatar.controller;
 
             Quaternion desiredWorldRot;
 
             if (inputData.space == Space.World) desiredWorldRot = inputData.rotation;
-            else desiredWorldRot = avatarCtrl.GetWorldFromLocalRotation(inputData.rotation, repr.point.bone, repr.key, relativeToParent);
+            else desiredWorldRot = avatarCtrl.GetWorldFromLocalRotation(inputData.rotation, repr);
 
             if (referenceTsf && replicatedTsf)
             {

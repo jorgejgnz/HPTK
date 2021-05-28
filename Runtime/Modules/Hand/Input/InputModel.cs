@@ -55,8 +55,6 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
 
         public InputDataProvider inputDataProvider;
 
-        public bool isActive = true;
-
         [Header("Wrist")]
         public Transform moveThisAsWrist;
         public Transform referenceTsf;

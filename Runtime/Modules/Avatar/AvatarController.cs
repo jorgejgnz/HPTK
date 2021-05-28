@@ -138,8 +138,9 @@ namespace HandPhysicsToolkit.Modules.Avatar
             // Update body related controllers
             model.bodies.ForEach(r => UpdateBody(r));
 
-            // Update proxy-body related controllers
-            if (HPTK.core.controlsUpdateCalls) model.registry.ForEach(c => c.ControllerUpdate());
+            // Update registered controllers
+
+            if (HPTK.core.controlsUpdateCalls) model.registry.ForEach((c) => { if (c.gameObject.activeSelf) c.ControllerUpdate(); });
         }
 
         void UpdateBody(BodyModel body)
@@ -167,6 +168,8 @@ namespace HandPhysicsToolkit.Modules.Avatar
 
             body.parts.ForEach(p => { if (p.gameObject.activeSelf) UpdatePart(p); });
 
+            // Update registered controllers
+
             if (HPTK.core.controlsUpdateCalls) body.registry.ForEach((c) => { if (c.gameObject.activeSelf) c.ControllerUpdate(); });
         }
 
@@ -177,7 +180,9 @@ namespace HandPhysicsToolkit.Modules.Avatar
 
             part.bones.ForEach(b => { if (b.gameObject.activeSelf) UpdateBone(b); });
 
-            if (HPTK.core.controlsUpdateCalls) part.registry.ForEach(c => { if (c.gameObject.activeSelf) c.ControllerUpdate(); });
+            // Update registered controllers
+
+            if (HPTK.core.controlsUpdateCalls) part.registry.ForEach((c) => { if (c.gameObject.activeSelf) c.ControllerUpdate(); });
         }
 
         void UpdateHand(HandModel h)
@@ -212,7 +217,7 @@ namespace HandPhysicsToolkit.Modules.Avatar
 
         void UpdateFinger(FingerModel f) { }
 
-        void UpdateBone(BoneModel bone) { }
+        void UpdateBone(BoneModel b) { }
 
         public float GetFingerLength(FingerModel finger)
         {
@@ -356,42 +361,28 @@ namespace HandPhysicsToolkit.Modules.Avatar
             AvatarHelpers.GetBonesFromRootToTip(finger, finger.bonesFromRootToTip);
         }
 
-        public Quaternion GetLocalRotation(BoneModel b, string reprKey, bool relativeToParentBone)
+        public Quaternion GetLocalRotation(ReprModel repr)
         {
-            if (!b.parent || !relativeToParentBone) return b.point.reprs[reprKey].transformRef.localRotation;
-
-            if (!b.parent.point.reprs.ContainsKey(reprKey))
-            {
-                Debug.LogWarning("Parent of bone " + b.name + ", " + b.parent.name + ", does not have a " + reprKey + " representation. Getting localRotation");
-                return b.point.reprs[reprKey].transformRef.localRotation;
-            }
-
-            return Quaternion.Inverse(b.parent.point.reprs[reprKey].transformRef.rotation) * b.point.reprs[reprKey].transformRef.rotation;
+            if (!repr.parent || !repr.relativeToParentBone) return repr.transformRef.localRotation;
+            return Quaternion.Inverse(repr.parent.transformRef.rotation) * repr.transformRef.rotation;
         }
 
-        public Quaternion GetWorldFromLocalRotation(Quaternion newLocalRot, BoneModel b, string reprKey, bool relativeToParentBone)
+        public Quaternion GetWorldFromLocalRotation(Quaternion newLocalRot, ReprModel repr)
         {
-            if (!b.parent || !relativeToParentBone) return b.point.reprs[reprKey].transformRef.parent.rotation * newLocalRot;
-            return b.parent.point.reprs[reprKey].transformRef.rotation * newLocalRot;
+            if (!repr.parent || !repr.relativeToParentBone) return repr.transformRef.parent.rotation * newLocalRot;
+            return repr.parent.transformRef.rotation * newLocalRot;
         }
 
-        public Vector3 GetLocalPosition(BoneModel b, string reprKey, bool relativeToParentBone)
+        public Vector3 GetLocalPosition(ReprModel repr)
         {
-            if (!b.parent || !relativeToParentBone) return b.point.reprs[reprKey].transformRef.localPosition;
-
-            if (!b.parent.point.reprs.ContainsKey(reprKey))
-            {
-                Debug.LogWarning("Parent of bone " + b.name + ", " + b.parent.name + ", does not have a " + reprKey + " representation. Getting localPosition");
-                return b.point.reprs[reprKey].transformRef.localPosition;
-            }
-
-            return b.parent.point.reprs[reprKey].transformRef.InverseTransformPoint(b.point.reprs[reprKey].transformRef.position);
+            if (!repr.parent || !repr.relativeToParentBone) return repr.transformRef.localPosition;
+            return repr.parent.transformRef.InverseTransformPoint(repr.transformRef.position);
         }
 
-        public Vector3 GetWorldFromLocalPoition(Vector3 newLocalPos, BoneModel b, string reprKey, bool relativeToParentBone)
+        public Vector3 GetWorldFromLocalPoition(Vector3 newLocalPos, ReprModel repr)
         {
-            if (!b.parent || !relativeToParentBone) return b.point.reprs[reprKey].transformRef.parent.TransformPoint(newLocalPos);
-            return b.parent.point.reprs[reprKey].transformRef.TransformPoint(newLocalPos);
+            if (!repr.parent || !repr.relativeToParentBone) return repr.transformRef.parent.TransformPoint(newLocalPos);
+            return repr.parent.transformRef.TransformPoint(newLocalPos);
         }
 
         public float GetProcessedAngleZ(Quaternion rotation)

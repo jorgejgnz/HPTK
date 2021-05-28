@@ -23,19 +23,35 @@ namespace HandPhysicsToolkit.Modules.Avatar
         public SkinnedMeshRenderer skinnedMeshRenderer;
         public LineRenderer lineRenderer;
 
+        ReprModel _parent;
+        public ReprModel parent
+        {
+            get
+            {
+                if (!_parent && point.bone.parent && point.bone.parent.point.reprs.ContainsKey(key)) _parent = point.bone.parent.point.reprs[key];
+                return _parent;
+            }
+        }
+
         [Header("Control")]
         public bool relativeToParentBone = true;
+
         public Vector3 localPosition
         {
-            get { return controller.GetLocalPosition(point.bone, key, relativeToParentBone); }
-            set { transformRef.position = controller.GetWorldFromLocalPoition(value, point.bone, key, relativeToParentBone); }
+            get { return controller.GetLocalPosition(this); }
+            set { transformRef.position = controller.GetWorldFromLocalPoition(value, this); }
         }
+
         public Quaternion localRotation
         {
-            get { return controller.GetLocalRotation(point.bone, key, relativeToParentBone); }
-            set { transformRef.rotation = controller.GetWorldFromLocalRotation(value, point.bone, key, relativeToParentBone); }
+            get { return controller.GetLocalRotation(this); }
+            set { transformRef.rotation = controller.GetWorldFromLocalRotation(value, this); }
         }
-        public float localRotZ { get { return controller.GetProcessedAngleZ(localRotation); } }
+
+        public float localRotZ
+        {
+            get { return controller.GetProcessedAngleZ(localRotation); }
+        }
 
         [Header("Armature")]
         [ReadOnly]

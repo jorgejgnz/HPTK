@@ -11,15 +11,9 @@ namespace HandPhysicsToolkit.Physics
     [RequireComponent(typeof(Rigidbody))]
     public class Pheasy : MonoBehaviour
     {
-        Rigidbody _rb;
+        public static List<Pheasy> registry = new List<Pheasy>();
 
-        public Rigidbody rb
-        {
-            get {
-                if (!_rb) _rb = GetComponent<Rigidbody>();
-                return _rb;
-            }
-        }
+        public Rigidbody rb;
 
         [Header("Center of Mass")]
         public Transform centerOfMass;
@@ -58,6 +52,8 @@ namespace HandPhysicsToolkit.Physics
 
         public List<Collider> ignoring = new List<Collider>();
 
+        Vector3 comPosition;
+
         TriggerNotifier triggerNotifier;
         List<Collider> myColliders = new List<Collider>();
         List<TriggerNotifier> myTriggerNotifiers = new List<TriggerNotifier>();
@@ -68,6 +64,10 @@ namespace HandPhysicsToolkit.Physics
 
         private void Awake()
         {
+            registry.Add(this);
+
+            rb = GetComponent<Rigidbody>();
+
             if (!centerOfMass)
             {
                 centerOfMass = new GameObject("CenterOfMass").transform;
@@ -102,9 +102,11 @@ namespace HandPhysicsToolkit.Physics
 
         private void Update()
         {
-            if (!rb) return;
-
-            if (centerOfMass) SetCenterOfMass(rb, centerOfMass);
+            if (centerOfMass)
+            {
+                comPosition = rb.transform.InverseTransformPoint(centerOfMass.position);
+                if (rb.centerOfMass != comPosition) rb.centerOfMass = comPosition;
+            }
 
             for (int t = 0; t < targets.Count; t++)
             {
@@ -117,8 +119,6 @@ namespace HandPhysicsToolkit.Physics
 
         private void FixedUpdate()
         {
-            if (!rb) return;
-
             for (int t = 0; t < targets.Count; t++)
             {
                 FixedUpdateJoint(targets[t]);
@@ -143,10 +143,6 @@ namespace HandPhysicsToolkit.Physics
                 t.axis.position = t.connectedAnchor.position;
                 t.axis.rotation = t.GetJointAxisWorldRotation();
             }
-
-            //*
-
-            //
         }
 
         void UpdateJoint(TargetConstraint t, bool editMode)
@@ -164,8 +160,8 @@ namespace HandPhysicsToolkit.Physics
                 // Drives
                 if (gradualMode)
                 {
-                    PhysHelpers.UpdateJointMotionDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.motionDrive.toJointDrive(), t.lerp));
-                    PhysHelpers.UpdateJointAngularDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.angularDrive.toJointDrive(), t.lerp));
+                    PhysHelpers.UpdateJointMotionDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.motionDrive.toJointDrive(), t.gradualLerp));
+                    PhysHelpers.UpdateJointAngularDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.angularDrive.toJointDrive(), t.gradualLerp));
                 }
                 else
                 {
@@ -182,11 +178,11 @@ namespace HandPhysicsToolkit.Physics
 
             if (!t.setAxisWhenEnabled) t.joint.autoConfigureConnectedAnchor = false; // Called every frame
 
-            //*
-
             // Connected body/anchor
-            if (t.connectedBody) t.joint.connectedAnchor = t.joint.connectedBody.transform.InverseTransformPoint(t.connectedAnchor.position);
-            else t.joint.connectedAnchor = t.connectedAnchor.position;
+            if (t.connectedBody) t.tmpConnAnchor = t.joint.connectedBody.transform.InverseTransformPoint(t.connectedAnchor.position);
+            else t.tmpConnAnchor = t.connectedAnchor.position;
+
+            if (t.joint.connectedAnchor != t.tmpConnAnchor) t.joint.connectedAnchor = t.tmpConnAnchor;
 
             // Target rotation
             t.jointFrameRotation = t.GetJointAxisWorldRotation();
@@ -201,15 +197,17 @@ namespace HandPhysicsToolkit.Physics
             // Target position
             if (t.targetPosition)
             {
-                t.joint.targetPosition = -1.0f * t.axis.InverseTransformPoint(t.targetPosition.position);
-                if (t.connectedBody) t.joint.targetPosition = Vector3.Scale(t.joint.targetPosition, t.connectedBody.transform.localScale);
+                t.tmpTargetPos = -1.0f * t.axis.InverseTransformPoint(t.targetPosition.position);
+                if (t.connectedBody) t.joint.targetPosition = Vector3.Scale(t.tmpTargetPos, t.connectedBody.transform.localScale);
+                else t.joint.targetPosition = t.tmpTargetPos;
             }
             else if (t.joint.targetPosition != Vector3.zero)
             {
                 t.joint.targetPosition = Vector3.zero;
             }
 
-            //
+            // Update flag
+            if (!t.updated) t.updated = true;
 
             // Debug
             if (t.showAxis) Debug.DrawLine(t.axis.position, t.axis.position + t.GetJointAxisWorldRotation() * Vector3.forward * 0.5f, Color.blue);
@@ -227,14 +225,14 @@ namespace HandPhysicsToolkit.Physics
             if (t.enabled)
             {
                 // Lerp
-                if (t.lerp < 1.0f)
+                if (t.gradualLerp < 1.0f)
                 {
-                    t.lerp += Time.fixedDeltaTime / t.lerpTime;
-                    if (t.lerp >= 1.0f) t.lerp = 1.0f;
+                    t.gradualLerp += Time.deltaTime / t.gradualMaxTime;
+                    if (t.gradualLerp >= 1.0f) t.gradualLerp = 1.0f;
                 }
 
                 // Joint
-                UpdateJoint(t, editMode);
+                UpdateJoint(t, editMode || (!editMode && !t.updated));
 
                 // Extensibility
                 for (int e = 0; e < t.extensions.Count; e++)
@@ -261,14 +259,14 @@ namespace HandPhysicsToolkit.Physics
             // Axis
             if (t.anchorAxis)
             {
-                UpdateAxis(t.anchorAxis.transform, t.anchor, axisScale);
-                t.anchorAxis.SetActive(t.showAnchor);
+                if (t.anchorAxis.activeSelf != t.showAnchor) t.anchorAxis.SetActive(t.showAnchor);
+                if (t.showAnchor) UpdateAxis(t.anchorAxis.transform, t.anchor, axisScale);
             }
 
             if (t.connAnchorAxis)
             {
-                UpdateAxis(t.connAnchorAxis.transform, t.connectedAnchor, axisScale);
-                t.connAnchorAxis.SetActive(t.showConnAcnhor);
+                if (t.connAnchorAxis.activeSelf != t.showConnAcnhor) t.connAnchorAxis.SetActive(t.showConnAcnhor);
+                if (t.showConnAcnhor) UpdateAxis(t.connAnchorAxis.transform, t.connectedAnchor, axisScale);
             }
         }
 
@@ -331,7 +329,7 @@ namespace HandPhysicsToolkit.Physics
                 }
             }
 
-            t.lerp = 0.0f;
+            t.gradualLerp = 0.0f;
 
             t.extensions.ForEach(e => e.InitExtension(t));
 

@@ -35,9 +35,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             StartFinger(pinky);
         }
 
-        public override sealed void UpdateHandGesture()
+        public override sealed void HandLerpUpdate()
         {
-            base.UpdateHandGesture();
+            base.HandLerpUpdate();
 
             if (pose != null)
             {
@@ -84,9 +84,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             }
         }
 
-        public override sealed void LateUpdateData()
+        public override sealed void LateGestureUpdate()
         {
-            base.LateUpdateData();
+            base.LateGestureUpdate();
 
             // Intention events
             if (isIntentionallyActive && !wasIntentionallyActive)

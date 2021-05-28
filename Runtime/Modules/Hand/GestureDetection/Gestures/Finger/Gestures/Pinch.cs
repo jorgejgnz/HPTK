@@ -18,9 +18,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitFingerGesture();
         }
 
-        public override sealed void UpdateFingerGesture()
+        public override sealed void FingerLerpUpdate()
         {
-            base.UpdateFingerGesture();
+            base.FingerLerpUpdate();
 
             // Lerp
             if (_model.flex.lerp < conf.minFlexLerpToDisablePinch)
@@ -73,9 +73,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             }
         }
 
-        public override sealed void LateUpdateData()
+        public override sealed void LateGestureUpdate()
         {
-            base.LateUpdateData();
+            base.LateGestureUpdate();
 
             // Intention events
             if (isIntentionallyActive && !wasIntentionallyActive)

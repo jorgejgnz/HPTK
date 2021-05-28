@@ -32,7 +32,7 @@ namespace HandPhysicsToolkit.Physics
         public JointSettings settings = new JointSettings();
 
         [Header("Stability")]
-        public float lerpTime = 1.0f;
+        public float gradualMaxTime = 1.0f;
         public float error = 0.0f;
 
         [Header("Extensibility")]
@@ -45,7 +45,7 @@ namespace HandPhysicsToolkit.Physics
         public bool showConnAcnhor = false;
 
         [HideInInspector]
-        public float lerp = 0.0f;
+        public float gradualLerp = 0.0f;
 
         [HideInInspector]
         public Quaternion jointFrameRotation;
@@ -70,6 +70,17 @@ namespace HandPhysicsToolkit.Physics
 
         [HideInInspector]
         public bool setAxisWhenEnabled = true;
+
+        [HideInInspector]
+        public Vector3 tmpConnAnchor;
+
+        [HideInInspector]
+        public Vector3 tmpTargetPos;
+
+        [HideInInspector]
+        public bool updated = false;
+
+        Vector3 xAxis, yAxis, zAxis;
 
         public TargetConstraint(Pheasy pheasy, string name)
         {
@@ -98,10 +109,9 @@ namespace HandPhysicsToolkit.Physics
         }
         public Quaternion GetJointAxisWorldRotation()
         {
-            Vector3 xAxis, yAxis, zAxis;
             xAxis = joint.axis;
-            zAxis = Vector3.Cross(joint.axis, joint.secondaryAxis).normalized;
-            yAxis = Vector3.Cross(zAxis, xAxis).normalized;
+            zAxis = Vector3.Cross(joint.axis, joint.secondaryAxis);
+            yAxis = Vector3.Cross(zAxis, xAxis);
 
             Quaternion axisRot = Quaternion.LookRotation(zAxis, yAxis);
 

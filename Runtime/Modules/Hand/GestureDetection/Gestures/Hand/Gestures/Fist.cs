@@ -15,9 +15,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitHandGesture();
         }
 
-        public override sealed void UpdateHandGesture()
+        public override sealed void HandLerpUpdate()
         {
-            base.UpdateHandGesture();
+            base.HandLerpUpdate();
 
             // Lerp
             sum = 0.0f;

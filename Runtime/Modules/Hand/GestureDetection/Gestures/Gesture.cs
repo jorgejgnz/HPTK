@@ -66,7 +66,16 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
 
         public virtual void InitGesture() { }
 
-        public virtual void UpdateGesture()
+        public void UpdateGesture()
+        {
+            EarlyGestureUpdate();
+
+            if (gameObject.activeSelf) LerpUpdate();
+
+            LateGestureUpdate();
+        }
+
+        public virtual void EarlyGestureUpdate()
         {
             // Backup previous values
             wasActive = isActive;
@@ -89,9 +98,17 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
                 timeActive += Time.deltaTime;
             else if (timeActive != 0.0f)
                 timeActive = 0.0f;
+
+            if (!gameObject.activeSelf)
+            {
+                _lerp = 0.0f;
+                return;
+            }
         }
 
-        public virtual void LateUpdateData()
+        public virtual void LerpUpdate() { }
+
+        public virtual void LateGestureUpdate()
         {
             // Activation events
             if (isActive && !wasActive)

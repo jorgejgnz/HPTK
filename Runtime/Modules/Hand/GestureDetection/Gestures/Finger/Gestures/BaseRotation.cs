@@ -14,9 +14,9 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.InitFingerGesture();
         }
 
-        public override sealed void UpdateFingerGesture()
+        public override sealed void FingerLerpUpdate()
         {
-            base.UpdateFingerGesture();
+            base.FingerLerpUpdate();
 
             // Lerp
             localRotZ = finger.knuckle.master.localRotation.eulerAngles.z;
