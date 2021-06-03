@@ -1,3 +1,10 @@
+## [0.6.1](https://github.com/jorgejgnz/HPTK/compare/v0.6.0...v0.6.1) (2021-05-28)
+
+
+### Performance Improvements
+
+* Optimizations. Pheasy registry. Toggleable gestures ([8660d86](https://github.com/jorgejgnz/HPTK/commit/8660d869bf385fb5bc574ed3b522ef64b3768857))
+
 # [0.6.0](https://github.com/jorgejgnz/HPTK/compare/v0.5.0...v0.6.0) (2021-05-18)
 
 
