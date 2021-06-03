@@ -21,6 +21,10 @@ namespace HandPhysicsToolkit.Utils
         public Representation representation;
         public BodyModel body;
 
+        [Header("Hand-specific")]
+        public bool requiresCorrected = true;
+
+        [Header("Read Only")]
         [ReadOnly]
         public BoneSearchEngine source;
 
@@ -41,7 +45,7 @@ namespace HandPhysicsToolkit.Utils
                 Debug.LogError("Hand has missing references. ReprModels cannot be generated");
                 return;
             }
-            else if (source is HandSearchEngine && !(source as HandSearchEngine).hand.wristPoint.corrected)
+            else if (source is HandSearchEngine && !(source as HandSearchEngine).hand.wristPoint.corrected && requiresCorrected)
             {
                 Debug.LogError("Hand wrist has not been corrected. Fix rotations first");
                 return;
@@ -159,7 +163,7 @@ namespace HandPhysicsToolkit.Utils
             }
             else if (source is HandSearchEngine)
             {
-                WizardHelpers.LinkHandPointReprs(source as HandSearchEngine, body, true, true);
+                WizardHelpers.LinkHandPointReprs(source as HandSearchEngine, body, true, requiresCorrected);
             }
         }
     }
