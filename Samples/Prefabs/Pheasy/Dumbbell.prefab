@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 5511998641604690945}
   - component: {fileID: 5511998641604690944}
   - component: {fileID: 5511998641604691007}
-  - component: {fileID: 5511998641604691006}
-  - component: {fileID: 5511998641604691005}
   m_Layer: 8
   m_Name: Cylinder
   m_TagString: Untagged
@@ -98,53 +96,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &5511998641604691006
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511998641604691003}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &5511998641604691005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5511998641604691003}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d15de70d95a419b45acb6e5ca9092518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  centerOfMass: {fileID: 0}
-  targets: []
-  colliders: []
-  collisionNotifier: {fileID: 0}
-  triggerNotifiers: []
-  safeMode: 1
-  maxVelocity: 20
-  maxAngularVelocity: 12.5
-  maxDepenetrationVelocity: 1
-  maxErrorAllowed: 0.5
-  ignoreCollisionsOnStart: 0
-  relations: []
-  onInit:
-    m_PersistentCalls:
-      m_Calls: []
-  disableEditModeAfterFrames: -1
-  axis: {fileID: 0}
-  axisScale: 0.02
-  ignoring: []
 --- !u!1 &5511998641995786358
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,12 +350,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15de70d95a419b45acb6e5ca9092518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   centerOfMass: {fileID: 0}
   targets: []
   colliders: []
   collisionNotifier: {fileID: 0}
   triggerNotifiers: []
   safeMode: 1
+  gradualMode: 1
   maxVelocity: 20
   maxAngularVelocity: 12.5
   maxDepenetrationVelocity: 1
@@ -414,9 +367,9 @@ MonoBehaviour:
   onInit:
     m_PersistentCalls:
       m_Calls: []
-  disableEditModeAfterFrames: -1
   axis: {fileID: 0}
   axisScale: 0.02
+  editMode: 1
   ignoring: []
 --- !u!114 &5511998642587595782
 MonoBehaviour:
