@@ -198,6 +198,8 @@ namespace HandPhysicsToolkit.Modules.Avatar
                 foreach (KeyValuePair<string, ReprModel> rayRepr in h.ray.reprs)
                 {
                     rayDir = Vector3.zero;
+
+                    // Find ray forward
                     if (shoulder && shoulder.reprs.ContainsKey(rayRepr.Key))
                     {
                         rayDir = (rayRepr.Value.transformRef.position - shoulder.reprs[rayRepr.Key].transformRef.position).normalized;
@@ -206,7 +208,11 @@ namespace HandPhysicsToolkit.Modules.Avatar
                     {
                         rayDir = Quaternion.Lerp(h.body.torso.head.reprs[rayRepr.Key].transformRef.rotation, h.palmNormal.reprs[rayRepr.Key].transformRef.rotation, 0.5f) * Vector3.forward;
                     }
-                    if (rayDir != Vector3.zero) rayRepr.Value.transformRef.forward = rayDir;
+
+                    // Apply rotation
+                    if (rayDir != Vector3.zero) rayRepr.Value.transformRef.rotation = Quaternion.LookRotation(rayDir, h.palmCenter.reprs[rayRepr.Key].transformRef.up);
+
+                    // Hide / Unhide
                     if (h.palmNormal.reprs.ContainsKey(rayRepr.Key) && h.palmNormal.reprs[rayRepr.Key].transformRef)
                     {
                         rayRepr.Value.transformRef.gameObject.SetActive(Vector3.Dot(h.palmNormal.reprs[rayRepr.Key].transformRef.forward, rayRepr.Value.transformRef.forward) > 0.0f);

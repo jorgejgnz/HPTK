@@ -1,3 +1,10 @@
+## [0.6.2](https://github.com/jorgejgnz/HPTK/compare/v0.6.1...v0.6.2) (2021-06-05)
+
+
+### Bug Fixes
+
+* **avatarModule:** Public functions restored in AvatarController ([0fec907](https://github.com/jorgejgnz/HPTK/commit/0fec907a212c9f49fb1ee651ba1274b725e6c6ed))
+
 ## [0.6.1](https://github.com/jorgejgnz/HPTK/compare/v0.6.0...v0.6.1) (2021-05-28)
 
 
