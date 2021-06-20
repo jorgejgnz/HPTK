@@ -78,7 +78,7 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
                     intentionTime = Mathf.Clamp(intentionTime - Time.deltaTime, 0.0f, conf.minTimeToIntention);
                 }
 
-                intentionLerp = Mathf.InverseLerp(0.0f, conf.minTimeToIntention, intentionTime);
+                _intentionLerp = Mathf.InverseLerp(0.0f, conf.minTimeToIntention, intentionTime);
 
                 _isIntentionallyActive = intentionLerp >= 1.0f;
             }

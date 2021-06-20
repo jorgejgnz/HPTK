@@ -41,7 +41,8 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
         [ReadOnly]
         [Range(0.0f, 1.0f)]
         [SerializeField]
-        protected float intentionLerp;
+        protected float _intentionLerp;
+        public float intentionLerp { get { return _intentionLerp; } }
 
         [SerializeField]
         [ReadOnly]
