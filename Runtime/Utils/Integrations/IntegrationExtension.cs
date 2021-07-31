@@ -8,6 +8,8 @@ namespace HandPhysicsToolkit.Utils
     [CreateAssetMenu(menuName = "HPTK/IntegrationConfigurationExtension", order = 2)]
     public class IntegrationExtension : ScriptableObject
     {
+        public bool autoIntegration = true;
+
         public IntegrationConfiguration main;
         public List<Integration> integrations = new List<Integration>();
 
