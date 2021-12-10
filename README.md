@@ -36,6 +36,8 @@
 ## Hand tracking
 - Oculus Quest 1/2 - Android
 - Hololens 2 - UWP
+- Leap Motion - PC
+- WebXR - Web
 
 ## Controllers
 - Oculus Touch
@@ -68,7 +70,7 @@ Check Wiki for a detailed **step-by-step guide**.
 
 **Michael Stevenson** - [GitHub](https://github.com/mstevenson)
 
-Nasim, K, Kim, YJ. Physics-based assistive grasping for robust object manipulation in virtual reality. Comput Anim Virtual Worlds. 2018; 29:e1820. [https://doi.org/10.1002/cav.1820](https://doi.org/10.1002/cav.1820)
+Kiran Nasim and Young J. Kim. 2016. Physics-based Interactive Virtual Grasping. In Proceedings of HCI Korea (HCIK '16). Hanbit Media, Inc., Seoul, KOR, 114–120. DOI: [https://doi.org/10.17210/hcik.2016.01.114](https://doi.org/10.17210/hcik.2016.01.114)
 
 Linn, Allison. Talking with your hands: How Microsoft researchers are moving beyond keyboard and mouse. The AI Blog. Microsoft. 2016
 [https://blogs.microsoft.com/](https://blogs.microsoft.com/ai/talking-hands-microsoft-researchers-moving-beyond-keyboard-mouse/)
