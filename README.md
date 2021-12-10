@@ -35,6 +35,7 @@
 # Supported input
 ## Hand tracking
 - Oculus Quest 1/2 - Android
+- Leap Motion - Standalone
 - Hololens 2 - UWP
 - Leap Motion - PC
 - WebXR - Web

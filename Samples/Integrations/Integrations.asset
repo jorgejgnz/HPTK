@@ -22,6 +22,6 @@ MonoBehaviour:
   - name: Hololens2
     package: 
   - name: Leap Motion
-    package: 
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/ultraleap.unitypackage
   - name: MRTK Quest
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk-quest.unitypackage
