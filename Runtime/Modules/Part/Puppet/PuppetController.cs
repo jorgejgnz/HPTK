@@ -20,9 +20,16 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
             base.Awake();
             model = GetComponent<PuppetModel>();
             SetGeneric(model.view, model);
+        }
 
-            // Module registry
+        private void OnEnable()
+        {
             model.part.registry.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            model.part.registry.Remove(this);
         }
 
         public override sealed void ControllerStart()

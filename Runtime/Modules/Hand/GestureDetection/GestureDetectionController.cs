@@ -20,9 +20,16 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.Awake();
             model = GetComponent<GestureDetectionModel>();
             SetGeneric(model.view, model);
+        }
 
-            // Module registry
+        private void OnEnable()
+        {
             model.hand.registry.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            model.hand.registry.Remove(this);
         }
 
         public override void ControllerStart()

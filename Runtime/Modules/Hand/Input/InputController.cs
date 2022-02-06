@@ -53,9 +53,16 @@ namespace HandPhysicsToolkit.Modules.Hand.Input
             base.Awake();
             model = GetComponent<InputModel>();
             SetGeneric(model.view, model);
+        }
 
-            // Module registry
+        private void OnEnable()
+        {
             model.hand.registry.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            model.hand.registry.Remove(this);
         }
 
         public override void ControllerStart()

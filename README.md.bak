@@ -30,17 +30,13 @@
 
 # Documentation
 
-Some documentation entries:
-- [Home](https://jorge-jgnz94.gitbook.io/hptk/)
-- [Setup](https://jorge-jgnz94.gitbook.io/hptk/setup)
-- [FAQs](https://jorge-jgnz94.gitbook.io/hptk/faqs)
+[Documentation](https://jorge-jgnz94.gitbook.io/hptk/)
 
 # Supported versions
 - Unity 2020.x
 - Unity 2019.x
 
 # Supported input
-
 ## Hand tracking
 - Oculus Quest 1/2 - Android
 - Leap Motion - Standalone

@@ -32,8 +32,16 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
             base.Awake();
             model = GetComponent<ContactDetectionModel>();
             SetGeneric(model.view, model);
+        }
 
+        private void OnEnable()
+        {
             model.part.registry.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            model.part.registry.Remove(this);
         }
 
         public override sealed void ControllerStart()
@@ -117,6 +125,9 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
             if (!gameObject.activeSelf)
                 return;
 
+            // Clean destroyed contactables
+            model.contacts.RemoveAll(c => c.contactable == null);
+
             if (model.hoverDetectionSystem == HoverDetectionSystem.OverlapSphereFromRoot)
             {
                 OverlapSphere(model.part.root, model.sphereCastRadius, foundRbs);
@@ -135,7 +146,7 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
                 {
                     OnRbExit(exitedRbs.ElementAt(i), model.part.root);
                 }
-            }
+            } 
 
             // For each contact
             for (int c = 0; c < model.contacts.Count; c++)
@@ -393,7 +404,7 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
 
         void OnRbTouchStay(Collision collision, BoneModel bone)
         {
-            stayedContact = model.contacts.Find(c => c.contactable.pheasy.rb == collision.rigidbody);
+            stayedContact = model.contacts.Find(c => c.contactable != null && c.contactable.pheasy.rb == collision.rigidbody);
 
             if (stayedContact == null || stayedContact.contactable == null)
                 return;
