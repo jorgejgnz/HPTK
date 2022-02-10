@@ -1,3 +1,10 @@
+## [0.6.3](https://github.com/jorgejgnz/HPTK/compare/v0.6.2...v0.6.3) (2022-02-06)
+
+
+### Bug Fixes
+
+* **contactDetectionModule:** Fix for missing references after contactable removal ([89f6573](https://github.com/jorgejgnz/HPTK/commit/89f6573285b139d7259e4266a063b5716374bb4a))
+
 ## [0.6.2](https://github.com/jorgejgnz/HPTK/compare/v0.6.1...v0.6.2) (2021-06-05)
 
 
