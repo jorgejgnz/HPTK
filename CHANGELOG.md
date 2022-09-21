@@ -1,3 +1,10 @@
+## [0.6.4](https://github.com/jorgejgnz/HPTK/compare/v0.6.3...v0.6.4) (2022-09-21)
+
+
+### Bug Fixes
+
+* **HPTKController:** Fix for modules not updating when disabled on startup ([4a99b73](https://github.com/jorgejgnz/HPTK/commit/4a99b7366e991df17330460fe920cc2c6b090993))
+
 ## [0.6.3](https://github.com/jorgejgnz/HPTK/compare/v0.6.2...v0.6.3) (2022-02-06)
 
 
