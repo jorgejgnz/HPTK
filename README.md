@@ -2,7 +2,7 @@
   <img src="https://imgur.com/QHED9DH.png" height="150" alt="logo"><br>
   <a href="https://unity3d.com/es/get-unity/download/archive"><img src="https://img.shields.io/badge/unity-2019.4%20or%20later-green.svg" alt=""></a>
   <a href="https://github.com/jorgejgnz/HPTK/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://github.com/jorgejgnz/HPTK/releases"><img src="https://img.shields.io/badge/version-0.6.3-blue" alt="version"></a>
+  <a href="https://github.com/jorgejgnz/HPTK/releases"><img src="https://img.shields.io/badge/version-0.6.4-blue" alt="version"></a>
   <a href="https://discord.gg/TuzhMZQpDy"><img src="https://img.shields.io/discord/679793598958403620?logo=discord" alt=""></a>
   <a href="https://twitter.com/intent/follow?screen_name=jorgejgnz"><img src="https://img.shields.io/twitter/follow/jorgejgnz.svg?label=Follow&amp;style=social" alt=""></a>
 </p><br>

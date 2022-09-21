@@ -40,7 +40,10 @@ namespace HandPhysicsToolkit
             started = true;
         }
 
-        public virtual void ControllerUpdate() { }
+        public virtual void ControllerUpdate()
+        {
+            if (!started) ControllerStart();
+        }
 
         public void SetGeneric(HPTKView view, HPTKModel model) { genericView = view; genericModel = model; }
     }
