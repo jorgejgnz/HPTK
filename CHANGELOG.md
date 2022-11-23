@@ -1,3 +1,10 @@
+## [0.6.5](https://github.com/jorgejgnz/HPTK/compare/v0.6.4...v0.6.5) (2022-11-23)
+
+
+### Bug Fixes
+
+* **DefaultAvatar:** Missing mesh on DefaultAvatar.Standard prefab ([e9de36a](https://github.com/jorgejgnz/HPTK/commit/e9de36af07dc647041117764bfb02662f536059f))
+
 ## [0.6.4](https://github.com/jorgejgnz/HPTK/compare/v0.6.3...v0.6.4) (2022-09-21)
 
 
