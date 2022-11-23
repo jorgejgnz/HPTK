@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381487037091}
   m_RootOrder: 1
@@ -73,6 +74,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.15677655, y: -0.009982705, z: 0.017125782}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 4
@@ -110,15 +112,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -128,6 +129,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -151,14 +154,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -173,8 +176,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982379598565989
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +206,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381022882460}
   m_RootOrder: 1
@@ -246,6 +251,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381449905327}
   m_Father: {fileID: 52982380238688426}
@@ -278,6 +284,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381259572320}
   m_RootOrder: 1
@@ -320,10 +327,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52982379704165300}
-  m_LocalRotation: {x: 0.000000014901159, y: 0.000000029802319, z: 0.0000000037252899,
-    w: -1}
+  m_LocalRotation: {x: 0.000000014901159, y: 0.000000029802319, z: 0.0000000037252899, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982379885934153}
   m_RootOrder: 1
@@ -369,6 +376,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380506797188}
   m_RootOrder: 1
@@ -414,6 +422,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.06869999, y: -0.02679997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 3
@@ -430,15 +439,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -448,6 +456,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -471,14 +481,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -493,8 +503,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982379829789912
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +533,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380640861125}
   m_RootOrder: 1
@@ -567,6 +579,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.06869999, y: -0.02679997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 2
@@ -583,15 +596,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -601,6 +613,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -624,14 +638,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -646,8 +660,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982379885934152
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +690,7 @@ Transform:
   m_LocalRotation: {x: -0.20425358, y: 0.13468078, z: -0.01960206, w: 0.9694109}
   m_LocalPosition: {x: 0.034073558, y: -0.009419835, z: -0.022998573}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380526032644}
   - {fileID: 52982379704165301}
@@ -693,15 +709,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -711,6 +726,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -734,14 +751,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -756,8 +773,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982379945147047
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,6 +803,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.024301702, y: 0.000005243357, z: 0.000004363086}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380770615417}
   - {fileID: 52982381102717729}
@@ -803,15 +822,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -821,6 +839,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -844,14 +864,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -866,8 +886,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380108886911
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,6 +916,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.06869999, y: -0.026799977, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380149266825}
   m_Father: {fileID: 52982381411928789}
@@ -912,15 +934,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -930,6 +951,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -953,14 +976,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -975,8 +998,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380149266824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,6 +1028,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380108886908}
   m_RootOrder: 0
@@ -1019,10 +1044,12 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1132,6 +1159,7 @@ Transform:
   m_LocalRotation: {x: 0.000000074505806, y: -0, z: 0.000000014901161, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380528399452}
   m_RootOrder: 1
@@ -1147,10 +1175,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1239,6 +1269,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.08869379, y: -0.006529307, z: -0.017465241}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380640861125}
   - {fileID: 52982381325678560}
@@ -1257,15 +1288,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -1275,6 +1305,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -1298,14 +1330,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1320,8 +1352,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380238688430
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1382,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381022882460}
   - {fileID: 52982381487037091}
@@ -1373,15 +1407,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 52982380345783093}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -1391,6 +1424,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -1414,14 +1449,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1436,8 +1471,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380240647222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1465,6 +1501,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0239, y: -0.0011, z: 0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380513543924}
   m_RootOrder: 0
@@ -1481,15 +1518,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -1499,6 +1535,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -1522,14 +1560,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1544,8 +1582,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380344963920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1612,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381114146054}
   m_RootOrder: 1
@@ -1618,6 +1658,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380528399452}
   m_RootOrder: 0
@@ -1633,10 +1674,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1718,6 +1761,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380526032644}
   m_RootOrder: 1
@@ -1763,6 +1807,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.020311384, y: -6.661338e-18, z: 1.7763568e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380647111595}
   - {fileID: 52982380612917700}
@@ -1781,15 +1826,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -1799,6 +1843,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -1822,14 +1868,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -1844,8 +1890,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380454956112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,6 +1919,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380238688426}
   - {fileID: 52982380528399452}
@@ -1905,6 +1953,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381160511849}
   m_RootOrder: 1
@@ -1950,6 +1999,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0036, y: -0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381100990669}
   m_RootOrder: 1
@@ -1995,6 +2045,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380528399452}
   m_RootOrder: 2
@@ -2010,10 +2061,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2042,7 +2095,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 88e2e1bfe11ec6c438b0ade27eaeded1, type: 3}
+  m_Mesh: {fileID: 4703312045575268607, guid: c259a54499bfc084698c4167b35b69a0, type: 3}
   m_Bones:
   - {fileID: 52982380238688426}
   - {fileID: 52982381353470236}
@@ -2094,6 +2147,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.095646605, y: -0.0025431544, z: 0.0017259055}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381160511849}
   - {fileID: 52982379739366553}
@@ -2112,15 +2166,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2130,6 +2183,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2153,14 +2208,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2175,8 +2230,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380513543927
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,6 +2260,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.026573397, y: 4.440892e-18, z: -4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380240647223}
   - {fileID: 52982381207367757}
@@ -2222,15 +2279,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2240,6 +2296,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2263,14 +2321,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2285,8 +2343,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380526032649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,6 +2373,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04565054, y: -0.0000009982332, z: 0.0000021940255}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381100990669}
   - {fileID: 52982380363072718}
@@ -2332,15 +2392,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2350,6 +2409,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2373,14 +2434,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2395,8 +2456,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380528399455
 GameObject:
   m_ObjectHideFlags: 0
@@ -2423,6 +2485,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380345783092}
   - {fileID: 52982380154368789}
@@ -2457,6 +2520,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03379309, y: 1.3322676e-17, z: -1.6653344e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380978792394}
   - {fileID: 52982381526336124}
@@ -2475,15 +2539,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2493,6 +2556,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2516,14 +2581,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2538,8 +2603,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380612917703
 GameObject:
   m_ObjectHideFlags: 0
@@ -2567,6 +2633,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380419095435}
   m_RootOrder: 1
@@ -2612,6 +2679,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0389961, y: -8.881784e-18, z: 8.881784e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380513543924}
   - {fileID: 52982379829789913}
@@ -2630,15 +2698,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2648,6 +2715,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2671,14 +2740,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2693,8 +2762,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380647111594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2722,6 +2792,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.011908775, y: -1.6653345e-18, z: -4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380419095435}
   m_RootOrder: 0
@@ -2738,15 +2809,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2756,6 +2826,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2779,14 +2851,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2801,8 +2873,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380669875232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2830,6 +2903,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.023, y: -0.0015, z: 0.0005}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381114146054}
   m_RootOrder: 0
@@ -2846,15 +2920,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2864,6 +2937,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2887,14 +2962,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2909,8 +2984,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380770615416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,6 +3014,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0219, y: -0.0011, z: 0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982379945147044}
   m_RootOrder: 0
@@ -2954,15 +3031,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -2972,6 +3048,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -2995,14 +3073,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3017,8 +3095,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380972769430
 GameObject:
   m_ObjectHideFlags: 0
@@ -3047,6 +3126,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.086715505, y: -0.009435296, z: 0.0170236}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 5
@@ -3084,15 +3164,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3102,6 +3181,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3125,14 +3206,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3147,8 +3228,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982380978792397
 GameObject:
   m_ObjectHideFlags: 0
@@ -3176,6 +3258,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0222, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380602179767}
   m_RootOrder: 0
@@ -3192,15 +3275,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3210,6 +3292,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3233,14 +3317,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3255,8 +3339,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381022882433
 GameObject:
   m_ObjectHideFlags: 0
@@ -3284,6 +3369,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.020069301, y: -0.011554099, z: 0.0104965195}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381353470236}
   - {fileID: 52982379598565986}
@@ -3302,15 +3388,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3320,6 +3405,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3343,14 +3430,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3365,8 +3452,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381031344515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3394,6 +3482,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.05117276, y: -0.02602797, z: 0.0392}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 1
@@ -3410,15 +3499,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3428,6 +3516,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3451,14 +3541,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3473,8 +3563,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381042960521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,6 +3595,7 @@ Transform:
   m_LocalRotation: {x: 0.70710695, y: 0.000000119209275, z: -0.0000000372529, w: 0.7071067}
   m_LocalPosition: {x: 0.057399996, y: -0.025400003, z: 0}
   m_LocalScale: {x: -6.355115, y: -4.5129704, z: -4.1896873}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380238688426}
   m_RootOrder: 5
@@ -3527,10 +3619,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3555,6 +3649,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &52982381042960519
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3565,7 +3660,7 @@ MeshCollider:
   m_Material: {fileID: 13400000, guid: 927bc3a6dd716f04293f3aa38e84b7da, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1431001292053516804, guid: 4c0b23bf8e849b242b5172d78ac8c743, type: 3}
@@ -3596,6 +3691,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.030720409, y: 1.110223e-18, z: -3.7747583e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380419095435}
   - {fileID: 52982380492931369}
@@ -3614,15 +3710,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3632,6 +3727,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3655,14 +3752,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3677,8 +3774,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381102717728
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,6 +3804,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982379945147044}
   m_RootOrder: 1
@@ -3751,6 +3850,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.027547145, y: 0.00001392042, z: 0.000009294309}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380669875233}
   - {fileID: 52982380344963921}
@@ -3769,15 +3869,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3787,6 +3886,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3810,14 +3911,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3832,8 +3933,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381160511850
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,6 +3963,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04292699, y: -4.440892e-18, z: 4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381114146054}
   - {fileID: 52982380455451127}
@@ -3879,15 +3982,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -3897,6 +3999,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -3920,14 +4024,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -3942,8 +4046,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381174510788
 GameObject:
   m_ObjectHideFlags: 0
@@ -3971,6 +4076,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381485228600}
   m_RootOrder: 1
@@ -4016,6 +4122,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380513543924}
   m_RootOrder: 1
@@ -4061,6 +4168,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0379273, y: 3.330669e-18, z: 1.3322676e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982379945147044}
   - {fileID: 52982379641395611}
@@ -4079,15 +4187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -4097,6 +4204,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -4120,14 +4229,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4142,8 +4251,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381272560217
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,6 +4281,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381353470236}
   m_RootOrder: 1
@@ -4216,6 +4327,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380162053639}
   m_RootOrder: 1
@@ -4261,6 +4373,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.024852559, y: 4.440892e-18, z: -1.1657341e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381485228600}
   - {fileID: 52982381272560214}
@@ -4279,15 +4392,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -4297,6 +4409,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -4320,14 +4434,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4342,8 +4456,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381411928788
 GameObject:
   m_ObjectHideFlags: 0
@@ -4370,6 +4485,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381490164814}
   - {fileID: 52982381031344512}
@@ -4411,6 +4527,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.1101, y: -0.01200002, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982379613183103}
   m_RootOrder: 0
@@ -4434,10 +4551,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4462,6 +4581,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &52982381449905325
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4532,6 +4652,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03251291, y: -4.440892e-18, z: 3.2196467e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982380602179767}
   - {fileID: 52982381174510789}
@@ -4550,15 +4671,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -4568,6 +4688,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -4591,14 +4713,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4613,8 +4735,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381487037092
 GameObject:
   m_ObjectHideFlags: 0
@@ -4642,6 +4765,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.09599624, y: -0.0073164543, z: 0.02355068}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 52982381259572320}
   - {fileID: 52982379445590018}
@@ -4660,15 +4784,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -4678,6 +4801,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -4701,14 +4826,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4723,8 +4848,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381490164849
 GameObject:
   m_ObjectHideFlags: 0
@@ -4752,6 +4878,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.05117276, y: -0.02602797, z: -0.039000012}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982381411928789}
   m_RootOrder: 0
@@ -4768,15 +4895,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd29bb4de4ae3554093e9837c3114347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
   pheasy: {fileID: 0}
   goal: {fileID: 0}
@@ -4786,6 +4912,8 @@ MonoBehaviour:
   maxLocalRotZ: 361
   fixedLocalRot: {x: 0, y: 0, z: 0, w: 1}
   _constrained: 0
+  ready: 0
+  puppet: {fileID: 0}
   constraint:
     pheasy: {fileID: 0}
     enabled: 0
@@ -4809,14 +4937,14 @@ MonoBehaviour:
         damper: 0
         maxForce: 0
       collideWithConnectedRb: 0
-    lerpTime: 0
+    gradualMaxTime: 0
     error: 0
     extensions: []
     force: 0
     showAxis: 0
     showAnchor: 0
     showConnAcnhor: 0
-    lerp: 0
+    gradualLerp: 0
     jointFrameRotation: {x: 0, y: 0, z: 0, w: 0}
     initialWorldRotation: {x: 0, y: 0, z: 0, w: 0}
     initialLocalRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -4831,8 +4959,9 @@ MonoBehaviour:
     anchorAxis: {fileID: 0}
     connAnchorAxis: {fileID: 0}
     setAxisWhenEnabled: 0
-  puppet: {fileID: 0}
-  ready: 0
+    tmpConnAnchor: {x: 0, y: 0, z: 0}
+    tmpTargetPos: {x: 0, y: 0, z: 0}
+    updated: 0
 --- !u!1 &52982381526336127
 GameObject:
   m_ObjectHideFlags: 0
@@ -4860,6 +4989,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 52982380602179767}
   m_RootOrder: 1

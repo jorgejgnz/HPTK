@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.027547145, y: 0.00001392042, z: 0.000009294309}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264545024650}
   m_Father: {fileID: 4827105265692499722}
@@ -44,15 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263654643570
 GameObject:
@@ -81,6 +81,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.09570441, y: -0.0042553633, z: 0.0017418526}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265692499722}
   m_Father: {fileID: 4827105265545848775}
@@ -98,15 +99,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263668521231
 GameObject:
@@ -134,6 +134,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264815023196}
   - {fileID: 4827105264925200981}
@@ -167,6 +168,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03251291, y: -4.440892e-18, z: 3.2196467e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265450358580}
   m_Father: {fileID: 4827105263672852580}
@@ -184,15 +186,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263672852583
 GameObject:
@@ -221,6 +222,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.024852559, y: 4.440892e-18, z: -1.1657341e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105263670619479}
   m_Father: {fileID: 4827105264369367297}
@@ -238,15 +240,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263697962597
 GameObject:
@@ -275,6 +276,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.024301702, y: 0.000005243357, z: 0.000004363086}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264811177782}
   m_Father: {fileID: 4827105263755012205}
@@ -292,15 +294,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263717615925
 GameObject:
@@ -329,6 +330,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.06869999, y: -0.02679997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 3
@@ -345,15 +347,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105263755012204
 GameObject:
@@ -382,6 +383,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0379273, y: 3.330669e-18, z: 1.3322676e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105263697962594}
   m_Father: {fileID: 4827105265299156633}
@@ -399,15 +401,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264003199695
 GameObject:
@@ -436,6 +437,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
   m_LocalPosition: {x: 0.06869999, y: -0.02679997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 2
@@ -452,15 +454,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264266822077
 GameObject:
@@ -489,6 +490,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0239, y: -0.0011, z: 0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105265691950439}
   m_RootOrder: 0
@@ -505,15 +507,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264294649462
 GameObject:
@@ -542,6 +543,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.051172752, y: -0.025627933, z: 0.039738357}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 1
@@ -558,15 +560,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264336499081
 GameObject:
@@ -596,6 +597,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0867155, y: -0.009435301, z: 0.017023599}
   m_LocalScale: {x: 0.96153843, y: 0.96153843, z: 0.96153843}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 5
@@ -633,15 +635,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264369367296
 GameObject:
@@ -670,6 +671,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.020069301, y: -0.011554099, z: 0.0104965195}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105263672852580}
   m_Father: {fileID: 4827105265545848775}
@@ -687,15 +689,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264545024653
 GameObject:
@@ -724,6 +725,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.023, y: -0.0015, z: 0.0005}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105263650241034}
   m_RootOrder: 0
@@ -740,15 +742,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264591340622
 GameObject:
@@ -776,6 +777,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265203667129}
   - {fileID: 4827105264294649463}
@@ -813,6 +815,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265545848775}
   - {fileID: 4827105263668521228}
@@ -846,6 +849,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.020311384, y: -6.661338e-18, z: 1.7763568e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265344558257}
   m_Father: {fileID: 4827105264867604962}
@@ -863,15 +867,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264714470648
 GameObject:
@@ -900,6 +903,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0389961, y: -8.881784e-18, z: 8.881784e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265691950439}
   m_Father: {fileID: 4827105265427844860}
@@ -917,15 +921,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264765805164
 GameObject:
@@ -954,6 +957,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04565054, y: -0.0000009982332, z: 0.0000021940255}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264867604962}
   m_Father: {fileID: 4827105264880161822}
@@ -971,15 +975,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264811177769
 GameObject:
@@ -1008,6 +1011,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0219, y: -0.0011, z: 0.0002}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105263697962594}
   m_RootOrder: 0
@@ -1024,15 +1028,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264815023199
 GameObject:
@@ -1061,6 +1064,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.04, y: 1.04, z: 1.04}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105263668521228}
   m_RootOrder: 0
@@ -1076,10 +1080,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1160,6 +1166,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.030720409, y: 1.110223e-18, z: -3.7747583e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264692459074}
   m_Father: {fileID: 4827105264765805165}
@@ -1177,15 +1184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264880161809
 GameObject:
@@ -1214,6 +1220,7 @@ Transform:
   m_LocalRotation: {x: -0.20425358, y: 0.13468078, z: -0.01960206, w: 0.9694109}
   m_LocalPosition: {x: 0.034073558, y: -0.009419835, z: -0.022998573}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264765805165}
   m_Father: {fileID: 4827105265545848775}
@@ -1231,15 +1238,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105264925200980
 GameObject:
@@ -1268,6 +1274,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.04, y: 1.04, z: 1.04}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105263668521228}
   m_RootOrder: 1
@@ -1283,10 +1290,12 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1315,7 +1324,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 88e2e1bfe11ec6c438b0ade27eaeded1, type: 3}
+  m_Mesh: {fileID: 4703312045575268607, guid: c259a54499bfc084698c4167b35b69a0, type: 3}
   m_Bones:
   - {fileID: 4827105265545848775}
   - {fileID: 4827105263672852580}
@@ -1367,6 +1376,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105265238286684}
   m_RootOrder: 0
@@ -1382,10 +1392,12 @@ LineRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1496,6 +1508,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.15677655, y: -0.009982632, z: 0.01712578}
   m_LocalScale: {x: 0.96153843, y: 0.96153843, z: 0.96153843}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 4
@@ -1533,15 +1546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265203667128
 GameObject:
@@ -1570,6 +1582,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.051172752, y: -0.025627933, z: -0.038534172}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264591340623}
   m_RootOrder: 0
@@ -1586,15 +1599,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265238286687
 GameObject:
@@ -1623,6 +1635,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.068699986, y: -0.026799968, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265061682439}
   m_Father: {fileID: 4827105264591340623}
@@ -1640,15 +1653,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265299156632
 GameObject:
@@ -1677,6 +1689,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.09599624, y: -0.0073164543, z: 0.02355068}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105263755012205}
   m_Father: {fileID: 4827105265545848775}
@@ -1694,15 +1707,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265344558256
 GameObject:
@@ -1731,6 +1743,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.011908775, y: -1.6653345e-18, z: -4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105264692459074}
   m_RootOrder: 0
@@ -1747,15 +1760,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265427844863
 GameObject:
@@ -1784,6 +1796,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.08869379, y: -0.006529307, z: -0.017465241}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264714470649}
   m_Father: {fileID: 4827105265545848775}
@@ -1801,15 +1814,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265450358583
 GameObject:
@@ -1838,6 +1850,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03379309, y: 1.3322676e-17, z: -1.6653344e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105265597145141}
   m_Father: {fileID: 4827105263670619479}
@@ -1855,15 +1868,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265484843610
 GameObject:
@@ -1891,6 +1903,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105265545848775}
   m_RootOrder: 6
@@ -1922,6 +1935,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.04, y: 1.04, z: 1.04}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264369367297}
   - {fileID: 4827105265299156633}
@@ -1945,15 +1959,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 4827105264815023197}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265597145140
 GameObject:
@@ -1982,6 +1995,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0222, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4827105265450358580}
   m_RootOrder: 0
@@ -1998,15 +2012,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265691950438
 GameObject:
@@ -2035,6 +2048,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.026573397, y: 4.440892e-18, z: -4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105264266822074}
   m_Father: {fileID: 4827105264714470649}
@@ -2052,15 +2066,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
 --- !u!1 &4827105265692499725
 GameObject:
@@ -2089,6 +2102,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.04292699, y: -4.440892e-18, z: 4.440892e-18}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4827105263650241034}
   m_Father: {fileID: 4827105263654643571}
@@ -2106,13 +2120,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c500de80a4cfb9458342c91f8d8e78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialized: 0
+  awaked: 0
   point: {fileID: 0}
   transformRef: {fileID: 0}
   meshRenderer: {fileID: 0}
   skinnedMeshRenderer: {fileID: 0}
   lineRenderer: {fileID: 0}
   relativeToParentBone: 1
-  localRotation: {x: 0, y: 0, z: 0, w: 0}
-  localRotZ: 0
+  originalTsfRef: {fileID: 0}
   key: 
