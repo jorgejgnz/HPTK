@@ -1,3 +1,10 @@
+## [0.6.6](https://github.com/jorgejgnz/HPTK/compare/v0.6.5...v0.6.6) (2022-11-23)
+
+
+### Bug Fixes
+
+* **integrations:** Fixed IDP for LeapMotion ([2df5ce6](https://github.com/jorgejgnz/HPTK/commit/2df5ce6a5271b66a61a65e9ca786a8a74bf7c1df))
+
 ## [0.6.5](https://github.com/jorgejgnz/HPTK/compare/v0.6.4...v0.6.5) (2022-11-23)
 
 
