@@ -121,7 +121,6 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
                 if (pheasy == null) pheasy = slave.transformRef.gameObject.AddComponent<Pheasy>();
 
-                pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
                 pheasy.rb.isKinematic = true;
 
                 pheasy.axis = model.axisPrefab;
@@ -181,17 +180,15 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
             if (slave.constraint != null)
             {
-                // Stability
+                slave.pheasy.rb.isKinematic = false;
+
+                slave.pheasy.rb.interpolation = RigidbodyInterpolation.None;
+                slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
                 slave.constraint.settings.collideWithConnectedRb = false;
-                slave.pheasy.safeMode = true;
-                slave.pheasy.gradualMode = false;
 
                 // Forced values
                 slave.constraint.enabled = true;
                 slave.constraint.keepAxisRelativeToObject = true;
-
-                slave.pheasy.rb.isKinematic = false;
-                slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
                 // Performance
                 slave.pheasy.editMode = true;
@@ -269,9 +266,6 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
                 slave.goal.rotation = master.transformRef.rotation;
                 slave.goal.position = master.transformRef.position;
 
-                if (model.forceUnconnected) slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                else slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-
                 slave.pheasy.rb.isKinematic = model.forceUnconnected;
                 slave.constraint.force = model.forceUnconnected;
             }
@@ -296,11 +290,8 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
             slave.pheasy.rb.useGravity = conf.useGravity;
 
             // Stability
-            slave.pheasy.safeMode = conf.safeMode;
-            slave.pheasy.maxVelocity = conf.maxLinearVelocity;
-            slave.pheasy.maxAngularVelocity = conf.maxAngularVelocity;
-            slave.pheasy.maxDepenetrationVelocity = conf.maxDepenetrationVelocity;
-            slave.pheasy.maxErrorAllowed = conf.maxErrorAllowed;
+            slave.pheasy.maxLinearAcceleration = conf.maxLinearAcceleration;
+            slave.pheasy.maxAngularAcceleration = conf.maxAngularAcceleration;
 
             // Debug
             slave.constraint.force = conf.force;
@@ -343,16 +334,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
         {
             if (!slave.usePhysics) return;
 
-            if (enabled)
-            {
-                slave.pheasy.rb.isKinematic = false;
-                slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-            }
-            else
-            {
-                slave.pheasy.rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-                slave.pheasy.rb.isKinematic = true;
-            }
+            slave.pheasy.rb.isKinematic = !enabled;
 
             // Enable/Disable colliders
             slave.pheasy.colliders.ForEach(c => c.enabled = enabled);          

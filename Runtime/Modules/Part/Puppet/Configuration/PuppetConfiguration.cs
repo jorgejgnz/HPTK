@@ -21,11 +21,8 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
         public float rigidbodyAngularDrag = 0.0f;
 
         [Header("Stability")]
-        public bool safeMode = true;
-        public float maxLinearVelocity = 20.0f;
-        public float maxAngularVelocity = 12.5f;
-        public float maxDepenetrationVelocity = 50.0f;
-        public float maxErrorAllowed = 0.5f;
+        public float maxLinearAcceleration = 0.5f;
+        public float maxAngularAcceleration = 0.5f;
 
         [Header("Joint")]
         public float jointMassScale = 1.0f;

@@ -29,12 +29,8 @@ namespace HandPhysicsToolkit.Physics
         public TriggerNotifier[] triggerNotifiers;
 
         [Header("Stability")]
-        public bool safeMode = true;
-        public bool gradualMode = true;
-        public float maxVelocity = 20.0f;
-        public float maxAngularVelocity = 12.5f;
-        public float maxDepenetrationVelocity = 1.0f;
-        public float maxErrorAllowed = 0.5f;
+        public float maxLinearAcceleration = -1.0f;
+        public float maxAngularAcceleration = -1.0f;
 
         [Header("Connections")]
         public bool ignoreCollisionsOnStart = false;
@@ -61,6 +57,14 @@ namespace HandPhysicsToolkit.Physics
 
         List<Pheasy> meAndMyRels = new List<Pheasy>();
         List<Pheasy> otherAndItsRels = new List<Pheasy>();
+
+        float currentLinearAcceleration;
+        float lastLinearVelocity;
+        float maxLinearVelocity;
+
+        float currentAngularAcceleration;
+        float lastAngularVelocity;
+        float maxAngularVelocity;
 
         private void Awake()
         {
@@ -124,11 +128,27 @@ namespace HandPhysicsToolkit.Physics
                 FixedUpdateJoint(targets[t]);
             }
 
-            if (safeMode)
+            if (!rb.isKinematic)
             {
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxVelocity);
-                rb.angularVelocity = Vector3.ClampMagnitude(rb.angularVelocity, maxAngularVelocity);
-                rb.maxDepenetrationVelocity = maxDepenetrationVelocity;
+                // Limit linear acc
+                if (maxLinearAcceleration >= 0.0f)
+                {
+                    currentLinearAcceleration = (rb.velocity.magnitude - lastLinearVelocity) / Time.fixedDeltaTime;
+                    maxLinearVelocity = lastLinearVelocity + Mathf.Clamp(currentLinearAcceleration, 0.0f, maxLinearAcceleration) * Time.fixedDeltaTime;
+                    rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxLinearVelocity);
+                    rb.maxLinearVelocity = maxLinearVelocity;
+                    lastLinearVelocity = rb.velocity.magnitude;
+                }
+
+                // Limit angular acc
+                if (maxAngularAcceleration >= 0.0f)
+                {
+                    currentAngularAcceleration = (rb.angularVelocity.magnitude - lastAngularVelocity) / Time.fixedDeltaTime;
+                    maxAngularVelocity = lastAngularVelocity + Mathf.Clamp(currentAngularAcceleration, 0.0f, maxAngularAcceleration) * Time.fixedDeltaTime;
+                    rb.angularVelocity = Vector3.ClampMagnitude(rb.angularVelocity, maxAngularVelocity);
+                    rb.maxAngularVelocity = maxAngularVelocity;
+                    lastAngularVelocity = rb.angularVelocity.magnitude;
+                }
             }
         }
 
@@ -158,16 +178,8 @@ namespace HandPhysicsToolkit.Physics
                 SetRotationLock(t.joint, t.settings.angularMotion);
 
                 // Drives
-                if (gradualMode)
-                {
-                    PhysHelpers.UpdateJointMotionDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.motionDrive.toJointDrive(), t.gradualLerp));
-                    PhysHelpers.UpdateJointAngularDrive(t.joint, PhysHelpers.JointDriveLerp(new JointDrive(), t.settings.angularDrive.toJointDrive(), t.gradualLerp));
-                }
-                else
-                {
-                    PhysHelpers.UpdateJointMotionDrive(t.joint, t.settings.motionDrive.toJointDrive());
-                    PhysHelpers.UpdateJointAngularDrive(t.joint, t.settings.angularDrive.toJointDrive());
-                }
+                PhysHelpers.UpdateJointMotionDrive(t.joint, t.settings.motionDrive.toJointDrive());
+                PhysHelpers.UpdateJointAngularDrive(t.joint, t.settings.angularDrive.toJointDrive());
 
                 // Control
                 t.joint.enableCollision = t.settings.collideWithConnectedRb;
@@ -247,13 +259,6 @@ namespace HandPhysicsToolkit.Physics
                 t.error = Vector3.Distance(t.anchor.position, t.connectedAnchor.position);
 
                 if (t.error < 0.00001f) t.error = 0.0f;
-            }
-
-            // Stability
-            if (safeMode && t.error > maxErrorAllowed)
-            {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
             }
 
             // Axis
