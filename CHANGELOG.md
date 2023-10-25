@@ -1,3 +1,10 @@
+## [0.6.7](https://github.com/jorgejgnz/HPTK/compare/v0.6.6...v0.6.7) (2023-10-25)
+
+
+### Bug Fixes
+
+* **puppetModule:** Fix for slow slave hands on Unity 2022 ([15a868d](https://github.com/jorgejgnz/HPTK/commit/15a868d9629944811d2b4ab65c94681ca7fefed4))
+
 ## [0.6.6](https://github.com/jorgejgnz/HPTK/compare/v0.6.5...v0.6.6) (2022-11-23)
 
 
