@@ -25,3 +25,5 @@ MonoBehaviour:
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/ultraleap.unitypackage
   - name: MRTK Quest
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk-quest.unitypackage
+  - name: Debug
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/debug.unitypackage
