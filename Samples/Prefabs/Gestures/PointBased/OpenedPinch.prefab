@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &132620468336361826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3761128802101333735}
+  - component: {fileID: 7178403333145787212}
+  - component: {fileID: 8144840654641767450}
+  m_Layer: 8
+  m_Name: OpenedPinch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3761128802101333735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132620468336361826}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7178403333145787212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132620468336361826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cd3f1f09ea78e4b9f3695b6dc97fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefix: 
+--- !u!114 &8144840654641767450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132620468336361826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2db3a6ef7df23f74eaa6baf7c4f1867a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeIfGreaterThan: 0.6
+  _lerp: 0
+  _isActive: 0
+  speed: 0
+  timeActive: 0
+  _providesIntention: 0
+  _intentionLerp: 0
+  intentionTime: 0
+  _isIntentionallyActive: 0
+  onActivation:
+    m_PersistentCalls:
+      m_Calls: []
+  onDeactivation:
+    m_PersistentCalls:
+      m_Calls: []
+  onIntendedActivation:
+    m_PersistentCalls:
+      m_Calls: []
+  onIntendedDeactivation:
+    m_PersistentCalls:
+      m_Calls: []
+  _model: {fileID: 0}
+  hand: {fileID: 0}
+  conf: {fileID: 0}
+  points: {fileID: 11400000, guid: 8aec53fbb34aa364581d0eb30b4529d3, type: 2}
+  threshold: 0.05

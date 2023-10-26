@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86eb47420caf01b42aca3ce40245ef7a, type: 3}
+  m_Name: ClosedPinch
+  m_EditorClassIdentifier: 
+  gestureName: ClosedPinch
+  handSide: 1
+  thumbTip: {x: -0.09940533, y: 0.07757753, z: -0.01916026}
+  indexTip: {x: -0.10249174, y: 0.07868252, z: -0.019340137}
+  middleTip: {x: -0.06960356, y: 0.02809369, z: -0.008995276}
+  ringTip: {x: -0.06190195, y: 0.03200869, z: 0.004509241}
+  pinkyTip: {x: -0.06245537, y: 0.035875537, z: 0.01512485}

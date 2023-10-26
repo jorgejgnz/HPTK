@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86eb47420caf01b42aca3ce40245ef7a, type: 3}
+  m_Name: Peace
+  m_EditorClassIdentifier: 
+  gestureName: Peace
+  handSide: 1
+  thumbTip: {x: -0.08770503, y: 0.057279292, z: 0.019234516}
+  indexTip: {x: -0.17367572, y: 0.035054818, z: -0.037813786}
+  middleTip: {x: -0.17957714, y: 0.046470597, z: 0.009054073}
+  ringTip: {x: -0.06670411, y: 0.027954577, z: 0.005311341}
+  pinkyTip: {x: -0.05232782, y: 0.033528913, z: 0.013215967}

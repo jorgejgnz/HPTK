@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86eb47420caf01b42aca3ce40245ef7a, type: 3}
+  m_Name: HandPinch
+  m_EditorClassIdentifier: 
+  gestureName: HandPinch
+  handSide: 1
+  thumbTip: {x: -0.103427045, y: 0.08751962, z: -0.004456636}
+  indexTip: {x: -0.1072945, y: 0.08322142, z: -0.012559971}
+  middleTip: {x: -0.113848105, y: 0.087956406, z: 0.0016715578}
+  ringTip: {x: -0.10009373, y: 0.08638684, z: 0.009415924}
+  pinkyTip: {x: -0.093127735, y: 0.080965005, z: 0.01744147}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86eb47420caf01b42aca3ce40245ef7a, type: 3}
+  m_Name: Palm
+  m_EditorClassIdentifier: 
+  gestureName: Palm
+  handSide: 1
+  thumbTip: {x: -0.08550194, y: 0.004077154, z: -0.10320661}
+  indexTip: {x: -0.17725018, y: 0.026474921, z: -0.030315408}
+  middleTip: {x: -0.1821619, y: 0.042463098, z: -0.0005105615}
+  ringTip: {x: -0.1703123, y: 0.038269494, z: 0.023553189}
+  pinkyTip: {x: -0.14307798, y: 0.032870077, z: 0.05821462}
