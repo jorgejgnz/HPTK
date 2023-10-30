@@ -25,12 +25,9 @@ MonoBehaviour:
     rigidbodyMass: 12
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
-    jointMassScale: 1
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
+    jointMassScale: 100
     jointConnectedMassScale: 1
     force: 0
   special:
@@ -46,12 +43,9 @@ MonoBehaviour:
     rigidbodyMass: 0.6
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
-    jointMassScale: 1
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
+    jointMassScale: 50
     jointConnectedMassScale: 1
     force: 0
   standard:
@@ -67,11 +61,8 @@ MonoBehaviour:
     rigidbodyMass: 0.6
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
-    jointMassScale: 1
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
+    jointMassScale: 10
     jointConnectedMassScale: 1
     force: 0

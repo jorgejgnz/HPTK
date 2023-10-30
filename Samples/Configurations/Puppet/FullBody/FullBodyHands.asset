@@ -14,30 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   root:
     rotationDrive:
-      spring: 1e+20
-      damper: 1e+18
-      maxForce: 5
+      spring: 1e+38
+      damper: 1e+36
+      maxForce: 10
     positionDrive:
       spring: 0
       damper: 0
       maxForce: 0
     useGravity: 0
-    rigidbodyMass: 0.255
+    rigidbodyMass: 0.25
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
     jointMassScale: 1
     jointConnectedMassScale: 1
     force: 0
   special:
     rotationDrive:
-      spring: 10
-      damper: 0.1
-      maxForce: 12.5
+      spring: 1000
+      damper: 1
+      maxForce: 10
     positionDrive:
       spring: 0
       damper: 0
@@ -46,18 +43,15 @@ MonoBehaviour:
     rigidbodyMass: 0.015
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
     jointMassScale: 1
     jointConnectedMassScale: 1
     force: 0
   standard:
     rotationDrive:
-      spring: 10
-      damper: 0.1
+      spring: 1000
+      damper: 1
       maxForce: 1
     positionDrive:
       spring: 0
@@ -67,11 +61,8 @@ MonoBehaviour:
     rigidbodyMass: 0.015
     rigidbodyDrag: 0
     rigidbodyAngularDrag: 0
-    safeMode: 1
-    maxLinearVelocity: 5
-    maxAngularVelocity: 2
-    maxDepenetrationVelocity: 1
-    maxErrorAllowed: 0.5
+    maxLinearAcceleration: 0.5
+    maxAngularAcceleration: 0.5
     jointMassScale: 1
     jointConnectedMassScale: 1
     force: 0
