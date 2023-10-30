@@ -16,6 +16,7 @@ namespace HandPhysicsToolkit.Modules.Avatar
     public class ReprModel : HPTKModel
     {
         public PointModel point;
+        public string key;
 
         [Header("Refs")]
         public Transform transformRef;
@@ -56,10 +57,6 @@ namespace HandPhysicsToolkit.Modules.Avatar
         [Header("Armature")]
         [ReadOnly]
         public Transform originalTsfRef;
-
-        [Header("Read Only")]
-        [ReadOnly]
-        public string key;
 
         ReprView _view;
         public ReprView view

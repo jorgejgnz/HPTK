@@ -8,7 +8,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 {
     public class PuppetModel : HPTKModel
     {
-        public static readonly string key = "slave";
+        public static readonly string key = "puppet";
         public static readonly float minLocalRotZ = -1.0f;
         public static readonly float maxLocalRotZ = 361.0f;
 
