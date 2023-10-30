@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skin_Slave
+  m_Name: Skin_Puppet
   m_Shader: {fileID: 4800000, guid: 06c6d8b7e9ea3a74f8bce96a3ebcfbdd, type: 3}
   m_ShaderKeywords: _COLOR_MAP_ENABLE_ _OUTLINEENABLED_ON _PULSE_ENABLED__ON _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
     _SPECULAREDGE_ON _SPECULAR_EDGE
