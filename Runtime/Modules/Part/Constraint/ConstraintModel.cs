@@ -48,6 +48,11 @@ namespace HandPhysicsToolkit.Modules.Part.Constraint
         public override void Awake()
         {
             base.Awake();
+
+            foreach (Constraint constraint in constraints)
+            {
+                constraint.model = this;
+            }
         }
     }
 }

@@ -49,8 +49,13 @@ namespace HandPhysicsToolkit.Modules.Part.Constraint
             // Move constrained wrist to fix UI penetration
             foreach (Constraint constraint in model.constraints)
             {
-                constraint.OnMimicCompleted(model.part);
+                if (constraint.gameObject.activeInHierarchy)
+                {
+                    constraint.OnMimicCompleted(model.part);
+                }
             }
+
+            model.view.onConstraintsApplied.Invoke();
         }
 
         void MimicPart(PartModel part)

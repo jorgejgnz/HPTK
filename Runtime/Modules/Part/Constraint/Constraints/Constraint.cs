@@ -1,12 +1,14 @@
 using HandPhysicsToolkit.Modules.Avatar;
-using System.Collections;
-using System.Collections.Generic;
+using HandPhysicsToolkit.Utils;
 using UnityEngine;
 
 namespace HandPhysicsToolkit.Modules.Part.Constraint
 {
     public class Constraint : MonoBehaviour
     {
+        [ReadOnly]
+        public ConstraintModel model;
+
         public virtual void OnMimicCompleted(PartModel part) { }
     }
 }
