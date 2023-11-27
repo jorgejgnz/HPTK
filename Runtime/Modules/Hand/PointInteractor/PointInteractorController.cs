@@ -59,6 +59,11 @@ namespace HandPhysicsToolkit.Modules.Hand.Interactor
 
                     // Fix point fwd direction
                     model.point.localRotation = Quaternion.FromToRotation(model.point.forward, fwdDir);
+
+                    if (model.hand.side == Side.Left)
+                    {
+                        model.point.Rotate(Vector3.forward, 180.0f, Space.Self);
+                    }
                 }
             }
         }

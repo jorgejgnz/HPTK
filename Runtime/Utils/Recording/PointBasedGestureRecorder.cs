@@ -11,38 +11,8 @@ using UnityEditor;
 public class PointBasedGestureRecorder : MonoBehaviour
 {
     public HandModel hand;
+    public string repr = AvatarModel.key;
     public string gestureName = "";
-
-    private Vector3 GetRelativePoint(HandModel hand, HumanFinger finger)
-    {
-        FingerModel fingerModel = null;
-        switch (finger)
-        {
-            case HumanFinger.Thumb: fingerModel = hand.thumb; break;
-            case HumanFinger.Index: fingerModel = hand.index; break;
-            case HumanFinger.Middle: fingerModel = hand.middle; break;
-            case HumanFinger.Ring: fingerModel = hand.ring; break;
-            case HumanFinger.Pinky: fingerModel = hand.pinky; break;
-        }
-
-        if (fingerModel != null)
-        {
-            return hand.wrist.transformRef.InverseTransformPoint(fingerModel.tip.transformRef.position);
-        }
-        else
-        {
-            return Vector3.zero;
-        }
-    }
-
-    public void AssignPoints(HandModel hand, PointBasedGestureAsset asset)
-    {
-        asset.thumbTip = GetRelativePoint(hand, HumanFinger.Thumb);
-        asset.indexTip = GetRelativePoint(hand, HumanFinger.Index);
-        asset.middleTip = GetRelativePoint(hand, HumanFinger.Middle);
-        asset.ringTip = GetRelativePoint(hand, HumanFinger.Ring);
-        asset.pinkyTip = GetRelativePoint(hand, HumanFinger.Pinky);
-    }
 }
 
 #if UNITY_EDITOR
@@ -69,7 +39,7 @@ public class PointBasedGestureRecorderEditor : Editor
         PointBasedGestureAsset asset = ScriptableObject.CreateInstance<PointBasedGestureAsset>();
         asset.gestureName = script.gestureName;
         asset.handSide = script.hand.side;
-        script.AssignPoints(script.hand, asset);
+        PoseHelpers.WritePointBasedGesture(script.hand, script.repr, asset);
 
         string path = "Assets/" + asset.gestureName + ".asset";
         AssetDatabase.CreateAsset(asset, path);

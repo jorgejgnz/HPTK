@@ -1,11 +1,12 @@
 ﻿using HandPhysicsToolkit.Helpers;
+using HandPhysicsToolkit.Input;
 using HandPhysicsToolkit.Modules.Avatar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HandPhysicsToolkit.Input
+namespace HandPhysicsToolkit.Assets
 {
     [CreateAssetMenu(menuName = "HPTK/HandPose", order = 2)]
     public class HandPoseAsset : ScriptableObject

@@ -9,6 +9,12 @@ namespace HandPhysicsToolkit.Modules.Part.Constraint
         [ReadOnly]
         public ConstraintModel model;
 
+        private void Awake()
+        {
+            if (!model) model = GetComponentInParent<ConstraintModel>();
+            if (model && !model.constraints.Contains(this)) model.constraints.Add(this);
+        }
+
         public virtual void OnMimicCompleted(PartModel part) { }
     }
 }

@@ -9,6 +9,73 @@ namespace HandPhysicsToolkit.Helpers
 {
     public static class BasicHelpers
     {
+        public static string ReplaceAt(this string input, int index, char newChar)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+
+            char[] chars = input.ToCharArray();
+            chars[index] = newChar;
+            return new string(chars);
+        }
+
+        public static Transform FindExactChildRecursive(this Transform parent, string objectName)
+        {
+            foreach (Transform child in parent)
+            {
+                if (child.name.Equals(objectName))
+                    return child;
+
+                var result = FindExactChildRecursive(child, objectName);
+                if (result != null)
+                    return result;
+            }
+            return null;
+        }
+
+        public static void RunForAllChildrenHierarchicaly(this Transform root, Action<Transform> action)
+        {
+            Queue<Transform> q = new Queue<Transform>();
+            q.Enqueue(root);
+            while (q.Count > 0)
+            {
+                Transform current = q.Dequeue();
+                if (current == null)
+                    continue;
+
+                foreach (Transform t in current)
+                {
+                    q.Enqueue(t);
+
+                    action(t);
+                }
+            }
+        }
+
+        public static void ResetLocalPosition(this Transform gameObjectTransform)
+        {
+            gameObjectTransform.localPosition = Vector3.zero;
+        }
+
+        public static void ResetLocalRotation(this Transform gameObjectTransform)
+        {
+            gameObjectTransform.localRotation = Quaternion.identity;
+        }
+
+        public static void ResetLocalScale(this Transform gameObjectTransform)
+        {
+            gameObjectTransform.localScale = Vector3.one;
+        }
+
+        public static void ResetLocalTransform(this Transform gameObjectTransform)
+        {
+            ResetLocalPosition(gameObjectTransform);
+            ResetLocalRotation(gameObjectTransform);
+            ResetLocalScale(gameObjectTransform);
+        }
+
         public static void SetLocalRotForHierarchy(Transform t, Vector3 newLocalRot)
         {
             t.localRotation = Quaternion.Euler(newLocalRot);
@@ -47,6 +114,14 @@ namespace HandPhysicsToolkit.Helpers
             newObj.transform.name = name;
 
             return newObj;
+        }
+
+        public static GameObject InstantiateParent(GameObject child, string name)
+        {
+            GameObject parent = InstantiateEmptyChild(child, name);
+            parent.transform.SetParent(child.transform.parent, true);
+            child.transform.SetParent(parent.transform, true);
+            return parent;
         }
 
         public static Vector3 NearestPointOnFiniteLine(Vector3 start, Vector3 end, Vector3 pnt)

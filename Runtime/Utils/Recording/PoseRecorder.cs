@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using HandPhysicsToolkit.Modules.Avatar;
-using HandPhysicsToolkit.Input;
+using HandPhysicsToolkit.Assets;
 using HandPhysicsToolkit.Helpers;
 
 #if UNITY_EDITOR
@@ -21,6 +21,7 @@ namespace HandPhysicsToolkit.Utils
         public bool applyPos = false;
         public bool applyRot = true;
         public bool applyScale = false;
+        public bool limitZRot = false;
 
         [Header("Apply on fingers")]
         public bool thumb = true;
@@ -54,33 +55,7 @@ namespace HandPhysicsToolkit.Utils
             EditorUtility.SetDirty(pose);
             dirty = true;
 #endif
-            pose.alias = alias;
-
-            pose.wrist = new AbstractTsf(
-                        hand.wrist.transformRef.localPosition,
-                        hand.wrist.transformRef.localRotation,
-                        Space.Self,
-                        hand.wrist.transformRef.localScale,
-                        hand.wrist.transformRef.name);
-
-            List<FingerPose> fingers = new List<FingerPose>();
-
-            pose.thumb = SaveFinger(hand.thumb);
-            fingers.Add(pose.thumb);
-
-            pose.index = SaveFinger(hand.index);
-            fingers.Add(pose.index);
-
-            pose.middle = SaveFinger(hand.middle);
-            fingers.Add(pose.middle);
-
-            pose.ring = SaveFinger(hand.ring);
-            fingers.Add(pose.ring);
-
-            pose.pinky = SaveFinger(hand.pinky);
-            fingers.Add(pose.pinky);
-
-            pose.fingers = fingers;
+            PoseHelpers.SaveHand(hand, representation, pose, alias);
         }
 
         public void Apply()
@@ -94,37 +69,7 @@ namespace HandPhysicsToolkit.Utils
 
         void ApplyFinger(FingerPose pose, FingerModel finger)
         {
-            if (finger) PoseHelpers.ApplyFingerPose(pose, finger, representation, applyPos, applyRot, applyScale, applyInverted);
-        }
-
-        FingerPose SaveFinger(FingerModel fingerModel)
-        {
-            if (!fingerModel) return SaveFinger();
-
-            List<AbstractTsf> bones = new List<AbstractTsf>();
-
-            for (int b = 0; b < fingerModel.bonesFromRootToTip.Count; b++)
-            {
-                bones.Add(new AbstractTsf(
-                    fingerModel.bonesFromRootToTip[b].master.localPosition,
-                    fingerModel.bonesFromRootToTip[b].master.localRotation,
-                    Space.Self,
-                    fingerModel.bonesFromRootToTip[b].master.transformRef.localScale,
-                    fingerModel.bonesFromRootToTip[b].master.transformRef.name));
-            }
-
-            FingerPose fingerPose = new FingerPose(fingerModel.finger);
-            fingerPose.bones = bones;
-
-            return fingerPose;
-        }
-
-        FingerPose SaveFinger()
-        {
-            FingerPose fingerPose = new FingerPose();
-            fingerPose.bones = new List<AbstractTsf>();
-
-            return fingerPose;
+            if (finger) PoseHelpers.ApplyFingerPose(pose, finger, representation, applyPos, applyRot, applyScale, applyInverted, limitZRot);
         }
     }
 

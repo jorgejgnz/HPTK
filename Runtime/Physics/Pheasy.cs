@@ -8,12 +8,12 @@ using UnityEngine.Events;
 
 namespace HandPhysicsToolkit.Physics
 {
-    [RequireComponent(typeof(Rigidbody))]
     public class Pheasy : MonoBehaviour
     {
         public static List<Pheasy> registry = new List<Pheasy>();
 
         public Rigidbody rb;
+        public ArticulationBody ab;
 
         [Header("Center of Mass")]
         public Transform centerOfMass;
@@ -71,21 +71,25 @@ namespace HandPhysicsToolkit.Physics
             registry.Add(this);
 
             rb = GetComponent<Rigidbody>();
+            ab = GetComponent<ArticulationBody>();
 
-            if (!centerOfMass)
+            if (rb)
             {
-                centerOfMass = new GameObject("CenterOfMass").transform;
-                centerOfMass.transform.parent = rb.transform;
-                centerOfMass.transform.localPosition = rb.centerOfMass;
-            }
+                if(!centerOfMass)
+                {
+                    centerOfMass = new GameObject("CenterOfMass").transform;
+                    centerOfMass.transform.parent = rb.transform;
+                    centerOfMass.transform.localPosition = rb.centerOfMass;
+                }
 
-            for (int t = 0; t < targets.Count; t++)
-            {
-                if (targets[t].enabled) EnableTarget(targets[t]);
-            }
+                if (!collisionNotifier) collisionNotifier = rb.GetComponent<CollisionNotifier>();
+                if (!collisionNotifier) collisionNotifier = rb.gameObject.AddComponent<CollisionNotifier>();
 
-            if (!collisionNotifier) collisionNotifier = rb.GetComponent<CollisionNotifier>();
-            if (!collisionNotifier) collisionNotifier = rb.gameObject.AddComponent<CollisionNotifier>();
+                for (int t = 0; t < targets.Count; t++)
+                {
+                    if (targets[t].enabled) EnableTarget(targets[t]);
+                }
+            }
 
             UpdateCollidersAndTriggerNotifiers();
 
@@ -128,7 +132,7 @@ namespace HandPhysicsToolkit.Physics
                 FixedUpdateJoint(targets[t]);
             }
 
-            if (!rb.isKinematic)
+            if (rb && !rb.isKinematic)
             {
                 // Limit linear acc
                 if (maxLinearAcceleration >= 0.0f)
@@ -149,6 +153,24 @@ namespace HandPhysicsToolkit.Physics
                     rb.maxAngularVelocity = maxAngularVelocity;
                     lastAngularVelocity = rb.angularVelocity.magnitude;
                 }
+            }
+
+            if (!rb && !ab && targets.Count > 0)
+            {
+                float weight = 1.0f / targets.Count;
+                Vector3 positionAvg = Vector3.zero;
+                Vector3 forwardAvg = Vector3.zero;
+                Vector3 upwardAvg = Vector3.zero;
+
+                foreach (TargetConstraint target in targets)
+                {
+                    positionAvg += weight * target.connectedAnchor.position;
+                    forwardAvg += weight * target.connectedAnchor.forward;
+                    upwardAvg += weight * target.connectedAnchor.up;
+                }
+
+                transform.position = positionAvg;
+                transform.rotation = Quaternion.LookRotation(forwardAvg, upwardAvg);
             }
         }
 
@@ -172,6 +194,10 @@ namespace HandPhysicsToolkit.Physics
                 // Connected body/anchor
                 if (t.connectedBody) t.joint.connectedBody = t.connectedBody;
                 else t.joint.connectedBody = null;
+
+                // Connected body/anchor
+                if (t.connectedArticulationBody) t.joint.connectedArticulationBody = t.connectedArticulationBody;
+                else t.joint.connectedArticulationBody = null;
 
                 // Freedom
                 SetPositionLock(t.joint, t.settings.linearMotion);
@@ -244,7 +270,10 @@ namespace HandPhysicsToolkit.Physics
                 }
 
                 // Joint
-                UpdateJoint(t, editMode || (!editMode && !t.updated));
+                if (t.joint)
+                {
+                    UpdateJoint(t, editMode || (!editMode && !t.updated));
+                }
 
                 // Extensibility
                 for (int e = 0; e < t.extensions.Count; e++)
@@ -287,37 +316,40 @@ namespace HandPhysicsToolkit.Physics
 
             if (t.name == null || t.name == "") t.name = t.anchor.name + "->" + t.connectedAnchor.name;
 
-            if (t.keepAxisRelativeToObject)
+            if (t.joint)
             {
-                t.joint.configuredInWorldSpace = false;
+                if (t.connectedBody)
+                {
+                    t.joint.connectedBody = t.connectedBody;
+                    t.initialLocalRotation = t.joint.connectedBody.transform.localRotation;
+                }
+
+                if (t.keepAxisRelativeToObject)
+                {
+                    t.joint.configuredInWorldSpace = false;
+                }
+                else
+                {
+                    t.joint.configuredInWorldSpace = true;
+                }
+
+                t.initialWorldRotation = t.joint.transform.rotation;
+
+                t.jointFrameRotation = t.GetJointAxisWorldRotation();
+
+                if (!t.axis)
+                {
+                    t.setAxisWhenEnabled = false;
+
+                    InstantiateAxis(t);
+                }
+                else
+                {
+                    t.setAxisWhenEnabled = true;
+
+                    t.SetAxis(t.axis.rotation);
+                }
             }
-            else
-            {
-                t.joint.configuredInWorldSpace = true;
-            }
-
-            if (!t.axis)
-            {
-                t.setAxisWhenEnabled = false;
-
-                InstantiateAxis(t);
-            }
-            else
-            {
-                t.setAxisWhenEnabled = true;
-
-                t.SetAxis(t.axis.rotation);
-            }
-
-            if (t.connectedBody)
-            {
-                t.joint.connectedBody = t.connectedBody;
-                t.initialLocalRotation = t.joint.connectedBody.transform.localRotation;
-            }
-
-            t.initialWorldRotation = t.joint.transform.rotation;
-
-            t.jointFrameRotation = t.GetJointAxisWorldRotation();
 
             if (axis != null)
             {
@@ -354,7 +386,7 @@ namespace HandPhysicsToolkit.Physics
 
             if (t.connectedBody && !t.connectedAnchor.IsChildOf(t.connectedBody.transform))
             {
-                Debug.LogWarning("Target " + t.name + " is not valid! Conn anchor is not child of connBody");
+                Debug.LogWarning($"Target {t.name} is not valid! Connected anchor {t.connectedAnchor.name} is not child of connected body {t.connectedBody.name}");
 
                 return false;
             }
@@ -367,10 +399,13 @@ namespace HandPhysicsToolkit.Physics
             if (t.joint)
                 return;
 
-            t.joint = gameObject.AddComponent<ConfigurableJoint>();
+            if (rb || ab)
+            {
+                t.joint = gameObject.AddComponent<ConfigurableJoint>();
 
-            t.joint.autoConfigureConnectedAnchor = false;
-            t.joint.rotationDriveMode = RotationDriveMode.Slerp;
+                t.joint.autoConfigureConnectedAnchor = false;
+                t.joint.rotationDriveMode = RotationDriveMode.Slerp;
+            }
         }
 
         void InstantiateAnchor(TargetConstraint t)
@@ -395,13 +430,13 @@ namespace HandPhysicsToolkit.Physics
 
             Transform connectedAnchor = new GameObject(t.pheasy.name + ".Goal").transform;
 
-            connectedAnchor.position = t.joint.transform.position;
-            connectedAnchor.rotation = t.joint.transform.rotation;
+            connectedAnchor.position = transform.position;
+            connectedAnchor.rotation = transform.rotation;
 
             if (t.connectedBody)
                 connectedAnchor.parent = t.connectedBody.transform;
             else
-                connectedAnchor.parent = t.joint.transform.parent;
+                connectedAnchor.parent = transform.parent;
 
             t.connectedAnchor = connectedAnchor;
         }
@@ -427,7 +462,15 @@ namespace HandPhysicsToolkit.Physics
         {
             myColliders.Clear();
             myTriggerNotifiers.Clear();
-            totalColliders = rb.GetComponentsInChildren<Collider>();
+
+            if (rb)
+            {
+                totalColliders = rb.GetComponentsInChildren<Collider>();
+            }
+            else
+            {
+                totalColliders = GetComponentsInChildren<Collider>();
+            }
             
             for (int c = 0; c < totalColliders.Length; c++)
             {
@@ -454,11 +497,12 @@ namespace HandPhysicsToolkit.Physics
             rb.transform.position += displacement;
         }
 
-        public TargetConstraint AddTargetConstraint(string name, Rigidbody connectedBody, bool keepAxisRelativeWithObject, Transform setAxisOnEnable)
+        public TargetConstraint AddTargetConstraint(string name, Rigidbody connectedBody, ArticulationBody connectedArticulationBody, bool keepAxisRelativeWithObject, Transform setAxisOnEnable)
         {
             TargetConstraint newTarget = new TargetConstraint(this, name);
 
-            newTarget.connectedBody = connectedBody;
+            if (connectedBody) newTarget.connectedBody = connectedBody;
+            if (connectedArticulationBody) newTarget.connectedArticulationBody = connectedArticulationBody;
 
             newTarget.keepAxisRelativeToObject = keepAxisRelativeWithObject;
 

@@ -390,18 +390,6 @@ namespace HandPhysicsToolkit.Modules.Avatar
             if (!repr.parent || !repr.relativeToParentBone) return repr.transformRef.parent.TransformPoint(newLocalPos);
             return repr.parent.transformRef.TransformPoint(newLocalPos);
         }
-
-        public float GetProcessedAngleZ(Quaternion rotation)
-        {
-            float angle = rotation.eulerAngles.z;
-
-            if (angle >= 180.0f)
-                angle -= 180.0f;
-            else
-                angle += 180.0f;
-
-            return angle;
-        }
     }
 }
 

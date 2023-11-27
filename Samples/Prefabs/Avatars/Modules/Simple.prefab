@@ -117,8 +117,8 @@ MonoBehaviour:
   isAvailable: 1
   hasDirection: 1
   radius: 0.005
+  selectionGesture: {fileID: 5326184727576506255}
   point: {fileID: 0}
-  gesture: {fileID: 0}
   tracks: []
 --- !u!114 &1548039015636589439
 MonoBehaviour:
@@ -269,8 +269,8 @@ MonoBehaviour:
   isAvailable: 1
   hasDirection: 1
   radius: 0.005
+  selectionGesture: {fileID: 5326184727025526078}
   point: {fileID: 0}
-  gesture: {fileID: 0}
   tracks: []
 --- !u!114 &7378539261878317431
 MonoBehaviour:
@@ -2738,7 +2738,7 @@ GameObject:
   - component: {fileID: 5326184726483379614}
   - component: {fileID: 5326184726483379615}
   m_Layer: 8
-  m_Name: Puppet
+  m_Name: Puppet.CJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5924,7 +5924,7 @@ GameObject:
   - component: {fileID: 5326184726997022876}
   - component: {fileID: 5326184726997022877}
   m_Layer: 8
-  m_Name: Puppet
+  m_Name: Puppet.CJ
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5959,7 +5959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awaked: 0
   part: {fileID: 5326184726567917881}
-  configuration: {fileID: 11400000, guid: 14e1b7d4d5881f74abb24e53429a7f4e, type: 2}
+  configuration: {fileID: 0}
   axisPrefab: {fileID: 6429936386063654322, guid: 83de49a3ee76488449958f8be901a72a, type: 3}
   mimicRepr: constrained
   forceUnconnected: 0
@@ -13180,8 +13180,7 @@ MonoBehaviour:
   part: {fileID: 5326184726567917881}
   mimicScale: 1
   mimicRootInWorldSpace: 1
-  constraints:
-  - {fileID: 1718720540266817417}
+  constraints: []
 --- !u!114 &2508844675688291777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13263,8 +13262,7 @@ MonoBehaviour:
   part: {fileID: 5326184727247996404}
   mimicScale: 1
   mimicRootInWorldSpace: 1
-  constraints:
-  - {fileID: 5393783418694603845}
+  constraints: []
 --- !u!114 &5053707987082942937
 MonoBehaviour:
   m_ObjectHideFlags: 0

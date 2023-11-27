@@ -1,7 +1,9 @@
-﻿using HandPhysicsToolkit.Modules.Avatar;
+﻿using HandPhysicsToolkit.Helpers;
+using HandPhysicsToolkit.Modules.Avatar;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace HandPhysicsToolkit.Input
@@ -111,6 +113,42 @@ namespace HandPhysicsToolkit.Input
 
         public Vector3 localScale;
 
+        public Vector3 worldPosition
+        {
+            get
+            {
+                if (space == Space.World) return position;
+                else { Debug.LogError($"AbstractTsf {name} is not in world space!"); return Vector3.zero; }
+            }
+        }
+
+        public Quaternion worldRotation
+        {
+            get
+            {
+                if (space == Space.World) return rotation;
+                else { Debug.LogError($"AbstractTsf {name} is not in world space!"); return Quaternion.identity; }
+            }
+        }
+
+        public Vector3 localPosition
+        {
+            get
+            {
+                if (space == Space.Self) return position;
+                else { Debug.LogError($"AbstractTsf {name} is not in local space!"); return Vector3.zero; }
+            }
+        }
+
+        public Quaternion localRotation
+        {
+            get
+            {
+                if (space == Space.Self) return rotation;
+                else { Debug.LogError($"AbstractTsf {name} is not in local space!"); return Quaternion.identity; }
+            }
+        }
+
         public AbstractTsf(Vector3 position, Quaternion rotation, Space space, Vector3 localScale, string name)
         {
             this.position = position;
@@ -166,6 +204,24 @@ namespace HandPhysicsToolkit.Input
             to.localScale = from.localScale;
         }
 
+        public void Copy(Transform from, Space space)
+        {
+            this.space = space;
+            this.localScale = from.localScale;
+            this.name = from.name;
+
+            if (space == Space.World)
+            {
+                position = from.position;
+                rotation = from.rotation;
+            }
+            else
+            {
+                position = from.localPosition;
+                rotation = from.localRotation;
+            }
+        }
+
         public void ApplyToTransform(Transform receiverTsf)
         {
             if (space == Space.World)
@@ -180,6 +236,39 @@ namespace HandPhysicsToolkit.Input
             }
 
             receiverTsf.localScale = localScale;
+        }
+
+        public Vector3 TransformPoint(Vector3 localPoint)
+        {
+            if (space == Space.World)
+            {
+                return MathHelpers.TransformPoint(position, rotation, localScale, localPoint);
+            }
+            else
+            {
+                Debug.LogError("TransformPoint can only be applied to AbstractTsf in world space");
+                return Vector3.zero;
+            }
+        }
+
+        public Vector3 InverseTransformPoint(Vector3 worldPoint)
+        {
+            if (space == Space.World)
+            {
+                return MathHelpers.InverseTransformPoint(position, rotation, localScale, worldPoint);
+            }
+            else
+            {
+                Debug.LogError("InverseTransformPoint can only be applied to AbstractTsf in world space");
+                return Vector3.zero;
+            }
+        }
+
+        public void Reset()
+        {
+            position = Vector3.zero;
+            rotation = Quaternion.identity;
+            localScale = Vector3.one;
         }
     }
 }

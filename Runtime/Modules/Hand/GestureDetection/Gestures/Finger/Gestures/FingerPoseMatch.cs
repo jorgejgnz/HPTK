@@ -1,4 +1,4 @@
-﻿using HandPhysicsToolkit.Input;
+﻿using HandPhysicsToolkit.Assets;
 using HandPhysicsToolkit.Modules.Avatar;
 using System.Collections;
 using System.Collections.Generic;

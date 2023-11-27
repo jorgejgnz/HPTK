@@ -1090,7 +1090,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 52982380454956112, guid: 1746f2113c8286346abd236820f0659c, type: 3}
       propertyPath: m_Name
-      value: Puppet
+      value: Puppet.CJ
       objectReference: {fileID: 0}
     - target: {fileID: 52982380454956112, guid: 1746f2113c8286346abd236820f0659c, type: 3}
       propertyPath: m_Layer
@@ -3398,7 +3398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2943998292699948007, guid: bb6a1cbb3a279ed4693c43251fc572c6, type: 3}
       propertyPath: m_Name
-      value: Puppet
+      value: Puppet.CJ
       objectReference: {fileID: 0}
     - target: {fileID: 2943998292699948007, guid: bb6a1cbb3a279ed4693c43251fc572c6, type: 3}
       propertyPath: m_Layer

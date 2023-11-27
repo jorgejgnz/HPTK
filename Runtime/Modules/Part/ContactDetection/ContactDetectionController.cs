@@ -60,10 +60,10 @@ namespace HandPhysicsToolkit.Modules.Part.ContactDetection
                 return;
             }
 
-            PuppetReprModel rootSlave = model.part.root.reprs[PuppetModel.key] as PuppetReprModel;
+            PuppetReprModel puppetRoot = model.part.root.reprs[PuppetModel.key] as PuppetReprModel;
 
-            if (rootSlave.specificView.ready) OnPhysicsReady();
-            else rootSlave.specificView.onPhysicsReady.AddListener(OnPhysicsReady);
+            if (puppetRoot.specificView.ready) OnPhysicsReady();
+            else puppetRoot.specificView.onPhysicsReady.AddListener(OnPhysicsReady);
         }
 
         void OnPhysicsReady()

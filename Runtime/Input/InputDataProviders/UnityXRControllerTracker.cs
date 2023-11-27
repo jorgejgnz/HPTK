@@ -1,4 +1,5 @@
 ﻿using HandPhysicsToolkit.Helpers;
+using HandPhysicsToolkit.Assets;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

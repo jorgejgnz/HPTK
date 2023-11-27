@@ -1,4 +1,5 @@
 using HandPhysicsToolkit.Modules.Avatar;
+using HandPhysicsToolkit.Modules.Hand.GestureDetection;
 using HandPhysicsToolkit.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace HandPhysicsToolkit.Modules.Hand.Interactor
         public bool isAvailable { get { return model.isAvailable; } }
         public bool hasDirection { get { return model.hasDirection; } }
         public float radius { get { return model.radius; } }
+        public Gesture selectionGesture {  get { return model.selectionGesture; } }
 
 
         public UnityEvent<PointTrack> onFirstHover = new UnityEvent<PointTrack>();

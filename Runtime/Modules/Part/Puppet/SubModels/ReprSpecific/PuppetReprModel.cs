@@ -20,15 +20,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
         public bool usePhysics = true;
         public bool isSpecial = false;
 
-        [Header("Locking")]
-        public float minLocalRotZ = PuppetModel.minLocalRotZ;
-        public float maxLocalRotZ = PuppetModel.maxLocalRotZ;
-        public Quaternion fixedLocalRot = Quaternion.identity;
-
         [Header("Read Only")]
-        [ReadOnly]
-        [SerializeField]
-        bool _constrained;
         [ReadOnly]
         public bool ready = false;
         [ReadOnly]
@@ -51,19 +43,6 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
         {
             return PuppetModel.key;
         }
-
-#if UNITY_EDITOR
-        private void OnValidate()
-        {
-            minLocalRotZ = PuppetModel.minLocalRotZ;
-            maxLocalRotZ = PuppetModel.maxLocalRotZ;
-        }
-
-        private void Update()
-        {
-            _constrained = constraint != null;
-        }
-#endif
     }
 
 #if UNITY_EDITOR

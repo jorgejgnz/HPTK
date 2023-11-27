@@ -28,7 +28,7 @@ public class TransformLogger : MonoBehaviour
         if (parent) rot = Quaternion.Inverse(parent.rotation) * child.rotation;
 
         // Print if possible
-        if (RealtimeLog.singleton) RealtimeLog.singleton.Write($"[{prefix.PadRight(15)}]\tPOS:{PrettyPrint(pos,format)}\tROT:{PrettyPrint(rot.eulerAngles,format)}");
+        if (RealtimeLog.singleton) RealtimeLog.singleton.Write($"[{prefix.PadRight(15)}]\nPOS:{PrettyPrint(pos,format)}\nROT:{PrettyPrint(rot.eulerAngles,format)}");
     }
 
     string PrettyPrint(Vector3 v, string format)

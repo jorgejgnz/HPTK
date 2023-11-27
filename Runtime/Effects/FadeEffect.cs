@@ -19,7 +19,7 @@ public class FadeEffect : MonoBehaviour
     }
 
     public string fromRepr = ConstraintModel.key;
-    public string toRepr = PuppetModel.key;
+    public string toRepr;
     public BoneView bone;
     
     public List<ColorEndpoint> colorEndpoints = new List<ColorEndpoint>();
@@ -35,6 +35,13 @@ public class FadeEffect : MonoBehaviour
 
     private void Update()
     {
+        if (toRepr == null || toRepr.Length == 0)
+        {
+            if (bone.reprs.ContainsKey(PuppetModel.key)) toRepr = PuppetModel.key;
+            else if (bone.reprs.ContainsKey("ab.puppet")) toRepr = "ab.puppet";
+            else toRepr = AvatarModel.key;
+        }
+
         if (!bone.point.reprs.ContainsKey(fromRepr))
         {
             Debug.LogWarning("Bone " + bone.boneName + " does not have a " + fromRepr + " representation");

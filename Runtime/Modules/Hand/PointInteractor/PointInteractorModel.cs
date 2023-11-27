@@ -12,11 +12,12 @@ namespace HandPhysicsToolkit.Modules.Hand.Interactor
     {
         public HandModel hand;
         public string repr = "";
-
+        [Space]
         public bool isAvailable = true;
         public bool hasDirection = true;
         public float radius = 0.005f;
-
+        public Gesture selectionGesture;
+        [Space]
         public Transform point;
         public List<PointTrack> tracks = new List<PointTrack>();
 

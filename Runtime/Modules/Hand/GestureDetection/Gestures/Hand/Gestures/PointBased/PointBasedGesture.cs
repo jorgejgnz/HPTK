@@ -14,6 +14,13 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
         public PointBasedGestureAsset points;
         public float threshold = 0.05f;
 
+        [Space]
+        public bool thumb = true;
+        public bool index = true;
+        public bool middle = true;
+        public bool ring = true;
+        public bool pinky = true;
+
         private List<float> distances = new List<float>();
 
         private float Distance(HandModel hand, FingerModel finger, Vector3 expectedLocalPos)
@@ -37,11 +44,11 @@ namespace HandPhysicsToolkit.Modules.Hand.GestureDetection
             base.HandLerpUpdate();
 
             distances.Clear();
-            distances.Add(Distance(hand, hand.thumb, points.thumbTip));
-            distances.Add(Distance(hand, hand.index, points.indexTip));
-            distances.Add(Distance(hand, hand.middle, points.middleTip));
-            distances.Add(Distance(hand, hand.ring, points.ringTip));
-            distances.Add(Distance(hand, hand.pinky, points.pinkyTip));
+            if (thumb) distances.Add(Distance(hand, hand.thumb, points.thumbTip));
+            if (index) distances.Add(Distance(hand, hand.index, points.indexTip));
+            if (middle) distances.Add(Distance(hand, hand.middle, points.middleTip));
+            if (ring) distances.Add(Distance(hand, hand.ring, points.ringTip));
+            if (pinky) distances.Add(Distance(hand, hand.pinky, points.pinkyTip));
 
             // Lerp
             if (distances.Any(d => d > threshold))

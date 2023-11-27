@@ -5,6 +5,7 @@ using HandPhysicsToolkit.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace HandPhysicsToolkit.Modules.Part.Puppet
@@ -118,8 +119,14 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
             if (slave.pheasy == null)
             {
                 Pheasy pheasy = slave.transformRef.GetComponent<Pheasy>();
-
                 if (pheasy == null) pheasy = slave.transformRef.gameObject.AddComponent<Pheasy>();
+
+                ArticulationBody ab = slave.transformRef.GetComponent<ArticulationBody>();
+                Rigidbody rb = slave.transformRef.GetComponent<Rigidbody>();
+                if (!ab && !rb) rb = slave.transformRef.gameObject.AddComponent<Rigidbody>();
+
+                pheasy.rb = rb;
+                pheasy.ab = ab;
 
                 pheasy.rb.isKinematic = true;
 
@@ -152,7 +159,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
             // Add and save pheasy.constraint
             if (slave.constraint == null || slave.constraint.pheasy == null)
-                slave.constraint = slave.pheasy.AddTargetConstraint("PuppetBone", connectedBody, false, null);
+                slave.constraint = slave.pheasy.AddTargetConstraint("PuppetBone", connectedBody, null, false, null);
 
             // Replace or instantiate goal
             if (slave.goal == null) slave.goal = slave.constraint.connectedAnchor;
@@ -256,7 +263,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
                 }
                 else
                 {
-                    slave.goal.localRotation = slave.fixedLocalRot;
+                    slave.goal.localRotation = slave.desiredLocalRot;
                 }
             }
             else

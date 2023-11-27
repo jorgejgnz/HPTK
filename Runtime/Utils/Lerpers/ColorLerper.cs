@@ -6,7 +6,7 @@ namespace HandPhysicsToolkit.Utils
 {
     public class ColorLerper : MonoBehaviour
     {
-        public SkinnedMeshRenderer smr;
+        public Renderer smr;
 
         public Color mincolor;
         public Color maxColor;

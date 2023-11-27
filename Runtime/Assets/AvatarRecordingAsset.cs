@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace HandPhysicsToolkit.Utils
+namespace HandPhysicsToolkit.Assets
 {
     [CreateAssetMenu(fileName = "AvatarRecording", menuName = "HPTK/AvatarRecording")]
     public class AvatarRecordingAsset : ScriptableObject

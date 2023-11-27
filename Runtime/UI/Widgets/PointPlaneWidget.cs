@@ -14,6 +14,7 @@ namespace HandPhysicsToolkit.UI
         [Header("Plane")]
         public Transform normal;
         public bool useInvertedNormal = true;
+        public bool onlyOppositeInteractors = true;
 
         public Vector3 normalDir { get { if (useInvertedNormal) return normal.forward * -1.0f; else return normal.forward; } }
 
@@ -108,7 +109,7 @@ namespace HandPhysicsToolkit.UI
             // If it's inside bounds and, if point has direction, direction is ok, then it's a candidate
             return (track.unclampedNormPlanePos.IsNorm() &&
                 track.unclampedNormDepth.IsNorm() &&
-                (!track.interactor.hasDirection || (track.interactor.hasDirection && Vector3.Dot(track.interactor.forward, normalDir) <= 0.0f)));
+                (!track.interactor.hasDirection || !onlyOppositeInteractors || (track.interactor.hasDirection && Vector3.Dot(track.interactor.forward, normalDir) <= 0.0f)));
         }
 
         private void OnDrawGizmos()

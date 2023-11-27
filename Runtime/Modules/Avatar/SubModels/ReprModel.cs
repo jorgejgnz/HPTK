@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -15,14 +16,29 @@ namespace HandPhysicsToolkit.Modules.Avatar
 {
     public class ReprModel : HPTKModel
     {
+        [Serializable]
+        public class DictEntry
+        {
+            public string key;
+            public GameObject value;
+        }
+
         public PointModel point;
         public string key;
 
         [Header("Refs")]
         public Transform transformRef;
+
         public MeshRenderer meshRenderer;
         public SkinnedMeshRenderer skinnedMeshRenderer;
         public LineRenderer lineRenderer;
+
+        [ReadOnly]
+        public float minLocalRotZ = AvatarModel.minLocalRotZ;
+        [ReadOnly]
+        public float maxLocalRotZ = AvatarModel.maxLocalRotZ;
+        [ReadOnly]
+        public Quaternion desiredLocalRot = Quaternion.identity;
 
         ReprModel _parent;
         public ReprModel parent
@@ -51,7 +67,7 @@ namespace HandPhysicsToolkit.Modules.Avatar
 
         public float localRotZ
         {
-            get { return controller.GetProcessedAngleZ(localRotation); }
+            get { return MathHelpers.GetProcessedAngleZ(localRotation); }
         }
 
         [Header("Armature")]
@@ -92,12 +108,17 @@ namespace HandPhysicsToolkit.Modules.Avatar
             {
                 if (key == null || key == "") key = FindKey();
 
-                if (key != null && key != "")
+                if (key != null && key.Length > 0)
                 {
                     if (!point.reprs.ContainsKey(key)) point.reprs.Add(key, this);
                     else key = null;
                 }
             }
+
+            // ReprModel shouldn't start locked
+            minLocalRotZ = AvatarModel.minLocalRotZ;
+            maxLocalRotZ = AvatarModel.maxLocalRotZ;
+            desiredLocalRot = Quaternion.identity;
         }
 
         protected virtual ReprView GetView()

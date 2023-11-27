@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b26ba61b54f85fc458f507deda99c884, type: 2}
   - {fileID: 11400000, guid: 930a90c6771d2d241845c329e4a1b627, type: 2}
   - {fileID: 11400000, guid: 045a5e237d2dc114b8598fe7f1a365a3, type: 2}
+  - {fileID: 11400000, guid: a1e741810107a014e8af321aca47c719, type: 2}
   leftEditorIdp: {fileID: 0}
   leftBuildIdp: {fileID: 0}
   rightEditorIdp: {fileID: 0}

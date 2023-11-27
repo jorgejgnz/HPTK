@@ -1981,7 +1981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52982380454956113}
   m_Layer: 8
-  m_Name: Slave.Hand.R
+  m_Name: Puppet.Hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

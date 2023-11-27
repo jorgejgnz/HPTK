@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using HandPhysicsToolkit.Assets;
 using UnityEngine;
 
 namespace HandPhysicsToolkit.Input

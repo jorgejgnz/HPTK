@@ -17,6 +17,8 @@ namespace HandPhysicsToolkit.Modules.Avatar
     public class AvatarModel : HPTKModel
     {
         public static readonly string key = "master";
+        public static readonly float minLocalRotZ = -1.0f;
+        public static readonly float maxLocalRotZ = 361.0f;
 
         [Header("Read Only")]
         [SerializeField]

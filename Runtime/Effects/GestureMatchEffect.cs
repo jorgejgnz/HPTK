@@ -9,7 +9,7 @@ public class GestureMatchEffect : MonoBehaviour
 {
     public BoneView bone;
     public Gesture gesture;
-    public string representation = PuppetModel.key;
+    public string repr;
 
     [Range(0.0f, 1.0f)]
     public float minColorAt = 0.0f;
@@ -24,10 +24,17 @@ public class GestureMatchEffect : MonoBehaviour
 
     private void Update()
     {
-        if (!bone.point.reprs.ContainsKey(representation) && !bone.point.reprs[representation].skinnedMeshRenderer) return;
+        if (repr == null || repr.Length == 0)
+        {
+            if (bone.reprs.ContainsKey(PuppetModel.key)) repr = PuppetModel.key;
+            else if (bone.reprs.ContainsKey("ab.puppet")) repr = "ab.puppet";
+            else repr = AvatarModel.key;
+        }
+
+        if (!bone.point.reprs.ContainsKey(repr) && !bone.point.reprs[repr].skinnedMeshRenderer) return;
 
         colorLerp = Mathf.InverseLerp(minColorAt, maxColorAt, gesture.lerp);
 
-        bone.point.reprs[representation].skinnedMeshRenderer.material.SetColor(shaderParam, Color.Lerp(minColor, maxColor, colorLerp));
+        bone.point.reprs[repr].skinnedMeshRenderer.material.SetColor(shaderParam, Color.Lerp(minColor, maxColor, colorLerp));
     }
 }

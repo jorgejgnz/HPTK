@@ -16,7 +16,7 @@ namespace HandPhysicsToolkit.Modules.Part.Puppet
 
         public float minLocalRotZ { get { return puppet.minLocalRotZ; } }
         public float maxLocalRotZ { get { return puppet.maxLocalRotZ; } }
-        public Quaternion fixedLocalRot { get { return puppet.fixedLocalRot; } }
+        public Quaternion fixedLocalRot { get { return puppet.desiredLocalRot; } }
 
         public bool ready { get { return puppet.ready; } }
 

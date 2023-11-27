@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HandPhysicsToolkit.Input;
+using HandPhysicsToolkit.Assets;
 using HandPhysicsToolkit.Modules.Avatar;
 using HandPhysicsToolkit.Modules.Hand.Input;
 using HandPhysicsToolkit.Helpers;

@@ -22,8 +22,9 @@ namespace HandPhysicsToolkit.Physics
         [Tooltip("If null, use center of mass")]
         public Transform anchor;
         public Transform connectedAnchor;
-        [Tooltip("Always in world space")]
+        [Space]
         public Rigidbody connectedBody;
+        public ArticulationBody connectedArticulationBody;
 
         [Header("Control")]
         public bool keepAxisRelativeToObject = true;

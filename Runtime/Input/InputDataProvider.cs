@@ -1,5 +1,5 @@
 ﻿using HandPhysicsToolkit.Helpers;
-using HandPhysicsToolkit.Utils;
+using HandPhysicsToolkit.Assets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
