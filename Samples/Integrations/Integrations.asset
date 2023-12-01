@@ -19,11 +19,11 @@ MonoBehaviour:
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk.unitypackage
   - name: Final IK
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/finalik.unitypackage
-  - name: Hololens2
-    package: 
   - name: Leap Motion
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/ultraleap.unitypackage
   - name: MRTK Quest
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk-quest.unitypackage
   - name: Debug
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/debug.unitypackage
+  - name: XRHands
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/xrhands.unitypackage

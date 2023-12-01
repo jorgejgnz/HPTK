@@ -76,7 +76,6 @@ namespace HandPhysicsToolkit.Input
             if (inputDevices.Count < 1)
             {
                 log = Time.time.ToString("F2") + " Controller for " + side.ToString() + " side was not found! Interrupting update";
-                Debug.LogError(log);
 
                 confidence = 0.0f;
 
@@ -86,7 +85,6 @@ namespace HandPhysicsToolkit.Input
             if (inputDevices.Count > 1)
             {
                 log = Time.time.ToString("F2") + " More than one controller was found for that side! Interrupting update";
-                Debug.LogError(log);
 
                 confidence = 0.0f;
 
@@ -96,7 +94,6 @@ namespace HandPhysicsToolkit.Input
             if (openHand.fingers.Count != 5 || pinch.fingers.Count != 5 || fist.fingers.Count != 5)
             {
                 log = Time.time.ToString("F2") + " Some poses don't have 5 fingers! Interrupting update";
-                Debug.LogError(log);
 
                 confidence = 0.0f;
 
