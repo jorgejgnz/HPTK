@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: Integrations
   m_EditorClassIdentifier: 
   integrations:
-  - name: Oculus
-    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/oculus.unitypackage
-  - name: MRTK
-    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk.unitypackage
+  - name: Meta Quest
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/meta.unitypackage
+  - name: XRHands
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/xrhands.unitypackage
   - name: Final IK
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/finalik.unitypackage
   - name: Leap Motion
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/ultraleap.unitypackage
+  - name: MRTK
+    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk.unitypackage
   - name: MRTK Quest
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/mrtk-quest.unitypackage
   - name: Debug
     package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/debug.unitypackage
-  - name: XRHands
-    package: Packages/com.jorgejgnz.hptk/Samples/Integrations/Packages/xrhands.unitypackage
