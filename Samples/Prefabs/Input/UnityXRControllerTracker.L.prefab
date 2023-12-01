@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7378428537580626199}
   m_Layer: 0
-  m_Name: OculusTouchOffset
+  m_Name: OculusTouchOffset.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,13 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3322253275892109027}
-  m_LocalRotation: {x: 0.56841266, y: 0.48674017, z: -0.42060328, w: 0.5129172}
-  m_LocalPosition: {x: -0.05, y: -0.018, z: -0.1}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5751104, y: 0.7949568, z: -0.0924719, w: 0.16953075}
+  m_LocalPosition: {x: -0.02, y: 0.0737, z: -0.018}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8457279937678201707}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 97, y: -10, z: -90}
+  m_LocalEulerAnglesHint: {x: 20, y: 170, z: 70}
 --- !u!1 &6354844845377706568
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,13 +55,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6354844845377706568}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7378428537580626199}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3222934654924886459
 MonoBehaviour:
@@ -74,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28951864902866a409e9ac3ac2e73fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  side: 1
   bones: []
   wrist:
     name: 
@@ -105,7 +108,6 @@ MonoBehaviour:
   confidence: 0
   scale: 1
   log: 
-  side: 1
   openHand: {fileID: 11400000, guid: 9db775b805eaa11468c78918743d4842, type: 2}
   pinch: {fileID: 11400000, guid: 9e4c989c6624d484cb7ec8f98fa26ed3, type: 2}
   fist: {fileID: 11400000, guid: 4da8e1b8b6002804995fb6c7ad9f72ce, type: 2}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8592292488377932686}
   m_Layer: 0
-  m_Name: OculusTouchOffset
+  m_Name: OculusTouchOffset.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23,13 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618893763536126842}
-  m_LocalRotation: {x: -0.5129172, y: -0.42060316, z: -0.48674014, w: 0.5684127}
-  m_LocalPosition: {x: 0.05, y: -0.018, z: -0.1}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.09247204, y: 0.16953102, z: 0.5751107, w: -0.79495656}
+  m_LocalPosition: {x: 0, y: 0.0737, z: -0.018}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1068063810550762410}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -97, y: -170, z: 90}
+  m_LocalEulerAnglesHint: {x: 340, y: 350, z: 290}
 --- !u!1 &5728394509092338231
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,13 +55,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5728394509092338231}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8592292488377932686}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5502624742457062706
 MonoBehaviour:
@@ -74,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28951864902866a409e9ac3ac2e73fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  side: 2
   bones: []
   wrist:
     name: 
@@ -102,11 +105,9 @@ MonoBehaviour:
   pinky:
     finger: 5
     bones: []
-  handSide: 2
   confidence: 0
   scale: 1
   log: 
-  side: 2
   openHand: {fileID: 11400000, guid: 157cdc73a1754ab4d8e996e021c95bd6, type: 2}
   pinch: {fileID: 11400000, guid: 107a04e45deaf994a8ef0432ad0b1b11, type: 2}
   fist: {fileID: 11400000, guid: a90e0232c0f05f146acb3c66638b8c36, type: 2}
