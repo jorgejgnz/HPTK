@@ -55,7 +55,7 @@ namespace HandPhysicsToolkit.Input
         InputDevice device;
 
         string currentDeviceName, currentDeviceManufacturer;
-        DeviceConfiguration deviceOffset;
+        DeviceConfiguration compatibleDevice;
 
         List<InputFeatureUsage> usages = new List<InputFeatureUsage>();
 
@@ -120,14 +120,20 @@ namespace HandPhysicsToolkit.Input
                     currentDeviceName = device.name;
                     currentDeviceManufacturer = device.manufacturer;
 
-                    deviceOffset = compatibleDevices.Find(x => currentDeviceName.Contains(x.deviceName) && currentDeviceManufacturer.Contains(x.deviceManufacturer));
+                    compatibleDevice = compatibleDevices.Find(x => currentDeviceName.Contains(x.deviceName) && currentDeviceManufacturer.Contains(x.deviceManufacturer));
+
+                    if (compatibleDevice == null)
+                    {
+                        // Find compatible devices without name and use their offsets
+                        compatibleDevice = compatibleDevices.Find(x => currentDeviceName.Length == 0);
+                    }
                 }
 
-                if (deviceOffset != null && deviceOffset.wristOffset != null)
+                if (compatibleDevice != null && compatibleDevice.wristOffset != null)
                 {
                     tsfMatrix = Matrix4x4.TRS(position, rotation, Vector3.one);
-                    position = tsfMatrix.MultiplyPoint3x4(deviceOffset.wristOffset.localPosition);
-                    rotation *= deviceOffset.wristOffset.localRotation;
+                    position = tsfMatrix.MultiplyPoint3x4(compatibleDevice.wristOffset.localPosition);
+                    rotation *= compatibleDevice.wristOffset.localRotation;
                 }
 
                 touchingGrip = gripLerp > minLerpToTouch;
