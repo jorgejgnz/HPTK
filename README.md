@@ -16,6 +16,11 @@
   <img src="https://media.giphy.com/media/5A9I0c8uwBTUuPwv4N/giphy.gif" height="500" alt="sample"><br><br>
 </p>
 
+> # ⚠️ Project Status: No longer maintained
+> This project is no longer actively maintained or supported.
+> If you want to continue the development, feel free to make a fork.
+> Thanks to everyone who contributed, used or supported this project!
+
 # Main features
 - **Data model** to access parts, components or calculated values with very little code
 - **Code architecture** based on MVC-like modules. Support to custom modules
